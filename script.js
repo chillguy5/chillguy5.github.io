@@ -98,7 +98,7 @@ scene("lose", (score) => {
 	add([
 		sprite("bean"),
 		pos(width() / 2, height() / 2 - 64),
-		scale(0,5),
+		scale(0.5),
 		anchor("center"),
 	])
 
