@@ -1,5 +1,3 @@
-loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-fullview.png");
-
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
 const SPEED = 480;
@@ -49,6 +47,9 @@ scene("start", () => {
 scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
+
+// load assets
+loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-fullview.png")
 
     const player = add([
         sprite("bean"),
