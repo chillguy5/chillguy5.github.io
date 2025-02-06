@@ -104,9 +104,10 @@ loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-ful
     });
 
     player.onCollide("tree", () => {
-		loadSound("gameover", "Voicy_bomboclart.mp3");
+        loadSound("gameover", "Voicy_bomboclart.mp3"); // Load sound only when needed
+        play("gameover"); // Play the game over sound
+
         go("lose", score);
-        burp();
         addKaboom(player.pos);
     });
 });
