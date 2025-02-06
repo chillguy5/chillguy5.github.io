@@ -104,6 +104,7 @@ loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-ful
     });
 
     player.onCollide("tree", () => {
+		loadSound("gameover", "assets/gameover.mp3");
         go("lose", score);
         burp();
         addKaboom(player.pos);
