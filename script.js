@@ -20,6 +20,7 @@ scene("game", () => {
 		// list of components
 		sprite("bean"),
 		pos(80, 40),
+		scale(0.25),
 		area(),
 		body(),
 	])
