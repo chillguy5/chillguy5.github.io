@@ -1,4 +1,4 @@
-FLOOR_HEIGHT = 48;
+const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
 const SPEED = 480; // Definieer de snelheid van de bomen
 
