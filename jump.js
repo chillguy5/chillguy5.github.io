@@ -88,6 +88,7 @@ scene("game", () => {
             move(LEFT, SPEED),
             offscreen({ destroy: true }),
             "tree",
+            { passed: false },
         ]);
         wait(rand(0.5, 1.5), spawnTree);
     }
@@ -96,20 +97,15 @@ scene("game", () => {
 
     let score = 0;
     const scoreLabel = add([text("Score: " + score), pos(24, 24)]);
-    let jumpedOverTree = false;
 
     onUpdate(() => {
         get("tree").forEach((tree) => {
-            if (player.pos.x > tree.pos.x + tree.width && !jumpedOverTree) {
-                jumpedOverTree = true;
+            if (player.pos.x > tree.pos.x + tree.width && !tree.passed) {
+                tree.passed = true;
                 score++;
                 scoreLabel.text = "Score: " + score;
             }
         });
-    });
-
-    player.on("grounded", () => {
-        jumpedOverTree = false;
     });
 
     player.onCollide("tree", () => {
