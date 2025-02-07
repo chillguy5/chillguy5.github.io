@@ -48,21 +48,25 @@ scene("start", () => {
 
 loadSound("backgroundMusic", "Youre just a chill guy listening to chill music.mp3");
 
+// ✅ Toegevoegd: Ophalen van het geselecteerde personage uit localStorage
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
+
+// ✅ Toegevoegd: Laden van het geselecteerde personage als sprite
+loadSprite("player", selectedCharacter);
+
 scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
-        // Speel achtergrondmuziek en laat deze herhalen
-        const music = play("backgroundMusic", {
-            volume: 1, // Pas het volume aan
-            loop: true,  // Herhaal de muziek
-        });
-    
+    // Speel achtergrondmuziek en laat deze herhalen
+    const music = play("backgroundMusic", {
+        volume: 1, // Pas het volume aan
+        loop: true,  // Herhaal de muziek
+    });
 
-    loadSprite("bean", "chilltimm-removebg-preview (1).png");
-
+    // ✅ Gewijzigd: Gebruik het geselecteerde personage
     const player = add([
-        sprite("bean"),
+        sprite("player"), // Gewijzigd van "bean" naar "player"
         pos(80, 40),
         scale(0.5),
         area(),
@@ -131,7 +135,7 @@ scene("game", () => {
 });
 
 scene("lose", (score) => {
-    add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
+    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]); // ✅ Gewijzigd naar "player"
     add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
 

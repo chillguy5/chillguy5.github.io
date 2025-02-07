@@ -67,13 +67,7 @@
         }
 
         window.onload = function() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter");
-
-            // Standaard personage instellen als er nog geen keuze is gemaakt
-            if (!selectedCharacter) {
-                localStorage.setItem("selectedCharacter", "chilltimm.png");
-                selectedCharacter = "chilltimm.png";
-            }
+            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
 
             // Markeer het juiste geselecteerde personage
             document.querySelectorAll('.gallery div img').forEach(img => {
@@ -93,6 +87,18 @@
         <div><img src="chillgeit.png" alt="Classic Chill Guy 2" onclick="selectImage(event, 'chillgeit.png')"><span class="selected-text">Selected</span></div>
         <div><img src="chillsamuel.png" alt="Classic Chill Guy 3" onclick="selectImage(event, 'chillsamuel.png')"><span class="selected-text">Selected</span></div>
         <div><img src="chillarda.png" alt="Classic Chill Guy 4" onclick="selectImage(event, 'chillarda.png')"><span class="selected-text">Selected</span></div>
+    </div>
+
+    <h2>The OG Chill Guys</h2>
+    <div class="gallery">
+        <div><img src="og1.png" alt="OG Chill Guy 1" onclick="selectImage(event, 'og1.png')"><span class="selected-text">Selected</span></div>
+        <div><img src="og2.png" alt="OG Chill Guy 2" onclick="selectImage(event, 'og2.png')"><span class="selected-text">Selected</span></div>
+    </div>
+
+    <h2>Vakantie Chill Guys</h2>
+    <div class="gallery">
+        <div><img src="vakantie1.png" alt="Vakantie Chill Guy 1" onclick="selectImage(event, 'vakantie1.png')"><span class="selected-text">Selected</span></div>
+        <div><img src="vakantie2.png" alt="Vakantie Chill Guy 2" onclick="selectImage(event, 'vakantie2.png')"><span class="selected-text">Selected</span></div>
     </div>
 
 </body>
