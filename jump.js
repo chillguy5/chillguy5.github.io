@@ -1,10 +1,16 @@
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
-const SPEED = 480; // Definieer de snelheid van de bomen
+const SPEED = 480;
 
 kaboom({
     background: [135, 62, 132],
 });
+
+// Functie om het geselecteerde personage te krijgen
+function getSelectedCharacter() {
+    const selectedCharacter = localStorage.getItem("selectedCharacter") || "1"; // Standaard karakter 1
+    return selectedCharacter;
+}
 
 function addButton(txt, p, f) {
     const btn = add([
@@ -51,10 +57,10 @@ scene("game", () => {
     setGravity(2400);
 
     // Haal het geselecteerde personage uit localStorage
-    const selectedCharacter = localStorage.getItem("selectedCharacter") || "1"; // Standaard karakter 1
+    const selectedCharacter = getSelectedCharacter(); // Verkrijg het geselecteerde personage
     let spriteName = "bean"; // Dit is het standaard karakter
 
-    // Als personage 2 of 3 geselecteerd is, pas dan de sprite aan
+    // Pas de sprite aan afhankelijk van het geselecteerde personage
     if (selectedCharacter === "2") {
         spriteName = "character-2";
     } else if (selectedCharacter === "3") {
@@ -137,7 +143,7 @@ scene("lose", (score) => {
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => window.location.href = "index.html");  // Veranderd naar index.html
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => window.location.href = "index.html");
 });
 
 scene("mainMenu", () => {
