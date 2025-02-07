@@ -45,7 +45,15 @@
             left: 10px;
             font-size: 16px;
             text-decoration: none;
-            color: blue;
+            color: white;
+            background-color: blue;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .back-link:hover {
+            background-color: darkblue;
         }
     </style>
     <script>
@@ -57,7 +65,7 @@
     </script>
 </head>
 <body>
-    <a href="index.html" class="back-link">Terug naar Main</a>
+    <a href="index.html" class="back-link">⬅ Terug naar Main</a>
     <h1>Classic Chill Guys</h1>
     <div class="gallery">
         <div><img src="chillarda.png" alt="Classic Chill Guy 1" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
