@@ -56,7 +56,7 @@ scene("game", () => {
         sprite("bean"),
         pos(80, 40),
         scale(0.5),
-        area(),
+        area({ shape: new Rect(vec2(10, 10), 20, 20) }), // Kleinere hitbox
         body(),
     ]);
 
