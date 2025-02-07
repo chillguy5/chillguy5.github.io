@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chill Guy Games</title>
+    <title>VLC Games</title>
     <style>
         body {
             text-align: center;
@@ -15,6 +15,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            position: relative; /* Belangrijk voor het positioneren van de tekst rechtsonder */
         }
 
         .title {
@@ -65,11 +66,21 @@
             background-color: #0056b3;
             transform: scale(1.1);
         }
+
+        /* Nieuwe CSS voor het rechtsonder weergeven van de naam */
+        .credit {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <!-- Title with the title class -->
-    <h1 class="title">Chill Guy Games</h1>
+    <h1 class="title">VLC Games</h1>
     
     <div class="game-container">
         <!-- Game 1 with the correct game-link class and image class -->
@@ -85,5 +96,8 @@
     
     <!-- Store button with the correct store-button class -->
     <a href="store.html" class="store-button">Store</a>
+
+    <!-- Credit text right below the page -->
+    <div class="credit">Made by Chill Guy Productions</div>
 </body>
 </html>
