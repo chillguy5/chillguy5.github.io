@@ -8,6 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            position: relative;
         }
         .gallery {
             display: flex;
@@ -15,50 +16,66 @@
             gap: 20px;
             margin: 20px 0;
         }
+        .gallery div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .gallery img {
             width: 150px;
             height: auto;
             border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.3s, border 0.3s;
-            border: 3px solid transparent;
+            transition: transform 0.3s;
         }
         .gallery img:hover {
             transform: scale(1.1);
         }
-        .selected {
-            border: 3px solid blue;
+        .selected-text {
+            margin-top: 5px;
+            font-weight: bold;
+            display: none;
         }
         h2 {
             margin-top: 30px;
         }
+        .back-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+            text-decoration: none;
+            color: blue;
+        }
     </style>
     <script>
         function selectImage(event) {
-            document.querySelectorAll('.gallery img').forEach(img => img.classList.remove('selected'));
-            event.target.classList.add('selected');
+            document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
+            let textElement = event.target.nextElementSibling;
+            textElement.style.display = 'block';
         }
     </script>
 </head>
 <body>
+    <a href="main.html" class="back-link">Terug naar Main</a>
     <h1>Classic Chill Guys</h1>
     <div class="gallery">
-        <img src="chillarda.png" alt="Classic Chill Guy 1" onclick="selectImage(event)">
-        <img src="chillgeit.png" alt="Classic Chill Guy 2" onclick="selectImage(event)">
-        <img src="chillsamuel.png" alt="Classic Chill Guy 3" onclick="selectImage(event)">
-        <img src="chilltimm.png" alt="Classic Chill Guy 4" onclick="selectImage(event)">
+        <div><img src="chillarda.png" alt="Classic Chill Guy 1" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
+        <div><img src="chillgeit.png" alt="Classic Chill Guy 2" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
+        <div><img src="chillsamuel.png" alt="Classic Chill Guy 3" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
+        <div><img src="chilltimm.png" alt="Classic Chill Guy 4" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
     </div>
     
     <h2>The OG Chill Guys</h2>
     <div class="gallery">
-        <img src="" alt="OG Chill Guy 1" onclick="selectImage(event)">
-        <img src="" alt="OG Chill Guy 2" onclick="selectImage(event)">
+        <div><img src="" alt="OG Chill Guy 1" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
+        <div><img src="" alt="OG Chill Guy 2" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
     </div>
     
     <h2>Vakantie Chill Guys</h2>
     <div class="gallery">
-        <img src="" alt="Vakantie Chill Guy 1" onclick="selectImage(event)">
-        <img src="" alt="Vakantie Chill Guy 2" onclick="selectImage(event)">
+        <div><img src="" alt="Vakantie Chill Guy 1" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
+        <div><img src="" alt="Vakantie Chill Guy 2" onclick="selectImage(event)"><span class="selected-text">Selected</span></div>
     </div>
 </body>
 </html>
