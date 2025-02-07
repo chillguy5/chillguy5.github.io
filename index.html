@@ -4,18 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VLC Games</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .title {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .game-link {
+            text-decoration: none;
+        }
+
+        .game-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .game-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .store-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: white;
+            background-color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .store-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>VLC Games</h1>
+    <!-- Title with the title class -->
+    <h1 class="title">VLC Games</h1>
+    
     <div class="game-container">
+        <!-- Game 1 with the correct game-link class and image class -->
         <a href="jumper.html" class="game-link">
-            <img src="unnamed.jpg" alt="Jump Game">
+            <img src="unnamed.jpg" alt="Jump Game" class="game-image">
         </a>
+        
+        <!-- Game 2 with the correct game-link class and image class -->
         <a href="gijs.html" class="game-link">
-            <img src="1672668590738.jpeg" alt="Gijs Game">
+            <img src="1672668590738.jpeg" alt="Gijs Game" class="game-image">
         </a>
     </div>
+    
+    <!-- Store button with the correct store-button class -->
     <a href="store.html" class="store-button">Store</a>
 </body>
 </html>
