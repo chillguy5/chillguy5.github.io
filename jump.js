@@ -99,7 +99,7 @@ scene("game", () => {
     let jumpedOverTree = false;
 
     onUpdate(() => {
-        every("tree", (tree) => {
+        get("tree").forEach((tree) => {
             if (player.pos.x > tree.pos.x + tree.width && jumpedOverTree) {
                 score++;
                 scoreLabel.text = score;
