@@ -54,7 +54,7 @@ scene("start", () => {
 
 scene("game", () => {
     setBackground(141, 183, 255);
-    setGravity(2400);
+    setGravity(2400); // Zet de zwaartekracht voor het springen
 
     // Haal het geselecteerde personage uit localStorage
     const selectedCharacter = getSelectedCharacter(); // Verkrijg het geselecteerde personage
@@ -67,8 +67,9 @@ scene("game", () => {
         spriteName = "character-3";
     }
 
-    loadSprite(spriteName, `${spriteName}.png`);
+    loadSprite(spriteName, `${spriteName}.png`); // Laad de sprite voor het geselecteerde personage
 
+    // Voeg de speler toe aan de game
     const player = add([
         sprite(spriteName),
         pos(80, 40),
@@ -77,25 +78,29 @@ scene("game", () => {
         body(),
     ]);
 
+    // Voeg de vloer toe
     add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
-        pos(0, height()),
+        pos(0, height() - FLOOR_HEIGHT),
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
         color(132, 101, 236),
     ]);
 
+    // Functie om te springen
     function jump() {
-        if (player.isGrounded && player.isGrounded()) {
-            player.jump(JUMP_FORCE);
+        if (player.isGrounded()) {  // Controleer of de speler op de grond is
+            player.jump(JUMP_FORCE);  // Laat de speler springen
         }
     }
 
+    // Wacht op de "space"-toets of een muisklik om te springen
     onKeyPress("space", jump);
     onClick(jump);
 
+    // Bomen spawnen (het obstakel)
     function spawnTree() {
         add([
             rect(48, rand(32, 96)),
@@ -114,6 +119,7 @@ scene("game", () => {
 
     spawnTree();
 
+    // Score bijhouden
     let score = 0;
     const scoreLabel = add([text("Score: " + score), pos(24, 24)]);
 
@@ -127,6 +133,7 @@ scene("game", () => {
         });
     });
 
+    // Wat er gebeurt als de speler tegen een boom botst
     player.onCollide("tree", () => {
         loadSound("gameover", "Voicy_bomboclart.mp3");
         play("gameover");
