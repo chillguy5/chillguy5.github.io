@@ -82,6 +82,11 @@
     <!-- Title with the title class -->
     <h1 class="title">Chill Guy Games</h1>
     
+    <!-- Total coins display -->
+    <div id="coin-display" style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+        Coins: <span id="coin-count">0</span>
+    </div>
+
     <div class="game-container">
         <!-- Game 1 with the correct game-link class and image class -->
         <a href="jumper.html" class="game-link">
@@ -99,5 +104,12 @@
 
     <!-- Credit text right below the page -->
     <div class="credit">Made by Chill Guy Productions</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let coins = localStorage.getItem("coins") || 0;
+            document.getElementById("coin-count").textContent = coins;
+        });
+    </script>
 </body>
 </html>
