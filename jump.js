@@ -81,7 +81,7 @@ scene("game", () => {
 
     function spawnTree() {
         add([
-            rect(48, rand(32, 96)),
+            rect(48, rand(32, 64)), // Verkleinde obstakels
             area(),
             outline(4),
             pos(width(), height() - FLOOR_HEIGHT),
@@ -121,20 +121,24 @@ scene("game", () => {
 });
 
 scene("lose", (score) => {
-    // Toon het spelpersonage en de score
-    add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.5), anchor("center")]);
-    add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-    add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
+    // Toon het spelpersonage en de score, maar maak het poppetje kleiner
+    add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]); // Verklein het poppetje
 
-    // Voeg de knoppen toe om opnieuw te starten of naar het hoofdmenu te gaan
-    addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => go("mainMenu"));
+    // Score en munten verder uit elkaar en knoppen verder van elkaar
+    add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+    add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
+
+    // Voeg de knoppen toe om opnieuw te starten of naar de index.html te gaan
+    addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
+        window.location.href = "index.html"; // Direct naar index.html
+    });
 });
 
 scene("mainMenu", () => {
-    add([text("Welcome to the Main Menu"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
+    add([text("Welcome to the jumper game."), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
-    addButton("Go to Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html"; // Verwijst naar index.html
     });
 });
