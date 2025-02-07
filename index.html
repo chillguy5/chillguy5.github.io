@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Jump Game</title>
+    <style>
+        .game-link img {
+            width: 200px; /* Pas de grootte aan */
+            height: auto;
+            border-radius: 10px; /* Mooie afgeronde hoeken */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Schaduw voor een mooi effect */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .game-link img:hover {
+            transform: scale(1.05); /* Beetje vergroten bij hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 <body> 
-    <a href="jumper.html">jumpgame</a>
+    <a href="jumper.html" class="game-link">
+        <img src="jumpgame-thumbnail.jpg" alt="Klik om het Jump Game te spelen">
+    </a>
 </body>
 </html>
