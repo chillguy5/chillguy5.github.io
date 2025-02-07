@@ -120,6 +120,7 @@ scene("game", () => {
     });
 
     player.onCollide("tree", () => {
+        music.stop();  // Stop achtergrondmuziek bij game over
         loadSound("gameover", "Voicy_bomboclart.mp3");
         play("gameover");
         coins += score;
