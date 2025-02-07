@@ -95,15 +95,15 @@ scene("game", () => {
     spawnTree();
 
     let score = 0;
-    const scoreLabel = add([text(score), pos(24, 24)]);
+    const scoreLabel = add([text("Score: " + score), pos(24, 24)]);
     let jumpedOverTree = false;
 
     onUpdate(() => {
         get("tree").forEach((tree) => {
-            if (player.pos.x > tree.pos.x + tree.width && jumpedOverTree) {
+            if (player.pos.x > tree.pos.x + tree.width && !jumpedOverTree) {
+                jumpedOverTree = true;
                 score++;
-                scoreLabel.text = score;
-                jumpedOverTree = false;
+                scoreLabel.text = "Score: " + score;
             }
         });
     });
@@ -123,9 +123,9 @@ scene("game", () => {
 });
 
 scene("lose", (score) => {
-    add([sprite("bean"), pos(width() / 2, height() / 2 - 64), scale(0.5), anchor("center")]);
-    add([text("Score: " + score), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
-    add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
+    add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.5), anchor("center")]);
+    add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+    add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
     addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
 });
 
