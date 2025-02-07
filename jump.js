@@ -54,7 +54,7 @@ scene("game", () => {
 
     const player = add([
         sprite("bean"),
-        pos(80, 40),
+        pos(80, height() - FLOOR_HEIGHT - 64), // Zorgt ervoor dat het poppetje op de vloer staat
         scale(0.5),
         area({ shape: new Rect(vec2(10, 10), 50, 50) }), // Verkleinde hitbox
         body(),
@@ -63,7 +63,7 @@ scene("game", () => {
     const floor = add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
-        pos(0, height() - FLOOR_HEIGHT), // Correcte vloerpositie
+        pos(0, height() - FLOOR_HEIGHT), // Zorgt ervoor dat de vloer helemaal onderaan is
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
