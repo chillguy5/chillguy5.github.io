@@ -10,7 +10,7 @@ body {
     margin: 0;
 }
 
-h1 {
+.title {
     font-size: 48px;
     color: #333;
     margin-bottom: 20px;
@@ -23,7 +23,11 @@ h1 {
     margin-bottom: 20px;
 }
 
-.game-link img {
+.game-link {
+    text-decoration: none;
+}
+
+.game-image {
     width: 250px;
     height: 250px;
     object-fit: cover;
@@ -32,7 +36,7 @@ h1 {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.game-link img:hover {
+.game-image:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
