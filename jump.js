@@ -56,14 +56,14 @@ scene("game", () => {
         sprite("bean"),
         pos(80, 40),
         scale(0.5),
-        area({ shape: new Rect(vec2(10, 10), 20, 20) }), // Kleinere hitbox
+        area({ shape: new Rect(vec2(5, 0), 30, 40) }), // Alleen voorkant en achterkant kleiner
         body(),
     ]);
 
     add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
-        pos(0, height()),
+        pos(0, height() - FLOOR_HEIGHT), // Correctie zodat vloer op juiste hoogte blijft
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
