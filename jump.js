@@ -1,4 +1,5 @@
 const FLOOR_HEIGHT = 48; // Definieer de FLOOR_HEIGHT constante
+const JUMP_FORCE = 800;
 const SPEED = 480; // Definieer de snelheid van de bomen
 
 kaboom({
