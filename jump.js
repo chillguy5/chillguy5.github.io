@@ -125,19 +125,18 @@ scene("lose", (score) => {
     add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
 
-    addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
-
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => {
-        go("mainMenu");
+    // We geven de speler 1 seconde om de score te zien voordat hij direct naar het hoofdmenu gaat
+    wait(1, () => {
+        go("mainMenu"); // Dit zorgt ervoor dat we direct naar het hoofdmenu gaan
     });
 });
 
 scene("mainMenu", () => {
     add([text("Welcome to the Main Menu"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
+    addButton("Go to Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html"; // Verwijst naar index.html
     });
 });
-    
+
 go("mainMenu");
