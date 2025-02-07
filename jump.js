@@ -55,7 +55,7 @@ scene("game", () => {
     const player = add([
         sprite("bean"),
         pos(80, 40),
-        scale(1),
+        scale(0,5),
         area(),
         body(),
     ]);
