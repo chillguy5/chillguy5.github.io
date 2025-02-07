@@ -52,6 +52,13 @@ scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
+        // Speel achtergrondmuziek en laat deze herhalen
+        const music = play("backgroundMusic", {
+            volume: 1, // Pas het volume aan
+            loop: true,  // Herhaal de muziek
+        });
+    
+
     loadSprite("bean", "chilltimm-removebg-preview (1).png");
 
     const player = add([
