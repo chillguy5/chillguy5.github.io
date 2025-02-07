@@ -35,9 +35,13 @@ function addButton(txt, p, f) {
     return btn;
 }
 
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
+    
+    add([text("Coins: " + coins), pos(24, 24), scale(2)]);
 });
 
 scene("game", () => {
@@ -65,7 +69,7 @@ scene("game", () => {
     ]);
 
     function jump() {
-        if (player.isGrounded()) {
+        if (player.isGrounded && player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
     }
@@ -104,13 +108,15 @@ scene("game", () => {
         });
     });
 
-    player.onJump(() => {
-        jumpedOverTree = true;
+    player.on("grounded", () => {
+        jumpedOverTree = false;
     });
 
     player.onCollide("tree", () => {
         loadSound("gameover", "Voicy_bomboclart.mp3");
         play("gameover");
+        coins += score; // Voeg score toe aan munten
+        localStorage.setItem("coins", coins); // Sla munten op
         go("lose", score);
         addKaboom(player.pos);
     });
@@ -118,7 +124,8 @@ scene("game", () => {
 
 scene("lose", (score) => {
     add([sprite("bean"), pos(width() / 2, height() / 2 - 64), scale(0.5), anchor("center")]);
-    add([text(score), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
+    add([text("Score: " + score), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
+    add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
     addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
 });
 
