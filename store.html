@@ -20,35 +20,45 @@
             height: auto;
             border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, border 0.3s;
+            border: 3px solid transparent;
         }
         .gallery img:hover {
             transform: scale(1.1);
+        }
+        .selected {
+            border: 3px solid blue;
         }
         h2 {
             margin-top: 30px;
         }
     </style>
+    <script>
+        function selectImage(event) {
+            document.querySelectorAll('.gallery img').forEach(img => img.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+    </script>
 </head>
 <body>
     <h1>Classic Chill Guys</h1>
     <div class="gallery">
-        <img src="chillarda.png" alt="Classic Chill Guy 1">
-        <img src="chillgeit.png" alt="Classic Chill Guy 2">
-        <img src="chillsamuel.png" alt="Classic Chill Guy 3">
-        <img src="chilltimm.png" alt="Classic Chill Guy 4">
+        <img src="chillarda.png" alt="Classic Chill Guy 1" onclick="selectImage(event)">
+        <img src="chillgeit.png" alt="Classic Chill Guy 2" onclick="selectImage(event)">
+        <img src="chillsamuel.png" alt="Classic Chill Guy 3" onclick="selectImage(event)">
+        <img src="chilltimm.png" alt="Classic Chill Guy 4" onclick="selectImage(event)">
     </div>
     
     <h2>The OG Chill Guys</h2>
     <div class="gallery">
-        <img src="" alt="OG Chill Guy 1">
-        <img src="" alt="OG Chill Guy 2">
+        <img src="" alt="OG Chill Guy 1" onclick="selectImage(event)">
+        <img src="" alt="OG Chill Guy 2" onclick="selectImage(event)">
     </div>
     
     <h2>Vakantie Chill Guys</h2>
     <div class="gallery">
-        <img src="" alt="Vakantie Chill Guy 1">
-        <img src="" alt="Vakantie Chill Guy 2">
+        <img src="" alt="Vakantie Chill Guy 1" onclick="selectImage(event)">
+        <img src="" alt="Vakantie Chill Guy 2" onclick="selectImage(event)">
     </div>
 </body>
 </html>
