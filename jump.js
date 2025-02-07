@@ -2,6 +2,8 @@ const FLOOR_HEIGHT = 48; // Definieer de FLOOR_HEIGHT constante
 const JUMP_FORCE = 1000;
 const SPEED = 1000; // Definieer de snelheid van de bomen
 
+loadSound("backgroundMusic", "Youre just a chill guy listening to chill music.mp3");
+
 kaboom({
     background: [135, 62, 132],
 });
