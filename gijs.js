@@ -25,7 +25,7 @@ loadSound("shoot", "/examples/sounds/shoot.mp3")
 loadSound("explode", "/examples/sounds/explode.mp3")
 loadSound("OtherworldlyFoe", "/examples/sounds/OtherworldlyFoe.mp3")
 
-scene("ba   ttle", () => {
+scene("battle", () => {
 
 	const BULLET_SPEED = 1200
 	const TRASH_SPEED = 120
@@ -35,7 +35,7 @@ scene("ba   ttle", () => {
 	const BOSS_HEALTH = 500
 	const OBJ_HEALTH = 4
 
-	const bossName = choose(objs)
+	const bossName = "GOONER"
 
 	let insaneMode = false
 
