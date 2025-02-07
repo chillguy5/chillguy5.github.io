@@ -15,7 +15,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            position: relative; /* Belangrijk voor het positioneren van de tekst rechtsonder */
+            position: relative;
         }
 
         .title {
@@ -67,7 +67,6 @@
             transform: scale(1.1);
         }
 
-        /* Nieuwe CSS voor het rechtsonder weergeven van de naam */
         .credit {
             position: absolute;
             bottom: 20px;
@@ -79,30 +78,24 @@
     </style>
 </head>
 <body>
-    <!-- Title with the title class -->
     <h1 class="title">Chill Guy Games</h1>
     
-    <!-- Total coins display -->
     <div id="coin-display" style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
         Coins: <span id="coin-count">0</span>
     </div>
 
     <div class="game-container">
-        <!-- Game 1 with the correct game-link class and image class -->
         <a href="jumper.html" class="game-link">
             <img src="Chill Guy Jumper.jpg" alt="Jump Game" class="game-image">
         </a>
         
-        <!-- Game 2 with the correct game-link class and image class -->
         <a href="gijs.html" class="game-link">
             <img src="1672668590738.jpeg" alt="Gijs Game" class="game-image">
         </a>
     </div>
     
-    <!-- Store button with the correct store-button class -->
     <a href="store.html" class="store-button">Store</a>
 
-    <!-- Credit text right below the page -->
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
