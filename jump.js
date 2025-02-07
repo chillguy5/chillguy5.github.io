@@ -121,14 +121,14 @@ scene("game", () => {
 });
 
 scene("lose", (score) => {
+    // Toon het spelpersonage en de score
     add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.5), anchor("center")]);
     add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
 
-    // We geven de speler 1 seconde om de score te zien voordat hij direct naar het hoofdmenu gaat
-    wait(1, () => {
-        go("mainMenu"); // Dit zorgt ervoor dat we direct naar het hoofdmenu gaan
-    });
+    // Voeg de knoppen toe om opnieuw te starten of naar het hoofdmenu te gaan
+    addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => go("mainMenu"));
 });
 
 scene("mainMenu", () => {
