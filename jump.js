@@ -60,10 +60,10 @@ scene("game", () => {
         body(),
     ]);
 
-    add([
+    const floor = add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
-        pos(0, height()),
+        pos(0, height() - FLOOR_HEIGHT), // Correcte vloerpositie
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
@@ -71,7 +71,7 @@ scene("game", () => {
     ]);
 
     function jump() {
-        if (player.isGrounded && player.isGrounded()) {
+        if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
     }
