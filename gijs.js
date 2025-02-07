@@ -32,10 +32,10 @@ scene("battle", () => {
 	const BOSS_SPEED = 48
 	const PLAYER_SPEED = 480
 	const STAR_SPEED = 120
-	const BOSS_HEALTH = 500
+	const BOSS_HEALTH = 1000
 	const OBJ_HEALTH = 4
 
-	const bossName = "GOONER"
+	const bossName = choose(objs)
 
 	let insaneMode = false
 
