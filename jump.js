@@ -101,7 +101,7 @@ scene("game", () => {
             "tree",
             { passed: false },
         ]);
-        wait(rand(1.5, 3), spawnTree); // Obstakels verder uit elkaar geplaatst
+        wait(rand(0.5, 1.5), spawnTree); // Obstakels verder uit elkaar geplaatst
     }
 
     spawnTree();
