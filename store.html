@@ -62,6 +62,13 @@
             let textElement = event.target.nextElementSibling;
             textElement.style.display = 'block';
         }
+
+        window.onload = function() {
+            // Selecteer automatisch de eerste afbeelding
+            let firstImage = document.querySelector('.gallery div img');
+            let firstText = firstImage.nextElementSibling;
+            firstText.style.display = 'block';
+        };
     </script>
 </head>
 <body>
