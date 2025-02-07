@@ -67,19 +67,26 @@
         }
 
         window.onload = function() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimstore.png";
-
-            // Markeer het juiste geselecteerde personage
+            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
+            let found = false;
+            
             document.querySelectorAll('.gallery div img').forEach(img => {
                 if (img.src.includes(selectedCharacter)) {
                     img.nextElementSibling.style.display = 'block';
+                    found = true;
                 }
             });
+            
+            // Als de opgeslagen waarde niet overeenkomt met een bestaande afbeelding, resetten naar de eerste afbeelding
+            if (!found) {
+                let firstImage = document.querySelector('.gallery div img');
+                firstImage.nextElementSibling.style.display = 'block';
+                localStorage.setItem("selectedCharacter", "chilltimgame.png");
+            }
         };
     </script>
 </head>
 <body>
-
     <a href="index.html" class="back-link">⬅ Terug naar Main</a>
     <h2>Classic Chill Guys</h2>
     <div class="gallery">
@@ -100,6 +107,5 @@
         <div><img src="vakantie1.png" alt="Vakantie Chill Guy 1" onclick="selectImage(event, 'vakantie1.png')"><span class="selected-text">Selected</span></div>
         <div><img src="vakantie2.png" alt="Vakantie Chill Guy 2" onclick="selectImage(event, 'vakantie2.png')"><span class="selected-text">Selected</span></div>
     </div>
-
 </body>
 </html>
