@@ -2,12 +2,10 @@ const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
 const SPEED = 480;
 
-// Initialize Kaboom with a background color
 kaboom({
-    background: [135, 62, 132]
+    background: [135, 62, 132],
 });
 
-// Function to create a button
 function addButton(txt, p, f) {
     const btn = add([
         rect(240, 80, { radius: 8 }),
@@ -37,19 +35,16 @@ function addButton(txt, p, f) {
     return btn;
 }
 
-// Start scene
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
 });
 
-// Game scene
 scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
-// load assets
-loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-fullview.png")
+    loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-fullview.png");
 
     const player = add([
         sprite("bean"),
@@ -97,16 +92,25 @@ loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-ful
 
     let score = 0;
     const scoreLabel = add([text(score), pos(24, 24)]);
+    let jumpedOverTree = false;
 
     onUpdate(() => {
-        score++;
-        scoreLabel.text = score;
+        every("tree", (tree) => {
+            if (player.pos.x > tree.pos.x + tree.width && jumpedOverTree) {
+                score++;
+                scoreLabel.text = score;
+                jumpedOverTree = false;
+            }
+        });
+    });
+
+    player.onJump(() => {
+        jumpedOverTree = true;
     });
 
     player.onCollide("tree", () => {
-        loadSound("gameover", "Voicy_bomboclart.mp3"); // Load sound only when needed
-        play("gameover"); // Play the game over sound
-
+        loadSound("gameover", "Voicy_bomboclart.mp3");
+        play("gameover");
         go("lose", score);
         addKaboom(player.pos);
     });
@@ -118,5 +122,4 @@ scene("lose", (score) => {
     addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
 });
 
-// Start at the start screen
 go("start");
