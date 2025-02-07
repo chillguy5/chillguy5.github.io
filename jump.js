@@ -1,7 +1,3 @@
-const FLOOR_HEIGHT = 48;
-const JUMP_FORCE = 800;
-const SPEED = 480;
-
 kaboom({
     background: [135, 62, 132],
 });
@@ -41,7 +37,9 @@ scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     
-    add([text("Coins: " + coins), pos(24, 24), scale(2)]);
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
+        go("mainMenu");
+    });
 });
 
 scene("game", () => {
@@ -122,7 +120,20 @@ scene("lose", (score) => {
     add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.5), anchor("center")]);
     add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
+
     addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
+
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => {
+        go("mainMenu");
+    });
 });
 
-go("start");
+scene("mainMenu", () => {
+    add([text("Welcome to the Main Menu"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
+    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
+    addButton("Store", vec2(width() / 2, height() / 2 + 100), () => {
+        window.location.href = "store.html";
+    });
+});
+    
+go("mainMenu");
