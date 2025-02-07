@@ -132,9 +132,9 @@ scene("lose", (score) => {
 });
 
 scene("mainMenu", () => {
-    add([text("Welcome to the Main Menu"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
+    add([text("Welcome to the jumper game."), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
-    addButton("Go to Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html"; // Verwijst naar index.html
     });
 });
