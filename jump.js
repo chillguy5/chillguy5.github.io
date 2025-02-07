@@ -50,7 +50,7 @@ scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
-    loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-fullview.png");
+    loadSprite("bean", "chilltimm-removebg-preview.png");
 
     const player = add([
         sprite("bean"),
