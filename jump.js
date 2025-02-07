@@ -36,37 +36,26 @@ function addButton(txt, p, f) {
 }
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
+let highscore = parseInt(localStorage.getItem("highscore")) || 0;
 
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
-    
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
-        go("mainMenu");
-    });
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
 loadSound("backgroundMusic", "Youre just a chill guy listening to chill music.mp3");
-
-// ✅ Toegevoegd: Ophalen van het geselecteerde personage uit localStorage
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
-
-// ✅ Toegevoegd: Laden van het geselecteerde personage als sprite
 loadSprite("player", selectedCharacter);
 
 scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
-    // Speel achtergrondmuziek en laat deze herhalen
-    const music = play("backgroundMusic", {
-        volume: 1, // Pas het volume aan
-        loop: true,  // Herhaal de muziek
-    });
+    const music = play("backgroundMusic", { volume: 1, loop: true });
 
-    // ✅ Gewijzigd: Gebruik het geselecteerde personage
     const player = add([
-        sprite("player"), // Gewijzigd van "bean" naar "player"
+        sprite("player"),
         pos(80, 40),
         scale(0.5),
         area(),
@@ -105,7 +94,7 @@ scene("game", () => {
             "tree",
             { passed: false },
         ]);
-        wait(rand(0.65, 2), spawnTree); // Obstakels verder uit elkaar geplaatst
+        wait(rand(0.65, 2), spawnTree);
     }
 
     spawnTree();
@@ -124,19 +113,26 @@ scene("game", () => {
     });
 
     player.onCollide("tree", () => {
-        music.stop();  // Stop achtergrondmuziek bij game over
+        music.stop();
         loadSound("gameover", "Voicy_bomboclart.mp3");
         play("gameover");
         coins += score;
         localStorage.setItem("coins", coins);
+
+        if (score > highscore) {
+            highscore = score;
+            localStorage.setItem("highscore", highscore);
+        }
+
         go("lose", score);
         addKaboom(player.pos);
     });
 });
 
 scene("lose", (score) => {
-    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]); // ✅ Gewijzigd naar "player"
+    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+    add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
@@ -147,6 +143,7 @@ scene("lose", (score) => {
 
 scene("mainMenu", () => {
     add([text("Welcome to the jumper game."), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
+    add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 50), scale(2), anchor("center")]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
