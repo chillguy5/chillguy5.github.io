@@ -143,7 +143,7 @@ scene("lose", (score) => {
 
 scene("mainMenu", () => {
     add([text("Welcome to the jumper game."), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
-    add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 25), scale(2), anchor("center")]);
+    add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 80), scale(2), anchor("center")]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
