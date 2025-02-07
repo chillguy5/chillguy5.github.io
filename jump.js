@@ -1,4 +1,4 @@
-const FLOOR_HEIGHT = 48; // Definieer de FLOOR_HEIGHT constante
+FLOOR_HEIGHT = 48; // Definieer de FLOOR_HEIGHT constante
 const JUMP_FORCE = 800;
 const SPEED = 480; // Definieer de snelheid van de bomen
 
@@ -50,20 +50,20 @@ scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
-    loadSprite("bean", "chilltimm-removebg-preview.png");
+    loadSprite("bean", "chill_guy_png_transparent_by_unsermanemamamamaam_dir0jnr-fullview.png");
 
     const player = add([
         sprite("bean"),
-        pos(80, height() - FLOOR_HEIGHT - 64), // Zorgt ervoor dat het poppetje op de vloer staat
-        scale(0.5),
-        area({ shape: new Rect(vec2(10, 10), 50, 50) }), // Verkleinde hitbox
+        pos(80, 40),
+        scale(0.1),
+        area(),
         body(),
     ]);
 
-    const floor = add([
+    add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
-        pos(0, height() - FLOOR_HEIGHT), // Zorgt ervoor dat de vloer helemaal onderaan is
+        pos(0, height()),
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
@@ -71,7 +71,7 @@ scene("game", () => {
     ]);
 
     function jump() {
-        if (player.isGrounded()) {
+        if (player.isGrounded && player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
     }
@@ -81,7 +81,7 @@ scene("game", () => {
 
     function spawnTree() {
         add([
-            rect(48, rand(32, 64)),
+            rect(48, rand(32, 64)), // Verkleinde obstakels
             area(),
             outline(4),
             pos(width(), height() - FLOOR_HEIGHT),
@@ -92,7 +92,7 @@ scene("game", () => {
             "tree",
             { passed: false },
         ]);
-        wait(rand(1.5, 3), spawnTree); // Obstakels verder uit elkaar geplaatst
+        wait(rand(0.5, 1.5), spawnTree);
     }
 
     spawnTree();
@@ -113,21 +113,25 @@ scene("game", () => {
     player.onCollide("tree", () => {
         loadSound("gameover", "Voicy_bomboclart.mp3");
         play("gameover");
-        coins += score;
-        localStorage.setItem("coins", coins);
+        coins += score; // Voeg score toe aan munten
+        localStorage.setItem("coins", coins); // Sla munten op
         go("lose", score);
         addKaboom(player.pos);
     });
 });
 
 scene("lose", (score) => {
-    add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
+    // Toon het spelpersonage en de score, maar maak het poppetje kleiner
+    add([sprite("bean"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]); // Verklein het poppetje
+
+    // Score en munten verder uit elkaar en knoppen verder van elkaar
     add([text("Score: " + score), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
 
+    // Voeg de knoppen toe om opnieuw te starten of naar de index.html te gaan
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
-        window.location.href = "index.html";
+        window.location.href = "index.html"; // Direct naar index.html
     });
 });
 
@@ -135,7 +139,7 @@ scene("mainMenu", () => {
     add([text("Welcome to the jumper game."), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
-        window.location.href = "index.html";
+        window.location.href = "index.html"; // Verwijst naar index.html
     });
 });
 
