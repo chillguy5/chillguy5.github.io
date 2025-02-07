@@ -1,16 +1,10 @@
-const FLOOR_HEIGHT = 48;
+FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
-const SPEED = 480;
+const SPEED = 480; // Definieer de snelheid van de bomen
 
 kaboom({
     background: [135, 62, 132],
 });
-
-// Functie om het geselecteerde personage te krijgen
-function getSelectedCharacter() {
-    const selectedCharacter = localStorage.getItem("selectedCharacter") || "1"; // Standaard karakter 1
-    return selectedCharacter;
-}
 
 function addButton(txt, p, f) {
     const btn = add([
@@ -54,22 +48,21 @@ scene("start", () => {
 
 scene("game", () => {
     setBackground(141, 183, 255);
-    setGravity(2400); // Zet de zwaartekracht voor het springen
+    setGravity(2400);
 
     // Haal het geselecteerde personage uit localStorage
-    const selectedCharacter = getSelectedCharacter(); // Verkrijg het geselecteerde personage
+    const selectedCharacter = localStorage.getItem("selectedCharacter") || "1"; // Standaard karakter 1
     let spriteName = "bean"; // Dit is het standaard karakter
 
-    // Pas de sprite aan afhankelijk van het geselecteerde personage
+    // Als personage 2 of 3 geselecteerd is, pas dan de sprite aan
     if (selectedCharacter === "2") {
         spriteName = "character-2";
     } else if (selectedCharacter === "3") {
         spriteName = "character-3";
     }
 
-    loadSprite(spriteName, `${spriteName}.png`); // Laad de sprite voor het geselecteerde personage
+    loadSprite(spriteName, ${spriteName}.png);
 
-    // Voeg de speler toe aan de game
     const player = add([
         sprite(spriteName),
         pos(80, 40),
@@ -78,29 +71,25 @@ scene("game", () => {
         body(),
     ]);
 
-    // Voeg de vloer toe
     add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
-        pos(0, height() - FLOOR_HEIGHT),
+        pos(0, height()),
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
         color(132, 101, 236),
     ]);
 
-    // Functie om te springen
     function jump() {
-        if (player.isGrounded()) {  // Controleer of de speler op de grond is
-            player.jump(JUMP_FORCE);  // Laat de speler springen
+        if (player.isGrounded && player.isGrounded()) {
+            player.jump(JUMP_FORCE);
         }
     }
 
-    // Wacht op de "space"-toets of een muisklik om te springen
     onKeyPress("space", jump);
     onClick(jump);
 
-    // Bomen spawnen (het obstakel)
     function spawnTree() {
         add([
             rect(48, rand(32, 96)),
@@ -119,7 +108,6 @@ scene("game", () => {
 
     spawnTree();
 
-    // Score bijhouden
     let score = 0;
     const scoreLabel = add([text("Score: " + score), pos(24, 24)]);
 
@@ -133,7 +121,6 @@ scene("game", () => {
         });
     });
 
-    // Wat er gebeurt als de speler tegen een boom botst
     player.onCollide("tree", () => {
         loadSound("gameover", "Voicy_bomboclart.mp3");
         play("gameover");
@@ -150,7 +137,7 @@ scene("lose", (score) => {
     add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 64), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 128), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => window.location.href = "index.html");
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 200), () => window.location.href = "index.html");  // Veranderd naar index.html
 });
 
 scene("mainMenu", () => {
