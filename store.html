@@ -83,26 +83,27 @@
         }
 
         window.onload = function() {
-    let selectedCharacter = localStorage.getItem("selectedCharacter");
+            let selectedCharacter = localStorage.getItem("selectedCharacter");
 
-    // Stel standaard in als er nog geen geselecteerd personage is
-    if (!selectedCharacter) {
-        selectedCharacter = "Classic Chill Guy 1";  // Dit is het standaard personage.
-        localStorage.setItem("selectedCharacter", selectedCharacter);
-    }
+            // Stel standaard in als er nog geen geselecteerd personage is
+            if (!selectedCharacter) {
+                selectedCharacter = "chilltimgame.png";  // Dit is het standaard personage.
+                localStorage.setItem("selectedCharacter", selectedCharacter);
+            }
 
-    // Zoek alle afbeeldingen en toon de geselecteerde tekst bij de juiste afbeelding
-    document.querySelectorAll('.gallery div').forEach(div => {
-        const img = div.querySelector('img');
-        const selectedText = div.querySelector('.selected-text');
-        if (img.src.includes(selectedCharacter)) {
-            selectedText.style.display = 'block';  // Toon 'Selected' tekst bij de juiste afbeelding
-        } else {
-            selectedText.style.display = 'none';   // Verberg 'Selected' tekst bij de andere afbeeldingen
-        }
-    });
-};
-
+            // Zoek alle afbeeldingen en toon de geselecteerde tekst bij de juiste afbeelding
+            document.querySelectorAll('.gallery div').forEach(div => {
+                const img = div.querySelector('img');
+                const selectedText = div.querySelector('.selected-text');
+                
+                // Vergeleken met de opgeslagen bestandsnaam in localStorage
+                if (img.src.includes(selectedCharacter)) {
+                    selectedText.style.display = 'block';  // Toon 'Selected' tekst bij de juiste afbeelding
+                } else {
+                    selectedText.style.display = 'none';   // Verberg 'Selected' tekst bij de andere afbeeldingen
+                }
+            });
+        };
     </script>
 </head>
 <body>
