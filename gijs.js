@@ -58,7 +58,7 @@ scene("battle", () => {
 		}
 	})
 
-	const player = add([sprite("bean"), area(), pos(width() / 2, height() - 64), anchor("center")])
+	const player = add([sprite("bean"), area(), pos(width() / 2, height() - 64), anchor("center"), "player"])
 
 	onKeyDown("left", () => {
 		player.move(-PLAYER_SPEED, 0)
@@ -127,7 +127,9 @@ scene("battle", () => {
 		destroy(b)
 		e.hurt(1)
 		healthbar.set(e.hp())
-		if (e.hp() <= 0) go("win", { time: 0, boss: bossName })
+		if (e.hp() <= 0) {
+			go("win", { time: 0, boss: bossName })
+		}
 	})
 
 	boss.onUpdate(() => {
