@@ -1,3 +1,7 @@
+Delen
+
+
+Je zei:
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -32,19 +36,21 @@
         .gallery img:hover {
             transform: scale(1.1);
         }
-        .selected-text, .coin-text {
+        .selected-text, .unlock-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: rgba(0, 0, 0, 0.7);
-            color: white;
             padding: 5px 10px;
             border-radius: 5px;
             font-weight: bold;
+        }
+        .selected-text {
+            color: white;
             display: none;
         }
-        .coin-text {
+        .unlock-text {
             color: red;
             cursor: pointer;
         }
@@ -53,96 +59,79 @@
             font-size: 14px;
             font-weight: bold;
         }
-        h2 {
-            margin-top: 30px;
-        }
-        .back-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 16px;
-            text-decoration: none;
-            color: white;
-            background-color: blue;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .back-link:hover {
-            background-color: darkblue;
-        }
-        #coin-count-container {
+        .coin-counter {
             position: absolute;
             top: 10px;
             right: 10px;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 16px;
             background-color: gold;
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 5px;
+            font-weight: bold;
         }
     </style>
     <script>
+        function updateCoinDisplay() {
+            document.getElementById("coin-count").textContent = localStorage.getItem("coins") || 0;
+        }
+
         function selectImage(event, character) {
-            localStorage.setItem("selectedCharacter", character);
-            updateSelectionDisplay();
-        }
-
-        function buyCharacter(event, character, price) {
-            let coins = parseInt(localStorage.getItem("coins") || "0");
-            let unlocked = JSON.parse(localStorage.getItem("unlockedCharacters") || "{}");
-            
-            if (!unlocked[character] && coins >= price) {
-                coins -= price;
-                unlocked[character] = true;
-                localStorage.setItem("coins", coins);
-                localStorage.setItem("unlockedCharacters", JSON.stringify(unlocked));
-                document.getElementById("coin-count").innerText = coins;
-            }
-            
-            if (unlocked[character]) {
-                selectImage(event, character);
-            }
-        }
-
-        function updateSelectionDisplay() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter");
-            let unlocked = JSON.parse(localStorage.getItem("unlockedCharacters") || "{}");
+            if (!isUnlocked(character)) return;
             
             document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
-            document.querySelectorAll('.coin-text').forEach(text => text.style.display = 'none');
+            let textElement = event.target.parentElement.querySelector('.selected-text');
+            textElement.style.display = 'block';
+            localStorage.setItem("selectedCharacter", character);
+        }
 
-            document.querySelectorAll('.gallery div').forEach(div => {
-                let img = div.querySelector('img');
-                let selectedText = div.querySelector('.selected-text');
-                let coinText = div.querySelector('.coin-text');
-                let character = img.getAttribute("onclick").match(/'([^']+)'/)[1];
+        function unlockCharacter(event, character, cost) {
+            let coins = parseInt(localStorage.getItem("coins") || 0);
+            if (coins >= cost) {
+                coins -= cost;
+                localStorage.setItem("coins", coins);
+                localStorage.setItem("unlocked_" + character, true);
+                updateCoinDisplay();
+                event.target.style.display = 'none';
+                selectImage({ target: event.target.previousElementSibling }, character);
+            } else {
+                alert("Niet genoeg coins!");
+            }
+        }
 
-                if (selectedCharacter === character) {
-                    selectedText.style.display = 'block';
-                }
-                if (!unlocked[character] && coinText) {
-                    coinText.style.display = 'block';
-                }
-            });
+        function isUnlocked(character) {
+            return character === "chilltimgame.png" || localStorage.getItem("unlocked_" + character);
         }
 
         window.onload = function() {
-            document.getElementById("coin-count").innerText = localStorage.getItem("coins") || "0";
-            updateSelectionDisplay();
+            if (!localStorage.getItem("coins")) {
+                localStorage.setItem("coins", 500);
+            }
+            updateCoinDisplay();
+            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
+            document.querySelectorAll('.gallery div').forEach(div => {
+                let img = div.querySelector('img');
+                let textElement = div.querySelector('.selected-text');
+                let unlockElement = div.querySelector('.unlock-text');
+                
+                if (img.src.includes(selectedCharacter)) {
+                    textElement.style.display = 'block';
+                }
+                if (unlockElement && isUnlocked(img.getAttribute("onclick").match(/'([^']+)'/)[1])) {
+                    unlockElement.style.display = 'none';
+                }
+            });
         };
     </script>
 </head>
 <body>
-    <div id="coin-count-container">Coins: <span id="coin-count">0</span></div>
+    <div class="coin-counter">Coins: <span id="coin-count">0</span></div>
     <a href="index.html" class="back-link">⬅ Terug naar Main</a>
     <h2>Classic Chill Guys</h2>
     <div class="gallery">
-        <div><img src="chilltimstore.png" alt="Classic Chill Guy 1" onclick="selectImage(event, 'chilltimgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Tim</span></div>
-        <div><img src="chillgijsstore.png" alt="Classic Chill Guy 2"><span class="coin-text" onclick="buyCharacter(event, 'chillgijsgame.png', 100)">100 Coins</span><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span></div>
-        <div><img src="chillsamuelstore.png" alt="Classic Chill Guy 3"><span class="coin-text" onclick="buyCharacter(event, 'chillsamuelgame.png', 200)">200 Coins</span><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span></div>
-        <div><img src="chillardastore.png" alt="Classic Chill Guy 4"><span class="coin-text" onclick="buyCharacter(event, 'chillardagame.png', 300)">300 Coins</span><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span></div>
+        <div><img src="chilltimstore.png" alt="Chill Tim" onclick="selectImage(event, 'chilltimgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Tim</span></div>
+        <div><img src="chillgijsstore.png" alt="Chill Gijs" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillgijsgame.png', 100)">100 Coins</span></div>
+        <div><img src="chillsamuelstore.png" alt="Chill Samuel" onclick="selectImage(event, 'chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillsamuelgame.png', 200)">200 Coins</span></div>
+        <div><img src="chillardastore.png" alt="Chill Arda" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillardagame.png', 300)">300 Coins</span></div>
     </div>
 
     <h2>The OG Chill Guys</h2>
