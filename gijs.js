@@ -17,7 +17,8 @@ for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
 
-loadBean()
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
+loadSprite("player", selectedCharacter);
 loadSound("hit", "/examples/sounds/hit.mp3")
 loadSound("shoot", "/examples/sounds/shoot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
@@ -59,7 +60,7 @@ scene("battle", () => {
 		}
 	})
 
-	const player = add([sprite("bean"), area(), pos(width() / 2, height() - 64), anchor("center"), "player"])
+	const player = add([sprite("player"), area(), pos(width() / 2, height() - 64), anchor("center"), "player"])
 
 	onKeyDown("left", () => {
 		player.move(-PLAYER_SPEED, 0)
