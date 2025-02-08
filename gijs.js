@@ -3,18 +3,18 @@ kaboom({
 })
 
 const objs = {
-	"Samuel": "Chillsamuelgame.png",
-	"Arda": "chillardagame.png",
-	"Gijs": "chillgijsgame.png",
-	"Tim": "chilltimgame.png",
-	"Samuel": "Chillsamuelgame.png",
-	"Arda": "chillardagame.png",
-	"Gijs": "chillgijsgame.png",
-	"Tim": "chilltimgame.png",
+	"apple": "Chillsamuelgame.png",
+	"lightening": "chillardagame.png",
+	"coin": "chillgijsgame.png",
+	"egg": "chilltimgame.png",
+	"key": "Chillsamuelgame.png",
+	"door": "chillardagame.png",
+	"meat": "chillgijsgame.png",
+	"mushroom": "chilltimgame.png",
 }
 
 for (const [key, file] of Object.entries(objs)) {
-	loadSprite(key, `/sprites/${file}`)
+	loadSprite(key, file)
 }
 
 loadBean()
