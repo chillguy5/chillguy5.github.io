@@ -14,11 +14,7 @@ const objs = {
 }
 
 for (const [key, file] of Object.entries(objs)) {
-	loadSprite(key, file, {
-		sliceX: 1,
-		sliceY: 1,
-		scale: 0.5
-	})
+	loadSprite(key, file)
 }
 
 loadBean()
@@ -83,6 +79,26 @@ scene("battle", () => {
 		music.speed = 1
 	})
 
+	function spawnBullet(p) {
+		add([
+			rect(12, 48),
+			area(),
+			pos(p),
+			anchor("center"),
+			color(127, 127, 255),
+			outline(4),
+			move(UP, BULLET_SPEED),
+			offscreen({ destroy: true }),
+			"bullet",
+		])
+		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
+	}
+
+	onKeyPress("space", () => {
+		spawnBullet(player.pos.sub(16, 0))
+		spawnBullet(player.pos.add(16, 0))
+	})
+
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
 		add([
@@ -99,6 +115,18 @@ scene("battle", () => {
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
+	onUpdate("trash", (t) => {
+		t.move(0, t.speed * (insaneMode ? 5 : 1))
+		if (t.pos.y - t.height > height()) {
+			destroy(t)
+		}
+	})
+
+	onCollide("bullet", "enemy", (b, e) => {
+		destroy(b)
+		e.hurt(insaneMode ? 10 : 1)
+	})
+
 	const boss = add([
 		sprite(bossName),
 		area(),
@@ -110,9 +138,19 @@ scene("battle", () => {
 		{ dir: 1 },
 	])
 
+	boss.onUpdate(() => {
+		boss.move(BOSS_SPEED * boss.dir * (insaneMode ? 3 : 1), 0)
+		if (boss.dir === 1 && boss.pos.x >= width() - 20) {
+			boss.dir = -1
+		}
+		if (boss.dir === -1 && boss.pos.x <= 20) {
+			boss.dir = 1
+		}
+	})
+
 	boss.onDeath(() => {
 		music.stop()
-		go("win", { time: timer.time, boss: bossName })
+		go("win", { time: 0, boss: bossName })
 	})
 
 	spawnTrash()
