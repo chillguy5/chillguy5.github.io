@@ -32,7 +32,7 @@
         .gallery img:hover {
             transform: scale(1.1);
         }
-        .selected-text, .price-text {
+        .selected-text {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -43,11 +43,6 @@
             border-radius: 5px;
             font-weight: bold;
             display: none;
-        }
-        .price-text {
-            color: red;
-            background-color: rgba(255, 0, 0, 0.7);
-            display: block;
         }
         .character-name {
             margin-top: 5px;
@@ -76,37 +71,31 @@
     </style>
     <script>
         function selectImage(event, character) {
-            let unlockedCharacters = JSON.parse(localStorage.getItem("unlockedCharacters")) || ["chilltimgame.png"];
-            
-            if (!unlockedCharacters.includes(character)) {
-                unlockedCharacters.push(character);
-                localStorage.setItem("unlockedCharacters", JSON.stringify(unlockedCharacters));
-            }
-            
+            document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
+            let textElement = event.target.parentElement.querySelector('.selected-text');
+            textElement.style.display = 'block';
+
+            // Opslaan van het geselecteerde personage
             localStorage.setItem("selectedCharacter", character);
-            updateSelection();
-        }
-
-        function updateSelection() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
-            let unlockedCharacters = JSON.parse(localStorage.getItem("unlockedCharacters")) || ["chilltimgame.png"];
-
-            document.querySelectorAll('.gallery div').forEach(div => {
-                let img = div.querySelector('img');
-                let character = img.getAttribute('onclick').match(/'(.*?)'/)[1];
-                let priceText = div.querySelector('.price-text');
-                let selectedText = div.querySelector('.selected-text');
-                
-                if (unlockedCharacters.includes(character)) {
-                    if (priceText) priceText.style.display = 'none';
-                }
-                
-                selectedText.style.display = character === selectedCharacter ? 'block' : 'none';
-            });
         }
 
         window.onload = function() {
-            updateSelection();
+            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
+            let found = false;
+            
+            document.querySelectorAll('.gallery div img').forEach(img => {
+                if (img.src.includes(selectedCharacter)) {
+                    img.parentElement.querySelector('.selected-text').style.display = 'block';
+                    found = true;
+                }
+            });
+            
+            // Als de opgeslagen waarde niet overeenkomt met een bestaande afbeelding, resetten naar de eerste afbeelding
+            if (!found) {
+                let firstImage = document.querySelector('.gallery div img');
+                firstImage.parentElement.querySelector('.selected-text').style.display = 'block';
+                localStorage.setItem("selectedCharacter", "chilltimgame.png");
+            }
         };
     </script>
 </head>
@@ -115,9 +104,9 @@
     <h2>Classic Chill Guys</h2>
     <div class="gallery">
         <div><img src="chilltimstore.png" alt="Classic Chill Guy 1" onclick="selectImage(event, 'chilltimgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Tim</span></div>
-        <div><img src="chillgijsstore.png" alt="Classic Chill Guy 2" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span><span class="price-text">FREE</span></div>
-        <div><img src="chillsamuelstore.png" alt="Classic Chill Guy 3" onclick="selectImage(event, 'Chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span><span class="price-text">FREE</span></div>
-        <div><img src="chillardastore.png" alt="Classic Chill Guy 4" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span><span class="price-text">FREE</span></div>
+        <div><img src="chillgijsstore.png" alt="Classic Chill Guy 2" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span></div>
+        <div><img src="chillsamuelstore.png" alt="Classic Chill Guy 3" onclick="selectImage(event, 'Chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span></div>
+        <div><img src="chillardastore.png" alt="Classic Chill Guy 4" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span></div>
     </div>
 
     <h2>The OG Chill Guys</h2>
