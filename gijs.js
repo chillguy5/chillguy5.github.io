@@ -26,7 +26,7 @@ loadSound("OtherworldlyFoe", "/examples/sounds/OtherworldlyFoe.mp3")
 scene("battle", () => {
 	const BULLET_SPEED = 1200
 	const TRASH_SPEED = 130
-	const BOSS_SPEED = 80
+	const BOSS_SPEED = 120
 	const PLAYER_SPEED = 550
 	const BOSS_HEALTH = 250
 	const OBJ_HEALTH = 5
