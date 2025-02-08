@@ -99,7 +99,7 @@ scene("game", () => {
             "tree",
             { passed: false },
         ]);
-        wait(rand(0.55, 2), spawnTree);
+        wait(rand(0.45, 1.5), spawnTree);
     }
 
     spawnTree();
