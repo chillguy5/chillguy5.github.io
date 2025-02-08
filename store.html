@@ -33,28 +33,34 @@
             transform: scale(1.1);
         }
         
- .selected-text, .unlock-text {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    width: max-content;
-    text-align: center;
-}
 
-.selected-text {
-    color: white;
-    display: none;
-    top: 60%; /* Zorg ervoor dat het net onder unlock-text komt */
-}
-
-.unlock-text {
-    top: 40%; /* Iets hoger dan selected-text */
-    color: red;
-    cursor: pointer;
+        .selected-text, .unlock-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .selected-text {
+            color: white;
+            display: none;
+        }
+        .unlock-text {
+        position: absolute;
+        top: 0; /* Zet het blok bovenaan de afbeelding */
+        left: 0;
+        width: 150px; /* Exacte breedte van de afbeelding */
+        height: 100%; /* Zorg ervoor dat de hoogte hetzelfde is als de afbeelding */
+        background-color: rgba(0, 0, 0, 0.7);
+        color: red;
+        font-weight: bold;
+        text-align: center;
+        line-height: 150px; /* Zorgt ervoor dat de tekst verticaal gecentreerd is */
+        border-radius: 10px; /* Zorg ervoor dat het blok dezelfde afgeronde hoeken heeft als de afbeelding */
+        cursor: pointer;
 }
         .character-name {
             margin-top: 5px;
