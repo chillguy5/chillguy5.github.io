@@ -60,7 +60,7 @@ scene("battle", () => {
 		}
 	})
 
-	const player = add([sprite("player"), area(), scale(0.5), pos(width() / 2, height() - 64), anchor("center"), "player"])
+	const player = add([sprite("player"), area(), scale(0.5), pos(width() / 2, height() - 100), anchor("center"), "player"])
 
 	onKeyDown("left", () => {
 		player.move(-PLAYER_SPEED, 0)
