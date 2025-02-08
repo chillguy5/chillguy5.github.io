@@ -41,6 +41,22 @@ scene("battle", () => {
 	volume(0.5)
 
 	add([
+		text("KILL", { size: 160 }),
+		pos(width() / 2, height() / 2),
+		anchor("center"),
+		lifespan(1),
+		fixed(),
+	])
+
+	add([
+		text("THE", { size: 80 }),
+		pos(width() / 2, height() / 2),
+		anchor("center"),
+		lifespan(2),
+		fixed(),
+	])
+
+	add([
 		text(bossName.toUpperCase(), { size: 120 }),
 		pos(width() / 2, height() / 2),
 		anchor("center"),
@@ -134,19 +150,37 @@ scene("battle", () => {
 		destroy(p)
 		destroy(t)
 		play("explode")
+		addKaboom(p.pos)
 		wait(1, () => go("battle"))
 	})
 
 	const boss = add([
 		sprite(bossName),
 		area(),
-		scale(1.2),
+		scale(1.5),
 		pos(width() / 2, 40),
 		health(BOSS_HEALTH),
 		anchor("top"),
 		"enemy",
 		{ dir: 1 },
 	])
+
+	const healthbar = add([
+		rect(width(), 24),
+		pos(0, 0),
+		color(107, 201, 108),
+		fixed(),
+		{ max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } },
+	])
+
+	onCollide("bullet", "enemy", (b, e) => {
+		destroy(b)
+		e.hurt(1)
+		healthbar.set(e.hp())
+		if (e.hp() <= 0) {
+			go("win", { time: 0, boss: bossName })
+		}
+	})
 
 	boss.onUpdate(() => {
 		boss.move(BOSS_SPEED * boss.dir * (insaneMode ? 3 : 1), 0)
@@ -156,11 +190,6 @@ scene("battle", () => {
 		if (boss.dir === -1 && boss.pos.x <= 20) {
 			boss.dir = 1
 		}
-	})
-
-	boss.onDeath(() => {
-		music.stop()
-		go("win", { time: 0, boss: bossName })
 	})
 
 	spawnTrash()
