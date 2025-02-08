@@ -112,13 +112,13 @@
                 let textElement = div.querySelector('.selected-text');
                 let unlockElement = div.querySelector('.unlock-text');
 
-                // Controleer of dit het geselecteerde personage is
+                // Controleer of dit het geselecteerde personage is en toon de 'Selected' tekst
                 if (img.src.includes(selectedCharacter)) {
                     textElement.style.display = 'block';
                 } else {
                     textElement.style.display = 'none';
                 }
-                
+
                 // Verberg de 'unlock' tekst als het personage al is ontgrendeld
                 if (unlockElement && isUnlocked(img.getAttribute("onclick").match(/'([^']+)'/)[1])) {
                     unlockElement.style.display = 'none';
