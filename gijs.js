@@ -116,10 +116,10 @@ scene("battle", () => {
 		destroy(t)
 		play("explode")
 		addKaboom(p.pos)
-		wait(1, () => go("battle"))
+		go("lose")
 	})
 
-	const boss = add([sprite(bossName), area(), scale(1.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
+	const boss = add([sprite(bossName), area(), scale(1), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
 
@@ -128,21 +128,29 @@ scene("battle", () => {
 		e.hurt(1)
 		healthbar.set(e.hp())
 		if (e.hp() <= 0) {
-			go("win", { time: 0, boss: bossName })
+			go("win")
 		}
 	})
 
-	boss.onUpdate(() => {
-		boss.move(BOSS_SPEED * boss.dir * (insaneMode ? 3 : 1), 0)
-		if (boss.dir === 1 && boss.pos.x >= width() - 20) boss.dir = -1
-		if (boss.dir === -1 && boss.pos.x <= 20) boss.dir = 1
+	scene("win", () => {
+		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
+	})
+
+	scene("lose", () => {
+		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
 	})
 
 	spawnTrash()
-})
-
-scene("win", ({ time, boss }) => {
-	add([text(`You defeated ${boss}!`, { size: 48 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(5)])
 })
 
 go("battle")
