@@ -119,11 +119,11 @@ scene("battle", () => {
 		wait(1, () => go("battle"))
 	})
 
-	const boss = add([sprite(bossName), area(), scale(1.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "enemy", { dir: 1 }])
+	const boss = add([sprite(bossName), area(), scale(1.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
 
-	onCollide("bullet", "enemy", (b, e) => {
+	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		e.hurt(1)
 		healthbar.set(e.hp())
