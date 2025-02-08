@@ -2,15 +2,19 @@ kaboom({
 	background: [74, 48, 82],
 })
 
-const objs = [
-	"Chillsamuelgame",
-	"chillardagame",
-	"chillgijsgame",
-	"chilltimgame",
-]
+const objs = {
+	"Samuel": "Chillsamuelgame.png",
+	"Arda": "chillardagame.png",
+	"Gijs": "chillgijsgame.png",
+	"Tim": "chilltimgame.png",
+	"Samuel": "Chillsamuelgame.png",
+	"Arda": "chillardagame.png",
+	"Gijs": "chillgijsgame.png",
+	"Tim": "chilltimgame.png",
+}
 
-for (const obj of objs) {
-	loadSprite(obj, `/sprites/${obj}.png`)
+for (const [key, file] of Object.entries(objs)) {
+	loadSprite(key, `/sprites/${file}`)
 }
 
 loadBean()
@@ -29,7 +33,7 @@ scene("battle", () => {
 	const BOSS_HEALTH = 500
 	const OBJ_HEALTH = 4
 
-	const bossName = choose(objs)
+	const bossName = choose(Object.keys(objs))
 
 	let insaneMode = false
 
@@ -77,7 +81,7 @@ scene("battle", () => {
 	})
 
 	function spawnTrash() {
-		const name = choose(objs.filter(n => n != bossName))
+		const name = choose(Object.keys(objs).filter(n => n != bossName))
 		add([
 			sprite(name),
 			area(),
