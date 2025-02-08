@@ -49,18 +49,6 @@
             font-size: 14px;
             font-weight: bold;
         }
-        .free-tag {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: red;
-            color: white;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: none; /* Standaard verborgen totdat de gebruiker het personage koopt */
-        }
         h2 {
             margin-top: 30px;
         }
@@ -91,43 +79,16 @@
             localStorage.setItem("selectedCharacter", character);
         }
 
-        function buyCharacter(event, character) {
-            // Controleer of het personage al is gekocht
-            if (localStorage.getItem(character) !== "purchased") {
-                localStorage.setItem(character, "purchased");
-                event.target.style.display = 'none'; // Verberg het "Free" label
-                alert(character + " is gekocht!");
-            }
-        }
-
         window.onload = function() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
-            let found = false;
+            let selectedCharacter = localStorage.getItem("selectedCharacter");
+            if (!selectedCharacter) {
+                selectedCharacter = "chilltimgame.png";
+                localStorage.setItem("selectedCharacter", selectedCharacter);
+            }
             
-            // Toon de geselecteerde character
             document.querySelectorAll('.gallery div img').forEach(img => {
                 if (img.src.includes(selectedCharacter)) {
                     img.parentElement.querySelector('.selected-text').style.display = 'block';
-                    found = true;
-                }
-            });
-            
-            // Als de opgeslagen waarde niet overeenkomt met een bestaande afbeelding, resetten naar de eerste afbeelding
-            if (!found) {
-                let firstImage = document.querySelector('.gallery div img');
-                firstImage.parentElement.querySelector('.selected-text').style.display = 'block';
-                localStorage.setItem("selectedCharacter", "chilltimgame.png");
-            }
-
-            // Zet de status van de aankopen
-            document.querySelectorAll('.gallery div').forEach(div => {
-                let img = div.querySelector('img');
-                let character = img.src.split("/").pop().replace(".png", "");
-                
-                if (localStorage.getItem(character) === "purchased") {
-                    div.querySelector('.free-tag').style.display = 'none'; // Verberg de "Free" tag
-                } else {
-                    div.querySelector('.free-tag').style.display = 'block'; // Toon de "Free" tag voor niet-gekregen personages
                 }
             });
         };
@@ -138,21 +99,9 @@
     <h2>Classic Chill Guys</h2>
     <div class="gallery">
         <div><img src="chilltimstore.png" alt="Classic Chill Guy 1" onclick="selectImage(event, 'chilltimgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Tim</span></div>
-        <div>
-            <img src="chillgijsstore.png" alt="Classic Chill Guy 2" onclick="selectImage(event, 'chillgijsgame.png')" >
-            <span class="free-tag" onclick="buyCharacter(event, 'chillgijsgame')">Free</span>
-            <span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span>
-        </div>
-        <div>
-            <img src="chillsamuelstore.png" alt="Classic Chill Guy 3" onclick="selectImage(event, 'Chillsamuelgame.png')">
-            <span class="free-tag" onclick="buyCharacter(event, 'Chillsamuelgame')">Free</span>
-            <span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span>
-        </div>
-        <div>
-            <img src="chillardastore.png" alt="Classic Chill Guy 4" onclick="selectImage(event, 'chillardagame.png')">
-            <span class="free-tag" onclick="buyCharacter(event, 'chillardagame')">Free</span>
-            <span class="selected-text">Selected</span><span class="character-name">Chill Arda</span>
-        </div>
+        <div><img src="chillgijsstore.png" alt="Classic Chill Guy 2" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span></div>
+        <div><img src="chillsamuelstore.png" alt="Classic Chill Guy 3" onclick="selectImage(event, 'Chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span></div>
+        <div><img src="chillardastore.png" alt="Classic Chill Guy 4" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span></div>
     </div>
 
     <h2>The OG Chill Guys</h2>
