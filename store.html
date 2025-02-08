@@ -82,10 +82,11 @@
         window.onload = function() {
             let selectedCharacter = localStorage.getItem("selectedCharacter");
             if (!selectedCharacter) {
-                selectedCharacter = "chilltimgame.png";
+                selectedCharacter = "chilltimgame.png";  // Dit is de standaard, de eerste afbeelding
                 localStorage.setItem("selectedCharacter", selectedCharacter);
             }
             
+            // Zoek naar de afbeelding die overeenkomt met de opgeslagen gekozen afbeelding
             document.querySelectorAll('.gallery div img').forEach(img => {
                 if (img.src.includes(selectedCharacter)) {
                     img.parentElement.querySelector('.selected-text').style.display = 'block';
