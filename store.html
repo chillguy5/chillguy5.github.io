@@ -1,7 +1,3 @@
-Delen
-
-
-Je zei:
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -77,11 +73,11 @@ Je zei:
 
         function selectImage(event, character) {
             if (!isUnlocked(character)) return;
-            
+
             document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
             let textElement = event.target.parentElement.querySelector('.selected-text');
             textElement.style.display = 'block';
-            localStorage.setItem("selectedCharacter", character);
+            localStorage.setItem("selectedCharacter", character);  // Sla de geselecteerde character op
         }
 
         function unlockCharacter(event, character, cost) {
@@ -107,15 +103,21 @@ Je zei:
                 localStorage.setItem("coins", 500);
             }
             updateCoinDisplay();
+
+            // Haal de geselecteerde character uit localStorage
             let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
+            
             document.querySelectorAll('.gallery div').forEach(div => {
                 let img = div.querySelector('img');
                 let textElement = div.querySelector('.selected-text');
                 let unlockElement = div.querySelector('.unlock-text');
-                
+
+                // Controleer of dit het geselecteerde personage is
                 if (img.src.includes(selectedCharacter)) {
                     textElement.style.display = 'block';
                 }
+                
+                // Verberg de 'unlock' tekst als het personage al is ontgrendeld
                 if (unlockElement && isUnlocked(img.getAttribute("onclick").match(/'([^']+)'/)[1])) {
                     unlockElement.style.display = 'none';
                 }
