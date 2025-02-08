@@ -51,14 +51,15 @@
         }
         .free-tag {
             position: absolute;
-            top: 5px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             background-color: red;
             color: white;
             font-weight: bold;
-            padding: 3px 10px;
+            padding: 5px 10px;
             border-radius: 5px;
+            display: none; /* Standaard verborgen totdat de gebruiker het personage koopt */
         }
         h2 {
             margin-top: 30px;
@@ -125,6 +126,8 @@
                 
                 if (localStorage.getItem(character) === "purchased") {
                     div.querySelector('.free-tag').style.display = 'none'; // Verberg de "Free" tag
+                } else {
+                    div.querySelector('.free-tag').style.display = 'block'; // Toon de "Free" tag voor niet-gekregen personages
                 }
             });
         };
