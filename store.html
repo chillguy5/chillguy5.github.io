@@ -80,22 +80,17 @@
         }
 
         window.onload = function() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
-            let found = false;
+            let selectedCharacter = localStorage.getItem("selectedCharacter");
+            if (!selectedCharacter) {
+                selectedCharacter = "chilltimgame.png";
+                localStorage.setItem("selectedCharacter", selectedCharacter);
+            }
             
             document.querySelectorAll('.gallery div img').forEach(img => {
                 if (img.src.includes(selectedCharacter)) {
                     img.parentElement.querySelector('.selected-text').style.display = 'block';
-                    found = true;
                 }
             });
-            
-            // Als de opgeslagen waarde niet overeenkomt met een bestaande afbeelding, resetten naar de eerste afbeelding
-            if (!found) {
-                let firstImage = document.querySelector('.gallery div img');
-                firstImage.parentElement.querySelector('.selected-text').style.display = 'block';
-                localStorage.setItem("selectedCharacter", "chilltimgame.png");
-            }
         };
     </script>
 </head>
