@@ -1,6 +1,7 @@
 const FLOOR_HEIGHT = 48; // Definieer de FLOOR_HEIGHT constante
 const JUMP_FORCE = 1000;
 const SPEED = 1000; // Definieer de snelheid van de bomen
+let canDoubleJump = false; // Variabele om bij te houden of een dubbeljump mogelijk is
 
 kaboom({
     background: [135, 62, 132],
@@ -73,8 +74,12 @@ scene("game", () => {
     ]);
 
     function jump() {
-        if (player.isGrounded && player.isGrounded()) {
+        if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
+            canDoubleJump = true;
+        } else if (canDoubleJump) {
+            player.jump(JUMP_FORCE * 0.8);
+            canDoubleJump = false;
         }
     }
 
@@ -94,7 +99,7 @@ scene("game", () => {
             "tree",
             { passed: false },
         ]);
-        wait(rand(0.65, 2), spawnTree);
+        wait(rand(0.55, 2), spawnTree);
     }
 
     spawnTree();
