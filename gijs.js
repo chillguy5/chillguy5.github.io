@@ -3,27 +3,26 @@ kaboom({
 })
 
 const objs = {
-	"apple": "Chillsamuelgame.png",
-	"lightening": "chillardagame.png",
-	"coin": "chillgijsgame.png",
-	"egg": "chilltimgame.png",
-	"key": "Chillsamuelgame.png",
-	"door": "chillardagame.png",
-	"meat": "chillgijsgame.png",
-	"mushroom": "chilltimgame.png",
+	"Samuel": "Chillsamuelgame.png",
+	"Arda": "chillardagame.png",
+	"Gijs": "chillgijsgame.png",
+	"Tim": "chilltimgame.png",
+	"Samuel": "Chillsamuelgame.png",
+	"Arda": "chillardagame.png",
+	"Gijs": "chillgijsgame.png",
+	"Tim": "chilltimgame.png",
 }
 
 for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
 
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
-loadSprite("player", selectedCharacter);
-
+loadBean()
 loadSound("hit", "/examples/sounds/hit.mp3")
 loadSound("shoot", "/examples/sounds/shoot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
 loadSound("OtherworldlyFoe", "/examples/sounds/OtherworldlyFoe.mp3")
+loadSound("explode2", "")
 
 scene("battle", () => {
 	const BULLET_SPEED = 1200
@@ -60,7 +59,7 @@ scene("battle", () => {
 		}
 	})
 
-	const player = add([sprite("player"), area(), pos(width() / 2, height() - 64), anchor("center"), "player"])
+	const player = add([sprite("bean"), area(), pos(width() / 2, height() - 64), anchor("center"), "player"])
 
 	onKeyDown("left", () => {
 		player.move(-PLAYER_SPEED, 0)
@@ -109,7 +108,7 @@ scene("battle", () => {
 		if (t.hp() <= 0) {
 			destroy(t)
 			addKaboom(t.pos)
-			play("explode")
+			play("explode2")
 		}
 	})
 
@@ -139,6 +138,24 @@ scene("battle", () => {
 		if (e.hp() <= 0) {
 			go("win")
 		}
+	})
+
+	scene("win", () => {
+		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
+	})
+
+	scene("lose", () => {
+		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
 	})
 
 	spawnTrash()
