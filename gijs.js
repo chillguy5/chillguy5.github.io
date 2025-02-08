@@ -30,7 +30,7 @@ scene("battle", () => {
 	const PLAYER_SPEED = 500
 	const STAR_SPEED = 120
 	const BOSS_HEALTH = 500
-	const OBJ_HEALTH = 4
+	const OBJ_HEALTH = 3
 
 	const bossName = choose(Object.keys(objs))
 
@@ -101,7 +101,7 @@ scene("battle", () => {
 
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		add([
+		const trash = add([
 			sprite(name),
 			area(),
 			scale(0.5),
@@ -122,15 +122,25 @@ scene("battle", () => {
 		}
 	})
 
-	onCollide("bullet", "enemy", (b, e) => {
+	onCollide("bullet", "trash", (b, t) => {
 		destroy(b)
-		e.hurt(insaneMode ? 10 : 1)
+		t.hurt(1)
+		if (t.hp() <= 0) {
+			destroy(t)
+		}
+	})
+
+	onCollide("player", "trash", (p, t) => {
+		destroy(p)
+		destroy(t)
+		play("explode")
+		wait(1, () => go("battle"))
 	})
 
 	const boss = add([
 		sprite(bossName),
 		area(),
-		scale(1.5),
+		scale(1.2),
 		pos(width() / 2, 40),
 		health(BOSS_HEALTH),
 		anchor("top"),
