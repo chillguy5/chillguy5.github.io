@@ -3,14 +3,14 @@ kaboom({
 })
 
 const objs = {
-	"apple": "Chillsamuelgame.png",
-	"lightening": "chillardagame.png",
-	"coin": "chillgijsgame.png",
-	"egg": "chilltimgame.png",
-	"key": "Chillsamuelgame.png",
-	"door": "chillardagame.png",
-	"meat": "chillgijsgame.png",
-	"mushroom": "chilltimgame.png",
+	"Chille Samuel": "Chillsamuelgame.png",
+	"CHille Arda": "chillardagame.png",
+	"CHille Gijs": "chillgijsgame.png",
+	"Chille Tim": "chilltimgame.png",
+	"Chille Samuel": "Chillsamuelgame.png",
+	"CHille Arda": "chillardagame.png",
+	"CHille Gijs": "chillgijsgame.png",
+	"CHille Tim": "chilltimgame.png",
 }
 
 for (const [key, file] of Object.entries(objs)) {
