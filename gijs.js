@@ -119,7 +119,7 @@ scene("battle", () => {
 		go("lose")
 	})
 
-	const boss = add([sprite(bossName), area(), scale(0.7), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
+	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
 		boss.move(boss.dir * BOSS_SPEED, 0)
@@ -141,6 +141,15 @@ scene("battle", () => {
 
 	scene("win", () => {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
+	})
+
+	scene("lose", () => {
+		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
 
