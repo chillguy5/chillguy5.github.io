@@ -71,41 +71,31 @@
     </style>
     <script>
         function selectImage(event, character) {
-            // Verberg alle 'selected' teksten
             document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
-
-            // Toon de 'selected' tekst voor de aangeklikte afbeelding
             let textElement = event.target.parentElement.querySelector('.selected-text');
             textElement.style.display = 'block';
 
-            // Opslaan van het geselecteerde personage in localStorage
+            // Opslaan van het geselecteerde personage
             localStorage.setItem("selectedCharacter", character);
         }
 
         window.onload = function() {
-            let selectedCharacter = localStorage.getItem("selectedCharacter");
-
-            // Stel standaard in als er nog geen geselecteerd personage is
-            if (!selectedCharacter) {
-                selectedCharacter = "chilltimgame.png";  // Dit is het standaard personage.
-                localStorage.setItem("selectedCharacter", selectedCharacter);
-            }
-
-            // Zoek alle afbeeldingen en toon de geselecteerde tekst bij de juiste afbeelding
-            document.querySelectorAll('.gallery div').forEach(div => {
-                const img = div.querySelector('img');
-                const selectedText = div.querySelector('.selected-text');
-
-                // Haal de naam van de afbeelding uit de src (bestandsnaam)
-                const imageFileName = img.src.split('/').pop(); // Dit geeft alleen de bestandsnaam (bijv. chilltimgame.png)
-
-                // Vergeleken met de opgeslagen bestandsnaam in localStorage
-                if (imageFileName === selectedCharacter) {
-                    selectedText.style.display = 'block';  // Toon 'Selected' tekst bij de juiste afbeelding
-                } else {
-                    selectedText.style.display = 'none';   // Verberg 'Selected' tekst bij de andere afbeeldingen
+            let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
+            let found = false;
+            
+            document.querySelectorAll('.gallery div img').forEach(img => {
+                if (img.src.includes(selectedCharacter)) {
+                    img.parentElement.querySelector('.selected-text').style.display = 'block';
+                    found = true;
                 }
             });
+            
+            // Als de opgeslagen waarde niet overeenkomt met een bestaande afbeelding, resetten naar de eerste afbeelding
+            if (!found) {
+                let firstImage = document.querySelector('.gallery div img');
+                firstImage.parentElement.querySelector('.selected-text').style.display = 'block';
+                localStorage.setItem("selectedCharacter", "chilltimgame.png");
+            }
         };
     </script>
 </head>
