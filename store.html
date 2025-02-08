@@ -106,7 +106,7 @@
 
             // Haal de geselecteerde character uit localStorage
             let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
-            
+
             document.querySelectorAll('.gallery div').forEach(div => {
                 let img = div.querySelector('img');
                 let textElement = div.querySelector('.selected-text');
@@ -115,6 +115,8 @@
                 // Controleer of dit het geselecteerde personage is
                 if (img.src.includes(selectedCharacter)) {
                     textElement.style.display = 'block';
+                } else {
+                    textElement.style.display = 'none';
                 }
                 
                 // Verberg de 'unlock' tekst als het personage al is ontgrendeld
