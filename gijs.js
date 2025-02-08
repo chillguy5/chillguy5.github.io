@@ -14,7 +14,11 @@ const objs = {
 }
 
 for (const [key, file] of Object.entries(objs)) {
-	loadSprite(key, file)
+	loadSprite(key, file, {
+		sliceX: 1,
+		sliceY: 1,
+		scale: 0.5
+	})
 }
 
 loadBean()
@@ -24,7 +28,6 @@ loadSound("explode", "Voicy_bomboclart.mp3")
 loadSound("OtherworldlyFoe", "/examples/sounds/OtherworldlyFoe.mp3")
 
 scene("battle", () => {
-
 	const BULLET_SPEED = 1200
 	const TRASH_SPEED = 120
 	const BOSS_SPEED = 48
@@ -85,6 +88,7 @@ scene("battle", () => {
 		add([
 			sprite(name),
 			area(),
+			scale(0.5),
 			pos(rand(0, width()), 0),
 			health(OBJ_HEALTH),
 			anchor("bot"),
@@ -98,9 +102,9 @@ scene("battle", () => {
 	const boss = add([
 		sprite(bossName),
 		area(),
+		scale(1.5),
 		pos(width() / 2, 40),
 		health(BOSS_HEALTH),
-		scale(3),
 		anchor("top"),
 		"enemy",
 		{ dir: 1 },
