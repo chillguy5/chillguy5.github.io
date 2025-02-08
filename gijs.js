@@ -22,6 +22,7 @@ loadSound("hit", "/examples/sounds/hit.mp3")
 loadSound("shoot", "/examples/sounds/shoot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
 loadSound("OtherworldlyFoe", "/examples/sounds/OtherworldlyFoe.mp3")
+loadSound("explode2", "/examples/sounds/shoot.mp3")
 
 scene("battle", () => {
 	const BULLET_SPEED = 1200
@@ -107,7 +108,7 @@ scene("battle", () => {
 		if (t.hp() <= 0) {
 			destroy(t)
 			addKaboom(t.pos)
-			play("explode")
+			play("explode2")
 		}
 	})
 
