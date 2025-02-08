@@ -71,21 +71,27 @@
     </style>
     <script>
         function selectImage(event, character) {
+            // Verberg alle 'selected' teksten
             document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
+
+            // Toon de 'selected' tekst voor de aangeklikte afbeelding
             let textElement = event.target.parentElement.querySelector('.selected-text');
             textElement.style.display = 'block';
 
-            // Opslaan van het geselecteerde personage
+            // Opslaan van het geselecteerde personage in localStorage
             localStorage.setItem("selectedCharacter", character);
         }
 
         window.onload = function() {
             let selectedCharacter = localStorage.getItem("selectedCharacter");
+
+            // Stel standaard in als er nog geen geselecteerd personage is
             if (!selectedCharacter) {
                 selectedCharacter = "chilltimgame.png";
                 localStorage.setItem("selectedCharacter", selectedCharacter);
             }
-            
+
+            // Zoek alle afbeeldingen en toon de geselecteerde tekst bij de juiste afbeelding
             document.querySelectorAll('.gallery div img').forEach(img => {
                 if (img.src.includes(selectedCharacter)) {
                     img.parentElement.querySelector('.selected-text').style.display = 'block';
