@@ -92,7 +92,7 @@ scene("battle", () => {
 
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(OBJ_HEALTH), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
+		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
@@ -104,7 +104,11 @@ scene("battle", () => {
 	onCollide("bullet", "trash", (b, t) => {
 		destroy(b)
 		t.hurt(1)
-		if (t.hp() <= 0) destroy(t)
+		if (t.hp() <= 0) {
+			destroy(t)
+			addKaboom(t.pos)
+			play("explode")
+		}
 	})
 
 	onCollide("player", "trash", (p, t) => {
@@ -133,6 +137,10 @@ scene("battle", () => {
 	})
 
 	spawnTrash()
+})
+
+scene("win", ({ time, boss }) => {
+	add([text(`You defeated ${boss}!`, { size: 48 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(5)])
 })
 
 go("battle")
