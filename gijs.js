@@ -1,3 +1,5 @@
+let musicStarted = false;
+
 kaboom({
 	background: [74, 48, 82],
 })
@@ -33,12 +35,19 @@ scene("battle", () => {
 	const BOSS_HEALTH = 500
 	const OBJ_HEALTH = 6
 
-	const bossName = choose(Object.keys(objs))
+	 const bossName = choose(Object.keys(objs));
+    let insaneMode = false;
+    let music;
 
-	let insaneMode = false
+    add([text("Press SPACE to start"), pos(width() / 2, height() / 2), anchor("center")]);
 
-	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
-
+    onKeyPress("space", () => {
+        if (!musicStarted) {
+            music = play("OtherworldlyFoe", { volume: 1, loop: true });
+            musicStarted = true;
+        }
+    });
+	
 	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
 	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
 	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
@@ -70,15 +79,18 @@ scene("battle", () => {
 		if (player.pos.x > width()) player.pos.x = 0
 	})
 
-	onKeyPress("up", () => {
-		insaneMode = true
-		music.speed = 2
-	})
+	
+    onKeyPress("up", () => {
+        insaneMode = true;
+        if (music) music.speed = 2;
+    });
 
-	onKeyRelease("up", () => {
-		insaneMode = false
-		music.speed = 1
-	})
+    onKeyRelease("up", () => {
+        insaneMode = false;
+        if (music) music.speed = 1;
+    });
+  spawnTrash();
+});
 
 function spawnBullet(p) {
     add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
