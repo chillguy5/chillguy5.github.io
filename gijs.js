@@ -134,6 +134,7 @@ function spawnBullet(p) {
 
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
+		play("hit")
 		e.hurt(1)
 		healthbar.set(e.hp())
 		if (e.hp() <= 0) {
