@@ -18,7 +18,7 @@ loadSprite("player", selectedCharacter);
 loadSound("hit", "hit.mp3")
 loadSound("shoot", "shot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
-loadSound("OtherworldlyFoe", "kaboomguardian.mp3") // Correcte naam!
+loadSound("OtherworldlyFoe", "kaboomguardian.mp3")
 loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
@@ -26,13 +26,16 @@ scene("battle", () => {
 	const TRASH_SPEED = 120
 	const BOSS_SPEED = 48
 	const PLAYER_SPEED = 500
-	const BOSS_HEALTH = 500
+	const BOSS_HEALTH = 1000
+	const OBJ_HEALTH = 6
 
 	const bossName = choose(Object.keys(objs))
+
 	let insaneMode = false
 
-	// Start de muziek meteen (in plaats van bij "SPACE")
-	const music = play("kaboomguardian", { volume: 1, loop: true }) 
+	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
+
+	volume(0.5)
 
 	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
 	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
@@ -75,52 +78,29 @@ scene("battle", () => {
 		music.speed = 1
 	})
 
-	// Kogels afvuren met "SPACE"
-	onKeyPress("space", () => {
-		spawnBullet(player.pos.sub(16, 0))
-		spawnBullet(player.pos.add(16, 0))
-	})
-
 	function spawnBullet(p) {
 		add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
 		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 	}
 
+	onKeyPress("space", () => {
+		spawnBullet(player.pos.sub(16, 0))
+		spawnBullet(player.pos.add(16, 0))
+	})
+
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
+		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(OBJ_HEALTH), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
-	onUpdate("trash", (t) => {
-		t.move(0, t.speed * (insaneMode ? 5 : 1))
-		if (t.pos.y - t.height > height()) destroy(t)
-	})
+	spawnTrash()
 
-	onCollide("bullet", "trash", (b, t) => {
-		destroy(b)
-		play("hit")
-		t.hurt(1)
-		if (t.hp() <= 0) {
-			destroy(t)
-			addKaboom(t.pos)
-			play("explode2")
-		}
-	})
-
-	onCollide("player", "trash", (p, t) => {
-		destroy(p)
-		destroy(t)
-		play("explode")
-		addKaboom(p.pos)
-		go("lose")
-	})
-
-	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
+	const boss = add([sprite(bossName), area(), scale(3), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
 		boss.move(boss.dir * BOSS_SPEED, 0)
-		if (boss.pos.x < 0 || boss.pos.x > width()) {
+		if (boss.pos.x < 20 || boss.pos.x > width() - 20) {
 			boss.dir *= -1
 		}
 	})
@@ -130,9 +110,10 @@ scene("battle", () => {
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
-		e.hurt(1)
+		e.hurt(10)
 		healthbar.set(e.hp())
 		if (e.hp() <= 0) {
+			music.stop()
 			go("win")
 		}
 	})
@@ -140,22 +121,8 @@ scene("battle", () => {
 	scene("win", () => {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-
 		onKeyPress("r", () => go("battle"))
-		onKeyPress("m", () => window.location.href = "index.html")
 	})
-
-	scene("lose", () => {
-		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-
-		onKeyPress("r", () => go("battle"))
-		onKeyPress("m", () => window.location.href = "index.html")
-	})
-
-	spawnTrash()
 })
 
 go("battle")
