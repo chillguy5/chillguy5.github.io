@@ -18,7 +18,7 @@ loadSprite("player", selectedCharacter);
 loadSound("hit", "hit.mp3")
 loadSound("shoot", "shot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
-loadSound("OtherworldlyFoe", "kaboomguardian.mp3") // Zorg ervoor dat dit de juiste naam is
+loadSound("OtherworldlyFoe", "kaboomguardian.mp3") // Correcte naam!
 loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
@@ -30,18 +30,13 @@ scene("battle", () => {
 
 	const bossName = choose(Object.keys(objs))
 	let insaneMode = false
-	let musicStarted = false
-	let music;
 
-	add([text("Press SPACE to start"), pos(width() / 2, height() / 2), anchor("center")])
+	// Start de muziek meteen (in plaats van bij "SPACE")
+	const music = play("kaboomguardian", { volume: 1, loop: true }) 
 
-	onKeyPress("space", () => {
-		if (!musicStarted) {
-			music = play("kaboomguardian", { volume: 1, loop: true }) // Hier is de juiste mp3 naam
-			musicStarted = true;
-			console.log("Muziek gestart: kaboomguardian.mp3") // Debug-log
-		}
-	})
+	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
+	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
+	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
 
 	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
 
@@ -72,23 +67,24 @@ scene("battle", () => {
 
 	onKeyPress("up", () => {
 		insaneMode = true
-		if (music) music.speed = 2
+		music.speed = 2
 	})
 
 	onKeyRelease("up", () => {
 		insaneMode = false
-		if (music) music.speed = 1
+		music.speed = 1
+	})
+
+	// Kogels afvuren met "SPACE"
+	onKeyPress("space", () => {
+		spawnBullet(player.pos.sub(16, 0))
+		spawnBullet(player.pos.add(16, 0))
 	})
 
 	function spawnBullet(p) {
 		add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
 		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 	}
-
-	onKeyPress("space", () => {
-		spawnBullet(player.pos.sub(16, 0))
-		spawnBullet(player.pos.add(16, 0))
-	})
 
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
