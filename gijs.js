@@ -31,7 +31,7 @@ scene("battle", () => {
 	const BOSS_SPEED = 48
 	const PLAYER_SPEED = 500
 	const BOSS_HEALTH = 500
-	const OBJ_HEALTH = 3
+	const OBJ_HEALTH = 6
 
 	const bossName = choose(Object.keys(objs))
 
@@ -83,7 +83,8 @@ scene("battle", () => {
 	})
 
 function spawnBullet() {
-    add([rect(12, 48), area(), pos(player.pos.add(-player.width, -player.height)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"] )
+    add([rect(12, 48), area(), pos(player.pos.add(-player.width, -player.height / 2)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"] )
+    add([rect(12, 48), area(), pos(player.pos.add(player.width, -player.height / 2)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"] )
     play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 }
 
