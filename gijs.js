@@ -1,14 +1,8 @@
-let musicStarted = false;
-
 kaboom({
 	background: [74, 48, 82],
 })
 
 const objs = {
-	"Samuel": "Chillsamuelgame.png",
-	"Arda": "chillardagame.png",
-	"Gijs": "chillgijsgame.png",
-	"Tim": "chilltimgame.png",
 	"Samuel": "Chillsamuelgame.png",
 	"Arda": "chillardagame.png",
 	"Gijs": "chillgijsgame.png",
@@ -33,24 +27,20 @@ scene("battle", () => {
 	const BOSS_SPEED = 48
 	const PLAYER_SPEED = 500
 	const BOSS_HEALTH = 500
-	const OBJ_HEALTH = 6
 
-	 const bossName = choose(Object.keys(objs));
-    let insaneMode = false;
-    let music;
+	const bossName = choose(Object.keys(objs))
+	let insaneMode = false
+	let musicStarted = false
+	let music;
 
-    add([text("Press SPACE to start"), pos(width() / 2, height() / 2), anchor("center")]);
+	add([text("Press SPACE to start"), pos(width() / 2, height() / 2), anchor("center")])
 
-    onKeyPress("space", () => {
-        if (!musicStarted) {
-            music = play("OtherworldlyFoe", { volume: 1, loop: true });
-            musicStarted = true;
-        }
-    });
-	
-	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
-	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
-	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
+	onKeyPress("space", () => {
+		if (!musicStarted) {
+			music = play("OtherworldlyFoe", { volume: 1, loop: true })
+			musicStarted = true;
+		}
+	})
 
 	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
 
@@ -79,24 +69,20 @@ scene("battle", () => {
 		if (player.pos.x > width()) player.pos.x = 0
 	})
 
-	
-    onKeyPress("up", () => {
-        insaneMode = true;
-        if (music) music.speed = 2;
-    });
+	onKeyPress("up", () => {
+		insaneMode = true
+		if (music) music.speed = 2
+	})
 
-    onKeyRelease("up", () => {
-        insaneMode = false;
-        if (music) music.speed = 1;
-    });
-  spawnTrash();
-});
+	onKeyRelease("up", () => {
+		insaneMode = false
+		if (music) music.speed = 1
+	})
 
-function spawnBullet(p) {
-    add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
-    play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
-}
-
+	function spawnBullet(p) {
+		add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
+		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
+	}
 
 	onKeyPress("space", () => {
 		spawnBullet(player.pos.sub(16, 0))
