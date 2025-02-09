@@ -19,11 +19,11 @@ for (const [key, file] of Object.entries(objs)) {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
 loadSprite("player", selectedCharacter);
-loadSound("hit", "/examples/sounds/hit.mp3")
-loadSound("shoot", "/examples/sounds/shoot.mp3")
+loadSound("hit", "hit.mp3")
+loadSound("shoot", "shot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
-loadSound("OtherworldlyFoe", "/examples/sounds/OtherworldlyFoe.mp3")
-loadSound("explode2", "")
+loadSound("OtherworldlyFoe", "kaboomguardian.mp3")
+loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
 	const BULLET_SPEED = 1200
