@@ -7,6 +7,10 @@ const objs = {
 	"Arda": "chillardagame.png",
 	"Gijs": "chillgijsgame.png",
 	"Tim": "chilltimgame.png",
+	"Samuel": "Chillsamuelgame.png",
+	"Arda": "chillardagame.png",
+	"Gijs": "chillgijsgame.png",
+	"Tim": "chilltimgame.png",
 }
 
 for (const [key, file] of Object.entries(objs)) {
@@ -35,7 +39,12 @@ scene("battle", () => {
 
 	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
+	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
+	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
+	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
+
 	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
+
 	sky.onUpdate(() => {
 		if (insaneMode) {
 			const t = time() * 10
@@ -71,10 +80,11 @@ scene("battle", () => {
 		music.speed = 1
 	})
 
-	function spawnBullet(p) {
-		add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
-		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
-	}
+function spawnBullet(p) {
+    add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
+    play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
+}
+
 
 	onKeyPress("space", () => {
 		spawnBullet(player.pos.sub(16, 0))
@@ -83,7 +93,7 @@ scene("battle", () => {
 
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(OBJ_HEALTH), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
+		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
@@ -130,6 +140,24 @@ scene("battle", () => {
 		if (e.hp() <= 0) {
 			go("win")
 		}
+	})
+
+	scene("win", () => {
+		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
+	})
+
+	scene("lose", () => {
+		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
+		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+
+		onKeyPress("r", () => go("battle"))
+		onKeyPress("m", () => window.location.href = "index.html")
 	})
 
 	spawnTrash()
