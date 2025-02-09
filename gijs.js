@@ -37,9 +37,7 @@ scene("battle", () => {
 
 	let insaneMode = false
 
-	const music = play("OtherworldlyFoe")
-
-	volume(0.5)
+	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
 	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
 	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
