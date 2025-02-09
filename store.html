@@ -87,14 +87,17 @@
 
         .back-link {
             position: absolute;
+            display: inline-block;
             top: 10px;
             left: 30px;
-            font-size: 30px;
-            background-color: #9900ff;
-            color: white;
             padding: 10px 20px;
-            border-radius: 5px;
+            font-size: 30px;
+            color: white;
+            background-color: #9900ff;
             text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
             font-weight: bold;
         }
 
@@ -124,11 +127,6 @@
             height: 20px;
             margin-right: 5px;
             vertical-align: middle;
-        }
-
-
-        .back-link:hover {
-            background-color: darkblue;
         }
     </style>
     <script>
