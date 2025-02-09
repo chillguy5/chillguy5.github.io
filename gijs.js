@@ -26,7 +26,7 @@ scene("battle", () => {
 	const TRASH_SPEED = 120
 	const BOSS_SPEED = 48
 	const PLAYER_SPEED = 500
-	const BOSS_HEALTH = 1000
+	const BOSS_HEALTH = 500
 	const OBJ_HEALTH = 6
 
 	const bossName = choose(Object.keys(objs))
@@ -35,14 +35,7 @@ scene("battle", () => {
 
 	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
-	volume(0.5)
-
-	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
-	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
-	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
-
 	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
-
 	sky.onUpdate(() => {
 		if (insaneMode) {
 			const t = time() * 10
@@ -94,13 +87,35 @@ scene("battle", () => {
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
-	spawnTrash()
+	onUpdate("trash", (t) => {
+		t.move(0, t.speed * (insaneMode ? 5 : 1))
+		if (t.pos.y - t.height > height()) destroy(t)
+	})
 
-	const boss = add([sprite(bossName), area(), scale(3), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
+	onCollide("bullet", "trash", (b, t) => {
+		destroy(b)
+		play("hit")
+		t.hurt(1)
+		if (t.hp() <= 0) {
+			destroy(t)
+			addKaboom(t.pos)
+			play("explode2")
+		}
+	})
+
+	onCollide("player", "trash", (p, t) => {
+		destroy(p)
+		destroy(t)
+		play("explode")
+		addKaboom(p.pos)
+		go("lose")
+	})
+
+	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
 		boss.move(boss.dir * BOSS_SPEED, 0)
-		if (boss.pos.x < 20 || boss.pos.x > width() - 20) {
+		if (boss.pos.x < 0 || boss.pos.x > width()) {
 			boss.dir *= -1
 		}
 	})
@@ -110,19 +125,14 @@ scene("battle", () => {
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
-		e.hurt(10)
+		e.hurt(1)
 		healthbar.set(e.hp())
 		if (e.hp() <= 0) {
-			music.stop()
 			go("win")
 		}
 	})
 
-	scene("win", () => {
-		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
-		onKeyPress("r", () => go("battle"))
-	})
+	spawnTrash()
 })
 
 go("battle")
