@@ -60,7 +60,7 @@ scene("battle", () => {
 		}
 	})
 
-	const player = add([sprite("player"), area(), scale(0.45), pos(width() / 2, height() - 80), anchor("center"), "player"])
+	const player = add([sprite("player"), area(), scale(0.45), pos(width() / 2, height() - 85), anchor("center"), "player"])
 
 	onKeyDown("left", () => {
 		player.move(-PLAYER_SPEED, 0)
@@ -82,9 +82,8 @@ scene("battle", () => {
 		music.speed = 1
 	})
 
-function spawnBullet() {
-    add([rect(12, 48), area(), pos(player.pos.add(-player.width, -player.height / 2)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"] )
-    add([rect(12, 48), area(), pos(player.pos.add(player.width, -player.height / 2)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"] )
+function spawnBullet(p) {
+    add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
     play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 }
 
