@@ -37,7 +37,7 @@ scene("battle", () => {
 
 	let insaneMode = false
 
-	const music = play("OtherworldlyFoe")
+	const music = play("kaboomguardian.mp3")
 
 	volume(0.5)
 
@@ -106,6 +106,7 @@ function spawnBullet(p) {
 
 	onCollide("bullet", "trash", (b, t) => {
 		destroy(b)
+		play("hit.mp3")
 		t.hurt(1)
 		if (t.hp() <= 0) {
 			destroy(t)
