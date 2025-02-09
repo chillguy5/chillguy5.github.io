@@ -18,7 +18,7 @@ loadSprite("player", selectedCharacter);
 loadSound("hit", "hit.mp3")
 loadSound("shoot", "shot.mp3")
 loadSound("explode", "Voicy_bomboclart.mp3")
-loadSound("OtherworldlyFoe", "kaboomguardian.mp3")
+loadSound("OtherworldlyFoe", "kaboomguardian.mp3") // Zorg ervoor dat dit de juiste naam is
 loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
@@ -37,8 +37,9 @@ scene("battle", () => {
 
 	onKeyPress("space", () => {
 		if (!musicStarted) {
-			music = play("OtherworldlyFoe", { volume: 1, loop: true })
+			music = play("kaboomguardian", { volume: 1, loop: true }) // Hier is de juiste mp3 naam
 			musicStarted = true;
+			console.log("Muziek gestart: kaboomguardian.mp3") // Debug-log
 		}
 	})
 
