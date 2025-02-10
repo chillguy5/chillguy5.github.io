@@ -55,21 +55,17 @@
         
         .unlock-block {
             position: absolute;
-            top: -20px; /* Plaats het tekstje iets boven het plaatje */
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 0;
-            width: 150px; /* Exacte breedte van de afbeelding */
-            height: 150%; /* Zorg ervoor dat de hoogte hetzelfde is als de afbeelding */
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 0px;
-            border-radius: 10px;
-            font-weight: bold;
-            text-align: center;
-            vertical-align: center;
-            color: red;
-            cursor: pointer;
-            font-size: 30px; /* Zorg ervoor dat de tekst een geschikte grootte heeft */
+    top: 0;
+    left: 0;
+    width: 100%; /* Zorgt ervoor dat de breedte exact gelijk is aan de afbeelding */
+    height: 100%; /* Zorgt ervoor dat de hoogte exact gelijk is aan de afbeelding */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex; /* Zorgt ervoor dat de tekst goed gecentreerd wordt */
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-size: 30px;
+    border-radius: 10px;Zorg ervoor dat de tekst een geschikte grootte heeft */
         }
 
 
