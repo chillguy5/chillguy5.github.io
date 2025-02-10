@@ -80,20 +80,10 @@
             color: #f8f8d7;
         }
 
-        .h2 {
+        .h2{
             font-size: 30px;
             font-weight: bold;
-            color: #f0aa5e;
-            min-width: 200px; /* Zorgt ervoor dat de titel ruimte heeft */
-            text-align: right; /* Zet de tekst rechts */
-        }
-
-        .gallery-container {
-            display: flex;
-            align-items: center; /* Zet de h2 en de gallery op dezelfde hoogte */
-            gap: 20px; /* Ruimte tussen de h2 en de gallery */
-            justify-content: center; /* Zet alles in het midden */
-            margin-bottom: 20px; /* Ruimte tussen de secties */
+            color: #f0aa5e; 
         }
 
         .coin-counter {
@@ -239,15 +229,12 @@
     <h1 class="store-title">STORE<img src="storeicon.png" alt="Winkelmandje" class="cart-icon"></h1>
     <div class="coin-counter"><img src="coin.png" alt="coin" class="coin-icon">Coins: <span id="coin-count">0</span></div>
     <a href="index.html" class="back-link">Main menu<img src="homeicon.png" alt="home" class="home-icon"></a>
-
-    <div class="gallery-container"></div>
-        <h2 class="h2"> Classic Chill Guys</h2>
-        <div class="gallery">
+    <h2 class="h2"> Classic Chill Guys</h2>
+    <div class="gallery">
         <div><img src="chilltimstore.png" alt="Chill Tim" onclick="selectImage(event, 'chilltimgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Tim</span></div>
-            <div><img src="chillgijsstore.png" alt="Chill Gijs" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillgijsgame.png', 0)">Free</span></div>
-            <div><img src="chillsamuelstore.png" alt="Chill Samuel" onclick="selectImage(event, 'chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillsamuelgame.png', 0)">Free</span></div>
-            <div><img src="chillardastore.png" alt="Chill Arda" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillardagame.png', 0)">Free</span></div>
-        </div>
+        <div><img src="chillgijsstore.png" alt="Chill Gijs" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillgijsgame.png', 0)">Free</span></div>
+        <div><img src="chillsamuelstore.png" alt="Chill Samuel" onclick="selectImage(event, 'chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillsamuelgame.png', 0)">Free</span></div>
+        <div><img src="chillardastore.png" alt="Chill Arda" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span><span class="unlock-text" onclick="unlockCharacter(event, 'chillardagame.png', 0)">Free</span></div>
     </div>
 
     <h2 class="h2"> The OG Chill Guys</h2>
