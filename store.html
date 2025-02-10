@@ -52,29 +52,35 @@
             color: white;
             display: none;
         }
+
+        .image-container {
+    position: relative;
+    display: inline-block;
+}
         
         .unlock-block {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%; /* Zorgt ervoor dat de breedte exact gelijk is aan de afbeelding */
-            height: 100%; /* Zorgt ervoor dat de hoogte exact gelijk is aan de afbeelding */
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex; /* Zorgt ervoor dat de tekst goed gecentreerd wordt */
-            align-items: center;
-            justify-content: center;
-            color: red;
-            font-size: 30px;
-            border-radius: 10px;Zorg ervoor dat de tekst een geschikte grootte heeft */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Donkere overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-size: 30px;
+    border-radius: 10px;
         }
 
-
-        .character-name {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #f8f8d7;
-        }
+        /* Zorg dat de tekst niet beïnvloed wordt */
+.item p {
+    position: relative;
+    z-index: 2; /* Zorgt dat de tekst boven de overlay blijft */
+    text-align: center;
+    margin-top: 5px;
+    #f8f8d7
+}
 
         .h2{
             font-size: 30px;
@@ -228,9 +234,27 @@
     <h2 class="h2">Classic Chill Guys</h2>
     <div class="gallery">
         <div><img src="chilltimstore.png" alt="Chill Tim" onclick="selectImage(event, 'chilltimgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Tim</span></div>
-        <div><img src="chillgijsstore.png" alt="Chill Gijs" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Gijs</span><span class="unlock-block" onclick="unlockCharacter(event, 'chillgijsgame.png', 0)"><h3 class="unlock-tekst">free</h3></span></div>
-        <div><img src="chillsamuelstore.png" alt="Chill Samuel" onclick="selectImage(event, 'chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Samuel</span><span class="unlock-block" onclick="unlockCharacter(event, 'chillsamuelgame.png', 0)"><h3 class="unlock-tekst">free</h3></span></div>
-        <div><img src="chillardastore.png" alt="Chill Arda" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="character-name">Chill Arda</span><span class="unlock-block" onclick="unlockCharacter(event, 'chillardagame.png', 0)"><h3 class="unlock-tekst">free</h3></span></div>
+        <div class="item">
+            <div class="image-container">
+                <div><img src="chillgijsstore.png" alt="Chill Gijs" onclick="selectImage(event, 'chillgijsgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'chillgijsgame.png', 0)"></span></div>
+                <div class="unlock-block">free</div>
+            </div>
+            <p>Chill Gijs</p>
+        </div>
+        <div class="item">
+            <div class="image-container">
+                <div><img src="chillsamuelstore.png" alt="Chill Samuel" onclick="selectImage(event, 'chillsamuelgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'chillsamuelgame.png', 0)"></span></div>
+                <div class="unlock-block">free</div>
+            </div>
+            <p>Chill Gijs</p>
+        </div>
+        <div class="item">
+            <div class="image-container">
+                <div><img src="chillardastore.png" alt="Chill Arda" onclick="selectImage(event, 'chillardagame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'chillardagame.png', 0)"></span></div>
+                <div class="unlock-block">free</div>
+            </div>
+            <p>Chill Gijs</p>
+        </div>
     </div>
 
     <h2 class="h2">The OG Chill Guys</h2>
