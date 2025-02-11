@@ -22,7 +22,6 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-
         }
 
         .title {
@@ -78,7 +77,7 @@
             transform: scale(1.1);
         }
 
-        .cart-icon{
+        .cart-icon {
             width: 30px; /* Pas de grootte aan */
             height: 30px;
             margin-left: 5px;
@@ -112,19 +111,34 @@
             color: #f8f8d7;
             font-weight: bold;
         }
+
+        /* CSS voor de geluidknop */
+        .sound-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .sound-icon {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body>
-    <div><img src="naam.png" alt="icon" class="title"></div>
+    <audio id="background-audio" autoplay loop>
+        <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
+    </audio>
 
+    <!-- Geluidknop toegevoegd -->
     <a href="javascript:void(0);" class="sound-button" onclick="toggleSound()">
         <img id="sound-icon" src="sound-icon.png" alt="Sound" class="sound-icon">
     </a>
 
-    <audio id="background-audio" loop>
-        <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
-        Je browser ondersteunt geen audio-element.
-    </audio>
+    <div><img src="naam.png" alt="icon" class="title"></div>
     
     <div class="coin-counter"><img src="coin.png" alt="coin" class="coin-icon">Coins: <span id="coin-count">0</span></div>
 
@@ -142,48 +156,45 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
- // Zorg ervoor dat het geluid aan of uit is afhankelijk van de opgeslagen waarde
- function initializeSound() {
-        let soundOn = localStorage.getItem("soundOn");
-        if (soundOn === "true") {
-            document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep
-            playSound();
-        } else {
-            document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Voeg de rode streep toe
-            stopSound();
+        // Functie om geluid in/uit te schakelen
+        function initializeSound() {
+            let soundOn = localStorage.getItem("soundOn");
+            if (soundOn === "true") {
+                document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep
+                playSound();
+            } else {
+                document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Voeg de rode streep toe
+                stopSound();
+            }
         }
-    }
 
-    // Functie om geluid aan te zetten
-    function playSound() {
-        let audio = document.getElementById("background-audio");
-        audio.play();
-    }
-
-    // Functie om geluid uit te zetten
-    function stopSound() {
-        let audio = document.getElementById("background-audio");
-        audio.pause();
-    }
-
-    // Functie om de geluidstatus om te schakelen
-    function toggleSound() {
-        let soundOn = localStorage.getItem("soundOn") === "true";
-        
-        if (soundOn) {
-            localStorage.setItem("soundOn", "false");
-            document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Toevoegen van de rode streep
-            stopSound();
-        } else {
-            localStorage.setItem("soundOn", "true");
-            document.getElementById("sound-icon").style.transform = "none"; // Verwijderen van de rode streep
-            playSound();
+        function playSound() {
+            let audio = document.getElementById("background-audio");
+            audio.play();
         }
-    }
 
-    // Initialiseer het geluid bij het laden van de pagina
-    window.onload = initializeSound;
-        
+        function stopSound() {
+            let audio = document.getElementById("background-audio");
+            audio.pause();
+        }
+
+        function toggleSound() {
+            let soundOn = localStorage.getItem("soundOn") === "true";
+            
+            if (soundOn) {
+                localStorage.setItem("soundOn", "false");
+                document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Toevoegen van de rode streep
+                stopSound();
+            } else {
+                localStorage.setItem("soundOn", "true");
+                document.getElementById("sound-icon").style.transform = "none"; // Verwijderen van de rode streep
+                playSound();
+            }
+        }
+
+        window.onload = initializeSound;
+
+        // Code om coins op te slaan en weer te geven
         document.addEventListener("DOMContentLoaded", function () {
             let coins = localStorage.getItem("coins") || 0;
             document.getElementById("coin-count").textContent = coins;
