@@ -135,11 +135,12 @@
     </style>
 </head>
 <body>
+    <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
         <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Geluidknop toegevoegd -->
+    <!-- Geluidknop -->
     <a href="javascript:void(0);" class="sound-button" onclick="toggleSound()">
         <img id="sound-icon" src="sound-icon.png" alt="Sound" class="sound-icon">
     </a>
@@ -162,7 +163,18 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
-        // Functie om geluid in/uit te schakelen
+        // Code om coins op te slaan en weer te geven
+        document.addEventListener("DOMContentLoaded", function () {
+            let coins = localStorage.getItem("coins") || 0;
+            document.getElementById("coin-count").textContent = coins;
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let coins = localStorage.getItem("coins") || 0;
+            document.getElementById("coin-count").textContent = coins;
+        });
+
+        // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
             let soundOn = localStorage.getItem("soundOn");
             if (soundOn === "true") {
@@ -199,12 +211,6 @@
         }
 
         window.onload = initializeSound;
-
-        // Code om coins op te slaan en weer te geven
-        document.addEventListener("DOMContentLoaded", function () {
-            let coins = localStorage.getItem("coins") || 0;
-            document.getElementById("coin-count").textContent = coins;
-        });
     </script>
 </body>
 </html>
