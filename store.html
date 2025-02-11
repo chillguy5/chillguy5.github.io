@@ -167,102 +167,74 @@
         }
     </style>
 <script>
-    function updateCoinDisplay() {
-        document.getElementById("coin-count").textContent = localStorage.getItem("coins") || 0;
-    }
-
-    function selectImage(event, character) {
-        if (!isUnlocked(character)) return;
-
-        document.querySelectorAll('.selected-text').forEach(text => text.style.display = 'none');
-
-        let textElement = event.target.parentElement.querySelector('.selected-text');
-        if (textElement) {
-            textElement.style.display = 'block';
-        }
-
-        localStorage.setItem("selectedCharacter", character);
-    }
-
-    function unlockCharacter(event, character, cost) {
-        let coins = parseInt(localStorage.getItem("coins") || 0);
-
-        if (coins < cost) {
-            alert("Niet genoeg coins!");
-            return;
-        }
-
-        let confirmPurchase = confirm("Weet je zeker dat je dit karakter wilt kopen?");
-        if (!confirmPurchase) return;
-
-        coins -= cost;
-        localStorage.setItem("coins", coins);
-        localStorage.setItem("unlocked_" + character, "true");
-
-        updateCoinDisplay();
-
-        let unlockBlock = event.target.closest(".unlock-block");
-        if (unlockBlock) {
-            unlockBlock.style.display = 'none';
-        }
-
-        selectImage({ target: event.target.closest(".image-container").querySelector("img") }, character);
-    }
-
-    function isUnlocked(character) {
-        return character === "timgame.png" || localStorage.getItem("unlocked_" + character) === "true";
-    }
-
-    window.onload = function() {
-        if (!localStorage.getItem("coins")) {
-            localStorage.setItem("coins", "500");
-        }
-        updateCoinDisplay();
-
-        let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
-
-        document.querySelectorAll('.gallery div').forEach(div => {
-            let img = div.querySelector('img');
-            let textElement = div.querySelector('.selected-text');
-            let unlockElement = div.querySelector('.unlock-block');
-
-            if (img) {
-                let characterName = img.getAttribute("onclick").match(/'([^']+)'/)[1];
-
-                if (characterName === selectedCharacter) {
-                    textElement.style.display = 'block';
-                } else {
-                    textElement.style.display = 'none';
-                }
-
-                if (unlockElement && isUnlocked(characterName)) {
-                    unlockElement.style.display = 'none';
-                }
-            }
+    // Initialiseer en laad de opgeslagen munten
+    document.addEventListener("DOMContentLoaded", function () {
+            let coins = localStorage.getItem("coins") || 0;
+            document.getElementById("coin-count").textContent = coins;
         });
-    };
 
-        // Controleer of geluid is ingeschakeld in localStorage
+        // Geluid beheren
         function initializeSound() {
-        let soundOn = localStorage.getItem("soundOn");
-        if (soundOn === "true") {
-            playSound();
+            let soundOn = localStorage.getItem("soundOn");
+            if (soundOn === "true") {
+                document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep
+                playSound();
+            } else {
+                document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Voeg de rode streep toe
+                stopSound();
+            }
         }
-    }
 
-    function playSound() {
-        let audio = document.getElementById("background-audio");
-        if (!audio) {
-            let audioElement = document.createElement('audio');
-            audioElement.id = "background-audio";
-            audioElement.autoplay = true;
-            audioElement.loop = true;
-            audioElement.innerHTML = '<source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
-            document.body.appendChild(audioElement);
+        function playSound() {
+            let audio = document.getElementById("background-audio");
+            audio.play();
         }
-    }
 
-    window.onload = initializeSound;
+        function stopSound() {
+            let audio = document.getElementById("background-audio");
+            audio.pause();
+        }
+
+        function toggleSound() {
+            let soundOn = localStorage.getItem("soundOn") === "true";
+            
+            if (soundOn) {
+                localStorage.setItem("soundOn", "false");
+                document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Toevoegen van de rode streep
+                stopSound();
+            } else {
+                localStorage.setItem("soundOn", "true");
+                document.getElementById("sound-icon").style.transform = "none"; // Verwijderen van de rode streep
+                playSound();
+            }
+        }
+
+        // Sla de nieuwe munten op als ze veranderen
+        function saveCoins(coins) {
+            localStorage.setItem("coins", coins);
+            document.getElementById("coin-count").textContent = coins;
+        }
+
+        window.onload = initializeSound;
+
+         // Laad de opgeslagen munten bij het laden van de pagina
+         document.addEventListener("DOMContentLoaded", function () {
+            let coins = localStorage.getItem("coins") || 0;
+            document.getElementById("coin-count").textContent = coins;
+        });
+
+        function purchaseItem() {
+            let coins = parseInt(localStorage.getItem("coins")) || 0;
+
+            if (coins >= 50) {
+                coins -= 50; // Verlaag de munten
+                localStorage.setItem("coins", coins); // Opslaan in localStorage
+                document.getElementById("coin-count").textContent = coins;
+                alert("Item gekocht!");
+            } else {
+                alert("Niet genoeg munten!");
+            }
+        }
 </script>
 
 
