@@ -112,26 +112,39 @@
             font-weight: bold;
         }
 
-        /* CSS voor de geluidknop */
-        .sound-button {
-            position: absolute;
-            top: 100px;
-            right: 30px;
-            font-size: 30px;
-            color: #900d27;
-            background-color: #f0aa5e;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+         /* Standaard stijl voor de sound-knop */
+    .sound-button {
+        position: absolute;
+        top: 100px;
+        right: 30px;
+        font-size: 30px;
+        color: #900d27;
+        background-color: #f0aa5e;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+        position: relative;
+    }
 
-        .sound-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-            transition: transform 0.3s ease;
-        }
+    .sound-icon {
+        width: 50px; /* Pas de grootte aan */
+        height: 50px;
+        vertical-align: middle;
+    }
+
+    /* Pseudo-element voor de rode lijn (default: onzichtbaar) */
+    .sound-button.sound-off::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 5px;
+        width: 60px;
+        height: 5px;
+        background-color: red;
+        transform: rotate(-45deg);
+        transform-origin: center;
+    }
     </style>
 </head>
 <body>
@@ -168,49 +181,57 @@
             let coins = localStorage.getItem("coins") || 0;
             document.getElementById("coin-count").textContent = coins;
         });
-
+    
         document.addEventListener("DOMContentLoaded", function () {
             let coins = localStorage.getItem("coins") || 0;
             document.getElementById("coin-count").textContent = coins;
         });
-
+    
         // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
             let soundOn = localStorage.getItem("soundOn");
+            let soundButton = document.querySelector(".sound-button"); // Nieuw: knop selecteren
+    
             if (soundOn === "true") {
-                document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep
+                document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep (oude code)
                 playSound();
+                soundButton.classList.remove("sound-off"); // Nieuw: rode lijn verwijderen
             } else {
-                document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Voeg de rode streep toe
+                document.getElementById("sound-icon").style.transform = "none"; // Zorgt dat icoon recht blijft
                 stopSound();
+                soundButton.classList.add("sound-off"); // Nieuw: rode lijn toevoegen
             }
         }
-
+    
         function playSound() {
             let audio = document.getElementById("background-audio");
             audio.play();
         }
-
+    
         function stopSound() {
             let audio = document.getElementById("background-audio");
             audio.pause();
         }
-
+    
         function toggleSound() {
             let soundOn = localStorage.getItem("soundOn") === "true";
-            
+            let soundButton = document.querySelector(".sound-button"); // Nieuw: knop selecteren
+    
             if (soundOn) {
                 localStorage.setItem("soundOn", "false");
-                document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Toevoegen van de rode streep
+                document.getElementById("sound-icon").style.transform = "none"; // Zorgt dat icoon recht blijft
+                soundButton.classList.add("sound-off"); // Nieuw: rode lijn toevoegen
                 stopSound();
             } else {
                 localStorage.setItem("soundOn", "true");
-                document.getElementById("sound-icon").style.transform = "none"; // Verwijderen van de rode streep
+                document.getElementById("sound-icon").style.transform = "none"; // Zorgt dat icoon recht blijft
+                soundButton.classList.remove("sound-off"); // Nieuw: rode lijn verwijderen
                 playSound();
             }
         }
-
+    
         window.onload = initializeSound;
     </script>
+    
 </body>
 </html>
