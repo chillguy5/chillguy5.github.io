@@ -115,8 +115,8 @@
          /* Standaard stijl voor de sound-knop */
     .sound-button {
         position: absolute;
-    top: 80px; /* Pas deze waarde aan zodat het net onder de coin counter zit */
-    right: 30px;
+    top: calc(30px + 60px); /* 30px van boven (zoals coin counter) + hoogte coin counter */
+    right: 30px; /* Zelfde als coin counter */
     font-size: 30px;
     color: #900d27;
     background-color: #f0aa5e;
@@ -124,7 +124,7 @@
     border-radius: 5px;
     font-weight: bold;
     display: inline-block;
-    position: relative;
+    position: absolute;
     }
 
     .sound-icon {
