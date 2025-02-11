@@ -210,7 +210,7 @@
     }
 
     function isUnlocked(character) {
-        return character === "chilltimgame.png" || localStorage.getItem("unlocked_" + character) === "true";
+        return character === "timgame.png" || localStorage.getItem("unlocked_" + character) === "true";
     }
 
     window.onload = function() {
@@ -219,7 +219,7 @@
         }
         updateCoinDisplay();
 
-        let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimgame.png";
+        let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 
         document.querySelectorAll('.gallery div').forEach(div => {
             let img = div.querySelector('img');
