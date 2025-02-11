@@ -3,21 +3,21 @@ kaboom({
 })
 
 const objs = {
-	"Samuel": "Chillsamuelgame.png",
-	"Arda": "chillardagame.png",
-	"Gijs": "chillgijsgame.png",
-	"Tim": "chilltimgame.png",
-	"Samuel": "Chillsamuelgame.png",
-	"Arda": "chillardagame.png",
-	"Gijs": "chillgijsgame.png",
-	"Tim": "chilltimgame.png",
+	"Samuel": "samuelgame.png",
+	"Arda": "ardagame.png",
+	"Gijs": "gijsgame.png",
+	"Tim": "timgame.png",
+	"Samuel": "samuelgame.png",
+	"Arda": "ardagame.png",
+	"Gijs": "gijsgame.png",
+	"Tim": "timgame.png",
 }
 
 for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
 
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "timm.png";
 loadSprite("player", selectedCharacter);
 loadSound("hit", "hit.mp3")
 loadSound("shoot", "shot.mp3")
