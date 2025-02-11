@@ -167,6 +167,8 @@
         }
     </style>
 <script>
+    loadSound("backgroundMusic", "Youre just a chill guy listening to chill music.mp3");
+
     function updateCoinDisplay() {
         document.getElementById("coin-count").textContent = localStorage.getItem("coins") || 0;
     }
