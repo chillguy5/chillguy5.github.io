@@ -52,8 +52,6 @@ scene("game", () => {
     setBackground(141, 183, 255);
     setGravity(2400);
 
-    const music = play("backgroundMusic", { volume: 1, loop: true });
-
     const player = add([
         sprite("player"),
         pos(80, 40),
