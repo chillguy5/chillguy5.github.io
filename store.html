@@ -168,6 +168,8 @@
     </style>
 <script>
 
+    window.onload = initializeSound;
+
     function updateCoinDisplay() {
         document.getElementById("coin-count").textContent = localStorage.getItem("coins") || 0;
     }
@@ -247,9 +249,10 @@
 
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
-    </audio>
+<!-- Dit moet op elke pagina staan -->
+<audio id="background-audio" loop>
+    <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
+</audio>
 
     <h1 class="store-title">STORE<img src="storeicon.png" alt="Winkelmandje" class="cart-icon"></h1>
     <div class="coin-counter"><img src="coin.png" alt="coin" class="coin-icon">Coins: <span id="coin-count">0</span></div>

@@ -115,11 +115,16 @@
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
-    </audio>
-
     <div><img src="naam.png" alt="icon" class="title"></div>
+
+    <a href="javascript:void(0);" class="sound-button" onclick="toggleSound()">
+        <img id="sound-icon" src="sound-icon.png" alt="Sound" class="sound-icon">
+    </a>
+
+    <audio id="background-audio" loop>
+        <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
+        Je browser ondersteunt geen audio-element.
+    </audio>
     
     <div class="coin-counter"><img src="coin.png" alt="coin" class="coin-icon">Coins: <span id="coin-count">0</span></div>
 
@@ -137,6 +142,48 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
+ // Zorg ervoor dat het geluid aan of uit is afhankelijk van de opgeslagen waarde
+ function initializeSound() {
+        let soundOn = localStorage.getItem("soundOn");
+        if (soundOn === "true") {
+            document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep
+            playSound();
+        } else {
+            document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Voeg de rode streep toe
+            stopSound();
+        }
+    }
+
+    // Functie om geluid aan te zetten
+    function playSound() {
+        let audio = document.getElementById("background-audio");
+        audio.play();
+    }
+
+    // Functie om geluid uit te zetten
+    function stopSound() {
+        let audio = document.getElementById("background-audio");
+        audio.pause();
+    }
+
+    // Functie om de geluidstatus om te schakelen
+    function toggleSound() {
+        let soundOn = localStorage.getItem("soundOn") === "true";
+        
+        if (soundOn) {
+            localStorage.setItem("soundOn", "false");
+            document.getElementById("sound-icon").style.transform = "rotate(-45deg)"; // Toevoegen van de rode streep
+            stopSound();
+        } else {
+            localStorage.setItem("soundOn", "true");
+            document.getElementById("sound-icon").style.transform = "none"; // Verwijderen van de rode streep
+            playSound();
+        }
+    }
+
+    // Initialiseer het geluid bij het laden van de pagina
+    window.onload = initializeSound;
+        
         document.addEventListener("DOMContentLoaded", function () {
             let coins = localStorage.getItem("coins") || 0;
             document.getElementById("coin-count").textContent = coins;
