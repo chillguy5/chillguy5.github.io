@@ -112,40 +112,40 @@
             font-weight: bold;
         }
 
-         /* Standaard stijl voor de sound-knop */
-        .sound-button {
-            margin-top: 20px;
-            position: absolute;
-            top: calc(30px + 60px); /* 30px van boven (zoals coin counter) + hoogte coin counter */
-            left: 30px; /* Zelfde als coin counter */
-            font-size: 30px;
-            color: #900d27;
-            background-color: #f8f8d7;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-            position: absolute;
-        }
+        /* Standaard stijl voor de sound-knop */
+.sound-button {
+    position: absolute;
+    top: calc(30px + 50px + 20px); /* 30px van boven + hoogte coin counter + extra marge */
+    left: 30px; /* Links uitlijnen zoals de coin counter */
+    font-size: 30px;
+    color: #900d27;
+    background-color: #f8f8d7;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
 
-        .sound-icon {
-            width: 50px; /* Pas de grootte aan */
-            height: 50px;
-            vertical-align: middle;
-        }
+/* Stijl voor het icoon */
+.sound-icon {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
 
-        /* Pseudo-element voor de rode lijn (correcte positie) */
-        .sound-button.sound-off::after {
-            content: "";
-            position: absolute;
-            top: 50%;  
-            left: 50%;
-            width: 60px;
-            height: 5px;
-            background-color: red;
-            transform: translate(-50%, -50%) rotate(-45deg); /* Gecentreerd en schuin */
-            transform-origin: center;
-        }
+/* Pseudo-element voor de rode lijn (correcte positie) */
+.sound-button.sound-off::after {
+    content: "";
+    position: absolute;
+    top: 50%;  
+    left: 50%;
+    width: 60px;
+    height: 5px;
+    background-color: red;
+    transform: translate(-50%, -50%) rotate(-45deg); /* Gecentreerd en schuin */
+    transform-origin: center;
+}
+
     </style>
 </head>
 <body>
