@@ -45,7 +45,6 @@ scene("start", () => {
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
-loadSound("backgroundMusic", "Youre just a chill guy listening to chill music.mp3");
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
 loadSprite("player", selectedCharacter);
 
