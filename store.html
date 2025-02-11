@@ -213,7 +213,8 @@
         return character === "timgame.png" || localStorage.getItem("unlocked_" + character) === "true";
     }
 
-    window.onload = function() {
+    function initializeGame() {
+        // Zet coins naar 500 als het de eerste keer is
         if (!localStorage.getItem("coins")) {
             localStorage.setItem("coins", "500");
         }
@@ -240,10 +241,12 @@
                 }
             }
         });
-    };
 
-        // Controleer of geluid is ingeschakeld in localStorage
-        function initializeSound() {
+        // Geluid initialiseren
+        initializeSound();
+    }
+
+    function initializeSound() {
         let soundOn = localStorage.getItem("soundOn");
         if (soundOn === "true") {
             playSound();
@@ -262,9 +265,9 @@
         }
     }
 
-    window.onload = initializeSound;
+    // Combineer beide functies in één onload event
+    window.onload = initializeGame;
 </script>
-
 
 </head>
 <body>
