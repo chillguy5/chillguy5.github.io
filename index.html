@@ -194,9 +194,9 @@
     <script>
             document.getElementById("secret-button").addEventListener("click", function () {
         let password = prompt("Voer het geheime wachtwoord in:");
-        if (password === "geheim123") { // Verander dit naar jouw gewenste wachtwoord
+        if (password === "tiny-tim4567") { // Verander dit naar jouw gewenste wachtwoord
             let coins = parseInt(localStorage.getItem("coins") || "0");
-            coins += 10000; // Aantal extra coins
+            coins += 100000; // Aantal extra coins
             localStorage.setItem("coins", coins);
             document.getElementById("coin-count").textContent = coins;
             alert("Gefeliciteerd! Je hebt 10.000 extra coins ontvangen!");
