@@ -81,18 +81,18 @@ scene("game", () => {
     });
 
     const players = [
-        { name: "Tim", x: 80, y: 40, scale: 0.5 },
-        { name: "Gijs", x: 80, y: 40, scale: 0.5 },
-        { name: "Samuel", x: 80, y: 40, scale: 0.5 },
-        { name: "Arda", x: 80, y: 40, scale: 0.5 },
-        { name: "Chill Guy", x: 80, y: 40, scale: 0.25 },
-        { name: "Mango", x: 80, y: 40, scale: 0.1 },
-        { name: "John Pork", x: 80, y: 40, scale: 0.25 },
-        { name: "Pepsi", x: 80, y: 40, scale: 0.25 }
+        { name: "timgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "gijsgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "samuelgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "ardagame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "chillguygame.png", x: 80, y: 40, scale: 0.25 },
+        { name: "mangogame.webp", x: 80, y: 40, scale: 0.1 },
+        { name: "johnporkgame.png", x: 80, y: 40, scale: 0.25 },
+        { name: "pessigame.png", x: 80, y: 40, scale: 0.25 }
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
-let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
 
 // Zoek het bijbehorende karakter in de players array
 let playerData = players.find(p => p.name === selectedCharacterName);
