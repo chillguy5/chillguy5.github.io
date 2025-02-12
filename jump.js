@@ -58,14 +58,12 @@ scene("game", () => {
         sprite("background"),
         pos(0, 0),
         scale(width() / 800, height() / 600), // Pas aan op je canvas grootte
-        layer("bg"),
     ]);
 
     const bg2 = add([
         sprite("background"),
         pos(width(), 0),
         scale(width() / 800, height() / 600),
-        layer("bg"),
     ]);
 
     const bgSpeed = 2;
@@ -88,16 +86,6 @@ scene("game", () => {
         scale(0.5),
         area(),
         body(),
-    ]);
-
-    add([
-        rect(width(), FLOOR_HEIGHT),
-        outline(4),
-        pos(0, height()),
-        anchor("botleft"),
-        area(),
-        body({ isStatic: true }),
-        color(132, 101, 236),
     ]);
 
     function jump() {
