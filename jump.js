@@ -4,7 +4,7 @@ const SPEED = 1000; // Definieer de snelheid van de bomen
 let canDoubleJump = false; // Variabele om bij te houden of een dubbeljump mogelijk is
 
 kaboom({
-    background: [135, 62, 132],
+    background: [74, 16, 21],
 });
 
 function addButton(txt, p, f) {
