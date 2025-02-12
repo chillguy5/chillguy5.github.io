@@ -89,7 +89,6 @@ scene("game", () => {
         area(),
         body(),
     ]);
-});
 
     add([
         rect(width(), FLOOR_HEIGHT),
