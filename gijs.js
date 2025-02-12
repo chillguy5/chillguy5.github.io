@@ -27,11 +27,11 @@ loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
 	const BULLET_SPEED = 1200
-	const TRASH_SPEED = 120
+	const TRASH_SPEED = 200
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
 	const BOSS_HEALTH = 250
-	const OBJ_HEALTH = 6
+	const OBJ_HEALTH = 8
 
 	const bossName = choose(Object.keys(objs))
 
