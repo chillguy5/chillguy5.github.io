@@ -104,16 +104,8 @@ scene("battle", () => {
 
 function spawnBullet(p) {
 		add([
-			rect(12, 48),
-			area(),
-			pos(p),
-			anchor("center"),
-			color(127, 127, 255),
-			outline(4),
-			move(UP, BULLET_SPEED),
-			offscreen({ destroy: true }),
-			// strings here means a tag
-			"bullet",
+    add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
+    play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 		])
 	}
  
