@@ -48,7 +48,7 @@ scene("start", () => {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
-loadSprite("background", "school.jpg"); // Laad de achtergrondafbeelding
+loadSprite("background", "1.png"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
