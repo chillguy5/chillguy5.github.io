@@ -39,10 +39,32 @@ scene("battle", () => {
 
 	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
-	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
-	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
-	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
 
+	add([
+		text("KILL", { size: 160 }),
+		pos(width() / 2, height() / 2),
+		anchor("center"),
+		lifespan(1),
+		fixed(),
+	])
+
+	add([
+		text("THE", { size: 80 }),
+		pos(width() / 2, height() / 2),
+		anchor("center"),
+		lifespan(2),
+		late(1),
+		fixed(),
+	])
+
+	add([
+		text(bossName.toUpperCase(), { size: 120 }),
+		pos(width() / 2, height() / 2),
+		anchor("center"),
+		lifespan(4),
+		late(2),
+		fixed(),
+	])
 	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
 
 	sky.onUpdate(() => {
@@ -123,6 +145,18 @@ function spawnBullet(p) {
 		if (t.pos.y - t.height > height()) destroy(t)
 	})
 
+	const timer = add([
+		text(0),
+		pos(12, 32),
+		fixed(),
+		{ time: 0 },
+	])
+
+	timer.onUpdate(() => {
+		timer.time += dt()
+		timer.text = timer.time.toFixed(2)
+	})
+	
 	onCollide("bullet", "trash", (b, t) => {
 		destroy(b)
 		play("hit")
