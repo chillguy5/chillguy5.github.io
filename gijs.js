@@ -1,3 +1,7 @@
+Delen
+
+
+Je zei:
 kaboom({
 	background: [74, 48, 82],
 })
@@ -27,11 +31,11 @@ loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
 	const BULLET_SPEED = 1200
-	const TRASH_SPEED = 200
+	const TRASH_SPEED = 120
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
 	const BOSS_HEALTH = 250
-	const OBJ_HEALTH = 8
+	const OBJ_HEALTH = 6
 
 	const bossName = choose(Object.keys(objs))
 
@@ -39,32 +43,10 @@ scene("battle", () => {
 
 	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
+	add([text("KILL", { size: 160 }), pos(width() / 2, height() / 2), anchor("center"), lifespan(1), fixed()])
+	add([text("THE", { size: 80 }), pos(width() / 2, height() / 2 + 80), anchor("center"), lifespan(2), fixed()])
+	add([text(bossName.toUpperCase(), { size: 120 }), pos(width() / 2, height() / 2 + 160), anchor("center"), lifespan(4), fixed()])
 
-	add([
-		text("KILL", { size: 160 }),
-		pos(width() / 2, height() / 2),
-		anchor("center"),
-		lifespan(1),
-		fixed(),
-	])
-
-	add([
-		text("THE", { size: 80 }),
-		pos(width() / 2, height() / 2),
-		anchor("center"),
-		lifespan(2),
-		late(1),
-		fixed(),
-	])
-
-	add([
-		text(bossName.toUpperCase(), { size: 120 }),
-		pos(width() / 2, height() / 2),
-		anchor("center"),
-		lifespan(4),
-		late(2),
-		fixed(),
-	])
 	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
 
 	sky.onUpdate(() => {
@@ -106,12 +88,6 @@ function spawnBullet(p) {
     add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
     play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 }
- 
-	onUpdate("bullet", (b) => {
-		if (insaneMode) {
-			b.color = rand(rgb(0, 0, 0), rgb(255, 255, 255))
-		}
-	})
 
 
 	onKeyPress("space", () => {
@@ -121,7 +97,7 @@ function spawnBullet(p) {
 
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.3), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
+		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
@@ -130,87 +106,25 @@ function spawnBullet(p) {
 		if (t.pos.y - t.height > height()) destroy(t)
 	})
 
-	const timer = add([
-		text(0),
-		pos(12, 32),
-		fixed(),
-		{ time: 0 },
-	])
-
-	timer.onUpdate(() => {
-		timer.time += dt()
-		timer.text = timer.time.toFixed(2)
+	onCollide("bullet", "trash", (b, t) => {
+		destroy(b)
+		play("hit")
+		t.hurt(1)
+		if (t.hp() <= 0) {
+			destroy(t)
+			addKaboom(t.pos)
+			play("explode2")
+		}
 	})
-	
-onCollide("bullet", "trash", (b, t) => {
-    destroy(b);
-    play("hit");
-    shake(0.5);
-    t.hurt(insaneMode ? 2 : 1);
-    if (t.hp() <= 0) {
-        destroy(t);
-        shake(2);
-        addKaboom(t.pos);
-        play("explode2");
-        addExplode(b.pos, 1, 24, 1);
-    }
-});
-
 
 	onCollide("player", "trash", (p, t) => {
-		destroy(player)
-		shake(120)
+		destroy(p)
+		destroy(t)
 		play("explode")
-		music.detune = -1200
-		addExplode(center(), 12, 120, 30)
-		wait(1, () => {
-			music.paused = true
-			go("lose")
-		})
+		addKaboom(p.pos)
+		go("lose")
 	})
 
-	function addExplode(p, n, rad, size) {
-		for (let i = 0; i < n; i++) {
-			wait(rand(n * 0.1), () => {
-				for (let i = 0; i < 2; i++) {
-					add([
-						pos(p.add(rand(vec2(-rad), vec2(rad)))),
-						rect(4, 4),
-						scale(1 * size, 1 * size),
-						lifespan(0.1),
-						grow(rand(48, 72) * size),
-						anchor("center"),
-					])
-				}
-			})
-		}
-	}
-
-	function grow(rate) {
-		return {
-			update() {
-				const n = rate * dt()
-				this.scale.x += n
-				this.scale.y += n
-			},
-		}
-	}
-
-	function late(t) {
-		let timer = 0
-		return {
-			add() {
-				this.hidden = true
-			},
-			update() {
-				timer += dt()
-				if (timer >= t) {
-					this.hidden = false
-				}
-			},
-		}
-	}
-	
 	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
@@ -220,13 +134,12 @@ onCollide("bullet", "trash", (b, t) => {
 		}
 	})
 
-
 	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
 
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
-		e.hurt(insaneMode ? 2 : 1)
+		e.hurt(1)
 		healthbar.set(e.hp())
 		if (e.hp() <= 0) {
 			go("win")
@@ -237,8 +150,6 @@ onCollide("bullet", "trash", (b, t) => {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-		})
-	})
 
 		onKeyPress("r", () => go("battle"))
 		onKeyPress("m", () => window.location.href = "index.html")
@@ -255,7 +166,5 @@ onCollide("bullet", "trash", (b, t) => {
 
 	spawnTrash()
 })
-
-
 
 go("battle")
