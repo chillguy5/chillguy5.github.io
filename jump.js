@@ -15,13 +15,13 @@ function addButton(txt, p, f) {
         scale(1),
         anchor("center"),
         outline(4),
-        color(248, 248, 215)
+        color(240, 170, 94)
     ]);
 
     btn.add([
         text(txt),
         anchor("center"),
-        color(205, 63, 43),
+        color(144, 13, 39),
     ]);
 
     btn.onHoverUpdate(() => {
