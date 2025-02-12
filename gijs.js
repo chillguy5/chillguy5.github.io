@@ -85,7 +85,17 @@ scene("battle", () => {
 		bullet.damage = insaneMode ? 2 : 1;
 		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
 	}
-
+	update() {
+	if (insaneMode) {
+		const t = time() * 10;
+		this.color = rgb(
+		wave(127, 255, t),
+		wave(127, 255, t + 2),
+		wave(127, 255, t + 4)
+						);
+					} else {
+						this.color = rgb(127, 127, 255);
+					}
 	
 
 	onKeyPress("space", () => {
