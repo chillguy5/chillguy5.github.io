@@ -45,7 +45,7 @@ scene("start", () => {
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "chilltimm.png";
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
 
 scene("game", () => {
