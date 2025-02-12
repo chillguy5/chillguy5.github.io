@@ -143,6 +143,31 @@ function spawnBullet(p) {
 		}
 	}
 
+	function grow(rate) {
+		return {
+			update() {
+				const n = rate * dt()
+				this.scale.x += n
+				this.scale.y += n
+			},
+		}
+	}
+
+	function late(t) {
+		let timer = 0
+		return {
+			add() {
+				this.hidden = true
+			},
+			update() {
+				timer += dt()
+				if (timer >= t) {
+					this.hidden = false
+				}
+			},
+		}
+	}
+	
 	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
