@@ -93,7 +93,7 @@ scene("game", () => {
     
     players.forEach(p => {
         add([
-            sprite("player"),   // Zorg dat je sprites goed ingesteld zijn
+            sprite(players),   // Zorg dat je sprites goed ingesteld zijn
             pos(p.x, p.y),
             scale(p.scale),
             area(),
