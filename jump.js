@@ -20,7 +20,7 @@ function addButton(txt, p, f) {
     btn.add([
         text(txt),
         anchor("center"),
-        color(0, 0, 0),
+        color(248, 248, 215),
     ]);
 
     btn.onHoverUpdate(() => {
