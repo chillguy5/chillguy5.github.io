@@ -227,15 +227,7 @@ function spawnBullet(p) {
 		}
 	})
 
-		healthbar.onUpdate(() => {
-		if (healthbar.flash) {
-			healthbar.color = rgb(255, 255, 255)
-			healthbar.flash = false
-		} else {
-			healthbar.color = rgb(127, 255, 127)
-		}
-	})
-	
+
 	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
 
 	onCollide("bullet", "boss", (b, e) => {
