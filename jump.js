@@ -15,6 +15,7 @@ function addButton(txt, p, f) {
         scale(1),
         anchor("center"),
         outline(4),
+        color(248, 248, 215)
     ]);
 
     btn.add([
