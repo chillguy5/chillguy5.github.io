@@ -73,11 +73,13 @@ scene("battle", () => {
 	onKeyPress("up", () => {
 		insaneMode = true
 		music.speed = 2
+		BOSS_SPEED = 200
 	})
 
 	onKeyRelease("up", () => {
 		insaneMode = false
 		music.speed = 1
+		BOSS_SPEED = 100
 	})
 
 function spawnBullet(p) {
