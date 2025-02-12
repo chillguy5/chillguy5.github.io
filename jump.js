@@ -48,14 +48,14 @@ scene("start", () => {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
-loadSprite("background", "1.png"); // Laad de achtergrondafbeelding
+loadSprite("background", "Ontwerp zonder titel (3).png"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
 
     // Bepaal de schaalfactor
-    let bgScaleX = width() / 8000; // Schaal de breedte
-    let bgScaleY = height() / 250; // Schaal de hoogte
+    let bgScaleX = width() / 4000; // Schaal de breedte
+    let bgScaleY = height() / 500; // Schaal de hoogte
 
     // Voeg de achtergrond toe en schaal deze correct
     const bg1 = add([
