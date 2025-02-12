@@ -256,11 +256,6 @@ onCollide("bullet", "trash", (b, t) => {
 	spawnTrash()
 })
 
-add([
-		text("UP: insane mode", { width: width() / 2, size: 32 }),
-		anchor("botleft"),
-		pos(24, height() - 24),
-	])
 
 
 go("battle")
