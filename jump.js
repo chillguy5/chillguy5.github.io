@@ -88,7 +88,7 @@ scene("game", () => {
         { name: "Chill Guy", x: 80, y: 40, scale: 0.25 },
         { name: "Mango", x: 80, y: 40, scale: 0.1 },
         { name: "John Pork", x: 80, y: 40, scale: 0.25 },
-        { name: "Pessi", x: 80, y: 40, scale: 0.25 }
+        { name: "Pepsi", x: 80, y: 40, scale: 0.25 }
     ];
     
     players.forEach(p => {
