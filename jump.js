@@ -80,13 +80,25 @@ scene("game", () => {
         }
     });
 
-    const player = add([
-        sprite("player"),
-        pos(80, 40),
-        scale(0.5),
-        area(),
-        body(),
-    ]);
+    const players = [
+        { name: "Tim", x: 80, y: 40, scale: 0.5 },
+        { name: "Gijs", x: 80, y: 40, scale: 0.5 },
+        { name: "Samuel", x: 80, y: 40, scale: 0.5 }
+        { name: "Arda", x: 80, y: 40, scale: 0.5 },
+        { name: "Chill Guy", x: 80, y: 40, scale: 0.25 },
+        { name: "Mango", x: 80, y: 40, scale: 0.1 }
+        { name: "John Pork", x: 80, y: 40, scale: 0.25 },
+        { name: "Pepsi", x: 80, y: 40, scale: 0.25 }
+    ];
+    
+    players.forEach(p => {
+        add([
+            sprite("player"),   // Zorg dat je sprites goed ingesteld zijn
+            pos(p.x, p.y),
+            scale(p.scale),
+            area(),
+            body(),
+        ]);
 
     add([
         rect(width(), FLOOR_HEIGHT),
