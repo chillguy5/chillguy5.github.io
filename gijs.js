@@ -124,7 +124,7 @@ function spawnBullet(p) {
 	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
-		boss.move(boss.dir * BOSS_SPEED, 0)
+		boss.move(boss.dir * (insaneMode ? BOSS_SPEED * 2 : BOSS_SPEED), 0)
 		if (boss.pos.x < 0 || boss.pos.x > width()) {
 			boss.dir *= -1
 		}
