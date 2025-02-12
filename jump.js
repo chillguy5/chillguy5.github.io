@@ -52,31 +52,34 @@ loadSprite("background", "school.jpg"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
-    
-    let bgX1 = 0;
-    let bgX2 = width();
+
+    // Voeg de achtergrond toe als een sprite
+    const bg1 = add([
+        sprite("background"),
+        pos(0, 0),
+        scale(width() / 800, height() / 600), // Pas aan op je canvas grootte
+        layer("bg"),
+    ]);
+
+    const bg2 = add([
+        sprite("background"),
+        pos(width(), 0),
+        scale(width() / 800, height() / 600),
+        layer("bg"),
+    ]);
+
     const bgSpeed = 2;
 
-    function updateBackground() {
-        bgX1 -= bgSpeed;
-        bgX2 -= bgSpeed;
-
-        if (bgX1 <= -width()) {
-            bgX1 = width();
-        }
-        if (bgX2 <= -width()) {
-            bgX2 = width();
-        }
-    }
-
-    function drawBackground() {
-        drawSprite("background", bgX1, 0, width(), height());
-        drawSprite("background", bgX2, 0, width(), height());
-    }
-
     onUpdate(() => {
-        updateBackground();
-        drawBackground();
+        bg1.pos.x -= bgSpeed;
+        bg2.pos.x -= bgSpeed;
+
+        if (bg1.pos.x <= -width()) {
+            bg1.pos.x = width();
+        }
+        if (bg2.pos.x <= -width()) {
+            bg2.pos.x = width();
+        }
     });
 
     const player = add([
@@ -86,6 +89,7 @@ scene("game", () => {
         area(),
         body(),
     ]);
+});
 
     add([
         rect(width(), FLOOR_HEIGHT),
