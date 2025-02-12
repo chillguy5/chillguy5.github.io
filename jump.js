@@ -83,10 +83,10 @@ scene("game", () => {
     const players = [
         { name: "Tim", x: 80, y: 40, scale: 0.5 },
         { name: "Gijs", x: 80, y: 40, scale: 0.5 },
-        { name: "Samuel", x: 80, y: 40, scale: 0.5 }
+        { name: "Samuel", x: 80, y: 40, scale: 0.5 },
         { name: "Arda", x: 80, y: 40, scale: 0.5 },
         { name: "Chill Guy", x: 80, y: 40, scale: 0.25 },
-        { name: "Mango", x: 80, y: 40, scale: 0.1 }
+        { name: "Mango", x: 80, y: 40, scale: 0.1 },
         { name: "John Pork", x: 80, y: 40, scale: 0.25 },
         { name: "Pepsi", x: 80, y: 40, scale: 0.25 }
     ];
