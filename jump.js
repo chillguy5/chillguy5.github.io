@@ -48,26 +48,33 @@ scene("start", () => {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
-loadSprite("background", "school.jpg"); // Laad de achtergrondafbeelding
+loadSprite("background", "1.png"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
 
-    // Voeg de achtergrond toe als een sprite
+    // Bepaal de schaalfactor
+    let bgScaleX = width() / 8000; // Schaal de breedte
+    let bgScaleY = height() / 250; // Schaal de hoogte
+
+    // Voeg de achtergrond toe en schaal deze correct
     const bg1 = add([
         sprite("background"),
         pos(0, 0),
-        scale(width() / 250, height() / 250), // Pas aan op je canvas grootte
+        scale(bgScaleX, bgScaleY), 
+        fixed() // Zorgt ervoor dat het mee beweegt met de camera als nodig
     ]);
 
     const bg2 = add([
         sprite("background"),
         pos(width(), 0),
-        scale(width() / 250, height() / 250),
+        scale(bgScaleX, bgScaleY),
+        fixed()
     ]);
 
     const bgSpeed = 2;
 
+    // Laat de achtergrond scrollen
     onUpdate(() => {
         bg1.pos.x -= bgSpeed;
         bg2.pos.x -= bgSpeed;
