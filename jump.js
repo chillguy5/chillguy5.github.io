@@ -88,6 +88,16 @@ scene("game", () => {
         body(),
     ]);
 
+    add([
+        rect(width(), FLOOR_HEIGHT),
+        outline(4),
+        pos(0, height()),
+        anchor("botleft"),
+        area(),
+        body({ isStatic: true }),
+        color(132, 101, 236),
+    ]);
+
     function jump() {
         if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
