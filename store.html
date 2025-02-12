@@ -214,12 +214,7 @@
         return character === "timgame.png" || localStorage.getItem("unlocked_" + character) === "true";
     }
 
-    function initializeGame() {
-        // Zet coins naar 500 als het de eerste keer is
-        if (!localStorage.getItem("coins")) {
-            localStorage.setItem("coins", "500");
-        }
-        updateCoinDisplay();
+    
 
         let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 
@@ -285,19 +280,19 @@
         </div>
         <div class="item">
             <div class="image-container">
-                <div><img src="gijsstore.png" alt="Gijs" onclick="selectImage(event, 'gijsgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'gijsgame.png', 0)"><h3 class="unlock-tekst">Free</h3></span></div>
+                <div><img src="gijsstore.png" alt="Gijs" onclick="selectImage(event, 'gijsgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'gijsgame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
             </div>
             <p>Gijs</p>
         </div>
         <div class="item">
             <div class="image-container">
-                <div><img src="samuelstore.png" alt="Samuel" onclick="selectImage(event, 'samuelgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'samuelgame.png', 0)"><h3 class="unlock-tekst">Free</h3></span></div>
+                <div><img src="samuelstore.png" alt="Samuel" onclick="selectImage(event, 'samuelgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'samuelgame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
             </div>
             <p>Samuel</p>
         </div>
         <div class="item">
             <div class="image-container">
-                <div><img src="ardastore.png" alt="Arda" onclick="selectImage(event, 'ardagame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'ardagame.png', 0)"><h3 class="unlock-tekst">Free</h3></span></div>
+                <div><img src="ardastore.png" alt="Arda" onclick="selectImage(event, 'ardagame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'ardagame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
             </div>
             <p>Arda</p>
         </div>
