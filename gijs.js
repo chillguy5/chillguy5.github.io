@@ -106,6 +106,7 @@ function spawnBullet(p) {
 		destroy(b)
 		play("hit")
 		t.hurt(1)
+		t.hurt(insaneMode ? 2 : 1)
 		if (t.hp() <= 0) {
 			destroy(t)
 			addKaboom(t.pos)
