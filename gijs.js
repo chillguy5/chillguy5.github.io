@@ -115,7 +115,6 @@ function spawnBullet(p) {
 	})
 
 	onCollide("player", "trash", (p, t) => {
-		destroy(e)
 		destroy(player)
 		shake(120)
 		play("explode")
