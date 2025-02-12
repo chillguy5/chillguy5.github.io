@@ -63,7 +63,7 @@ scene("game", () => {
     const bg2 = add([
         sprite("background"),
         pos(width(), 0),
-        scale(width() / 800, height() / 600),
+        scale(width() / 8000, height() / 250),
     ]);
 
     const bgSpeed = 2;
