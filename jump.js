@@ -48,10 +48,36 @@ scene("start", () => {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
+loadSprite("background", "background.jpg"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
-    setBackground(141, 183, 255);
     setGravity(2400);
+    
+    let bgX1 = 0;
+    let bgX2 = width();
+    const bgSpeed = 2;
+
+    function updateBackground() {
+        bgX1 -= bgSpeed;
+        bgX2 -= bgSpeed;
+
+        if (bgX1 <= -width()) {
+            bgX1 = width();
+        }
+        if (bgX2 <= -width()) {
+            bgX2 = width();
+        }
+    }
+
+    function drawBackground() {
+        drawSprite("background", bgX1, 0, width(), height());
+        drawSprite("background", bgX2, 0, width(), height());
+    }
+
+    onUpdate(() => {
+        updateBackground();
+        drawBackground();
+    });
 
     const player = add([
         sprite("player"),
