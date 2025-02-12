@@ -91,15 +91,23 @@ scene("game", () => {
         { name: "Pepsi", x: 80, y: 40, scale: 0.25 }
     ];
     
-    players.forEach(p => {
-        add([
-            sprite("player"),   // Zorg dat je sprites goed ingesteld zijn
-            pos(p.x, p.y),
-            scale(p.scale),
-            area(),
-            body(),
-        ]);
-    });
+// Verkrijg de naam van het geselecteerde karakter uit localStorage
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
+
+// Zoek het bijbehorende karakter in de players array
+let playerData = players.find(p => p.name === selectedCharacterName);
+
+// Laad de sprite en gebruik de bijbehorende schaal
+loadSprite("player", selectedCharacterName.toLowerCase() + ".png");
+
+// Nu kunnen we de speler toevoegen met de juiste schaal
+const player = add([
+    sprite("player"),
+    pos(playerData.x, playerData.y),
+    scale(playerData.scale),
+    area(),
+    body(),
+]);
 
     add([
         rect(width(), FLOOR_HEIGHT),
