@@ -142,20 +142,20 @@ function spawnBullet(p) {
 		timer.text = timer.time.toFixed(2)
 	})
 	
-	onCollide("bullet", "trash", (b, t) => {
-		destroy(b)
-		play("hit")
-		shake(0.5)
-		t.hurt(1)
-		t.hurt(insaneMode ? 2 : 1)
-		if (t.hp() <= 0) {
-			destroy(t)
-			shake(2)
-			addKaboom(t.pos)
-			play("explode2")
-		addExplode(b.pos, 1, 24, 1)
-		}
-	})
+onCollide("bullet", "trash", (b, t) => {
+    destroy(b);
+    play("hit");
+    shake(0.5);
+    t.hurt(insaneMode ? 2 : 1);
+    if (t.hp() <= 0) {
+        destroy(t);
+        shake(2);
+        addKaboom(t.pos);
+        play("explode2");
+        addExplode(b.pos, 1, 24, 1);
+    }
+});
+
 
 	onCollide("player", "trash", (p, t) => {
 		destroy(player)
