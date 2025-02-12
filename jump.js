@@ -57,13 +57,13 @@ scene("game", () => {
     const bg1 = add([
         sprite("background"),
         pos(0, 0),
-        scale(width() / 800, height() / 600), // Pas aan op je canvas grootte
+        scale(width() / 1200, height() / 1000), // Pas aan op je canvas grootte
     ]);
 
     const bg2 = add([
         sprite("background"),
         pos(width(), 0),
-        scale(width() / 800, height() / 600),
+        scale(width() / 1200, height() / 1000),
     ]);
 
     const bgSpeed = 2;
