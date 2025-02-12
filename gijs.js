@@ -260,8 +260,6 @@ function spawnBullet(p) {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-			time: timer.time,
-			boss: bossName,
 		})
 	})
 
