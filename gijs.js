@@ -1,7 +1,3 @@
-Delen
-
-
-Je zei:
 kaboom({
 	background: [74, 48, 82],
 })
