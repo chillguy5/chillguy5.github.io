@@ -135,7 +135,7 @@ function spawnBullet(p) {
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
-		e.hurt(1)
+		e.hurt(insaneMode ? 2 : 1)
 		healthbar.set(e.hp())
 		if (e.hp() <= 0) {
 			go("win")
