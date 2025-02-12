@@ -160,12 +160,15 @@ function spawnBullet(p) {
 	onCollide("bullet", "trash", (b, t) => {
 		destroy(b)
 		play("hit")
+		shake(0.5)
 		t.hurt(1)
 		t.hurt(insaneMode ? 2 : 1)
 		if (t.hp() <= 0) {
 			destroy(t)
+			shake(2)
 			addKaboom(t.pos)
 			play("explode2")
+		addExplode(b.pos, 1, 24, 1)
 		}
 	})
 
@@ -232,6 +235,15 @@ function spawnBullet(p) {
 		}
 	})
 
+		healthbar.onUpdate(() => {
+		if (healthbar.flash) {
+			healthbar.color = rgb(255, 255, 255)
+			healthbar.flash = false
+		} else {
+			healthbar.color = rgb(127, 255, 127)
+		}
+	})
+	
 	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
 
 	onCollide("bullet", "boss", (b, e) => {
@@ -248,6 +260,10 @@ function spawnBullet(p) {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
+			time: timer.time,
+			boss: bossName,
+		})
+	})
 
 		onKeyPress("r", () => go("battle"))
 		onKeyPress("m", () => window.location.href = "index.html")
@@ -264,5 +280,12 @@ function spawnBullet(p) {
 
 	spawnTrash()
 })
+
+add([
+		text("UP: insane mode", { width: width() / 2, size: 32 }),
+		anchor("botleft"),
+		pos(24, height() - 24),
+	])
+
 
 go("battle")
