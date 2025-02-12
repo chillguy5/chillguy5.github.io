@@ -98,7 +98,7 @@ let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgam
 let playerData = players.find(p => p.name === selectedCharacterName);
 
 // Laad de sprite en gebruik de bijbehorende schaal
-loadSprite("player", selectedCharacterName.toLowerCase() + ".png");
+loadSprite("player", selectedCharacterName.toLowerCase());
 
 // Nu kunnen we de speler toevoegen met de juiste schaal
 const player = add([
