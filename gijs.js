@@ -80,38 +80,11 @@ scene("battle", () => {
 		music.speed = 1
 	})
 
-	function spawnBullet(p) {
-		const bullet = add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
-		bullet.damage = insaneMode ? 2 : 1;
-		play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
-	}
+function spawnBullet(p) {
+    add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
+    play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
+}
 
-	function spawnBullet(p) {
-		const bullet = add([
-			rect(12, 48),
-			area(),
-			pos(p.sub(0, 20)),
-			anchor("center"),
-			outline(4),
-			move(UP, BULLET_SPEED),
-			offscreen({ destroy: true }),
-			"bullet",
-			{
-				damage: insaneMode ? 2 : 1,
-				update() {
-					if (insaneMode) {
-						const t = time() * 10;
-						this.color = rgb(
-							wave(127, 255, t),
-							wave(127, 255, t + 2),
-							wave(127, 255, t + 4)
-						);
-					} else {
-						this.color = rgb(127, 127, 255);
-					}
-				}
-			}
-		])
 
 	onKeyPress("space", () => {
 		spawnBullet(player.pos.sub(16, 0))
