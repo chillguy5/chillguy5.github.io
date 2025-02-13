@@ -178,7 +178,7 @@ function spawnBullet(p) {
 		addExplode(center(), 12, 120, 30)
 		wait(1, () => {
 			music.paused = true
-			go("battle")
+			go("lose")
 		})
 	})
 
