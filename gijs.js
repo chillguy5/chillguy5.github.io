@@ -299,6 +299,12 @@ function togglePause() {
 
 onKeyPress("p", togglePause);
 
+const pauseText = add([
+    text("Press P to Pause", { size: 16 }),
+    pos(width() - 150, 10),
+    fixed(),
+]);
+
 onUpdate(() => {
     if (paused) return;
     
@@ -335,6 +341,7 @@ onKeyPress("p", () => {
         go("pause");
     }
 });
+
 
 
 go("battle")
