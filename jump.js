@@ -48,7 +48,7 @@ scene("start", () => {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
-loadSprite("background", "empty-school-corridor-interior-with-row-of-lockers-closed-door-to-classroom-horizontal-banner-cartoon-college-campus-hall-or-university-lobby-illustration-in-a-flat-style-vector.jpg"); // Laad de achtergrondafbeelding
+loadSprite("background", "1.png"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
@@ -57,7 +57,7 @@ scene("game", () => {
     const bg1 = add([
         sprite("background"),
         pos(0, 0),
-        scale(width() / 266.67, height() / 200), // Pas aan op je canvas grootte
+        scale(width(8000) / 800, height(250) / 200), // Pas aan op je canvas grootte
     ]);
 
     const bg2 = add([
