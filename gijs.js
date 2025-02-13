@@ -1,3 +1,11 @@
+
+
+2
+
+Delen
+
+
+Je zei:
 kaboom({
 	background: [74, 48, 82],
 })
@@ -30,8 +38,8 @@ scene("battle", () => {
 	const TRASH_SPEED = 120
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
-	const BOSS_HEALTH = 1
-	const OBJ_HEALTH = 1000
+	const BOSS_HEALTH = 1000
+	const OBJ_HEALTH = 100
 
 	const bossName = choose(Object.keys(objs))
 
@@ -236,20 +244,18 @@ healthbar.onUpdate(() => {
 
 			
 	onCollide("bullet", "boss", (b, e) => {
-		destroy(b);
-		play("hit");
-		e.hurt(1);
-		shake(1);
-		healthbar.set(e.hp());
-		e.hurt(insaneMode ? 10 : 1);
-		addExplode(b.pos, 1, 24, 1);
+		destroy(b)
+		play("hit")
+		e.hurt(1)
+		shake(1)
+		healthbar.set(e.hp())
+		e.hurt(insaneMode ? 10 : 1)
+		addExplode(b.pos, 1, 24, 1)
 		if (e.hp() <= 0) {
-			coins += 100; // Voeg 100 coins toe
-			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
-			go("win");
-			play("explode");
+			go("win")
+			play("explode")
 		}
-	});
+	})
 
 	const timer = add([
 		text(0),
@@ -268,7 +274,6 @@ healthbar.onUpdate(() => {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
 
 		onKeyPress("r", () => go("battle"))
 		onKeyPress("m", () => window.location.href = "index.html")
