@@ -147,7 +147,7 @@ function spawnBullet(p) {
 
 	function spawnTrash() {
 		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.5), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
+		const trash = add([sprite(name), area(), scale(0.23), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
 		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
 	}
 
@@ -159,7 +159,7 @@ function spawnBullet(p) {
 	onCollide("bullet", "trash", (b, t) => {
 		destroy(b)
 		play("hit")
-		t.hurt(1)
+		t.hurt(0.5)
 		t.hurt(insaneMode ? 10 : 1)
 		shake(1)
 		addExplode(b.pos, 1, 24, 1)
@@ -238,12 +238,14 @@ healthbar.onUpdate(() => {
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
-		e.hurt(3)
+		e.hurt(1)
+		shake(1)
 		healthbar.set(e.hp())
 		e.hurt(insaneMode ? 10 : 1)
 		addExplode(b.pos, 1, 24, 1)
 		if (e.hp() <= 0) {
 			go("win")
+			play("explode")
 		}
 	})
 
