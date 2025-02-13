@@ -369,6 +369,24 @@ onUpdate(() => {
         timer.text = timer.time.toFixed(2);
     }
 });
+
+// Stop spelerbeweging tijdens pauze
+tonKeyDown("left", () => {
+    if (!paused) player.move(-PLAYER_SPEED, 0);
+});
+
+tonKeyDown("right", () => {
+    if (!paused) player.move(PLAYER_SPEED, 0);
+});
+
+// Stop schieten tijdens pauze
+onKeyPress("space", () => {
+    if (!paused) {
+        spawnBullet(player.pos.sub(35, 0));
+        spawnBullet(player.pos.add(35, 0));
+    }
+});
+
 	
 	spawnTrash()
 })
