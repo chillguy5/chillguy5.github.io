@@ -111,7 +111,7 @@ const player = add([
 
     add([
         rect(width(), FLOOR_HEIGHT),
-        outline(4),
+        outline(0),
         pos(0, height()),
         anchor("botleft"),
         area(),
