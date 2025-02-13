@@ -265,7 +265,7 @@ healthbar.onUpdate(() => {
 
 	
 	scene("win", () => {
-		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+		add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
 		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
