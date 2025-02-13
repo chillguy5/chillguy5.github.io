@@ -234,8 +234,6 @@ healthbar.onUpdate(() => {
 		}
 	})
 	let coins = parseInt(localStorage.getItem("coins")) || 0;
-			
-	let coins = 0;
 
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b);
