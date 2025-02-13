@@ -57,7 +57,7 @@ scene("game", () => {
     const bg1 = add([
         sprite("background"),
         pos(0, 0),
-        scale(width() / 300, height() / 225), // Pas aan op je canvas grootte
+        scale(width() / 300, height() / 200), // Pas aan op je canvas grootte
     ]);
 
     const bg2 = add([
