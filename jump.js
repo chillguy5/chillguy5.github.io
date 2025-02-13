@@ -1,4 +1,4 @@
-const FLOOR_HEIGHT = 48; // Definieer de FLOOR_HEIGHT constante
+const FLOOR_HEIGHT = 50; // Definieer de FLOOR_HEIGHT constante
 const JUMP_FORCE = 1000;
 const SPEED = 1000; // Definieer de snelheid van de bomen
 let canDoubleJump = false; // Variabele om bij te houden of een dubbeljump mogelijk is
@@ -116,7 +116,7 @@ const player = add([
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
-        color(132, 101, 236),
+        color(47, 133, 176),
     ]);
 
     function jump() {
