@@ -141,8 +141,8 @@ function spawnBullet(p) {
 
 
 	onKeyPress("space", () => {
-		spawnBullet(player.pos.sub(35, 10))
-		spawnBullet(player.pos.add(35, 10))
+		spawnBullet(player.pos.sub(35, 0))
+		spawnBullet(player.pos.add(35, 0))
 	})
 
 	function spawnTrash() {
