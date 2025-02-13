@@ -173,6 +173,24 @@ function spawnBullet(p) {
 	})
 
 
+	function addExplode(p, n, rad, size) {
+		for (let i = 0; i < n; i++) {
+			wait(rand(n * 0.1), () => {
+				for (let i = 0; i < 2; i++) {
+					add([
+						pos(p.add(rand(vec2(-rad), vec2(rad)))),
+						rect(4, 4),
+						scale(1 * size, 1 * size),
+						lifespan(0.1),
+						grow(rand(48, 72) * size),
+						anchor("center"),
+					])
+				}
+			})
+		}
+	}
+
+	
 	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
 	boss.onUpdate(() => {
