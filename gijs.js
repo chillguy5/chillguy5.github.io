@@ -283,7 +283,7 @@ healthbar.onUpdate(() => {
 		onKeyPress("m", () => window.location.href = "index.html")
 	})
 	
-	let paused = false;
+let paused = false;
 
 function togglePause() {
     paused = !paused;
@@ -371,11 +371,11 @@ onUpdate(() => {
 });
 
 // Stop spelerbeweging tijdens pauze
-tonKeyDown("left", () => {
+onKeyDown("left", () => {
     if (!paused) player.move(-PLAYER_SPEED, 0);
 });
 
-tonKeyDown("right", () => {
+onKeyDown("right", () => {
     if (!paused) player.move(PLAYER_SPEED, 0);
 });
 
@@ -386,7 +386,6 @@ onKeyPress("space", () => {
         spawnBullet(player.pos.add(35, 0));
     }
 });
-
 	
 	spawnTrash()
 })
