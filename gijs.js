@@ -210,8 +210,20 @@ function spawnBullet(p) {
 		}
 	})
 
-	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
-
+	
+	const healthbar = add([
+		rect(width(), 24),
+		pos(0, 0),
+		color(107, 201, 108),
+		fixed(),
+		{
+			max: BOSS_HEALTH,
+			set(hp) {
+				this.width = width() * hp / this.max
+				this.flash = true
+			},
+		},
+	])
 healthbar.onUpdate(() => {
 		if (healthbar.flash) {
 			healthbar.color = rgb(255, 255, 255)
