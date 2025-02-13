@@ -163,7 +163,7 @@ function spawnBullet(p) {
 		t.hurt(insaneMode ? 10 : 1)
 		shake(1)
 		addExplode(b.pos, 1, 24, 1)
-		if (t.hp() <= 0) {
+		if (t.OBJ_HEALTH() <= 0) {
 			destroy(t)
 			shake(2)
 			addKaboom(t.pos)
