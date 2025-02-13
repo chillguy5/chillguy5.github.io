@@ -161,12 +161,17 @@ function spawnBullet(p) {
 	})
 
 	onCollide("player", "trash", (p, t) => {
-		destroy(p)
-		destroy(t)
+		destroy(player)
+		shake(120)
 		play("explode")
-		addKaboom(p.pos)
-		go("lose")
+		music.detune = -1200
+		addExplode(center(), 12, 120, 30)
+		wait(1, () => {
+			music.paused = true
+			go("battle")
+		})
 	})
+
 
 	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
