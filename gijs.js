@@ -343,12 +343,18 @@ onUpdate("bullet", (b) => {
     }
 });
 
-boss.onUpdate(() => {
+onUpdate("boss", (b) => {
     if (!paused) {
-        boss.move(boss.dir * (insaneMode ? BOSS_SPEED * 4 : BOSS_SPEED), 0);
-        if (boss.pos.x < 0 || boss.pos.x > width()) {
-            boss.dir *= -1;
+        b.move(b.dir * (insaneMode ? BOSS_SPEED * 4 : BOSS_SPEED), 0);
+        if (b.pos.x < 0 || b.pos.x > width()) {
+            b.dir *= -1;
         }
+    }
+});
+
+onUpdate("player", (p) => {
+    if (paused) {
+        p.move(0, 0);
     }
 });
 
@@ -358,6 +364,7 @@ onUpdate(() => {
         timer.text = timer.time.toFixed(2);
     }
 });
+
 
 	spawnTrash()
 })
