@@ -283,7 +283,7 @@ healthbar.onUpdate(() => {
 		onKeyPress("m", () => window.location.href = "index.html")
 	})
 	
-let paused = false;
+	let paused = false;
 
 function togglePause() {
     paused = !paused;
@@ -331,30 +331,29 @@ onUpdate(() => {
 });
 
 onUpdate("trash", (t) => {
+    if (!t.originalSpeed) t.originalSpeed = t.speed;
+    t.speed = paused ? 0 : t.originalSpeed;
     if (!paused) {
         t.move(0, t.speed * (insaneMode ? 5 : 1));
         if (t.pos.y - t.height > height()) destroy(t);
-    } else {
-        t.move(0, 0);
     }
 });
 
 onUpdate("bullet", (b) => {
+    if (!b.originalSpeed) b.originalSpeed = BULLET_SPEED;
     if (!paused) {
-        b.move(0, -BULLET_SPEED * dt());
-    } else {
-        b.move(0, 0);
+        b.move(0, -b.originalSpeed * dt());
     }
 });
 
 onUpdate("boss", (b) => {
+    if (!b.originalSpeed) b.originalSpeed = BOSS_SPEED;
+    b.speed = paused ? 0 : b.originalSpeed;
     if (!paused) {
-        b.move(b.dir * (insaneMode ? BOSS_SPEED * 4 : BOSS_SPEED), 0);
+        b.move(b.dir * (insaneMode ? b.speed * 4 : b.speed), 0);
         if (b.pos.x < 0 || b.pos.x > width()) {
             b.dir *= -1;
         }
-    } else {
-        b.move(0, 0);
     }
 });
 
@@ -370,9 +369,7 @@ onUpdate(() => {
         timer.text = timer.time.toFixed(2);
     }
 });
-
-
-
+	
 	spawnTrash()
 })
 
