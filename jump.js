@@ -132,14 +132,15 @@ const player = add([
     onKeyPress("space", jump);
     onClick(jump);
 
+    loadSprite("tree", "pngtree-handdrawing-school-backpack-png-image_6136819.png"); // Zorg ervoor dat "boom.png" in je project staat
+
     function spawnTree() {
         add([
-            rect(48, rand(32, 64)),
+            sprite("tree"), // Gebruik de geladen sprite
             area(),
-            outline(4),
-            pos(width(), height() - FLOOR_HEIGHT),
+            pos(width(), height() - FLOOR_HEIGHT), 
             anchor("botleft"),
-            color(238, 143, 203),
+            scale(0.3), // Pas de grootte aan zodat de boom goed past
             move(LEFT, SPEED),
             offscreen({ destroy: true }),
             "tree",
