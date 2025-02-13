@@ -286,4 +286,55 @@ healthbar.onUpdate(() => {
 	spawnTrash()
 })
 
+let paused = false;
+
+function togglePause() {
+    paused = !paused;
+    if (paused) {
+        music.paused = true;
+    } else {
+        music.paused = false;
+    }
+}
+
+onKeyPress("p", togglePause);
+
+onUpdate(() => {
+    if (paused) return;
+    
+    // Update game elements only if not paused
+    onUpdate("trash", (t) => {
+        t.move(0, t.speed * (insaneMode ? 5 : 1));
+        if (t.pos.y - t.height > height()) destroy(t);
+    });
+
+    onUpdate("bullet", (b) => {
+        b.move(0, -BULLET_SPEED * dt());
+    });
+
+    boss.onUpdate(() => {
+        boss.move(boss.dir * (insaneMode ? BOSS_SPEED * 4 : BOSS_SPEED), 0);
+        if (boss.pos.x < 0 || boss.pos.x > width()) {
+            boss.dir *= -1;
+        }
+    });
+
+    timer.time += dt();
+    timer.text = timer.time.toFixed(2);
+});
+
+scene("pause", () => {
+    add([text("PAUSED", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+    add([text("Press P to Resume", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
+});
+
+onKeyPress("p", () => {
+    if (paused) {
+        go("battle");
+    } else {
+        go("pause");
+    }
+});
+
+
 go("battle")
