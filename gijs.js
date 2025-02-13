@@ -297,8 +297,8 @@ function togglePause() {
 }
 
 const pauseText = add([
-    text("Press P to Pause", { size: 16 }),
-    pos(width() - 150, 10),
+    text("Press P to Pause", { size: 20 }),
+    pos(width() - 200, 40),
     fixed(),
 ]);
 
@@ -328,25 +328,35 @@ pauseOverlay.add([
 
 onUpdate(() => {
     if (paused) return;
-    
-    onUpdate("trash", (t) => {
+});
+
+onUpdate("trash", (t) => {
+    if (!paused) {
         t.move(0, t.speed * (insaneMode ? 5 : 1));
         if (t.pos.y - t.height > height()) destroy(t);
-    });
+    }
+});
 
-    onUpdate("bullet", (b) => {
+onUpdate("bullet", (b) => {
+    if (!paused) {
         b.move(0, -BULLET_SPEED * dt());
-    });
+    }
+});
 
-    boss.onUpdate(() => {
+boss.onUpdate(() => {
+    if (!paused) {
         boss.move(boss.dir * (insaneMode ? BOSS_SPEED * 4 : BOSS_SPEED), 0);
         if (boss.pos.x < 0 || boss.pos.x > width()) {
             boss.dir *= -1;
         }
-    });
+    }
+});
 
-    timer.time += dt();
-    timer.text = timer.time.toFixed(2);
+onUpdate(() => {
+    if (!paused) {
+        timer.time += dt();
+        timer.text = timer.time.toFixed(2);
+    }
 });
 
 	spawnTrash()
