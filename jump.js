@@ -156,7 +156,7 @@ const player = add([
 
     onUpdate(() => {
         get("tree").forEach((tree) => {
-            if (player.pos.x > tree.pos.x + tree.width && !tree.passed) {
+            if (!tree.passed && player.pos.x > tree.pos.x + tree.width / 2) { 
                 tree.passed = true;
                 score++;
                 scoreLabel.text = "Score: " + score;
