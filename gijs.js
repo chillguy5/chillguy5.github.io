@@ -105,6 +105,13 @@ scene("battle", () => {
 		}
 	})
 
+	onUpdate("bullet", (b) => {
+		if (insaneMode) {
+			b.color = rand(rgb(0, 0, 0), rgb(255, 255, 255))
+		}
+	})
+
+
 	const player = add([sprite("player"), area(), scale(0.45), pos(width() / 2, height() - 90), anchor("center"), "player"])
 
 	onKeyDown("left", () => {
