@@ -212,6 +212,16 @@ function spawnBullet(p) {
 
 	const healthbar = add([rect(width(), 24), pos(0, 0), color(107, 201, 108), fixed(), { max: BOSS_HEALTH, set(hp) { this.width = width() * hp / this.max } }])
 
+healthbar.onUpdate(() => {
+		if (healthbar.flash) {
+			healthbar.color = rgb(255, 255, 255)
+			healthbar.flash = false
+		} else {
+			healthbar.color = rgb(127, 255, 127)
+		}
+	})
+
+			
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
@@ -222,6 +232,19 @@ function spawnBullet(p) {
 		}
 	})
 
+	const timer = add([
+		text(0),
+		pos(12, 32),
+		fixed(),
+		{ time: 0 },
+	])
+
+	timer.onUpdate(() => {
+		timer.time += dt()
+		timer.text = timer.time.toFixed(2)
+	})
+
+	
 	scene("win", () => {
 		add([text("YOU WIN!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
