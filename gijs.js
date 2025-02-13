@@ -297,8 +297,8 @@ function togglePause() {
 }
 
 const pauseText = add([
-    text("Press P to Pause", { size: 20 }),
-    pos(width() - 200, 40),
+    text("Press P to Pause", { size: 24 }),
+    pos(width() - 250, 60),
     fixed(),
 ]);
 
@@ -315,14 +315,14 @@ const pauseOverlay = add([
 pauseOverlay.hidden = true;
 
 pauseOverlay.add([
-    text("PAUSED", { size: 48 }),
+    text("PAUSED", { size: 64 }),
     pos(width() / 2, height() / 2),
     anchor("center")
 ]);
 
 pauseOverlay.add([
-    text("Press P to Resume", { size: 24 }),
-    pos(width() / 2, height() / 2 + 40),
+    text("Press P to Resume", { size: 32 }),
+    pos(width() / 2, height() / 2 + 60),
     anchor("center")
 ]);
 
@@ -334,12 +334,16 @@ onUpdate("trash", (t) => {
     if (!paused) {
         t.move(0, t.speed * (insaneMode ? 5 : 1));
         if (t.pos.y - t.height > height()) destroy(t);
+    } else {
+        t.move(0, 0);
     }
 });
 
 onUpdate("bullet", (b) => {
     if (!paused) {
         b.move(0, -BULLET_SPEED * dt());
+    } else {
+        b.move(0, 0);
     }
 });
 
@@ -349,6 +353,8 @@ onUpdate("boss", (b) => {
         if (b.pos.x < 0 || b.pos.x > width()) {
             b.dir *= -1;
         }
+    } else {
+        b.move(0, 0);
     }
 });
 
@@ -364,6 +370,7 @@ onUpdate(() => {
         timer.text = timer.time.toFixed(2);
     }
 });
+
 
 
 	spawnTrash()
