@@ -283,14 +283,16 @@ healthbar.onUpdate(() => {
 		onKeyPress("m", () => window.location.href = "index.html")
 	})
 	
-	let paused = false;
+let paused = false;
 
 function togglePause() {
     paused = !paused;
     if (paused) {
         music.paused = true;
+        pauseOverlay.hidden = false;
     } else {
         music.paused = false;
+        pauseOverlay.hidden = true;
     }
 }
 
@@ -300,14 +302,7 @@ const pauseText = add([
     fixed(),
 ]);
 
-onKeyPress("p", () => {
-    togglePause();
-    if (paused) {
-        pauseOverlay.hidden = false;
-    } else {
-        pauseOverlay.hidden = true;
-    }
-});
+onKeyPress("p", togglePause);
 
 const pauseOverlay = add([
     rect(width(), height()),
@@ -315,8 +310,9 @@ const pauseOverlay = add([
     opacity(0.7),
     pos(0, 0),
     fixed(),
-    { hidden: true }
 ]);
+
+pauseOverlay.hidden = true;
 
 pauseOverlay.add([
     text("PAUSED", { size: 48 }),
@@ -352,7 +348,6 @@ onUpdate(() => {
     timer.time += dt();
     timer.text = timer.time.toFixed(2);
 });
-
 
 	spawnTrash()
 })
