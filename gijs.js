@@ -233,7 +233,7 @@ healthbar.onUpdate(() => {
 			healthbar.color = rgb(127, 255, 127)
 		}
 	})
-
+	let coins = parseInt(localStorage.getItem("coins")) || 0;
 			
 	let coins = 0;
 
