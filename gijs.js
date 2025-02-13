@@ -31,7 +31,7 @@ scene("battle", () => {
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
 	const BOSS_HEALTH = 250
-	const OBJ_HEALTH = 6
+	const OBJ_HEALTH = 10
 
 	const bossName = choose(Object.keys(objs))
 
@@ -160,6 +160,7 @@ function spawnBullet(p) {
 		destroy(b)
 		play("hit")
 		t.hurt(1)
+		t.hurt(insaneMode ? 10 : 1)
 		shake(1)
 		addExplode(b.pos, 1, 24, 1)
 		if (t.hp() <= 0) {
@@ -237,8 +238,10 @@ healthbar.onUpdate(() => {
 	onCollide("bullet", "boss", (b, e) => {
 		destroy(b)
 		play("hit")
-		e.hurt(1)
+		e.hurt(3)
 		healthbar.set(e.hp())
+		e.hurt(insaneMode ? 10 : 1)
+		addExplode(b.pos, 1, 24, 1)
 		if (e.hp() <= 0) {
 			go("win")
 		}
