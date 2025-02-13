@@ -160,9 +160,11 @@ function spawnBullet(p) {
 		destroy(b)
 		play("hit")
 		t.hurt(1)
+		shake(1)
 		addExplode(b.pos, 1, 24, 1)
 		if (t.hp() <= 0) {
 			destroy(t)
+			shake(2)
 			addKaboom(t.pos)
 			play("explode2")
 		}
