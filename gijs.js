@@ -282,11 +282,8 @@ healthbar.onUpdate(() => {
 		onKeyPress("r", () => go("battle"))
 		onKeyPress("m", () => window.location.href = "index.html")
 	})
-
-	spawnTrash()
-})
-
-let paused = false;
+	
+	let paused = false;
 
 function togglePause() {
     paused = !paused;
@@ -297,18 +294,45 @@ function togglePause() {
     }
 }
 
-onKeyPress("p", togglePause);
-
 const pauseText = add([
     text("Press P to Pause", { size: 16 }),
     pos(width() - 150, 10),
     fixed(),
 ]);
 
+onKeyPress("p", () => {
+    togglePause();
+    if (paused) {
+        pauseOverlay.hidden = false;
+    } else {
+        pauseOverlay.hidden = true;
+    }
+});
+
+const pauseOverlay = add([
+    rect(width(), height()),
+    color(0, 0, 0),
+    opacity(0.7),
+    pos(0, 0),
+    fixed(),
+    { hidden: true }
+]);
+
+pauseOverlay.add([
+    text("PAUSED", { size: 48 }),
+    pos(width() / 2, height() / 2),
+    anchor("center")
+]);
+
+pauseOverlay.add([
+    text("Press P to Resume", { size: 24 }),
+    pos(width() / 2, height() / 2 + 40),
+    anchor("center")
+]);
+
 onUpdate(() => {
     if (paused) return;
     
-    // Update game elements only if not paused
     onUpdate("trash", (t) => {
         t.move(0, t.speed * (insaneMode ? 5 : 1));
         if (t.pos.y - t.height > height()) destroy(t);
@@ -329,19 +353,8 @@ onUpdate(() => {
     timer.text = timer.time.toFixed(2);
 });
 
-scene("pause", () => {
-    add([text("PAUSED", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
-    add([text("Press P to Resume", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
-});
 
-onKeyPress("p", () => {
-    if (paused) {
-        go("battle");
-    } else {
-        go("pause");
-    }
-});
-
-
+	spawnTrash()
+})
 
 go("battle")
