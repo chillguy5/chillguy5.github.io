@@ -1,5 +1,3 @@
-kaboom()
-
 kaboom({
     background: [74, 16, 21],
 });
