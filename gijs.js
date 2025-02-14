@@ -134,7 +134,6 @@ scene("battle", () => {
 	})
 
 
-	let selectedCharacter = localStorage.getItem("selectedCharacter") || "Tim"; // Zorg dat dit een naam is, geen bestandsnaam
 const playerscalesPlayer = scales[name] || 0.45; // Standaard 0.45 als er niets is gevonden
 
 const player = add([
