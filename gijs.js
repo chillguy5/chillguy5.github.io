@@ -265,7 +265,7 @@ healthbar.onUpdate(() => {
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
-			wait(3, () => {
+			wait(3) => {
 				go("win");
 				play("explode");
 		}
