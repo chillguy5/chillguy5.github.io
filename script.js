@@ -1,9 +1,8 @@
 const API_URL = "http://localhost:5000";
 
-
+let username = localStorage.getItem("username");
 localStorage.setItem("highscore", highscore);
 submitScore(highscore); // Stuur de highscore naar de server
-let username = localStorage.getItem("username");
 
 document.addEventListener("DOMContentLoaded", () => {
     if (username) {
