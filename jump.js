@@ -140,7 +140,7 @@ const player = add([
             area(),
             pos(width(), height() - FLOOR_HEIGHT), 
             anchor("botleft"),
-            scale(0.15), // Pas de grootte aan zodat de boom goed past
+            scale(0.25), // Pas de grootte aan zodat de boom goed past
             move(LEFT, SPEED),
             offscreen({ destroy: true }),
             "tree",
