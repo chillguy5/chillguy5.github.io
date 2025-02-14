@@ -131,6 +131,7 @@ scene("lose", (score) => {
 
 	add([
 		sprite("tim"),
+        scale(0.5)
 		pos(width() / 2, height() / 2 - 108),
 		scale(3),
 		anchor("center"),
