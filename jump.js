@@ -147,7 +147,7 @@ const player = add([
             { passed: false },
         ]);
 
-        wait(rand(0.45, 1..25), spawnTree);
+        wait(rand(0.45, 1.25), spawnTree);
     }
 
     spawnTree();
