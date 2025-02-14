@@ -1,153 +1,153 @@
-kaboom();
+kaboom()
 
-// Laad het gekozen personage uit localStorage, of gebruik "bean" als standaard
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "bean";
+loadSprite("tim", "timgame.png")
+loadSound("score", "/examples/sounds/score.mp3")
+loadSound("wooosh", "/examples/sounds/wooosh.mp3")
+loadSound("hit", "/examples/sounds/hit.mp3")
 
-// Definieer alle beschikbare personages en hun sprites (met volledig pad!)
-const characters = {
-    "bean": "/sprites/bean.png",
-    "gijs": "/sprites/gijsgame.png",
-    "samuel": "/sprites/samuelgame.png",
-    "arda": "/sprites/ardagame.png",
-    "chillguy": "/sprites/chillguygame.png",
-    "mango": "/sprites/mangogame.webp",
-    "johnpork": "/sprites/johnporkgame.png",
-    "pessi": "/sprites/pessigame.png"
-};
-
-// Controleer of het geselecteerde personage bestaat, anders gebruik "bean"
-if (!characters[selectedCharacter]) {
-    console.warn(`⚠️ Waarschuwing: Personage '${selectedCharacter}' niet gevonden. Standaard 'bean' wordt gebruikt.`);
-    selectedCharacter = "bean";
-}
-
-// Laad alle sprites voordat het spel start
-for (const [key, path] of Object.entries(characters)) {
-    console.log(`📢 Laden: ${key} -> ${path}`);  // Debuggen: Zien welke sprites worden geladen
-    loadSprite(key, path);
-}
-
-// Geluiden laden
-loadSound("score", "/examples/sounds/score.mp3");
-loadSound("wooosh", "/examples/sounds/wooosh.mp3");
-loadSound("hit", "/examples/sounds/hit.mp3");
-
-setGravity(3200);
+// define gravity
+setGravity(3200)
 
 scene("game", () => {
-    const PIPE_OPEN = 240;
-    const PIPE_MIN = 60;
-    const JUMP_FORCE = 800;
-    const SPEED = 320;
-    const CEILING = -60;
 
-    // Voeg speler toe met het gekozen personage
-    console.log(`🎮 Speler: ${selectedCharacter}`);  // Debuggen: Controleer welk personage wordt gebruikt
-    const bean = add([
-        sprite(selectedCharacter), // Gebruik het gekozen personage
-        pos(width() / 4, 0),
-        area(),
-        body(),
-    ]);
+	const PIPE_OPEN = 240
+	const PIPE_MIN = 60
+	const JUMP_FORCE = 800
+	const SPEED = 320
+	const CEILING = -60
 
-    bean.onUpdate(() => {
-        if (bean.pos.y >= height() || bean.pos.y <= CEILING) {
-            go("lose", score);
-        }
-    });
+	// a game object consists of a list of components and tags
+	const bean = add([
+		// sprite() means it's drawn with a sprite of name "bean" (defined above in 'loadSprite')
+		sprite("bean"),
+		// give it a position
+		pos(width() / 4, 0),
+		// give it a collider
+		area(),
+		// body component enables it to fall and jump in a gravity world
+		body(),
+	])
 
-    function jump() {
-        bean.jump(JUMP_FORCE);
-        play("wooosh");
-    }
+	// check for fall death
+	bean.onUpdate(() => {
+		if (bean.pos.y >= height() || bean.pos.y <= CEILING) {
+			// switch to "lose" scene
+			go("lose", score)
+		}
+	})
 
-    onKeyPress("space", jump);
-    onGamepadButtonPress("south", jump);
-    onClick(jump);
+	// jump
+	onKeyPress("space", () => {
+		bean.jump(JUMP_FORCE)
+		play("wooosh")
+	})
 
-    function spawnPipe() {
-        const h1 = rand(PIPE_MIN, height() - PIPE_MIN - PIPE_OPEN);
-        const h2 = height() - h1 - PIPE_OPEN;
+	onGamepadButtonPress("south", () => {
+		bean.jump(JUMP_FORCE)
+		play("wooosh")
+	})
 
-        add([
-            pos(width(), 0),
-            rect(64, h1),
-            color(0, 127, 255),
-            outline(4),
-            area(),
-            move(LEFT, SPEED),
-            offscreen({ destroy: true }),
-            "pipe",
-        ]);
+	// mobile
+	onClick(() => {
+		bean.jump(JUMP_FORCE)
+		play("wooosh")
+	})
 
-        add([
-            pos(width(), h1 + PIPE_OPEN),
-            rect(64, h2),
-            color(0, 127, 255),
-            outline(4),
-            area(),
-            move(LEFT, SPEED),
-            offscreen({ destroy: true }),
-            "pipe",
-            { passed: false },
-        ]);
-    }
+	function spawnPipe() {
 
-    bean.onCollide("pipe", () => {
-        go("lose", score);
-        play("hit");
-        addKaboom(bean.pos);
-    });
+		// calculate pipe positions
+		const h1 = rand(PIPE_MIN, height() - PIPE_MIN - PIPE_OPEN)
+		const h2 = height() - h1 - PIPE_OPEN
 
-    onUpdate("pipe", (p) => {
-        if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
-            addScore();
-            p.passed = true;
-        }
-    });
+		add([
+			pos(width(), 0),
+			rect(64, h1),
+			color(0, 127, 255),
+			outline(4),
+			area(),
+			move(LEFT, SPEED),
+			offscreen({ destroy: true }),
+			// give it tags to easier define behaviors see below
+			"pipe",
+		])
 
-    loop(1, spawnPipe);
+		add([
+			pos(width(), h1 + PIPE_OPEN),
+			rect(64, h2),
+			color(0, 127, 255),
+			outline(4),
+			area(),
+			move(LEFT, SPEED),
+			offscreen({ destroy: true }),
+			// give it tags to easier define behaviors see below
+			"pipe",
+			// raw obj just assigns every field to the game obj
+			{ passed: false },
+		])
 
-    let score = 0;
-    const scoreLabel = add([
-        text(score),
-        anchor("center"),
-        pos(width() / 2, 80),
-        fixed(),
-        z(100),
-    ]);
+	}
 
-    function addScore() {
-        score++;
-        scoreLabel.text = score;
-        play("score");
-    }
-});
+	// callback when bean onCollide with objects with tag "pipe"
+	bean.onCollide("pipe", () => {
+		go("lose", score)
+		play("hit")
+		addKaboom(bean.pos)
+	})
+
+	// per frame event for all objects with tag 'pipe'
+	onUpdate("pipe", (p) => {
+		// check if bean passed the pipe
+		if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
+			addScore()
+			p.passed = true
+		}
+	})
+
+	// spawn a pipe every 1 sec
+	loop(1, () => {
+		spawnPipe()
+	})
+
+	let score = 0
+
+	// display score
+	const scoreLabel = add([
+		text(score),
+		anchor("center"),
+		pos(width() / 2, 80),
+		fixed(),
+		z(100),
+	])
+
+	function addScore() {
+		score++
+		scoreLabel.text = score
+		play("score")
+	}
+
+})
 
 scene("lose", (score) => {
-    add([
-        sprite(selectedCharacter), // Gebruik het gekozen personage
-        pos(width() / 2, height() / 2 - 108),
-        scale(3),
-        anchor("center"),
-    ]);
 
-    add([
-        text(score),
-        pos(width() / 2, height() / 2 + 108),
-        scale(3),
-        anchor("center"),
-    ]);
+	add([
+		sprite("bean"),
+		pos(width() / 2, height() / 2 - 108),
+		scale(3),
+		anchor("center"),
+	])
 
-    add([
-        text("Druk op SPATIE om opnieuw te beginnen"),
-        pos(width() / 2, height() - 100),
-        scale(1.5),
-        anchor("center"),
-    ]);
+	// display score
+	add([
+		text(score),
+		pos(width() / 2, height() / 2 + 108),
+		scale(3),
+		anchor("center"),
+	])
 
-    onKeyPress("space", () => go("game"));
-    onClick(() => go("game"));
-});
+	// go back to game with space is pressed
+	onKeyPress("space", () => go("game"))
+	onClick(() => go("game"))
 
-go("game");
+})
+
+go("game")
