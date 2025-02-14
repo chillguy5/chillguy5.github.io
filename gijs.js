@@ -7,10 +7,10 @@ const objs = {
 	"Arda": "ardagame.png",
 	"Gijs": "gijsgame.png",
 	"Tim": "timgame.png",
-	"Samuel": "samuelgame.png",
-	"Arda": "ardagame.png",
-	"Gijs": "gijsgame.png",
-	"Tim": "timgame.png",
+	"Mango": "mangogame.webp",
+	"Chill Guy": "chillguygame.png",
+	"John Pork ": "johnporkgame.png",
+	"Pessi": "pessigame.png",
 }
 
 for (const [key, file] of Object.entries(objs)) {
