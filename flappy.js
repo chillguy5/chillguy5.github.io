@@ -1,5 +1,8 @@
 kaboom()
 
+// Laad het gekozen personage uit localStorage, of gebruik "bean" als standaard
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "bean";
+
 // Laad alle beschikbare personages
 const characters = [
     { name: "bean", sprite: "/sprites/bean.png" },
@@ -13,38 +16,13 @@ const characters = [
 ]
 
 // Laad alle sprites
-characters.forEach(char => loadSprite(char.name, char.sprite))
+characters.forEach(char => loadSprite(char.name, char.sprite));
 
 loadSound("score", "/examples/sounds/score.mp3")
 loadSound("wooosh", "/examples/sounds/wooosh.mp3")
 loadSound("hit", "/examples/sounds/hit.mp3")
 
-// Zet standaardpersonage als er geen keuze is opgeslagen
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "bean";
-
-// definieer zwaartekracht
 setGravity(3200)
-
-scene("characterSelect", () => {
-    add([text("Kies een personage"), pos(width() / 2, 50), anchor("center"), scale(2)])
-
-    characters.forEach((char, index) => {
-        add([
-            sprite(char.name),
-            pos(100 + index * 100, height() / 2),
-            scale(0.5),
-            area(),
-            anchor("center"),
-            {
-                name: char.name
-            }
-        ]).onClick(() => {
-            selectedCharacter = char.name;
-            localStorage.setItem("selectedCharacter", selectedCharacter);
-            go("game");
-        });
-    });
-});
 
 scene("game", () => {
     const PIPE_OPEN = 240
@@ -53,22 +31,22 @@ scene("game", () => {
     const SPEED = 320
     const CEILING = -60
 
-    // Voeg speler toe met het geselecteerde personage
-    const player = add([
-        sprite(selectedCharacter),
+    // Voeg speler toe met het gekozen personage
+    const bean = add([
+        sprite(selectedCharacter), // Gebruik het geselecteerde personage
         pos(width() / 4, 0),
         area(),
         body(),
     ])
 
-    player.onUpdate(() => {
-        if (player.pos.y >= height() || player.pos.y <= CEILING) {
+    bean.onUpdate(() => {
+        if (bean.pos.y >= height() || bean.pos.y <= CEILING) {
             go("lose", score)
         }
     })
 
     function jump() {
-        player.jump(JUMP_FORCE)
+        bean.jump(JUMP_FORCE)
         play("wooosh")
     }
 
@@ -104,14 +82,14 @@ scene("game", () => {
         ])
     }
 
-    player.onCollide("pipe", () => {
+    bean.onCollide("pipe", () => {
         go("lose", score)
         play("hit")
-        addKaboom(player.pos)
+        addKaboom(bean.pos)
     })
 
     onUpdate("pipe", (p) => {
-        if (p.pos.x + p.width <= player.pos.x && p.passed === false) {
+        if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
             addScore()
             p.passed = true
         }
@@ -136,12 +114,29 @@ scene("game", () => {
 })
 
 scene("lose", (score) => {
-    add([sprite(selectedCharacter), pos(width() / 2, height() / 2 - 108), scale(3), anchor("center")])
-    add([text(score), pos(width() / 2, height() / 2 + 108), scale(3), anchor("center")])
-    add([text("Druk op SPATIE om opnieuw te beginnen"), pos(width() / 2, height() - 100), scale(1.5), anchor("center")])
+    add([
+        sprite(selectedCharacter), // Gebruik het gekozen personage
+        pos(width() / 2, height() / 2 - 108),
+        scale(3),
+        anchor("center"),
+    ])
+
+    add([
+        text(score),
+        pos(width() / 2, height() / 2 + 108),
+        scale(3),
+        anchor("center"),
+    ])
+
+    add([
+        text("Druk op SPATIE om opnieuw te beginnen"),
+        pos(width() / 2, height() - 100),
+        scale(1.5),
+        anchor("center"),
+    ])
 
     onKeyPress("space", () => go("game"))
     onClick(() => go("game"))
 })
 
-go("characterSelect")
+go("game")
