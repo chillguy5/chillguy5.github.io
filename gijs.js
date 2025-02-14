@@ -13,6 +13,17 @@ const objs = {
 	"Pessi": "pessigame.png",
 }
 
+const scales = {
+    "Samuel": 0.45,
+    "Arda": 0.45,
+    "Gijs": 0.45,
+    "Tim": 0.45,
+	"Mango": 0.1,
+	"Chill Guy": 0.25,
+	"John Pork": 0.25,
+	"Pessi": 0.25,
+};
+
 for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
@@ -112,7 +123,17 @@ scene("battle", () => {
 	})
 
 
-	const player = add([sprite("player"), area(), scale(0.45), pos(width() / 2, height() - 90), anchor("center"), "player"])
+	let selectedCharacter = localStorage.getItem("selectedCharacter") || "Tim"; // Zorg dat dit een naam is, geen bestandsnaam
+const playerScale = scales[selectedCharacter] || 0.45; // Standaard 0.45 als er niets is gevonden
+
+const player = add([
+    sprite("player"),
+    area(),
+    scale(playerScale), // Hier wordt de schaal ingesteld
+    pos(width() / 2, height() - 90),
+    anchor("center"),
+    "player"
+]);
 
 	onKeyDown("left", () => {
 		player.move(-PLAYER_SPEED, 0)
