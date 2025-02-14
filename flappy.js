@@ -19,7 +19,7 @@ scene("game", () => {
 	// a game object consists of a list of components and tags
 	const bean = add([
 		// sprite() means it's drawn with a sprite of name "bean" (defined above in 'loadSprite')
-		sprite("bean"),
+		sprite("tim"),
 		// give it a position
 		pos(width() / 4, 0),
 		// give it a collider
@@ -130,7 +130,7 @@ scene("game", () => {
 scene("lose", (score) => {
 
 	add([
-		sprite("bean"),
+		sprite("tim"),
 		pos(width() / 2, height() / 2 - 108),
 		scale(3),
 		anchor("center"),
