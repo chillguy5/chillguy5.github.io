@@ -1,5 +1,8 @@
 const API_URL = "http://localhost:5000";
 
+
+localStorage.setItem("highscore", highscore);
+submitScore(highscore); // Stuur de highscore naar de server
 let username = localStorage.getItem("username");
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,7 +46,7 @@ async function fetchHighscores() {
         const response = await fetch(`${API_URL}/highscores`);
         const highscores = await response.json();
         const highscoreDiv = document.getElementById("highscores");
-        highscoreDiv.innerHTML = "";
+        highscoreDiv.innerHTML = ""; // Leeg de lijst
 
         highscores.forEach(player => {
             const div = document.createElement("div");
@@ -55,3 +58,4 @@ async function fetchHighscores() {
         console.error("Fout bij het ophalen van highscores:", error);
     }
 }
+
