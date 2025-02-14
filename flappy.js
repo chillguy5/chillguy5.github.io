@@ -177,23 +177,6 @@ scene("game", () => {
 
 })
 
-scene("lose", (score) => {
-
-	add([
-		sprite("player"),
-		pos(width() / 2, height() / 2 - 108),
-		scale(0.5),
-		anchor("center"),
-	])
-
-	// display score
-	add([
-		text(score),
-		pos(width() / 2, height() / 2 + 108),
-		scale(3),
-		anchor("center"),
-	])
-
 	scene("lose", (score) => {
 		add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
 		add([text("Score: " + score), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
