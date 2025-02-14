@@ -125,13 +125,30 @@ scene("battle", () => {
 		}
 	})
 
-	const name = selectedCharacter
-	const playerScale = scalesPlayer[name] || 0.45;
+    const players = [
+        { name: "timgame.png", scale: 0.45 },
+        { name: "gijsgame.png", scale: 0.45 },
+        { name: "samuelgame.png", scale: 0.45 },
+        { name: "ardagame.png", scale: 0.45 },
+        { name: "chillguygame.png", scale: 0.15 },
+        { name: "mangogame.webp", scale: 0.1 },
+        { name: "johnporkgame.png",scale: 0.15 },
+        { name: "pessigame.png", scale: 0.15 }
+    ];
+
+	// Verkrijg de naam van het geselecteerde karakter uit localStorage
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
+
+// Zoek het bijbehorende karakter in de players array
+let playerData = players.find(p => p.name === selectedCharacterName);
+
+// Laad de sprite en gebruik de bijbehorende schaal
+loadSprite("player", selectedCharacterName);
 
 const player = add([
     sprite("player"),
     area(),
-    scale(playerScale), // Hier wordt de juiste schaal gebruikt
+    scale(playerData.scale), // Hier wordt de juiste schaal gebruikt
     pos(width() / 2, height() - 90),
     anchor("center"),
     "player"
