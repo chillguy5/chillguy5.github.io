@@ -125,8 +125,8 @@ scene("battle", () => {
 		}
 	})
 
-
-	const playerScale = scalesPlayer[selectedCharacter] || 0.45;
+	const name = selectedCharacter
+	const playerScale = scalesPlayer[name] || 0.45;
 
 const player = add([
     sprite("player"),
