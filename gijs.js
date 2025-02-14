@@ -19,9 +19,9 @@ const scales = {
     "Gijs": 0.45,
     "Tim": 0.45,
 	"Mango": 0.1,
-	"Chill Guy": 0.25,
-	"John Pork": 0.25,
-	"Pessi": 0.25,
+	"Chill Guy": 0.15,
+	"John Pork": 0.1,
+	"Pessi": 0.15,
 };
 
 for (const [key, file] of Object.entries(objs)) {
