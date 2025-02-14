@@ -167,9 +167,22 @@ function spawnBullet(p) {
 	})
 
 	function spawnTrash() {
-		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.3), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
-		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
+		const name = choose(Object.keys(objs).filter(n => n != bossName));
+		const trashScale = scales[name] || 0.3; // Gebruik standaard 0.3 als er geen schaal is ingesteld
+		
+		const trash = add([
+			sprite(name),
+			area(),
+			scale(trashScale), // Pas de schaal toe
+			pos(rand(0, width()), 0),
+			health(3),
+			anchor("bot"),
+			"trash",
+			"enemy",
+			{ speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }
+		]);
+	
+		wait(insaneMode ? 0.1 : 0.3, spawnTrash);
 	}
 
 	onUpdate("trash", (t) => {
