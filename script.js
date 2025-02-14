@@ -1,60 +1,55 @@
-const API_URL = "http://localhost:5000";
+// Functie om de username in te stellen
+function setUsername() {
+    let username = document.getElementById('username').value.trim();
 
-let username = localStorage.getItem("username");
-localStorage.setItem("highscore", highscore);
-submitScore(highscore); // Stuur de highscore naar de server
+    if (username !== '') {
+        // Zet de username in localStorage
+        localStorage.setItem('username', username);
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (username) {
-        document.getElementById("usernameInput").style.display = "none";
-        document.getElementById("welcomeMessage").innerText = `Welkom, ${username}!`;
-        document.getElementById("welcomeMessage").style.display = "block";
-    }
-    fetchHighscores();
-});
+        // Verwijder de username invoer sectie en toon de highscore lijst
+        document.querySelector('.username-form').style.display = 'none';
 
-function submitUsername() {
-    const input = document.getElementById("username").value.trim();
-    if (input) {
-        localStorage.setItem("username", input);
-        username = input;
-        document.getElementById("usernameInput").style.display = "none";
-        document.getElementById("welcomeMessage").innerText = `Welkom, ${username}!`;
-        document.getElementById("welcomeMessage").style.display = "block";
-        submitScore(0);  // Stuur een initiële score van 0
+        // Voeg de highscore toe aan de lijst van scores
+        displayHighScores();
+    } else {
+        alert('Voer een geldige username in.');
     }
 }
 
-async function submitScore(score) {
-    if (!username) return;
-    
-    try {
-        await fetch(`${API_URL}/submit-score`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, score }),
-        });
-        fetchHighscores();
-    } catch (error) {
-        console.error("Fout bij het opslaan van de score:", error);
+// Functie om de highscorelijst te tonen
+function displayHighScores() {
+    // Verkrijg de highscore uit localStorage
+    let highscore = localStorage.getItem('highscore');
+    let username = localStorage.getItem('username');
+
+    // Dit zou in een echte situatie van een server of database moeten komen
+    let scores = [
+        { username: 'Speler1', highscore: 150 },
+        { username: 'Speler2', highscore: 200 },
+        { username: 'Speler3', highscore: 180 }
+    ];
+
+    // Voeg de score van de huidige gebruiker toe
+    if (username && highscore) {
+        scores.push({ username: username, highscore: parseInt(highscore) });
     }
+
+    // Sorteer de scores van hoog naar laag
+    scores.sort((a, b) => b.highscore - a.highscore);
+
+    // Vul de lijst van high scores in
+    const scoreList = document.getElementById('score-list');
+    scoreList.innerHTML = '';
+
+    scores.forEach(score => {
+        let li = document.createElement('li');
+        li.textContent = `${score.username}: ${score.highscore}`;
+        scoreList.appendChild(li);
+    });
 }
 
-async function fetchHighscores() {
-    try {
-        const response = await fetch(`${API_URL}/highscores`);
-        const highscores = await response.json();
-        const highscoreDiv = document.getElementById("highscores");
-        highscoreDiv.innerHTML = ""; // Leeg de lijst
-
-        highscores.forEach(player => {
-            const div = document.createElement("div");
-            div.className = "score-item";
-            div.innerHTML = `<span>${player.username}</span> <span><strong>${player.score}</strong></span>`;
-            highscoreDiv.appendChild(div);
-        });
-    } catch (error) {
-        console.error("Fout bij het ophalen van highscores:", error);
-    }
+// Controleer of er al een username is opgeslagen
+if (localStorage.getItem('username')) {
+    document.querySelector('.username-form').style.display = 'none';
+    displayHighScores();
 }
-

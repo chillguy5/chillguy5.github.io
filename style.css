@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.username-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.username-form input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+    font-size: 1rem;
+}
+
+.username-form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.username-form button:hover {
+    background-color: #45a049;
+}
+
+.highscore-list {
+    margin-top: 40px;
+    width: 80%;
+    max-width: 500px;
+}
+
+.highscore-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.highscore-list li {
+    background-color: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
