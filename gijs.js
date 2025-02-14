@@ -9,7 +9,7 @@ const objs = {
 	"Tim": "timgame.png",
 	"Mango": "mangogame.webp",
 	"Chill Guy": "chillguygame.png",
-	"John Pork ": "johnporkgame.png",
+	"John Pork": "johnporkgame.png",
 	"Pessi": "pessigame.png",
 }
 
@@ -20,7 +20,7 @@ const scales = {
     "Tim": 0.45,
 	"Mango": 0.1,
 	"Chill Guy": 0.15,
-	"John Pork": 0.025,
+	"John Pork": 0.15,
 	"Pessi": 0.15,
 };
 
