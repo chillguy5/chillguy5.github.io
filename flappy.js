@@ -1,6 +1,5 @@
 kaboom()
 
-loadSprite("tim", "timgame.png")
 loadSound("score", "/examples/sounds/score.mp3")
 loadSound("wooosh", "/examples/sounds/wooosh.mp3")
 loadSound("hit", "/examples/sounds/hit.mp3")
@@ -16,10 +15,13 @@ scene("game", () => {
 	const SPEED = 320
 	const CEILING = -60
 
+	let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
+	loadSprite("player", selectedCharacter);
+
 	// a game object consists of a list of components and tags
 	const bean = add([
 		// sprite() means it's drawn with a sprite of name "bean" (defined above in 'loadSprite')
-		sprite("tim"),
+		sprite("player"),
 		// give it a position
 		pos(width() / 4, 0),
 		// give it a collider
@@ -131,7 +133,7 @@ scene("game", () => {
 scene("lose", (score) => {
 
 	add([
-		sprite("tim"),
+		sprite("player"),
 		pos(width() / 2, height() / 2 - 108),
 		scale(0.5),
 		anchor("center"),
