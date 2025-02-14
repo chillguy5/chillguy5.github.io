@@ -26,6 +26,7 @@ scene("game", () => {
 		area(),
 		// body component enables it to fall and jump in a gravity world
 		body(),
+        scale(0.5)
 	])
 
 	// check for fall death
