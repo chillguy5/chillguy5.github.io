@@ -20,7 +20,7 @@ const scales = {
     "Tim": 0.45,
 	"Mango": 0.1,
 	"Chill Guy": 0.15,
-	"John Pork": 0.1,
+	"John Pork": 0.025,
 	"Pessi": 0.15,
 };
 
@@ -124,7 +124,7 @@ scene("battle", () => {
 
 
 	let selectedCharacter = localStorage.getItem("selectedCharacter") || "Tim"; // Zorg dat dit een naam is, geen bestandsnaam
-const playerScale = scales[selectedCharacter] || 0.45; // Standaard 0.45 als er niets is gevonden
+const playerScale = scales[] || 0.45; // Standaard 0.45 als er niets is gevonden
 
 const player = add([
     sprite("player"),
