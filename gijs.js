@@ -261,7 +261,6 @@ healthbar.onUpdate(() => {
 		e.hurt(insaneMode ? 10 : 1);
 		addExplode(b.pos, 1, 24, 1);
 		if (e.hp() <= 0) {
-			wait(2.5, () => {
 			addExplode2(center(), 12, 120, 30)
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
