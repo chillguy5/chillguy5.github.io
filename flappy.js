@@ -3,26 +3,27 @@ kaboom();
 // Laad het gekozen personage uit localStorage, of gebruik "bean" als standaard
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "bean";
 
-// Definieer alle beschikbare personages en hun sprites
+// Definieer alle beschikbare personages en hun sprites (met volledig pad!)
 const characters = {
-    "bean": "bean.png",
-    "gijs": "gijsgame.png",
-    "samuel": "samuelgame.png",
-    "arda": "ardagame.png",
-    "chillguy": "chillguygame.png",
-    "mango": "mangogame.webp",
-    "johnpork": "johnporkgame.png",
-    "pessi": "pessigame.png"
+    "bean": "/sprites/bean.png",
+    "gijs": "/sprites/gijsgame.png",
+    "samuel": "/sprites/samuelgame.png",
+    "arda": "/sprites/ardagame.png",
+    "chillguy": "/sprites/chillguygame.png",
+    "mango": "/sprites/mangogame.webp",
+    "johnpork": "/sprites/johnporkgame.png",
+    "pessi": "/sprites/pessigame.png"
 };
 
 // Controleer of het geselecteerde personage bestaat, anders gebruik "bean"
 if (!characters[selectedCharacter]) {
-    console.warn(`Waarschuwing: ${selectedCharacter} niet gevonden, terug naar 'bean'.`);
+    console.warn(`⚠️ Waarschuwing: Personage '${selectedCharacter}' niet gevonden. Standaard 'bean' wordt gebruikt.`);
     selectedCharacter = "bean";
 }
 
 // Laad alle sprites voordat het spel start
 for (const [key, path] of Object.entries(characters)) {
+    console.log(`📢 Laden: ${key} -> ${path}`);  // Debuggen: Zien welke sprites worden geladen
     loadSprite(key, path);
 }
 
@@ -41,8 +42,9 @@ scene("game", () => {
     const CEILING = -60;
 
     // Voeg speler toe met het gekozen personage
+    console.log(`🎮 Speler: ${selectedCharacter}`);  // Debuggen: Controleer welk personage wordt gebruikt
     const bean = add([
-        sprite(selectedCharacter), // Gebruik het geselecteerde personage
+        sprite(selectedCharacter), // Gebruik het gekozen personage
         pos(width() / 4, 0),
         area(),
         body(),
