@@ -5,14 +5,14 @@ let selectedCharacter = localStorage.getItem("selectedCharacter") || "bean";
 
 // Definieer alle beschikbare personages en hun sprites
 const characters = {
-    "bean": "/sprites/bean.png",
-    "gijs": "/sprites/gijsgame.png",
-    "samuel": "/sprites/samuelgame.png",
-    "arda": "/sprites/ardagame.png",
-    "chillguy": "/sprites/chillguygame.png",
-    "mango": "/sprites/mangogame.webp",
-    "johnpork": "/sprites/johnporkgame.png",
-    "pessi": "/sprites/pessigame.png"
+    "bean": "bean.png",
+    "gijs": "gijsgame.png",
+    "samuel": "samuelgame.png",
+    "arda": "ardagame.png",
+    "chillguy": "chillguygame.png",
+    "mango": "mangogame.webp",
+    "johnpork": "johnporkgame.png",
+    "pessi": "pessigame.png"
 };
 
 // Controleer of het geselecteerde personage bestaat, anders gebruik "bean"
