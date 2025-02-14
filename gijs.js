@@ -134,12 +134,12 @@ scene("battle", () => {
 	})
 
 
-const playerscalesPlayer = scalesPlayer[name] || 0.45; // Standaard 0.45 als er niets is gevonden
+	const playerScale = scalesPlayer[selectedCharacter] || 0.45;
 
 const player = add([
     sprite("player"),
     area(),
-    scale(playerscalesPlayer), // Hier wordt de schaal ingesteld
+    scale(playerScale), // Hier wordt de juiste schaal gebruikt
     pos(width() / 2, height() - 90),
     anchor("center"),
     "player"
