@@ -201,6 +201,23 @@ function spawnBullet(p) {
 		}
 	}
 
+	function addExplode2(p, n, rad, size) {
+		for (let i = 0; i < n; i++) {
+			wait(rand(n * 0.1), () => {
+				for (let i = 0; i < 2; i++) {
+					add([
+						pos(p.add(rand(vec2(-rad), vec2(rad)))),
+						rect(4, 4),
+						scale(1 * size, 1 * size),
+						lifespan(0.3),
+						grow(rand(48, 72) * size),
+						anchor("center"),
+					])
+				}
+			})
+		}
+	}
+
 	
 	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
 
@@ -244,6 +261,8 @@ healthbar.onUpdate(() => {
 		e.hurt(insaneMode ? 10 : 1);
 		addExplode(b.pos, 1, 24, 1);
 		if (e.hp() <= 0) {
+			wait(2.5, () => {
+			addExplode2(center(), 12, 120, 30)
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			go("win");
