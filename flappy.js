@@ -169,7 +169,7 @@ scene("game", () => {
 		score++
 		scoreLabel.text = score
 		play("score")
-		if (score > highscore) {
+		if (score > highscoref) {
             highscoref = score;
             localStorage.setItem("highscoref", highscoref);
         }
