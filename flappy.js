@@ -194,17 +194,21 @@ scene("lose", (score) => {
 		anchor("center"),
 	])
 
-	// go back to game with space is pressed
-	onKeyPress("space", () => go("game"))
-	onClick(() => go("game"))
-
-})
-
-go("game")
+	scene("lose", (score) => {
+		add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
+		add([text("Score: " + score), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
+		add([text("Highscore: " + highscoref), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+		add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
+	
+		addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
+		addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
+			window.location.href = "index.html";
+		});
+	});
 
 scene("mainMenu", () => {
     add([text("Welcome to Chill Guy Jumper."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
-    add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
+    add([text("Highscore: " + highscoref), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
