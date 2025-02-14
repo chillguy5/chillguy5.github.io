@@ -33,7 +33,7 @@ function addButton(txt, p, f) {
 }
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
-let highscore = parseInt(localStorage.getItem("highscore")) || 0;
+let highscore = parseInt(localStorage.getItem("highscoref")) || 0;
 
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
@@ -169,6 +169,10 @@ scene("game", () => {
 		score++
 		scoreLabel.text = score
 		play("score")
+		if (score > highscore) {
+            highscoref = score;
+            localStorage.setItem("highscoref", highscoref);
+        }
 	}
 
 })
