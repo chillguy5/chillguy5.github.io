@@ -7,10 +7,6 @@ const objs = {
 	"Arda": "ardagame.png",
 	"Gijs": "gijsgame.png",
 	"Tim": "timgame.png",
-	"Mango": "mangogame.webp",
-	"Chill Guy": "chillguygame.png",
-	"John Pork": "johnporkgame.png",
-	"Pessi": "pessigame.png",
 }
 
 const scales = {
