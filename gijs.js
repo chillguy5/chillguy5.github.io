@@ -134,7 +134,7 @@ scene("battle", () => {
 	})
 
 
-const playerscalesPlayer = scales[name] || 0.45; // Standaard 0.45 als er niets is gevonden
+const playerscalesPlayer = scalesPlayer[name] || 0.45; // Standaard 0.45 als er niets is gevonden
 
 const player = add([
     sprite("player"),
