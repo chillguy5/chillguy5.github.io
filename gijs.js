@@ -321,31 +321,33 @@ healthbar.onUpdate(() => {
 		{ time: 0 },
 	])
 
-	timer.onUpdate(() => {
-		timer.time += dt();
-		timer.text = timer.time.toFixed(2);
-		
-		let 
-		score = parseFloat(timer.time.toFixed(2)); // Zorg dat het een getal blijft
-	
-		if (score < highscores || highscores === Infinity) {
-			highscores = score;
-			localStorage.setItem("highscores", highscores);
-		}
-	});
+	let score = 0;
+let highscores = parseFloat(localStorage.getItem("highscores")) || Infinity;
 
-	
-	scene("win", () => {
-		add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
-		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
-		add([text(`Score: ${score} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 160), anchor("center")]);
-		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 200), anchor("center")]);
+timer.onUpdate(() => {
+    timer.time += dt();
+    timer.text = timer.time.toFixed(2);
+    
+    score = parseFloat(timer.time.toFixed(2));
 
-		onKeyPress("r", () => go("battle"));
-		onKeyPress("m", () => window.location.href = "index.html");
-	});
+    if (score < highscores || highscores === Infinity) {
+        highscores = score;
+        localStorage.setItem("highscores", highscores);
+    }
+});
+
+scene("win", () => {
+    add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+    add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
+    add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
+    add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
+    add([text(`Score: ${score} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 160), anchor("center")]);
+    add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 200), anchor("center")]);
+
+    onKeyPress("r", () => go("battle"));
+    onKeyPress("m", () => window.location.href = "index.html");
+});
+
 
 	scene("lose", () => {
 		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
