@@ -32,6 +32,9 @@ for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
 
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+let highscoref = parseInt(localStorage.getItem("highscoref")) || 0;
+
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
 loadSound("hit", "hit.mp3")
@@ -323,9 +326,9 @@ healthbar.onUpdate(() => {
 		timer.time += dt()
 		timer.text = timer.time.toFixed(2)
 		score = timer.time.toFixed(2)
-		if (score > highscoref) {
-            highscoref = score;
-            localStorage.setItem("highscoref", highscoref);
+		if (score > highscores) {
+            highscores = score;
+            localStorage.setItem("highscores", highscores);
         }
 	})
 
