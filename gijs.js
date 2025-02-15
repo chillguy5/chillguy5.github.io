@@ -21,6 +21,7 @@ const scalesPlayer = {
     "Arda": 0.45,
     "Gijs": 0.45,
     "Tim": 0.45,
+	"Amir": 0.5,
 	"Mango": 0.1,
 	"Chill Guy": 0.15,
 	"John Pork": 0.025,
