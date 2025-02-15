@@ -131,6 +131,7 @@ scene("battle", () => {
         { name: "gijsgame.png", scale: 0.45 },
         { name: "samuelgame.png", scale: 0.45 },
         { name: "ardagame.png", scale: 0.45 },
+		{ name: "amirgame.png", scale: 0.5 },
         { name: "chillguygame.png", scale: 0.15 },
         { name: "mangogame.webp", scale: 0.1 },
         { name: "johnporkgame.png",scale: 0.15 },
