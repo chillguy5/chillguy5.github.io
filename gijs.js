@@ -322,6 +322,11 @@ healthbar.onUpdate(() => {
 	timer.onUpdate(() => {
 		timer.time += dt()
 		timer.text = timer.time.toFixed(2)
+		score = timer.time.toFixed(2)
+		if (score > highscoref) {
+            highscoref = score;
+            localStorage.setItem("highscoref", highscoref);
+        }
 	})
 
 	
