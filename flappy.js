@@ -59,10 +59,10 @@ scene("game", () => {
 	const CEILING = -60
 
     const players = [
-        { name: "timgame.png", scale: 0.4 },
-        { name: "gijsgame.png", scale: 0.4 },
-        { name: "samuelgame.png", scale: 0.4 },
-        { name: "ardagame.png", scale: 0.4 },
+        { name: "timgame.png", scale: 0.3 },
+        { name: "gijsgame.png", scale: 0.3 },
+        { name: "samuelgame.png", scale: 0.3 },
+        { name: "ardagame.png", scale: 0.3 },
 		{ name: "amirgame.png", scale: 0.45 },
         { name: "chillguygame.png", scale: 0.1 },
         { name: "mangogame.webp", scale: 0.1 },
