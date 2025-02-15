@@ -32,9 +32,6 @@ for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
 
-let coins = parseInt(localStorage.getItem("coins")) || 0;
-let highscores = parseInt(localStorage.getItem("highscores")) || 0;
-
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
 loadSound("hit", "hit.mp3")
@@ -295,6 +292,8 @@ healthbar.onUpdate(() => {
 			healthbar.color = rgb(127, 255, 127)
 		}
 	})
+
+	let highscores = parseInt(localStorage.getItem("highscores")) || 0;
 	let coins = parseInt(localStorage.getItem("coins")) || 0;
 
 	onCollide("bullet", "boss", (b, e) => {
