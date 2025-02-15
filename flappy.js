@@ -58,6 +58,27 @@ scene("game", () => {
 	const SPEED = 320
 	const CEILING = -60
 
+    const players = [
+        { name: "timgame.png", scale: 0.45 },
+        { name: "gijsgame.png", scale: 0.45 },
+        { name: "samuelgame.png", scale: 0.45 },
+        { name: "ardagame.png", scale: 0.45 },
+		{ name: "amirgame.png", scale: 0.5 },
+        { name: "chillguygame.png", scale: 0.15 },
+        { name: "mangogame.webp", scale: 0.1 },
+        { name: "johnporkgame.png",scale: 0.15 },
+        { name: "pessigame.png", scale: 0.15 }
+    ];
+
+	// Verkrijg de naam van het geselecteerde karakter uit localStorage
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
+
+// Zoek het bijbehorende karakter in de players array
+let playerData = players.find(p => p.name === selectedCharacterName);
+
+// Laad de sprite en gebruik de bijbehorende schaal
+loadSprite("player", selectedCharacterName);
+
 	let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 	loadSprite("player", selectedCharacter);
 
@@ -71,7 +92,7 @@ scene("game", () => {
 		area(),
 		// body component enables it to fall and jump in a gravity world
 		body(),
-        scale(0.25)
+        scale(playerData.scale)
 	])
 
 	// check for fall death
