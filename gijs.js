@@ -349,7 +349,7 @@ healthbar.onUpdate(() => {
 		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
 		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
 		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-		add([text("Highscore: " + highscoref), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+		add([text("Highscore: " + highscores), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
 
 		onKeyPress("r", () => go("battle"))
 		onKeyPress("m", () => window.location.href = "index.html")
