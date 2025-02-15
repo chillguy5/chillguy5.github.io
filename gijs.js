@@ -328,7 +328,7 @@ healthbar.onUpdate(() => {
 		score = timer.time.toFixed(2)
 		if (score < highscores || highscores === Infinity) {
 			highscores = score;
-			localStorage.setItem("highscores", highscores.toFixed(2)); // Opslaan als string met 2 decimalen
+			localStorage.setItem("highscores", highscores); // Opslaan als string met 2 decimalen
 		}
 	})
 
