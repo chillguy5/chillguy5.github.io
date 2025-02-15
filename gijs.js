@@ -33,7 +33,7 @@ for (const [key, file] of Object.entries(objs)) {
 }
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
-let highscoref = parseInt(localStorage.getItem("highscoref")) || 0;
+let highscores = parseInt(localStorage.getItem("highscores")) || 0;
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
