@@ -313,29 +313,30 @@ healthbar.onUpdate(() => {
 		}
 	});
 
-	const timer = add([
-		text(0),
-		pos(12, 32),
-		fixed(),
-		{ time: 0 },
-	])
+	let highscores = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : Infinity;
+let score = 0;
 
-	let score = 0;
-let highscores = parseFloat(localStorage.getItem("highscores")) || Infinity;
+const timer = add([
+    text(0),
+    pos(12, 32),
+    fixed(),
+    { time: 0 },
+]);
 
 timer.onUpdate(() => {
     timer.time += dt();
     timer.text = timer.time.toFixed(2);
-    
     score = parseFloat(timer.time.toFixed(2));
+});
 
-    if (score < highscores || highscores === Infinity) {
+// Sla de highscore alleen op als de speler wint
+scene("win", () => {
+    // Check of de huidige score beter is dan de highscore
+    if (score < highscores) {
         highscores = score;
         localStorage.setItem("highscores", highscores);
     }
-});
 
-scene("win", () => {
     add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
     add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
     add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
@@ -346,6 +347,7 @@ scene("win", () => {
     onKeyPress("r", () => go("battle"));
     onKeyPress("m", () => window.location.href = "index.html");
 });
+
 
 
 	scene("lose", () => {
