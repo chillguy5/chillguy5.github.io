@@ -325,7 +325,8 @@ healthbar.onUpdate(() => {
 		timer.time += dt();
 		timer.text = timer.time.toFixed(2);
 		
-		let score = parseFloat(timer.time.toFixed(2)); // Zorg dat het een getal blijft
+		let 
+		score = parseFloat(timer.time.toFixed(2)); // Zorg dat het een getal blijft
 	
 		if (score < highscores || highscores === Infinity) {
 			highscores = score;
