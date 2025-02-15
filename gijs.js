@@ -326,7 +326,7 @@ healthbar.onUpdate(() => {
 		timer.time += dt()
 		timer.text = timer.time.toFixed(2)
 		score = timer.time.toFixed(2)
-		if (score > highscores) {
+		if (score < highscores) {
             highscores = score;
             localStorage.setItem("highscores", highscores);
         }
