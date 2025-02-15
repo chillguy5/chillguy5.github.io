@@ -322,14 +322,16 @@ healthbar.onUpdate(() => {
 	])
 
 	timer.onUpdate(() => {
-		timer.time += dt()
-		timer.text = timer.time.toFixed(2)
-		score = timer.time.toFixed(2)
-		if (score < highscores) {
+		timer.time += dt();
+		timer.text = timer.time.toFixed(2);
+		
+		let score = parseFloat(timer.time.toFixed(2)); // Zorg dat het een getal blijft
+	
+		if (score < highscores || highscores === Infinity) {
 			highscores = score;
 			localStorage.setItem("highscores", highscores);
 		}
-	})
+	});
 
 	
 	scene("win", () => {
