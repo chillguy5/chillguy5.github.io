@@ -293,7 +293,8 @@ healthbar.onUpdate(() => {
 		}
 	})
 
-	let highscores = parseInt(localStorage.getItem("highscores")) || 0;
+	let highscores = localStorage.getItem("highscores");
+	highscores = highscores ? parseFloat(highscores) : Infinity; // Infinity zorgt dat eerste score altijd wordt opgeslagen
 	let coins = parseInt(localStorage.getItem("coins")) || 0;
 
 	onCollide("bullet", "boss", (b, e) => {
@@ -325,10 +326,10 @@ healthbar.onUpdate(() => {
 		timer.time += dt()
 		timer.text = timer.time.toFixed(2)
 		score = timer.time.toFixed(2)
-		if (score < highscores) {
-            highscores = score;
-            localStorage.setItem("highscores", highscores);
-        }
+		if (score < highscores || highscores === Infinity) {
+			highscores = score;
+			localStorage.setItem("highscores", highscores.toFixed(2)); // Opslaan als string met 2 decimalen
+		}
 	})
 
 	
