@@ -59,15 +59,15 @@ scene("game", () => {
 	const CEILING = -60
 
     const players = [
-        { name: "timgame.png", scale: 0.45 },
-        { name: "gijsgame.png", scale: 0.45 },
-        { name: "samuelgame.png", scale: 0.45 },
-        { name: "ardagame.png", scale: 0.45 },
-		{ name: "amirgame.png", scale: 0.5 },
-        { name: "chillguygame.png", scale: 0.15 },
-        { name: "mangogame.webp", scale: 0.1 },
-        { name: "johnporkgame.png",scale: 0.15 },
-        { name: "pessigame.png", scale: 0.15 }
+        { name: "timgame.png", scale: 0.4 },
+        { name: "gijsgame.png", scale: 0.4 },
+        { name: "samuelgame.png", scale: 0.4 },
+        { name: "ardagame.png", scale: 0.4 },
+		{ name: "amirgame.png", scale: 0.45 },
+        { name: "chillguygame.png", scale: 0.1 },
+        { name: "mangogame.webp", scale: 0.05 },
+        { name: "johnporkgame.png",scale: 0.1 },
+        { name: "pessigame.png", scale: 0.1 }
     ];
 
 	// Verkrijg de naam van het geselecteerde karakter uit localStorage
