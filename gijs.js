@@ -1,6 +1,45 @@
 kaboom({
-	background: [74, 48, 82],
-})
+    background: [74, 16, 21],
+});
+
+function addButton(txt, p, f) {
+    const btn = add([
+        rect(240, 80, { radius: 8 }),
+        pos(p),
+        area(),
+        scale(1),
+        anchor("center"),
+        outline(4),
+        color(240, 170, 94)
+    ]);
+
+    btn.add([
+        text(txt),
+        anchor("center"),
+        color(144, 13, 39),
+    ]);
+
+    btn.onHoverUpdate(() => {
+        btn.scale = vec2(1.2);
+        setCursor("pointer");
+    });
+
+    btn.onHoverEnd(() => {
+        btn.scale = vec2(1);
+    });
+
+    btn.onClick(f);
+    return btn;
+}
+
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+let highscores = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : Infinity;
+
+scene("start", () => {
+    add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
+    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
+});
 
 const objs = {
 	"Samuel": "samuelgame.png",
@@ -16,18 +55,6 @@ const scales = {
     "Tim": 0.45,
 };
 
-const scalesPlayer = {
-    "Samuel": 0.45,
-    "Arda": 0.45,
-    "Gijs": 0.45,
-    "Tim": 0.45,
-	"Amir": 0.5,
-	"Mango": 0.1,
-	"Chill Guy": 0.15,
-	"John Pork": 0.025,
-	"Pessi": 0.15,
-};
-
 for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
@@ -41,20 +68,24 @@ loadSound("OtherworldlyFoe", "kaboomguardian.mp3")
 loadSound("explode2", "retroexp.mp3")
 
 scene("battle", () => {
+
 	const BULLET_SPEED = 1200
 	const TRASH_SPEED = 120
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
+	const STAR_SPEED = 120
 	const BOSS_HEALTH = 850
-	const OBJ_HEALTH = 100
+	const OBJ_HEALTH = 4
 
-	const bossName = choose(Object.keys(objs))
+    const bossName = choose(Object.keys(objs))
 
 	let insaneMode = false
 
+
+
 	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
-	function grow(rate) {
+    function grow(rate) {
 		return {
 			update() {
 				const n = rate * dt()
@@ -79,7 +110,7 @@ scene("battle", () => {
 		}
 	}
 
-	add([
+    add([
 		text("KILL", { size: 160 }),
 		pos(width() / 2, height() / 2),
 		anchor("center"),
@@ -105,9 +136,13 @@ scene("battle", () => {
 		fixed(),
 	])
 
-	const sky = add([rect(width(), height()), color(0, 0, 0), opacity(0)])
+    const sky = add([
+		rect(width(), height()),
+		color(0, 0, 0),
+		opacity(0),
+	])
 
-	sky.onUpdate(() => {
+    sky.onUpdate(() => {
 		if (insaneMode) {
 			const t = time() * 10
 			sky.color.r = wave(127, 255, t)
@@ -117,12 +152,6 @@ scene("battle", () => {
 		} else {
 			sky.color = rgb(0, 0, 0)
 			sky.opacity = 0
-		}
-	})
-
-	onUpdate("bullet", (b) => {
-		if (insaneMode) {
-			b.color = rand(rgb(0, 0, 0), rgb(255, 255, 255))
 		}
 	})
 
@@ -138,14 +167,10 @@ scene("battle", () => {
         { name: "pessigame.png", scale: 0.15 }
     ];
 
-	// Verkrijg de naam van het geselecteerde karakter uit localStorage
-let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
-
-// Zoek het bijbehorende karakter in de players array
-let playerData = players.find(p => p.name === selectedCharacterName);
-
-// Laad de sprite en gebruik de bijbehorende schaal
-loadSprite("player", selectedCharacterName);
+    let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
+    let playerData = players.find(p => p.name.includes(selectedCharacterName)) || players[0]; 
+    loadSprite("player", playerData.name);
+    
 
 const player = add([
     sprite("player"),
@@ -156,147 +181,164 @@ const player = add([
     "player"
 ]);
 
-	onKeyDown("left", () => {
-		player.move(-PLAYER_SPEED, 0)
-		if (player.pos.x < 0) player.pos.x = width()
-	})
+onKeyDown("left", () => {
+    player.move(-PLAYER_SPEED, 0)
+    if (player.pos.x < 0) player.pos.x = width()
+})
 
-	onKeyDown("right", () => {
-		player.move(PLAYER_SPEED, 0)
-		if (player.pos.x > width()) player.pos.x = 0
-	})
+onKeyDown("right", () => {
+    player.move(PLAYER_SPEED, 0)
+    if (player.pos.x > width()) player.pos.x = 0
+})
 
-	onKeyPress("up", () => {
-		insaneMode = true
-		music.speed = 2
-	})
+onKeyPress("up", () => {
+    insaneMode = true;
+    if (music) music.speed = 2;
+});
 
-	onKeyRelease("up", () => {
-		insaneMode = false
-		music.speed = 1
-	})
+onKeyRelease("up", () => {
+    insaneMode = false;
+    if (music) music.speed = 1;
+});
 
-function spawnBullet(p) {
-    add([rect(12, 48), area(), pos(p.sub(0, 20)), anchor("center"), color(127, 127, 255), outline(4), move(UP, BULLET_SPEED), offscreen({ destroy: true }), "bullet"])
-    play("shoot", { volume: 0.3, detune: rand(-1200, 1200) })
+player.onCollide("enemy", (e) => {
+    destroy(e)
+    destroy(player)
+    shake(120)
+    play("explode")
+    music.detune = -1200
+    addExplode(center(), 12, 120, 30)
+    wait(1, () => {
+        music.paused = true
+        go("lose")
+    })
+})
+
+function addExplode(p, n, rad, size) {
+    for (let i = 0; i < n; i++) {
+        wait(rand(n * 0.1), () => {
+            for (let i = 0; i < 2; i++) {
+                add([
+                    pos(p.add(rand(vec2(-rad), vec2(rad)))),
+                    rect(4, 4),
+                    scale(1 * size, 1 * size),
+                    lifespan(0.1),
+                    grow(rand(48, 72) * size),
+                    anchor("center"),
+                ])
+            }
+        })
+    }
+}
+
+function addExplode2(p, n, rad, size) {
+    for (let i = 0; i < n; i++) {
+        wait(rand(n * 0.1), () => {
+            for (let i = 0; i < 2; i++) {
+                add([
+                    pos(p.add(rand(vec2(-rad), vec2(rad)))),
+                    rect(4, 4),
+                    scale(1 * size, 1 * size),
+                    lifespan(0.3),
+                    grow(rand(48, 72) * size),
+                    anchor("center"),
+                ])
+            }
+        })
+    }
 }
 
 
-	onKeyPress("space", () => {
-		spawnBullet(player.pos.sub(35, 0))
-		spawnBullet(player.pos.add(35, 0))
-	})
+function spawnBullet(p) {
+    add([
+        rect(12, 48),
+        area(),
+        pos(p),
+        anchor("center"),
+        color(127, 127, 255),
+        outline(4),
+        move(UP, BULLET_SPEED),
+        offscreen({ destroy: true }),
+        // strings here means a tag
+        "bullet",
+    ])
+}
 
-	function spawnTrash() {
-		const name = choose(Object.keys(objs).filter(n => n != bossName))
-		const trash = add([sprite(name), area(), scale(0.3), pos(rand(0, width()), 0), health(3), anchor("bot"), "trash", "enemy", { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) }])
-		wait(insaneMode ? 0.1 : 0.3, spawnTrash)
-	}
+onUpdate("bullet", (b) => {
+    if (insaneMode) {
+        b.color = rand(rgb(0, 0, 0), rgb(255, 255, 255))
+    }
+})
 
-	onUpdate("trash", (t) => {
-		t.move(0, t.speed * (insaneMode ? 5 : 1))
-		if (t.pos.y - t.height > height()) destroy(t)
-	})
+onKeyPress("space", () => {
+    spawnBullet(player.pos.sub(16, 0))
+    spawnBullet(player.pos.add(16, 0))
+    play("shoot", {
+        volume: 0.3,
+        detune: rand(-1200, 1200),
+    })
+})
 
-	onCollide("bullet", "trash", (b, t) => {
-		destroy(b)
-		play("hit")
-		t.hurt(0.5)
-		t.hurt(insaneMode ? 10 : 1)
-		shake(1)
-		addExplode(b.pos, 1, 24, 1)
-		if (t.hp() <= 0) {
-			destroy(t)
-			shake(2)
-			addKaboom(t.pos)
-			play("explode2")
-		}
-	})
+function spawnTrash() {
+    const name = choose(Object.keys(objs).filter(n => n !== bossName));
+    add([
+        sprite(name),
+        area(),
+        pos(rand(0, width()), 0),
+        health(OBJ_HEALTH),
+        scale(0.25),
+        anchor("bot"),
+        "trash",
+        "enemy",
+        { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) },
+    ])
+    wait(insaneMode ? 0.1 : 0.3, spawnTrash)
+ }
 
-	onCollide("player", "trash", (p, t) => {
-		destroy(player)
-		shake(120)
-		play("explode")
-		music.detune = -1200
-		addExplode(center(), 12, 120, 30)
-		wait(1, () => {
-			music.paused = true
-			go("lose")
-		})
-	})
+ const boss = add([
+    sprite(bossName),
+    area(),
+    pos(width() / 2, 40),
+    health(BOSS_HEALTH),
+    scale(0.45),
+    anchor("top"),
+    "boss",
+    {
+        dir: 1,
+    },
+])
 
+on("death", "enemy", (e) => {
+    destroy(e)
+    shake(2)
+    addKaboom(e.pos)
+})
 
-	function addExplode(p, n, rad, size) {
-		for (let i = 0; i < n; i++) {
-			wait(rand(n * 0.1), () => {
-				for (let i = 0; i < 2; i++) {
-					add([
-						pos(p.add(rand(vec2(-rad), vec2(rad)))),
-						rect(4, 4),
-						scale(1 * size, 1 * size),
-						lifespan(0.1),
-						grow(rand(48, 72) * size),
-						anchor("center"),
-					])
-				}
-			})
-		}
-	}
+on("hurt", "enemy", (e) => {
+    shake(1)
+    play("hit", {
+        detune: rand(-1200, 1200),
+        speed: rand(0.2, 2),
+    })
+})
 
-	function addExplode2(p, n, rad, size) {
-		for (let i = 0; i < n; i++) {
-			wait(rand(n * 0.1), () => {
-				for (let i = 0; i < 2; i++) {
-					add([
-						pos(p.add(rand(vec2(-rad), vec2(rad)))),
-						rect(4, 4),
-						scale(1 * size, 1 * size),
-						lifespan(0.3),
-						grow(rand(48, 72) * size),
-						anchor("center"),
-					])
-				}
-			})
-		}
-	}
+const timer = add([
+    text(0),
+    pos(12, 32),
+    fixed(),
+    { time: 0 },
+]);
 
-	
-	const boss = add([sprite(bossName), area(), scale(0.5), pos(width() / 2, 40), health(BOSS_HEALTH), anchor("top"), "boss", { dir: 1 }])
+let score = 0;
 
-	boss.onUpdate(() => {
-		boss.move(boss.dir * (insaneMode ? BOSS_SPEED * 4 : BOSS_SPEED), 0)
-		if (boss.pos.x < 0 || boss.pos.x > width()) {
-			boss.dir *= -1
-		}
-	})
+timer.onUpdate(() => {
+    timer.time += dt();
+    timer.text = timer.time.toFixed(2); // Beperk tot 3 decimalen
+    score = parseFloat(timer.time.toFixed(2));
+});
 
-	
-	const healthbar = add([
-		rect(width(), 24),
-		pos(0, 0),
-		color(107, 201, 108),
-		fixed(),
-		{
-			max: BOSS_HEALTH,
-			set(hp) {
-				this.width = width() * hp / this.max
-				this.flash = true
-			},
-		},
-	])
-healthbar.onUpdate(() => {
-		if (healthbar.flash) {
-			healthbar.color = rgb(255, 255, 255)
-			healthbar.flash = false
-		} else {
-			healthbar.color = rgb(127, 255, 127)
-		}
-	})
-
-	let coins = parseInt(localStorage.getItem("coins")) || 0;
-
-	onCollide("bullet", "boss", (b, e) => {
-		destroy(b);
+onCollide("bullet", "boss", (b, e) => {
+	destroy(b);
 		play("hit");
 		e.hurt(1);
 		shake(1);
@@ -308,58 +350,121 @@ healthbar.onUpdate(() => {
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
-			go("win");
+			wait(0.5, () => go("win"));
 			play("explode");
 		}
 	});
 
-	let highscores = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : Infinity;
-	let score = 0;
-	
-	const timer = add([
-		text(0),
-		pos(12, 32),
-		fixed(),
-		{ time: 0 },
-	]);
-	
-	timer.onUpdate(() => {
-		timer.time += dt();
-		timer.text = timer.time.toFixed(2);
-		score = parseFloat(timer.time.toFixed(2));
-	});
-	
-	// Sla de highscore alleen op als de speler wint
-	scene("win", () => {
-		// Check of de huidige score beter is dan de highscore
-		if (score < highscores) {
-			highscores = score;
-			localStorage.setItem("highscores", highscores);
-		}
-	
-		add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
-		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
-		add([text(`Score: ${score} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 160), anchor("center")]);
-		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 200), anchor("center")]);
-	
-		onKeyPress("r", () => go("battle"));
-		onKeyPress("m", () => window.location.href = "index.html");
-	});
-	
-
-	scene("lose", () => {
-		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
-
-		onKeyPress("r", () => go("battle"))
-		onKeyPress("m", () => window.location.href = "index.html")
-	})
-	
-	spawnTrash()
+onUpdate("trash", (t) => {
+    t.move(0, t.speed * (insaneMode ? 5 : 1))
+    if (t.pos.y - t.height > height()) {
+        destroy(t)
+    }
 })
 
-go("battle")
+onCollide("bullet", "trash", (b, t) => {
+    destroy(b)
+    play("hit")
+    t.hurt(0.5)
+    t.hurt(insaneMode ? 10 : 1)
+    shake(1)
+    addExplode(b.pos, 1, 24, 1)
+    if (t.hp() <= 0) {
+        destroy(t)
+        shake(2)
+        addKaboom(t.pos)
+        play("explode2")
+    }
+})
+
+boss.onUpdate((p) => {
+    boss.move(BOSS_SPEED * boss.dir * (insaneMode ? 3 : 1), 0)
+    if (boss.dir === 1 && boss.pos.x >= width() - 20) {
+        boss.dir = -1
+    }
+    if (boss.dir === -1 && boss.pos.x <= 20) {
+        boss.dir = 1
+    }
+})
+
+boss.onHurt(() => {
+    healthbar.set(boss.hp())
+})
+
+boss.onDeath(() => {
+    music.stop()
+        go("win", { score: timer.time.toFixed(2) });
+    })
+
+const healthbar = add([
+    rect(width(), 24),
+    pos(0, 0),
+    color(107, 201, 108),
+    fixed(),
+    {
+        max: BOSS_HEALTH,
+        set(hp) {
+            this.width = width() * hp / this.max
+            this.flash = true
+        },
+    },
+])
+
+healthbar.onUpdate(() => {
+    if (healthbar.flash) {
+        healthbar.color = rgb(255, 255, 255)
+        healthbar.flash = false
+    } else {
+        healthbar.color = rgb(127, 255, 127)
+    }
+})
+
+add([
+    text("UP: insane mode", { width: width() / 2, size: 32 }),
+    anchor("botleft"),
+    pos(24, height() - 24),
+])
+
+spawnTrash()
+
+})
+
+scene("win", ({ score }) => {
+    // Check of de huidige score beter is dan de highscore
+    if (score < highscores) {
+        highscores = score;
+        localStorage.setItem("highscores", highscores);
+    }
+
+    add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+    add([text(`Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
+    add([text(`Score: ${score} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
+    add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 120), anchor("center")]);
+
+    addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
+        window.location.href = "index.html";
+    });
+});
+
+scene("lose", () => {
+    add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+    add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
+    add([text(`Total Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
+
+    addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
+        window.location.href = "index.html";
+    });
+});
+
+scene("mainMenu", () => {
+    add([text("Welcome to Chill Guy Shooter."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
+    add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
+    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
+        window.location.href = "index.html";
+    });
+});
+
+go("mainMenu");
