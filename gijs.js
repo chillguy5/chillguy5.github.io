@@ -410,3 +410,6 @@ scene("mainMenu", () => {
 });
 
 go("mainMenu");
+
+	});
+});
