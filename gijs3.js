@@ -55,8 +55,8 @@ const scales = {
     "Tim": 0.45,
 };
 
-for (const obj of objs) {
-	loadSprite(obj, `/sprites/${obj}.png`)
+for (const obj in objs) {
+    loadSprite(obj, `/sprites/${objs[obj]}`);
 }
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
