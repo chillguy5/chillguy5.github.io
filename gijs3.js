@@ -229,24 +229,6 @@ function addExplode(p, n, rad, size) {
     }
 }
 
-function addExplode2(p, n, rad, size) {
-    for (let i = 0; i < n; i++) {
-        wait(rand(n * 0.1), () => {
-            for (let j = 0; j < 2; j++) {
-                add([
-                    pos(p.add(rand(vec2(-rad), vec2(rad)))),
-                    rect(6, 6), // Iets grotere explosiedeeltjes
-                    scale(1.2 * size, 1.2 * size),
-                    lifespan(0.15),
-                    grow(rand(60, 90) * size),
-                    anchor("center"),
-                    color(rand(200, 255), rand(50, 100), rand(0, 50)), // Oranje-geel-rood effect
-                ]);
-            }
-        });
-    }
-}
-
 
 function spawnBullet(p) {
     add([
@@ -345,7 +327,7 @@ onCollide("bullet", "enemy", (b, e) => {
 		e.hurt(insaneMode ? 10 : 1);
 		addExplode(b.pos, 1, 24, 1);
 		if (e.hp() <= 0) {
-			addExplode2(center(), 12, 120, 30)
+			addExplode(center(), 12, 120, 30)
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
