@@ -263,6 +263,7 @@ function spawnTrash() {
     const name = choose(Object.keys(objs).filter(n => n !== bossName));
     add([
         sprite(name),
+        scale(0.45)
         area(),
         pos(rand(0, width()), 0),
         health(OBJ_HEALTH),
@@ -276,6 +277,7 @@ function spawnTrash() {
 
  const boss = add([
     sprite(bossName),
+    scale(0.6)
     area(),
     pos(width() / 2, 40),
     health(BOSS_HEALTH),
