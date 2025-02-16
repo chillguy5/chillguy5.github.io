@@ -383,22 +383,20 @@ scene("win", () => {
 	addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
 	addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
 		window.location.href = "index.html";
+	});  // <-- Dit haakje zorgt ervoor dat "scene("win", ...)" correct afgesloten is
+
+
+
+scene("lose", () => {  // <-- Nu begint "scene("lose", ...)" correct buiten "scene("win", ...)"
+    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
+    add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
+    add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
+    add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 200), anchor("center")]);
+    addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
+        window.location.href = "index.html";
+    });
 });
-
-
-
-	scene("lose", () => {
-		add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
-		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
-		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 200), anchor("center")]);
-		addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
-		addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
-			window.location.href = "index.html";
-	})
-	
-	spawnTrash()
-})
 
 scene("mainMenu", () => {
     add([text("Welcome to Chill Guy Jumper."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
@@ -410,6 +408,3 @@ scene("mainMenu", () => {
 });
 
 go("mainMenu");
-
-	});
-});
