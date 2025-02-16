@@ -55,18 +55,6 @@ const scales = {
     "Tim": 0.45,
 };
 
-const scalesPlayer = {
-    "Samuel": 0.45,
-    "Arda": 0.45,
-    "Gijs": 0.45,
-    "Tim": 0.45,
-	"Amir": 0.5,
-	"Mango": 0.1,
-	"Chill Guy": 0.15,
-	"John Pork": 0.025,
-	"Pessi": 0.15,
-};
-
 for (const obj of objs) {
 	loadSprite(obj, `/sprites/${obj}.png`)
 }
