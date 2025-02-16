@@ -442,8 +442,8 @@ scene("win", ({ score }) => {
     add([text(`Score: ${score} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
     add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 120), anchor("center")]);
 
-    addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
+    addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
         window.location.href = "index.html";
     });
 });
@@ -454,8 +454,8 @@ scene("lose", () => {
     add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
     add([text(`Total Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
 
-    addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
+    addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300),  () => {
         window.location.href = "index.html";
     });
 });
