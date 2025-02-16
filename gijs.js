@@ -367,6 +367,8 @@ healthbar.onUpdate(() => {
 		timer.text = timer.time.toFixed(2);
 		score = parseFloat(timer.time.toFixed(2));
 	});
+
+});
 	
 	scene("win", () => {
 		// Check of de huidige score beter is dan de highscore
