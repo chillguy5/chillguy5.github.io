@@ -331,7 +331,7 @@ onCollide("bullet", "boss", (b, e) => {
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
-			go("win");
+			wait(0.5, () => go("win"));
 			play("explode");
 		}
 	});
