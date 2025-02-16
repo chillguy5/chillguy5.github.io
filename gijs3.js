@@ -317,7 +317,7 @@ timer.onUpdate(() => {
     score = parseFloat(timer.time.toFixed(2));
 });
 
-onCollide("bullet", "boss", (b, e) => {
+onCollide("bullet", "enemy", (b, e) => {
 	destroy(b);
 		play("hit");
 		e.hurt(1);
