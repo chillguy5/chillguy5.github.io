@@ -438,9 +438,9 @@ scene("win", ({ score }) => {
 
     add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-    add([text(`Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
-    add([text(`Score: ${score} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
-    add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 120), anchor("center")]);
+    add([text(`Coins: ${coins}`), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
+    add([text(`Score: ${score} seconds`), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
+    add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
@@ -451,8 +451,8 @@ scene("win", ({ score }) => {
 scene("lose", () => {
     add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-    add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
-    add([text(`Total Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
+    add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+    add([text(`Total Coins: ${coins}`), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 300),  () => {
