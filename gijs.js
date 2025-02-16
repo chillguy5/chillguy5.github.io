@@ -1,6 +1,45 @@
 kaboom({
-	background: [74, 48, 82],
-})
+    background: [74, 16, 21],
+});
+
+function addButton(txt, p, f) {
+    const btn = add([
+        rect(240, 80, { radius: 8 }),
+        pos(p),
+        area(),
+        scale(1),
+        anchor("center"),
+        outline(4),
+        color(240, 170, 94)
+    ]);
+
+    btn.add([
+        text(txt),
+        anchor("center"),
+        color(144, 13, 39),
+    ]);
+
+    btn.onHoverUpdate(() => {
+        btn.scale = vec2(1.2);
+        setCursor("pointer");
+    });
+
+    btn.onHoverEnd(() => {
+        btn.scale = vec2(1);
+    });
+
+    btn.onClick(f);
+    return btn;
+}
+
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+let highscores = parseInt(localStorage.getItem("highscore"s)) || 0;
+
+scene("start", () => {
+    add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
+    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
+});
 
 const objs = {
 	"Samuel": "samuelgame.png",
@@ -364,3 +403,14 @@ scene("win", () => {
 })
 
 go("battle")
+
+scene("mainMenu", () => {
+    add([text("Welcome to Chill Guy Jumper."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
+    add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
+    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
+    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
+        window.location.href = "index.html";
+    });
+});
+
+go("mainMenu");
