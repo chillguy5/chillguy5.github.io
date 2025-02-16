@@ -393,7 +393,6 @@ boss.onDeath(() => {
     music.stop()
         go("win", { score: timer.time });
     })
-})
 
 const healthbar = add([
     rect(width(), 24),
