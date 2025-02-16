@@ -215,12 +215,12 @@ onKeyDown("right", () => {
 
 onKeyPress("up", () => {
     insaneMode = true;
-    if (music) music.speed = 2;
+    if (audio) music.speed = 2;
 });
 
 onKeyRelease("up", () => {
     insaneMode = false;
-    if (music) music.speed = 1;
+    if (audio) music.speed = 1;
 });
 
 player.onCollide("enemy", (e) => {
