@@ -375,9 +375,9 @@ healthbar.onUpdate(() => {
 		}
 	
 		add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
-		add([text(`Coins: ${coins}, { size: 24 }`), pos(width() / 2, height() / 2 + 40), anchor("center")]);
-		add([text(`Score: ${score} seconds, { size: 24 }`), pos(width() / 2, height() / 2 + 80), anchor("center")]);
-		add([text(`Highscore: ${highscores} seconds, { size: 24 }`), pos(width() / 2, height() / 2 + 120), anchor("center")]);
+		add([text(`Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
+		add([text(`Score: ${score} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
+		add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 120), anchor("center")]);
 	
 		addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
 		addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
@@ -387,8 +387,8 @@ healthbar.onUpdate(() => {
 	
 	scene("lose", () => {
 		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
-		add([text(`Highscore: ${highscores} seconds, { size: 24 }`), pos(width() / 2, height() / 2 + 40), anchor("center")]);
-		add([text(`Total Coins: ${coins}, { size: 24 }`), pos(width() / 2, height() / 2 + 80), anchor("center")]);
+		add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
+		add([text(`Total Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
 	
 		addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
 		addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
