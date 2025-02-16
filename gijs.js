@@ -2,28 +2,6 @@ kaboom({
     background: [74, 16, 21],
 });
 
-        // Controleer of geluid is ingeschakeld in localStorage
-        function initializeSound() {
-            let soundOn = localStorage.getItem("soundOn");
-            if (soundOn === "true") {
-                playSound();
-            }
-        }
-    
-        function playSound() {
-            let audio = document.getElementById("background-audio");
-            if (!audio) {
-                let audioElement = document.createElement('audio');
-                audioElement.id = "background-audio";
-                audioElement.autoplay = true;
-                audioElement.loop = true;
-                audioElement.innerHTML = '<source src="53SanctuaryGuardian.mp3" type="audio/mpeg">';
-                document.body.appendChild(audioElement);
-            }
-        }
-    
-        window.onload = initializeSound;
-
 function addButton(txt, p, f) {
     const btn = add([
         rect(240, 80, { radius: 8 }),
@@ -215,12 +193,12 @@ onKeyDown("right", () => {
 
 onKeyPress("up", () => {
     insaneMode = true;
-    if (audio) music.speed = 2;
+    if (music) music.speed = 2;
 });
 
 onKeyRelease("up", () => {
     insaneMode = false;
-    if (audio) music.speed = 1;
+    if (music) music.speed = 1;
 });
 
 player.onCollide("enemy", (e) => {
