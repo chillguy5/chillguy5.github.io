@@ -81,7 +81,9 @@ scene("battle", () => {
 
 	let insaneMode = false
 
-	const music = play("53SanctuaryGuardian.mp3", { volume: 1, loop: true })
+
+
+	const music = play("OtherworldlyFoe", { volume: 1, loop: true })
 
     function grow(rate) {
 		return {
