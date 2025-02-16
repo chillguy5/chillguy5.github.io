@@ -331,8 +331,8 @@ let score = 0;
 
 timer.onUpdate(() => {
     timer.time += dt();
-    timer.text = timer.time.toFixed(2);
-    score = parseFloat(timer.time.toFixed(2));
+    timer.text = timer.time.toFixed(3); // Beperk tot 3 decimalen
+    score = parseFloat(timer.time.toFixed(3));
 });
 
 onCollide("bullet", "boss", (b, e) => {
