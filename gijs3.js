@@ -391,9 +391,7 @@ boss.onHurt(() => {
 
 boss.onDeath(() => {
     music.stop()
-    go("win", {
-        time: timer.time,
-        boss: bossName,
+        go("win", { score: timer.time });
     })
 })
 
@@ -430,7 +428,7 @@ spawnTrash()
 
 })
 
-scene("win", () => {
+scene("win", ({ score }) => {
     // Check of de huidige score beter is dan de highscore
     if (score < highscores) {
         highscores = score;
