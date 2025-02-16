@@ -330,8 +330,6 @@ timer.onUpdate(() => {
     score = parseFloat(timer.time.toFixed(2));
 });
 
-});
-
 onCollide("bullet", "enemy", (b, e) => {
 	destroy(b);
 		play("hit");
@@ -409,6 +407,8 @@ add([
 ])
 
 spawnTrash()
+
+})
 
 scene("win", () => {
     // Check of de huidige score beter is dan de highscore
