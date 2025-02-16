@@ -202,9 +202,9 @@ loadSprite("player", selectedCharacterName);
 
 	scene("lose", (score) => {
 		add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-		add([text("Score: " + score), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
-		add([text("Highscore: " + highscoref), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-		add([text("Total Coins: " + coins), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
+		add([text("Score: " + score, { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
+		add([text("Highscore: " + highscoref, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+		add([text("Total Coins: " + coins, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
 	
 		addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
 		addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
