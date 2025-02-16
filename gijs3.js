@@ -165,9 +165,10 @@ scene("battle", () => {
         { name: "pessigame.png", scale: 0.15 }
     ];
 
-let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
-let playerData = players.find(p => p.name === selectedCharacterName) || players[0]; 
-loadSprite("player", selectedCharacterName);
+    let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
+    let playerData = players.find(p => p.name.includes(selectedCharacterName)) || players[0]; 
+    loadSprite("player", playerData.name);
+    
 
 const player = add([
     sprite("player"),
@@ -189,14 +190,14 @@ onKeyDown("right", () => {
 })
 
 onKeyPress("up", () => {
-    insaneMode = true
-    music.speed = 2
-})
+    insaneMode = true;
+    if (music) music.speed = 2;
+});
 
 onKeyRelease("up", () => {
-    insaneMode = false
-    music.speed = 1
-})
+    insaneMode = false;
+    if (music) music.speed = 1;
+});
 
 player.onCollide("enemy", (e) => {
     destroy(e)
@@ -315,7 +316,7 @@ timer.onUpdate(() => {
     score = parseFloat(timer.time.toFixed(2));
 });
 
-onCollide("bullet", "enemy", (b, e) => {
+onCollide("bullet", "boss", (b, e) => {
 	destroy(b);
 		play("hit");
 		e.hurt(1);
