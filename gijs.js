@@ -408,4 +408,6 @@ scene("mainMenu", () => {
     });
 });
 
+});
+
 go("mainMenu");
