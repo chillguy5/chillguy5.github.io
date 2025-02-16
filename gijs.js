@@ -85,7 +85,7 @@ scene("battle", () => {
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
 	const BOSS_HEALTH = 850
-	const OBJ_HEALTH = 100
+	const OBJ_HEALTH_HEALTH = 100
 
 	const bossName = choose(Object.keys(objs))
 
@@ -351,9 +351,6 @@ healthbar.onUpdate(() => {
 			play("explode");
 		}
 	});
-
-	let highscores = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : Infinity;
-	let score = 0;
 	
 	const timer = add([
 		text(0),
