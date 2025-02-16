@@ -74,7 +74,7 @@ scene("battle", () => {
 	const BOSS_SPEED = 100
 	const PLAYER_SPEED = 500
 	const STAR_SPEED = 120
-	const BOSS_HEALTH = 850
+	const BOSS_HEALTH = 10
 	const OBJ_HEALTH = 4
 
     const bossName = choose(Object.keys(objs))
