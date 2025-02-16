@@ -410,8 +410,6 @@ add([
 
 spawnTrash()
 
-})
-
 scene("win", () => {
     // Check of de huidige score beter is dan de highscore
     if (score < highscores) {
