@@ -229,6 +229,25 @@ function addExplode(p, n, rad, size) {
     }
 }
 
+function addExplode2(p, n, rad, size) {
+    for (let i = 0; i < n; i++) {
+        wait(rand(n * 0.1), () => {
+            for (let j = 0; j < 2; j++) {
+                add([
+                    pos(p.add(rand(vec2(-rad), vec2(rad)))),
+                    rect(6, 6), // Iets grotere explosiedeeltjes
+                    scale(1.2 * size, 1.2 * size),
+                    lifespan(0.15),
+                    grow(rand(60, 90) * size),
+                    anchor("center"),
+                    color(rand(200, 255), rand(50, 100), rand(0, 50)), // Oranje-geel-rood effect
+                ]);
+            }
+        });
+    }
+}
+
+
 function spawnBullet(p) {
     add([
         rect(12, 48),
