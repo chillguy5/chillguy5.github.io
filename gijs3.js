@@ -229,6 +229,23 @@ function addExplode(p, n, rad, size) {
     }
 }
 
+function addExplode2(p, n, rad, size) {
+    for (let i = 0; i < n; i++) {
+        wait(rand(n * 0.1), () => {
+            for (let i = 0; i < 2; i++) {
+                add([
+                    pos(p.add(rand(vec2(-rad), vec2(rad)))),
+                    rect(4, 4),
+                    scale(1 * size, 1 * size),
+                    lifespan(0.3),
+                    grow(rand(48, 72) * size),
+                    anchor("center"),
+                ])
+            }
+        })
+    }
+}
+
 
 function spawnBullet(p) {
     add([
@@ -283,7 +300,7 @@ function spawnTrash() {
     health(BOSS_HEALTH),
     scale(0.6),
     anchor("top"),
-    "enemy",
+    "boss",
     {
         dir: 1,
     },
@@ -318,7 +335,7 @@ timer.onUpdate(() => {
     score = parseFloat(timer.time.toFixed(2));
 });
 
-onCollide("bullet", "enemy", (b, e) => {
+onCollide("bullet", "boss", (b, e) => {
 	destroy(b);
 		play("hit");
 		e.hurt(1);
@@ -327,7 +344,7 @@ onCollide("bullet", "enemy", (b, e) => {
 		e.hurt(insaneMode ? 10 : 1);
 		addExplode(b.pos, 1, 24, 1);
 		if (e.hp() <= 0) {
-			addExplode(center(), 12, 120, 30)
+			addExplode2(center(), 12, 120, 30)
 			coins += 100; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
