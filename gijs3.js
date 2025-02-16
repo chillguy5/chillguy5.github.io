@@ -391,7 +391,7 @@ boss.onHurt(() => {
 
 boss.onDeath(() => {
     music.stop()
-        go("win", { score: timer.time });
+        go("win", { score: timer.time.toFixed(3) });
     })
 
 const healthbar = add([
