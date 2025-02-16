@@ -37,7 +37,7 @@ let highscores = parseInt(localStorage.getItem("highscores")) || 0;
 
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
-    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
+    addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
