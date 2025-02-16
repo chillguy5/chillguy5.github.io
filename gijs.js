@@ -329,7 +329,6 @@ healthbar.onUpdate(() => {
 		score = parseFloat(timer.time.toFixed(2));
 	});
 	
-	// Sla de highscore alleen op als de speler wint
 	scene("win", () => {
 		// Check of de huidige score beter is dan de highscore
 		if (score < highscores) {
@@ -338,28 +337,25 @@ healthbar.onUpdate(() => {
 		}
 	
 		add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
-		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
-		add([text(`Score: ${score} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 160), anchor("center")]);
-		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 200), anchor("center")]);
+		add([text(`Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
+		add([text(`Score: ${score} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
+		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
 	
-		onKeyPress("r", () => go("battle"));
-		onKeyPress("m", () => window.location.href = "index.html");
+		addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
+		addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
+			window.location.href = "index.html";
+		});
 	});
 	
-
 	scene("lose", () => {
-		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")])
-		add([text("Press R to Restart", { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")])
-		add([text("Press M for Main Menu", { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")])
-		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 120), anchor("center")]);
-
-		onKeyPress("r", () => go("battle"))
-		onKeyPress("m", () => window.location.href = "index.html")
-	})
+		add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+		add([text(`Highscore: ${highscores} seconds`, { size: 24 }), pos(width() / 2, height() / 2 + 40), anchor("center")]);
+		add([text(`Total Coins: ${coins}`, { size: 24 }), pos(width() / 2, height() / 2 + 80), anchor("center")]);
 	
-	spawnTrash()
-})
-
-go("battle")
+		addButton("Restart", vec2(width() / 2, height() / 2 + 180), () => go("battle"));
+		addButton("Main Menu", vec2(width() / 2, height() / 2 + 240), () => {
+			window.location.href = "index.html";
+		});
+	});
+	
+	go("battle");
