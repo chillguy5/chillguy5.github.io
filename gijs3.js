@@ -281,7 +281,6 @@ function spawnTrash() {
     scale(0.6),
     pos(width() / 2, 40),
     health(BOSS_HEALTH),
-    scale(3),
     anchor("top"),
     "enemy",
     {
