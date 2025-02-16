@@ -284,7 +284,7 @@ function spawnTrash() {
         area(),
         pos(rand(0, width()), 0),
         health(OBJ_HEALTH),
-        scale(0.45),
+        scale(0.25),
         anchor("bot"),
         "trash",
         "enemy",
@@ -298,7 +298,7 @@ function spawnTrash() {
     area(),
     pos(width() / 2, 40),
     health(BOSS_HEALTH),
-    scale(0.6),
+    scale(0.45),
     anchor("top"),
     "boss",
     {
