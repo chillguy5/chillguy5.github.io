@@ -331,8 +331,8 @@ let score = 0;
 
 timer.onUpdate(() => {
     timer.time += dt();
-    timer.text = timer.time.toFixed(3); // Beperk tot 3 decimalen
-    score = parseFloat(timer.time.toFixed(3));
+    timer.text = timer.time.toFixed(2); // Beperk tot 3 decimalen
+    score = parseFloat(timer.time.toFixed(2));
 });
 
 onCollide("bullet", "boss", (b, e) => {
@@ -391,7 +391,7 @@ boss.onHurt(() => {
 
 boss.onDeath(() => {
     music.stop()
-        go("win", { score: timer.time.toFixed(3) });
+        go("win", { score: timer.time.toFixed(2) });
     })
 
 const healthbar = add([
