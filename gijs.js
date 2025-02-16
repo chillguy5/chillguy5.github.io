@@ -384,6 +384,7 @@ scene("win", () => {
 	addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
 		window.location.href = "index.html";
 	});  // <-- Dit haakje zorgt ervoor dat "scene("win", ...)" correct afgesloten is
+});
 
 
 
