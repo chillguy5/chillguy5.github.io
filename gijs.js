@@ -437,6 +437,7 @@ scene("win", ({ score }) => {
     }
 
     add([text("YOU WIN! You get 100 coins.", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text(`Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
     add([text(`Score: ${score} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
     add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 120), anchor("center")]);
@@ -449,6 +450,7 @@ scene("win", ({ score }) => {
 
 scene("lose", () => {
     add([text("YOU LOSE!", { size: 48 }), pos(width() / 2, height() / 2), anchor("center")]);
+    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text(`Highscore: ${highscores} seconds`), { size: 24 }, pos(width() / 2, height() / 2 + 40), anchor("center")]);
     add([text(`Total Coins: ${coins}`), { size: 24 }, pos(width() / 2, height() / 2 + 80), anchor("center")]);
 
