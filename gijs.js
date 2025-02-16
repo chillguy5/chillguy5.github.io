@@ -368,6 +368,8 @@ timer.onUpdate(() => {
     score = parseFloat(timer.time.toFixed(2));
 });
 
+});
+
 // Sla de highscore alleen op als de speler wint
 scene("win", () => {
     // Check of de huidige score beter is dan de highscore
@@ -406,8 +408,6 @@ scene("mainMenu", () => {
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
     });
-});
-
 });
 
 go("mainMenu");
