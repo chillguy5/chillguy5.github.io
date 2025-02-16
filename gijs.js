@@ -69,7 +69,7 @@ const scalesPlayer = {
 
 for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
-}
+}!!!!!!!!!!!!!!!!!!!!
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
@@ -163,7 +163,7 @@ scene("battle", () => {
 		if (insaneMode) {
 			b.color = rand(rgb(0, 0, 0), rgb(255, 255, 255))
 		}
-	})
+	}) !!!!!!!!!
 
     const players = [
         { name: "timgame.png", scale: 0.45 },
