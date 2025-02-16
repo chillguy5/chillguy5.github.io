@@ -165,13 +165,8 @@ scene("battle", () => {
         { name: "pessigame.png", scale: 0.15 }
     ];
 
-	// Verkrijg de naam van het geselecteerde karakter uit localStorage
 let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
-
-// Zoek het bijbehorende karakter in de players array
-let playerData = players.find(p => p.name === selectedCharacterName);
-
-// Laad de sprite en gebruik de bijbehorende schaal
+let playerData = players.find(p => p.name === selectedCharacterName) || players[0]; 
 loadSprite("player", selectedCharacterName);
 
 const player = add([
@@ -264,7 +259,7 @@ onKeyPress("space", () => {
 })
 
 function spawnTrash() {
-    const name = choose(objs.filter(n => n != bossName))
+    const name = choose(Object.keys(objs).filter(n => n !== bossName));
     add([
         sprite(name),
         area(),
@@ -311,6 +306,8 @@ const timer = add([
     fixed(),
     { time: 0 },
 ]);
+
+let score = 0;
 
 timer.onUpdate(() => {
     timer.time += dt();
