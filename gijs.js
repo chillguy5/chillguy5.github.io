@@ -404,7 +404,7 @@ healthbar.onUpdate(() => {
 go("battle")
 
 scene("mainMenu", () => {
-    add([text("Welcome to Chill Guy Flappy."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
+    add([text("Welcome to Chill Guy Shooter."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
 	add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
