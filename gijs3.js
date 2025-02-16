@@ -264,7 +264,7 @@ function spawnTrash() {
     add([
         sprite(name),
         area(),
-        scale(0.45)
+        scale(0.45),
         pos(rand(0, width()), 0),
         health(OBJ_HEALTH),
         anchor("bot"),
@@ -278,7 +278,7 @@ function spawnTrash() {
  const boss = add([
     sprite(bossName),
     area(),
-    scale(0.6)
+    scale(0.6),
     pos(width() / 2, 40),
     health(BOSS_HEALTH),
     scale(3),
