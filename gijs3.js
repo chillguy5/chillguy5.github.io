@@ -360,6 +360,21 @@ onUpdate("trash", (t) => {
     }
 })
 
+onCollide("bullet", "trash", (b, t) => {
+    destroy(b)
+    play("hit")
+    t.hurt(0.5)
+    t.hurt(insaneMode ? 10 : 1)
+    shake(1)
+    addExplode(b.pos, 1, 24, 1)
+    if (t.hp() <= 0) {
+        destroy(t)
+        shake(2)
+        addKaboom(t.pos)
+        play("explode2")
+    }
+})
+
 boss.onUpdate((p) => {
     boss.move(BOSS_SPEED * boss.dir * (insaneMode ? 3 : 1), 0)
     if (boss.dir === 1 && boss.pos.x >= width() - 20) {
