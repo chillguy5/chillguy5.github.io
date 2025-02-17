@@ -245,10 +245,7 @@
     <script>
 
 function initializeGame() {
-    let currentVersion = "1.1"; // Verhoog dit nummer bij elke reset
-    let savedVersion = localStorage.getItem("gameVersion");
-
-    if (savedVersion !== currentVersion) {
+ {
         // Reset alleen de Limited Edition characters
         localStorage.removeItem("unlocked_chillguygame.png");
         localStorage.removeItem("unlocked_mangogame.webp");
