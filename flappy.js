@@ -176,8 +176,6 @@ const scoreLabel = add([
 ]);
 
 function addScore() {
-	score++;
-	scoreLabel.text = "Score: " + score;
     play("score");
 
     if (score > highscoref) {
@@ -192,6 +190,8 @@ function addScore() {
 		if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
 			addScore()
 			p.passed = true
+			score++;
+			scoreLabel.text = "Score: " + score;
 		}
 	})
 
