@@ -154,6 +154,9 @@ loadSprite("player", selectedCharacterName);
 
 	}
 
+	let score = 0;
+	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
+
 	// callback when bean onCollide with objects with tag "pipe"
 	bean.onCollide("pipe", () => {
 		go("lose", score)
@@ -162,9 +165,6 @@ loadSprite("player", selectedCharacterName);
 		coins += score;
         localStorage.setItem("coins", coins);
 	})
-
-	let score = 0;
-	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
 
 // Display score
 const scoreLabel = add([
