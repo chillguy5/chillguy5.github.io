@@ -86,6 +86,7 @@ scene("game", () => {
         { name: "samuelgame.png", x: 80, y: 40, scale: 0.5 },
         { name: "ardagame.png", x: 80, y: 40, scale: 0.5 },
         { name: "amirgame.png", x: 80, y: 40, scale: 0.65 },
+        { name: "bashargame.png", x: 80, y: 40, scale: 0.5 },
         { name: "chillguygame1.png", x: 80, y: 40, scale: 0.25 },
         { name: "mangogame1.webp", x: 80, y: 40, scale: 0.1 },
         { name: "johnporkgame1.png", x: 80, y: 40, scale: 0.15 },
