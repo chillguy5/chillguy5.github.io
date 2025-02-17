@@ -161,6 +161,31 @@ loadSprite("player", selectedCharacterName);
 		addKaboom(bean.pos)
 	})
 
+	let score = 0;
+	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
+
+// Display score
+const scoreLabel = add([
+    text("Score: " + score),
+    anchor("center"),
+    pos(width() / 2, 80),
+    fixed(),
+    z(100),
+]);
+
+function addScore() {
+    score++;
+    scoreLabel.text = "Score: " + score;
+    play("score");
+	coins += score; // Voeg de behaalde score toe aan de totale coins
+    localStorage.setItem("coins", coins); // Sla nieuwe coin-waarde op
+
+    if (score > highscoref) {
+        highscoref = score;
+        localStorage.setItem("highscoref", highscoref);
+    }
+}
+
 	// per frame event for all objects with tag 'pipe'
 	onUpdate("pipe", (p) => {
 		// check if bean passed the pipe
@@ -174,31 +199,6 @@ loadSprite("player", selectedCharacterName);
 	loop(1, () => {
 		spawnPipe()
 	})
-
-	let score = 0;
-	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
-
-// Display score
-const scoreLabel = add([
-    text(score),
-    anchor("center"),
-    pos(width() / 2, 80),
-    fixed(),
-    z(100),
-]);
-
-function addScore() {
-    score++;
-    scoreLabel.text = "Score: " + score;
-	coins += score; // Voeg de behaalde score toe aan coins
-    localStorage.setItem("coins", coins); // Sla nieuwe coin-waarde op
-    play("score");
-
-    if (score > highscoref) {
-        highscoref = score;
-        localStorage.setItem("highscoref", highscoref);
-    }
-}
 
 })
 
