@@ -176,6 +176,7 @@ loadSprite("player", selectedCharacterName);
 	})
 
 	let score = 0
+	const scoreLabel = add([text("Score: " + score), pos(24, 24)]);
 
 	// display score
 	const scoreLabel = add([
@@ -188,7 +189,7 @@ loadSprite("player", selectedCharacterName);
 
 	function addScore() {
 		score++
-		scoreLabel.text = score
+		scoreLabel.text = "Score: " + score;
 		play("score")
 		coins += score;
         localStorage.setItem("coins", coins);
