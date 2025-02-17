@@ -155,7 +155,8 @@ loadSprite("player", selectedCharacterName);
 	}
 
 	let score = 0;
-	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
+	let coins = parseInt(localStorage.getItem("coins"));
+	coins = isNaN(coins) ? 0 : coins;
 
 	bean.onCollide("pipe", () => {
 		play("hit");
@@ -182,17 +183,18 @@ loadSprite("player", selectedCharacterName);
 			this.text = "Score: " + score;
 		}
 	}]);
-	
-	onUpdate("pipe", (p) => {
-		// check if bean passed the pipe
-		if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
-			// Update score
-			score++;
-			p.passed = true;
-			
-			// Update score label text
-			scoreLabel.text = "Score: " + score;
-		}
+
+	onUpdate(() => {
+		get("pipe").forEach(p => {
+			if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
+				// Update score
+				score++;
+				p.passed = true;
+				
+				// Update score label text
+				scoreLabel.text = "Score: " + score;
+			}
+		});
 	});
 	
 
