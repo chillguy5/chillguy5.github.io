@@ -185,22 +185,20 @@ loadSprite("player", selectedCharacterName);
 				localStorage.setItem("coins", score);
 			}
 		});
-	});
-	
+	});	
 	
 	bean.onCollide("pipe", () => {
 		play("hit");
 		addKaboom(bean.pos);
 	
-		// Update de highscore als dat nodig is
+		// Update de highscore als nodig
 		if (score > highscoref) {
 			highscoref = score;
 			localStorage.setItem("highscoref", highscoref);
 		}
 	
-		// **Correct coins optellen (niet dubbel)**
-		let currentCoins = parseInt(localStorage.getItem("coins")) || 0;
-		localStorage.setItem("coins", currentCoins + score);
+		// Coins exact gelijkstellen aan score (geen verdubbeling)
+		localStorage.setItem("coins", coins + score);
 	
 		go("lose", score);
 	});
@@ -223,7 +221,6 @@ loadSprite("player", selectedCharacterName);
 		add([text("Highscore: " + highscoref, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
 		
 		coins = parseInt(localStorage.getItem("coins")) || 0;
-		coins += score;
 		localStorage.setItem("coins", coins);
 		add([text("Total Coins: " + coins, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
 
