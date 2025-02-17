@@ -157,20 +157,24 @@ loadSprite("player", selectedCharacterName);
 	let score = 0;
 	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
 
-	// callback when bean onCollide with objects with tag "pipe"
 	bean.onCollide("pipe", () => {
-		play("hit")
-		addKaboom(bean.pos)
-		coins += score;
-        localStorage.setItem("coins", coins);
-
+		play("hit");
+		addKaboom(bean.pos);
+	
+		// Update coins met de huidige score
+		coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
+		coins += score; // Tel de score op bij de bestaande coins
+		localStorage.setItem("coins", coins); // Sla de nieuwe coins-waarde op
+	
+		// Highscore bijwerken indien nodig
 		if (score > highscoref) {
 			highscoref = score;
 			localStorage.setItem("highscoref", highscoref);
 		}
-			go("lose", score);
-			addKaboom(player.pos);
-	})
+	
+		go("lose", score);
+	});
+	
 
 	// per frame event for all objects with tag 'pipe'
 	onUpdate("pipe", (p) => {
