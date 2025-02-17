@@ -191,6 +191,17 @@
     cursor: pointer;
 }
 
+#sorry-button{
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: green;
+    border: none;
+    cursor: pointer;
+}
+
 
     </style>
 </head>
@@ -242,6 +253,29 @@
             alert("Onjuist wachtwoord!");
         }
         });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("sorry-button");
+
+    // Controleer of de knop al eerder is gebruikt
+    if (localStorage.getItem("buttonClicked") === "true") {
+        button.style.display = "none"; // Verberg de knop voor altijd
+    }
+
+    button.addEventListener("click", function () {
+        let coins = parseInt(localStorage.getItem("coins") || "0");
+        coins += 5000; // Voeg 5000 coins toe
+        localStorage.setItem("coins", coins);
+        document.getElementById("coin-count").textContent = coins;
+        alert("Je hebt 5000 coins ontvangen!");
+
+        // Markeer de knop als gebruikt en verberg deze
+        localStorage.setItem("buttonClicked", "true");
+        button.style.display = "none";
+    });
+});
+
+
 
         // Code om coins op te slaan en weer te geven
         document.addEventListener("DOMContentLoaded", function () {
