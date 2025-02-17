@@ -159,30 +159,18 @@ loadSprite("player", selectedCharacterName);
 
 	// callback when bean onCollide with objects with tag "pipe"
 	bean.onCollide("pipe", () => {
-		go("lose", score)
 		play("hit")
 		addKaboom(bean.pos)
 		coins += score;
         localStorage.setItem("coins", coins);
+
+		if (score > highscoref) {
+			highscoref = score;
+			localStorage.setItem("highscoref", highscoref);
+		}
+			go("lose", score);
+			addKaboom(player.pos);
 	})
-
-// Display score
-const scoreLabel = add([
-    text("Score: " + score),
-    anchor("center"),
-    pos(width() / 2, 80),
-    fixed(),
-    z(100),
-]);
-
-function addScore() {
-    play("score");
-
-    if (score > highscoref) {
-        highscoref = score;
-        localStorage.setItem("highscoref", highscoref);
-    }
-}
 
 	// per frame event for all objects with tag 'pipe'
 	onUpdate("pipe", (p) => {
