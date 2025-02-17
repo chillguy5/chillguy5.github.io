@@ -184,6 +184,11 @@ loadSprite("player", selectedCharacterName);
 	
 		go("lose", score);
 	});
+
+		// spawn a pipe every 1 sec
+		loop(1, () => {
+			spawnPipe()
+		})
 	
 
 })
