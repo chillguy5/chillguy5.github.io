@@ -180,9 +180,13 @@ loadSprite("player", selectedCharacterName);
 	
 				// Update de score label
 				scoreLabel.text = "Score: " + score;
+	
+				// Coins gelijk maken aan score (1 score = 1 coin)
+				localStorage.setItem("coins", score);
 			}
 		});
 	});
+	
 	
 	bean.onCollide("pipe", () => {
 		play("hit");
