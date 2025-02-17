@@ -161,10 +161,10 @@ scene("battle", () => {
         { name: "samuelgame.png", scale: 0.45 },
         { name: "ardagame.png", scale: 0.45 },
 		{ name: "amirgame.png", scale: 0.5 },
-        { name: "chillguygame.png", scale: 0.15 },
-        { name: "mangogame.webp", scale: 0.1 },
-        { name: "johnporkgame.png",scale: 0.15 },
-        { name: "pessigame.png", scale: 0.15 }
+        { name: "chillguygame1.png", scale: 0.15 },
+        { name: "mangogame1.webp", scale: 0.1 },
+        { name: "johnporkgame1.png",scale: 0.15 },
+        { name: "pessigame1.png", scale: 0.15 }
     ];
 
     let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
