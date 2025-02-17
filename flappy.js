@@ -157,6 +157,14 @@ loadSprite("player", selectedCharacterName);
 	let score = 0;
 	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
 
+	let scoreLabel = add([
+		text("Score: 0"),
+		pos(24, 24),
+		layer("ui"),
+		{ value: 0 } // Opslag van de scorewaarde
+	]);
+	
+
 	onUpdate("pipe", (p) => {
 		// Controleer of de speler de pijp gepasseerd is en of het een onderste pijp is
 		if (!p.passed && p.pos.x + p.width <= bean.pos.x) {
