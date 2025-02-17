@@ -155,28 +155,9 @@ loadSprite("player", selectedCharacterName);
 	}
 
 	let score = 0;
-	let coins = parseInt(localStorage.getItem("coins"));
-	coins = isNaN(coins) ? 0 : coins;
-
-	bean.onCollide("pipe", () => {
-		play("hit");
-		addKaboom(bean.pos);
+	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
 	
-		// Update coins met de huidige score
-		coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
-		coins += score; // Tel de score op bij de bestaande coins
-		localStorage.setItem("coins", coins); // Sla de nieuwe coins-waarde op
-	
-		// Highscore bijwerken indien nodig
-		if (score > highscoref) {
-			highscoref = score;
-			localStorage.setItem("highscoref", highscoref);
-		}
-	
-		go("lose", score);
-	});
-
-
+	// Score label toevoegen
 	let scoreLabel = add([
 		text("Score: 0"),
 		pos(12, 12),
@@ -189,19 +170,43 @@ loadSprite("player", selectedCharacterName);
 		}
 	]);
 	
-
 	onUpdate(() => {
+		// Verhoog de score en update de coins elke keer dat een pijp wordt gepasseerd
 		get("pipe").forEach(p => {
 			if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
-				// Update score
+				// Verhoog de score
 				score++;
 				p.passed = true;
-				
-				// Update score label text
+	
+				// Update de score label
 				scoreLabel.text = "Score: " + score;
+	
+				// Update coins met de huidige score
+				coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige coins op
+				coins += 1; // Tel 1 coin per scorepunt op
+				localStorage.setItem("coins", coins); // Sla de nieuwe coins-waarde op
 			}
 		});
 	});
+	
+	bean.onCollide("pipe", () => {
+		play("hit");
+		addKaboom(bean.pos);
+	
+		// Bij verlies, update coins en highscore
+		coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige coins op
+		coins += score; // Tel de score op bij de bestaande coins
+		localStorage.setItem("coins", coins); // Sla de nieuwe coins-waarde op
+	
+		// Highscore bijwerken indien nodig
+		if (score > highscoref) {
+			highscoref = score;
+			localStorage.setItem("highscoref", highscoref);
+		}
+	
+		go("lose", score);
+	});
+	
 	
 
 	// spawn a pipe every 1 sec
