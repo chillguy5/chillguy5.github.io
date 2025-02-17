@@ -157,36 +157,34 @@ loadSprite("player", selectedCharacterName);
 	let score = 0;
 	let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal huidige coins op
 
-	// callback when bean onCollide with objects with tag "pipe"
+	onUpdate("pipe", (p) => {
+		// Controleer of de speler de pijp gepasseerd is en of het een onderste pijp is
+		if (!p.passed && p.pos.x + p.width <= bean.pos.x) {
+			p.passed = true;
+			score++;
+			scoreLabel.text = "Score: " + score;
+			play("score"); // Speel geluid bij scoreverhoging
+		}
+	});
+	
+	// Bij een botsing wordt de score opgeteld bij de totale coins
 	bean.onCollide("pipe", () => {
-		play("hit")
-		addKaboom(bean.pos)
+		play("hit");
+		addKaboom(bean.pos);
+	
+		// Voeg de behaalde score toe aan de totale coins
 		coins += score;
-        localStorage.setItem("coins", coins);
-
+		localStorage.setItem("coins", coins);
+	
+		// Update highscore indien nodig
 		if (score > highscoref) {
 			highscoref = score;
 			localStorage.setItem("highscoref", highscoref);
 		}
-			go("lose", score);
-			addKaboom(player.pos);
-	})
-
-	// per frame event for all objects with tag 'pipe'
-	onUpdate("pipe", (p) => {
-		// check if bean passed the pipe
-		if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
-			addScore()
-			p.passed = true
-			score++;
-			scoreLabel.text = "Score: " + score;
-		}
-	})
-
-	// spawn a pipe every 1 sec
-	loop(1, () => {
-		spawnPipe()
-	})
+	
+		go("lose", score);
+	});
+	
 
 })
 
