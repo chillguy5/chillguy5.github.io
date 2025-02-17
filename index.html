@@ -244,9 +244,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("sorry-button");
 
+    if (!button) {
+        console.error("Knop niet gevonden! Zorg ervoor dat er een knop met id 'sorry-button' in je HTML staat.");
+        return;
+    }
+
     // Controleer of de knop al eerder is gebruikt
     if (localStorage.getItem("buttonClicked") === "true") {
         button.style.display = "none"; // Verberg de knop voor altijd
+    } else {
+        button.style.display = "block"; // Zorg ervoor dat de knop zichtbaar is als hij niet eerder is geklikt
     }
 
     button.addEventListener("click", function () {
@@ -261,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.style.display = "none";
     });
 });
+
 
 
 
