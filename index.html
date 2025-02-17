@@ -208,6 +208,8 @@
 <body>
     <button id="secret-button"></button>
 
+    <button id="sorry-button">Klik hier</button>
+
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
         <source src="Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
@@ -241,6 +243,19 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
+                    document.getElementById("secret-button").addEventListener("click", function () {
+        let password = prompt("Voer het geheime wachtwoord in:");
+        if (password === "fluffy") { // Verander dit naar jouw gewenste wachtwoord
+            let coins = parseInt(localStorage.getItem("coins") || "0");
+            coins += 100000; // Aantal extra coins
+            localStorage.setItem("coins", coins);
+            document.getElementById("coin-count").textContent = coins;
+            alert("Gefeliciteerd! Je hebt 100.000 extra coins ontvangen!");
+        } else {
+            alert("Onjuist wachtwoord!");
+        }
+        });
+        
 document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("sorry-button");
 
