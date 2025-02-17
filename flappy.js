@@ -174,14 +174,9 @@ loadSprite("player", selectedCharacterName);
 	
 		go("lose", score);
 	});
-	
-// Voeg de 'ui' laag toe
-layers([
-    "game", // De laag voor de game objecten
-    "ui",   // De laag voor de user interface (score, tekst, etc.)
-]);
 
-	let scoreLabel = add([text("Score: 0"), pos(12, 12), layer("ui"), {
+
+	let scoreLabel = add([text("Score: 0"), pos(12, 12), position(fixed), {
 		value: 0,
 		update() {
 			this.text = "Score: " + score;
