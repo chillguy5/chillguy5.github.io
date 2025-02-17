@@ -266,23 +266,6 @@
         }
     }
 
-    function initializeGame() {
-    let currentVersion = "1.1"; // Verhoog dit nummer bij elke reset
-    let savedVersion = localStorage.getItem("gameVersion");
-
-    if (savedVersion !== currentVersion) {
-        // Reset alleen de Limited Edition characters
-        localStorage.removeItem("unlocked_chillguygame.png");
-        localStorage.removeItem("unlocked_mangogame.webp");
-        localStorage.removeItem("unlocked_johnporkgame.png");
-        localStorage.removeItem("unlocked_pessigame.png");
-
-        localStorage.setItem("gameVersion", currentVersion);
-    }
-
-    updateCoinDisplay();
-}
-
     // Combineer beide functies in één onload event
     window.onload = initializeGame;
 </script>
