@@ -192,17 +192,19 @@ loadSprite("player", selectedCharacterName);
 		play("hit");
 		addKaboom(bean.pos);
 	
-		// Update de highscore als nodig
+		// Update de highscore als dat nodig is
 		if (score > highscoref) {
 			highscoref = score;
 			localStorage.setItem("highscoref", highscoref);
 		}
 	
-		// Coins exact gelijkstellen aan score (geen verdubbeling)
-		localStorage.setItem("coins", coins + score);
+		// **Correct coins optellen (niet dubbel)**
+		let currentCoins = parseInt(localStorage.getItem("coins")) || 0;
+		localStorage.setItem("coins", currentCoins + score);
 	
 		go("lose", score);
 	});
+	
 	
 	
 	
