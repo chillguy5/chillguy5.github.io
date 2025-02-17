@@ -67,8 +67,8 @@ scene("game", () => {
 		{ name: "bashargame.png", scale: 0.3 },
         { name: "chillguygame1.png", scale: 0.125 },
         { name: "mangogame1.webp", scale: 0.1 },
-        { name: "johnporkgame1.png",scale: 0.1 },
-        { name: "pessigame1.png", scale: 0.125 }
+        { name: "johnporkgame1.png",scale: 0.075 },
+        { name: "pessigame1.png", scale: 0.115 }
     ];
 
 	// Verkrijg de naam van het geselecteerde karakter uit localStorage
