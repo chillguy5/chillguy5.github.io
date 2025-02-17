@@ -159,6 +159,8 @@ loadSprite("player", selectedCharacterName);
 		go("lose", score)
 		play("hit")
 		addKaboom(bean.pos)
+		coins += score;
+        localStorage.setItem("coins", coins);
 	})
 
 	let score = 0;
@@ -174,11 +176,9 @@ const scoreLabel = add([
 ]);
 
 function addScore() {
-    score++;
-    scoreLabel.text = "Score: " + score;
+	score++;
+	scoreLabel.text = "Score: " + score;
     play("score");
-	coins += score; // Voeg de behaalde score toe aan de totale coins
-    localStorage.setItem("coins", coins); // Sla nieuwe coin-waarde op
 
     if (score > highscoref) {
         highscoref = score;
