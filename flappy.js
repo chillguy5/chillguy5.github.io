@@ -177,12 +177,18 @@ loadSprite("player", selectedCharacterName);
 	});
 
 
-	let scoreLabel = add([text("Score: 0"), pos(12, 12), position(fixed), {
-		value: 0,
-		update() {
-			this.text = "Score: " + score;
+	let scoreLabel = add([
+		text("Score: 0"),
+		pos(12, 12),
+		fixed(),  // Zorg ervoor dat het label vast blijft op de positie
+		{
+			value: 0,
+			update() {
+				this.text = "Score: " + score;
+			}
 		}
-	}]);
+	]);
+	
 
 	onUpdate(() => {
 		get("pipe").forEach(p => {
