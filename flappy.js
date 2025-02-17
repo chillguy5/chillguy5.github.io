@@ -60,7 +60,7 @@ scene("game", () => {
 
     const players = [
         { name: "timgame.png", scale: 0.3 },
-        { name: "gijsgame.png", scale: 0.3 },
+        { name: "gijsgame.png", scale: 0.25 },
         { name: "samuelgame.png", scale: 0.25 },
         { name: "ardagame.png", scale: 0.3 },
 		{ name: "amirgame.png", scale: 0.45 },
