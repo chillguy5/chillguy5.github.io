@@ -243,22 +243,7 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
-
-function initializeGame() {
- {
-        // Reset alleen de Limited Edition characters
-        localStorage.removeItem("unlocked_chillguygame.png");
-        localStorage.removeItem("unlocked_mangogame.webp");
-        localStorage.removeItem("unlocked_johnporkgame.png");
-        localStorage.removeItem("unlocked_pessigame.png");
-
-        localStorage.setItem("gameVersion", currentVersion);
-    }
-
-    updateCoinDisplay();
-}
-
-                    document.getElementById("secret-button").addEventListener("click", function () {
+        document.getElementById("secret-button").addEventListener("click", function () {
         let password = prompt("Voer het geheime wachtwoord in:");
         if (password === "fluffy") { // Verander dit naar jouw gewenste wachtwoord
             let coins = parseInt(localStorage.getItem("coins") || "0");
