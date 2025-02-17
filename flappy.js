@@ -176,16 +176,25 @@ loadSprite("player", selectedCharacterName);
 	});
 	
 
-	// per frame event for all objects with tag 'pipe'
+	let scoreLabel = add([text("Score: 0"), pos(12, 12), layer("ui"), {
+		value: 0,
+		update() {
+			this.text = "Score: " + score;
+		}
+	}]);
+	
 	onUpdate("pipe", (p) => {
 		// check if bean passed the pipe
 		if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
-			addScore()
-			p.passed = true
+			// Update score
 			score++;
+			p.passed = true;
+			
+			// Update score label text
 			scoreLabel.text = "Score: " + score;
 		}
-	})
+	});
+	
 
 	// spawn a pipe every 1 sec
 	loop(1, () => {
