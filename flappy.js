@@ -180,11 +180,6 @@ loadSprite("player", selectedCharacterName);
 	
 				// Update de score label
 				scoreLabel.text = "Score: " + score;
-	
-				// Update coins met de huidige score
-				coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige coins op
-				coins += 1; // Tel 1 coin per scorepunt op
-				localStorage.setItem("coins", coins); // Sla de nieuwe coins-waarde op
 			}
 		});
 	});
@@ -193,19 +188,18 @@ loadSprite("player", selectedCharacterName);
 		play("hit");
 		addKaboom(bean.pos);
 	
-		// Bij verlies, update coins en highscore
-		coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige coins op
-		coins += score; // Tel de score op bij de bestaande coins
-		localStorage.setItem("coins", coins); // Sla de nieuwe coins-waarde op
-	
-		// Highscore bijwerken indien nodig
+		// Update de highscore als nodig
 		if (score > highscoref) {
 			highscoref = score;
 			localStorage.setItem("highscoref", highscoref);
 		}
 	
+		// Coins exact gelijkstellen aan score (geen verdubbeling)
+		localStorage.setItem("coins", coins + score);
+	
 		go("lose", score);
 	});
+	
 	
 	
 	
