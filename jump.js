@@ -134,7 +134,7 @@ function jump() {
     onKeyPress("space", jump);
     onClick(jump);
 
-    // loadSprite("tree", "lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
+    loadSprite("tree", "lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
 
     function spawnTree() {
         add([
