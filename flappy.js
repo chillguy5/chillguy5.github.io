@@ -43,9 +43,9 @@ scene("start", () => {
 
 
 
-loadSound("score", "/examples/sounds/score.mp3")
-loadSound("wooosh", "/examples/sounds/wooosh.mp3")
-loadSound("hit", "/examples/sounds/hit.mp3")
+loadSound("score", "sound/score.mp3")
+loadSound("wooosh", "sound/wooosh.mp3")
+loadSound("hit", "sound/hit.mp3")
 
 // define gravity
 setGravity(3200)

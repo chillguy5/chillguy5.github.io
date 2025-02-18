@@ -61,11 +61,11 @@ for (const [key, file] of Object.entries(objs)) {
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
 loadSprite("player", selectedCharacter);
-loadSound("hit", "hit.mp3")
-loadSound("shoot", "shot.mp3")
-loadSound("explode", "Voicy_bomboclart.mp3")
-loadSound("OtherworldlyFoe", "kaboomguardian.mp3")
-loadSound("explode2", "retroexp.mp3")
+loadSound("hit", "sound/hit.mp3")
+loadSound("shoot", "sound/shot.mp3")
+loadSound("explode", "sound/Voicy_bomboclart.mp3")
+loadSound("OtherworldlyFoe", "sound/kaboomguardian.mp3")
+loadSound("explode2", "sound/retroexp.mp3")
 
 scene("battle", () => {
 

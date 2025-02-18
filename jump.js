@@ -168,7 +168,7 @@ function jump() {
     });
 
     player.onCollide("tree", () => {
-        loadSound("gameover", "Voicy_bomboclart.mp3");
+        loadSound("gameover", "sound/Voicy_bomboclart.mp3");
         play("gameover");
         coins += score;
         localStorage.setItem("coins", coins);
