@@ -240,7 +240,7 @@ function getCards(){
 		{ 
 			"suit": "spades",
 			"name": "2",
-			"src": "-2.png",
+			"src": "Spades-2.png",
 			"value": 2
 		},
 		{ 
