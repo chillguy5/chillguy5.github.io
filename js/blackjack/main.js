@@ -137,8 +137,8 @@ $("#chip-10").click(function(){selectWager(10)});
 $("#chip-25").click(function(){selectWager(25)});
 $("#chip-50").click(function(){selectWager(50)});
 $("#chip-100").click(function(){selectWager(100)});
-$("#chip-100").click(function(){selectWager(200)});
-$("#chip-100").click(function(){selectWager(500)});
+$("#chip-200").click(function(){selectWager(200)});
+$("#chip-500").click(function(){selectWager(500)});
 
 // Button activation
 $(startButton).click(startGame);
