@@ -240,55 +240,55 @@ function getCards(){
 		{ 
 			"suit": "spades",
 			"name": "2",
-			"src": "Spades-2.png",
+			"src": "images/blackjack/spades/Spades-2.png",
 			"value": 2
 		},
 		{ 
 			"suit": "spades",
 			"name": "3",
-			"src": "Spades-3.png",
+			"src": "images/blackjack/spades/Spades-3.png",
 			"value": 3
 		},
 		{ 
 			"suit": "spades",
 			"name": "4",
-			"src": "Spades-4.png",
+			"src": "images/blackjack/spades/Spades-4.png",
 			"value": 4
 		},
 		{ 
 			"suit": "spades",
 			"name": "5",
-			"src": "Spades-5.png",
+			"src": "images/blackjack/spades/Spades-5.png",
 			"value": 5
 		},
 		{ 
 			"suit": "spades",
 			"name": "6",
-			"src": "Spades-6.png",
+			"src": "images/blackjack/spades/Spades-6.png",
 			"value": 6
 		},
 		{ 
 			"suit": "spades",
 			"name": "7",
-			"src": "Spades-7.png",
+			"src": "images/blackjack/spades/Spades-7.png",
 			"value": 7
 		},
 		{ 
 			"suit": "spades",
 			"name": "8",
-			"src": "Spades-8.png",
+			"src": "images/blackjack/spades/Spades-8.png",
 			"value": 8
 		},
 		{ 
 			"suit": "spades",
 			"name": "9",
-			"src": "Spades-9.png",
+			"src": "images/blackjack/spades/Spades-9.png",
 			"value": 9
 		},
 		{ 
 			"suit": "spades",
 			"name": "10",
-			"src": "Spades-10.png",
+			"src": "images/blackjack/spades/Spades-10.png",
 			"value": 10
 		},
 		{ 
@@ -300,11 +300,11 @@ function getCards(){
 		{ 
 			"suit": "spades",
 			"name": "jack",
-			"src": "Spades-Jack.png",
+			"src": "images/blackjack/spades/Spades-Jack.png",
 			"value": 10
 		},
 		{ 
-			"suit": "spades",
+			"suit": "images/blackjack/spades/spades",
 			"name": "king",
 			"src": "Spades-King.png",
 			"value": 10
@@ -312,7 +312,7 @@ function getCards(){
 		{ 
 			"suit": "spades",
 			"name": "queen",
-			"src": "Spades-Queen.png",
+			"src": "images/blackjack/spades/Spades-Queen.png",
 			"value": 10
 		}
 	]
