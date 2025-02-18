@@ -141,7 +141,12 @@ $("#chip-200").click(function(){selectWager(200)});
 $("#chip-500").click(function(){selectWager(500)});
 $("#chip-1000").click(function(){selectWager(1000)});
 $("#chip-2000").click(function(){selectWager(2000)});
-$("#chip-allin").click(function(){selectWager(currentChipBalance)});
+$("#chip-allin").click(function(){ 
+    currentWager = currentChipBalance;  
+    updateVisibleChipBalances();
+});
+
+
 
 // Button activation
 $(startButton).click(startGame);
