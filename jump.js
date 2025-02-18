@@ -134,7 +134,7 @@ const player = add([
     onKeyPress("space", jump);
     onClick(jump);
 
-    loadSprite("tree", "lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
+    // loadSprite("tree", "lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
 
     function spawnTree() {
         add([
@@ -149,7 +149,7 @@ const player = add([
             { passed: false },
         ]);
 
-        wait(rand(0.55, 1.25), spawnTree);
+        wait(rand(0.65, 1.25), spawnTree);
     }
 
     spawnTree();
