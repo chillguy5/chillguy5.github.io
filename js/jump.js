@@ -183,6 +183,12 @@ function jump() {
     });
 });
 
+add([
+    text("Tripple jump enabled!", { width: width() / 2, size: 32 }),
+    anchor("botleft"),
+    pos(24, height() - 24),
+])
+
 scene("lose", (score) => {
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text("Score: " + score, { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
