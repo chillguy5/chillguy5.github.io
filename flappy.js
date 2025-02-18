@@ -228,7 +228,7 @@ loadSprite("player", selectedCharacterName);
 	
 		addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
 		addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
-			window.location.href = "html/index.html";
+			window.location.href = "index.html";
 		});
 	});
 
@@ -237,7 +237,7 @@ scene("mainMenu", () => {
     add([text("Highscore: " + highscoref), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
-        window.location.href = "html/index.html";
+        window.location.href = "index.html";
     });
 });
 
