@@ -139,8 +139,8 @@ $("#chip-50").click(function(){selectWager(50)});
 $("#chip-100").click(function(){selectWager(100)});
 $("#chip-200").click(function(){selectWager(200)});
 $("#chip-500").click(function(){selectWager(500)});
-$("#chip-1000").click(function(){selectWager(500)});
-$("#chip-2000").click(function(){selectWager(500)});
+$("#chip-1000").click(function(){selectWager(1000)});
+$("#chip-2000").click(function(){selectWager(2000)});
 $("#chip-allin").click(function(){selectWager("coins")});
 
 // Button activation
