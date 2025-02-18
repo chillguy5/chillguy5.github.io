@@ -56,6 +56,8 @@ function updateChipBalance() {
 	}
 	// Note: if dealer wins, nothing happens to player chip balance as their wager was already removed from it
 	updateVisibleChipBalances();
+
+	let currentChipBalance = localStorage.getItem("coins");
 }
 
 function announceWinner() {
