@@ -6,7 +6,7 @@ function dealCard(hand, location) {
 	var index = hand.length - 1;
 
 	// Create card image for card, hide initially so it doesn't impact transition
-	var cardImage = $("<img>").attr("class", "card").attr("src", "images/cards/" + hand[index].src).hide();
+	var cardImage = $("<img>").attr("class", "card").attr("src", "images/blackjack/cards/" + hand[index].src).hide();
 	cardImage.attr("id", currentTurn + "-card-" + index);
 
 	// To create stacked card effect
