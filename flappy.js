@@ -72,7 +72,7 @@ scene("game", () => {
     ];
 
 	// Verkrijg de naam van het geselecteerde karakter uit localStorage
-let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
 
 // Zoek het bijbehorende karakter in de players array
 let playerData = players.find(p => p.name === selectedCharacterName);
@@ -80,7 +80,7 @@ let playerData = players.find(p => p.name === selectedCharacterName);
 // Laad de sprite en gebruik de bijbehorende schaal
 loadSprite("player", selectedCharacterName);
 
-	let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
+	let selectedCharacter = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
 	loadSprite("player", selectedCharacter);
 
 	// a game object consists of a list of components and tags

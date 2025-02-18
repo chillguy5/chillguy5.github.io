@@ -59,7 +59,7 @@ for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
 }
 
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
 loadSprite("player", selectedCharacter);
 loadSound("hit", "sound/hit.mp3")
 loadSound("shoot", "sound/shot.mp3")

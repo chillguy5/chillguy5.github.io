@@ -46,9 +46,9 @@ scene("start", () => {
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "timgame.png";
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
 loadSprite("player", selectedCharacter);
-loadSprite("background", "school.jpg"); // Laad de achtergrondafbeelding
+loadSprite("background", "images/overig/school.jpg"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
@@ -94,7 +94,7 @@ scene("game", () => {
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
-let selectedCharacterName = localStorage.getItem("selectedCharacter") || "timgame.png";
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
 
 // Zoek het bijbehorende karakter in de players array
 let playerData = players.find(p => p.name === selectedCharacterName);
@@ -134,7 +134,7 @@ function jump() {
     onKeyPress("space", jump);
     onClick(jump);
 
-    loadSprite("tree", "lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
+    loadSprite("tree", "images/overig/lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
 
     function spawnTree() {
         add([
