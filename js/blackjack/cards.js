@@ -6,79 +6,79 @@ function getCards(){
 		{ 
 			"suit": "clubs",
 			"name": "2",
-			"src": "Clubs-2.png",
+			"src": "images/blackjack/clubs/Clubs-2.png",
 			"value": 2
 		},
 		{ 
 			"suit": "clubs",
 			"name": "3",
-			"src": "Clubs-3.png",
+			"src": "images/blackjack/clubs/Clubs-3.png",
 			"value": 3
 		},
 		{ 
 			"suit": "clubs",
 			"name": "4",
-			"src": "Clubs-4.png",
+			"src": "images/blackjack/clubs/Clubs-4.png",
 			"value": 4
 		},
 		{ 
 			"suit": "clubs",
 			"name": "5",
-			"src": "Clubs-5.png",
+			"src": "images/blackjack/clubs/Clubs-5.png",
 			"value": 5
 		},
 		{ 
 			"suit": "clubs",
 			"name": "6",
-			"src": "Clubs-6.png",
+			"src": "images/blackjack/clubs/Clubs-6.png",
 			"value": 6
 		},
 		{ 
 			"suit": "clubs",
 			"name": "7",
-			"src": "Clubs-7.png",
+			"src": "images/blackjack/clubs/Clubs-7.png",
 			"value": 7
 		},
 		{ 
 			"suit": "clubs",
 			"name": "8",
-			"src": "Clubs-8.png",
+			"src": "images/blackjack/clubs/Clubs-8.png",
 			"value": 8
 		},
 		{ 
 			"suit": "clubs",
 			"name": "9",
-			"src": "Clubs-9.png",
+			"src": "images/blackjack/clubs/Clubs-9.png",
 			"value": 9
 		},
 		{ 
 			"suit": "clubs",
 			"name": "10",
-			"src": "Clubs-10.png",
+			"src": "images/blackjack/clubs/Clubs-10.png",
 			"value": 10
 		},
 		{ 
 			"suit": "clubs",
 			"name": "ace",
-			"src": "Clubs-Ace.png",
+			"src": "images/blackjack/clubs/Clubs-Ace.png",
 			"value": 11
 		},
 		{ 
 			"suit": "clubs",
 			"name": "jack",
-			"src": "Clubs-Jack.png",
+			"src": "images/blackjack/clubs/Clubs-Jack.png",
 			"value": 10
 		},
 		{ 
 			"suit": "clubs",
 			"name": "king",
-			"src": "Clubs-King.png",
+			"src": "images/blackjack/clubs/Clubs-King.png",
 			"value": 10
 		},
 		{ 
 			"suit": "clubs",
 			"name": "queen",
-			"src": "Clubs-Queen.png",
+			"src": "images/blackjack/clubs/Clubs-Queen.png",
 			"value": 10
 		},
 		{ 
