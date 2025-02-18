@@ -13,7 +13,32 @@
 		<link rel="stylesheet" type="text/css" href="css/keyframes.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+<style>
+        .back-link {
+            position: absolute;
+            display: inline-block;
+            top: 10px;
+            left: 30px;
+            padding: 10px 20px;
+            font-size: 30px;
+            color: #cd3f2b;
+            background-color: #f8f8d7;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .back-link:hover{
+            background-color: #f0aa5e;
+            transform: scale(1.1);
+        }
+</style>
 <body>
+	
+	<a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
+
 <div class="navbar-fixed z-depth-0">
 	<nav>
 		<div class="nav-wrapper">
