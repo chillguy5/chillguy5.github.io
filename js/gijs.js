@@ -162,7 +162,7 @@ scene("battle", () => {
         { name: "images/characters/ardagame.png", scale: 0.45 },
 		{ name: "images/characters/amirgame.png", scale: 0.5 },
         { name: "images/characters/bashargame.png", scale: 0.45 },
-        { name: "images/characters/69game.png", scale: 0.5 },
+        { name: "images/characters/69game.png", scale: 0.45 },
         { name: "images/characters/chillguygame1.png", scale: 0.15 },
         { name: "images/characters/mangogame1.webp", scale: 0.1 },
         { name: "images/characters/johnporkgame1.png",scale: 0.15 },
