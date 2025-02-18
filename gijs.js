@@ -42,10 +42,10 @@ scene("start", () => {
 });
 
 const objs = {
-	"Samuel": "samuelgame.png",
-	"Arda": "ardagame.png",
-	"Gijs": "gijsgame.png",
-	"Tim": "timgame.png",
+	"Samuel": "characters/samuelgame.png",
+	"Arda": "characters/ardagame.png",
+	"Gijs": "characters/gijsgame.png",
+	"Tim": "characters/timgame.png",
 }
 
 const scales = {
@@ -156,16 +156,16 @@ scene("battle", () => {
 	})
 
     const players = [
-        { name: "timgame.png", scale: 0.45 },
-        { name: "gijsgame.png", scale: 0.45 },
-        { name: "samuelgame.png", scale: 0.45 },
-        { name: "ardagame.png", scale: 0.45 },
-		{ name: "amirgame.png", scale: 0.5 },
-        { name: "bashargame.png", scale: 0.45 },
-        { name: "chillguygame1.png", scale: 0.15 },
-        { name: "mangogame1.webp", scale: 0.1 },
-        { name: "johnporkgame1.png",scale: 0.15 },
-        { name: "pessigame1.png", scale: 0.15 }
+        { name: "characters/timgame.png", scale: 0.45 },
+        { name: "characters/gijsgame.png", scale: 0.45 },
+        { name: "characters/samuelgame.png", scale: 0.45 },
+        { name: "characters/ardagame.png", scale: 0.45 },
+		{ name: "characters/amirgame.png", scale: 0.5 },
+        { name: "characters/bashargame.png", scale: 0.45 },
+        { name: "characters/chillguygame1.png", scale: 0.15 },
+        { name: "characters/mangogame1.webp", scale: 0.1 },
+        { name: "characters/johnporkgame1.png",scale: 0.15 },
+        { name: "characters/pessigame1.png", scale: 0.15 }
     ];
 
     let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
