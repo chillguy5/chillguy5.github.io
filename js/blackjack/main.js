@@ -9,7 +9,7 @@ $( document ).ready(function() {
 
 var currentTurn = "player";
 var currentWager = 0;
-var currentChipBalance = localStorage.getItem('blackjackChips') || 500;
+var currentChipBalance = localStorage.getItem('coins') || 0;
 var gameWinner = "none"; // To be declared at end of game
 var isGameOver = false;
 
