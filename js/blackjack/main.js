@@ -92,7 +92,7 @@ function flipHiddenCard() {
 	if (dealerHand.length === 2) {
 		$("#dealer-card-1").addClass("flipped");
 		setTimeout(function(){
-			$("#dealer-card-1").attr("src", "img/" + dealerHand[1].src);
+			$("#dealer-card-1").attr("src", "images/blackjack/cards" + dealerHand[1].src);
 			updateVisibleHandTotals();
 		}, 250);	
 	} 
