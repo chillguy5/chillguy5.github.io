@@ -183,12 +183,6 @@ function jump() {
     });
 });
 
-add([
-    text("Tripple jump enabled!", { width: width() / 2, size: 32 }),
-    anchor("botleft"),
-    pos(24, height() - 24),
-])
-
 scene("lose", (score) => {
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text("Score: " + score, { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
@@ -204,6 +198,7 @@ scene("lose", (score) => {
 scene("mainMenu", () => {
     add([text("Welcome to Chill Guy Jumper."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
     add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
+    add([text("Tripple jump is enabled."), pos(width() / 2, height() / 2 + 50), anchor("center"), scale(1), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
