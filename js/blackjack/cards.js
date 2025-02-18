@@ -84,79 +84,79 @@ function getCards(){
 		{ 
 			"suit": "diamonds",
 			"name": "2",
-			"src": "Diamond-2.png",
+			"src": "images/blackjack/diamond/Diamond-2.png",
 			"value": 2
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "3",
-			"src": "Diamond-3.png",
+			"src": "images/blackjack/diamond/Diamond-3.png",
 			"value": 3
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "4",
-			"src": "Diamond-4.png",
+			"src": "images/blackjack/diamond/Diamond-4.png",
 			"value": 4
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "5",
-			"src": "Diamond-5.png",
+			"src": "images/blackjack/diamond/Diamond-5.png",
 			"value": 5
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "6",
-			"src": "Diamond-6.png",
+			"src": "images/blackjack/diamond/Diamond-6.png",
 			"value": 6
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "7",
-			"src": "Diamond-7.png",
+			"src": "images/blackjack/diamond/Diamond-7.png",
 			"value": 7
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "8",
-			"src": "Diamond-8.png",
+			"src": "images/blackjack/diamond/Diamond-8.png",
 			"value": 8
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "9",
-			"src": "Diamond-9.png",
+			"src": "images/blackjack/diamond/Diamond-9.png",
 			"value": 9
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "10",
-			"src": "Diamond-10.png",
+			"src": "images/blackjack/diamond/Diamond-10.png",
 			"value": 10
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "ace",
-			"src": "Diamond-Ace.png",
+			"src": "images/blackjack/diamond/Diamond-Ace.png",
 			"value": 11
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "jack",
-			"src": "Diamond-Jack.png",
+			"src": "images/blackjack/diamond/Diamond-Jack.png",
 			"value": 10
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "king",
-			"src": "Diamond-King.png",
+			"src": "images/blackjack/diamond/Diamond-King.png",
 			"value": 10
 		},
 		{ 
 			"suit": "diamonds",
 			"name": "queen",
-			"src": "Diamond-Queen.png",
+			"src": "images/blackjack/diamond/Diamond-Queen.png",
 			"value": 10
 		},
 		{ 
