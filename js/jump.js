@@ -126,7 +126,7 @@ function jump() {
         player.jump(JUMP_FORCE);
         canDoubleJump = 2; // Hiermee kunnen we nog twee keer springen
     } else if (canDoubleJump > 0) {
-        player.jump(JUMP_FORCE * (canDoubleJump === 2 ? 0.8 : 0.6)); 
+        player.jump(JUMP_FORCE * (canDoubleJump === 2 ? 0.8 : 0.7)); 
         canDoubleJump--;
     }
 }
