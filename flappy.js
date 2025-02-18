@@ -59,16 +59,16 @@ scene("game", () => {
 	const CEILING = -60
 
     const players = [
-        { name: "characters/timgame.png", scale: 0.3 },
-        { name: "characters/gijsgame.png", scale: 0.25 },
-        { name: "characters/samuelgame.png", scale: 0.25 },
-        { name: "characters/ardagame.png", scale: 0.3 },
-		{ name: "characters/amirgame.png", scale: 0.45 },
-		{ name: "characters/bashargame.png", scale: 0.3 },
-        { name: "characters/chillguygame1.png", scale: 0.125 },
-        { name: "characters/mangogame1.webp", scale: 0.1 },
-        { name: "characters/johnporkgame1.png",scale: 0.085 },
-        { name: "characters/pessigame1.png", scale: 0.115 }
+        { name: "images/characters/timgame.png", scale: 0.3 },
+        { name: "images/characters/gijsgame.png", scale: 0.25 },
+        { name: "images/characters/samuelgame.png", scale: 0.25 },
+        { name: "images/characters/ardagame.png", scale: 0.3 },
+		{ name: "images/characters/amirgame.png", scale: 0.45 },
+		{ name: "images/characters/bashargame.png", scale: 0.3 },
+        { name: "images/characters/chillguygame1.png", scale: 0.125 },
+        { name: "images/characters/mangogame1.webp", scale: 0.1 },
+        { name: "images/characters/johnporkgame1.png",scale: 0.085 },
+        { name: "images/characters/pessigame1.png", scale: 0.115 }
     ];
 
 	// Verkrijg de naam van het geselecteerde karakter uit localStorage

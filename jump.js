@@ -81,16 +81,16 @@ scene("game", () => {
     });
 
     const players = [
-        { name: "characters/timgame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "characters/gijsgame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "characters/samuelgame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "characters/ardagame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "characters/amirgame.png", x: 80, y: 40, scale: 0.65 },
-        { name: "characters/bashargame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "characters/chillguygame1.png", x: 80, y: 40, scale: 0.25 },
-        { name: "characters/mangogame1.webp", x: 80, y: 40, scale: 0.1 },
-        { name: "characters/johnporkgame1.png", x: 80, y: 40, scale: 0.15 },
-        { name: "characters/pessigame1.png", x: 80, y: 40, scale: 0.20 }
+        { name: "images/characters/timgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "images/characters/gijsgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "images/characters/samuelgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "images/characters/ardagame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "images/characters/amirgame.png", x: 80, y: 40, scale: 0.65 },
+        { name: "images/characters/bashargame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "images/characters/chillguygame1.png", x: 80, y: 40, scale: 0.25 },
+        { name: "images/characters/mangogame1.webp", x: 80, y: 40, scale: 0.1 },
+        { name: "images/characters/johnporkgame1.png", x: 80, y: 40, scale: 0.15 },
+        { name: "images/characters/pessigame1.png", x: 80, y: 40, scale: 0.20 }
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
