@@ -142,9 +142,16 @@ $("#chip-500").click(function(){selectWager(500)});
 $("#chip-1000").click(function(){selectWager(1000)});
 $("#chip-2000").click(function(){selectWager(2000)});
 $("#chip-allin").click(function(){ 
-    currentWager = currentChipBalance;  
-    updateVisibleChipBalances();
+    let remainingBalance = currentChipBalance - currentWager;
+    if (remainingBalance > 0) {  
+        currentWager += remainingBalance;  
+        updateVisibleChipBalances();
+
+        // Disable all other chip buttons
+        $(".chip").off().addClass("disabled-button");
+    }
 });
+
 
 
 
