@@ -121,15 +121,15 @@ const player = add([
         color(47, 133, 176),
     ]);
 
-    function jump() {
-        if (player.isGrounded()) {
-            player.jump(JUMP_FORCE);
-            canDoubleJump = true;
-        } else if (canDoubleJump) {
-            player.jump(JUMP_FORCE * 0.8);
-            canDoubleJump = false;
-        }
+function jump() {
+    if (player.isGrounded()) {
+        player.jump(JUMP_FORCE);
+        canDoubleJump = 2; // Hiermee kunnen we nog twee keer springen
+    } else if (canDoubleJump > 0) {
+        player.jump(JUMP_FORCE * (canDoubleJump === 2 ? 0.8 : 0.6)); 
+        canDoubleJump--;
     }
+}
 
     onKeyPress("space", jump);
     onClick(jump);
@@ -149,7 +149,7 @@ const player = add([
             { passed: false },
         ]);
 
-        wait(rand(0.65, 1.25), spawnTree);
+        wait(rand(0.55, 1.25), spawnTree);
     }
 
     spawnTree();
