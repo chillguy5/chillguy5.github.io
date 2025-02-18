@@ -277,10 +277,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     button.addEventListener("click", function () {
         let coins = parseInt(localStorage.getItem("coins") || "0");
-        coins += 5000; // Voeg 6000 coins toe
+        coins += 6000; // Voeg 6000 coins toe
         localStorage.setItem("coins", coins);
         document.getElementById("coin-count").textContent = coins;
-        alert("Je hebt 5000 coins ontvangen!");
+        alert("Je hebt 6000 coins ontvangen!");
 
         // Markeer de knop als gebruikt en verberg deze
         localStorage.setItem("button2Clicked", "true");
