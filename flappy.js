@@ -210,7 +210,7 @@ loadSprite("player", selectedCharacterName);
 	
 
 	// spawn a pipe every 1 sec
-	loop(1, () => {
+	loop(1.2, () => {
 		spawnPipe()
 	})
 
