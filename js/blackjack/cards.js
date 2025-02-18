@@ -162,79 +162,79 @@ function getCards(){
 		{ 
 			"suit": "hearts",
 			"name": "2",
-			"src": "Hearts-2.png",
+			"src": "images/blackjack/hearts/Hearts-2.png",
 			"value": 2
 		},
 		{ 
 			"suit": "hearts",
 			"name": "3",
-			"src": "Hearts-3.png",
+			"src": "images/blackjack/hearts/Hearts-3.png",
 			"value": 3
 		},
 		{ 
 			"suit": "hearts",
 			"name": "4",
-			"src": "Hearts-4.png",
+			"src": "images/blackjack/hearts/Hearts-4.png",
 			"value": 4
 		},
 		{ 
 			"suit": "hearts",
 			"name": "5",
-			"src": "Hearts-5.png",
+			"src": "images/blackjack/hearts/Hearts-5.png",
 			"value": 5
 		},
 		{ 
 			"suit": "hearts",
 			"name": "6",
-			"src": "Hearts-6.png",
+			"src": "images/blackjack/hearts/Hearts-6.png",
 			"value": 6
 		},
 		{ 
 			"suit": "hearts",
 			"name": "7",
-			"src": "Hearts-7.png",
+			"src": "images/blackjack/hearts/Hearts-7.png",
 			"value": 7
 		},
 		{ 
 			"suit": "hearts",
 			"name": "8",
-			"src": "Hearts-8.png",
+			"src": "images/blackjack/hearts/Hearts-8.png",
 			"value": 8
 		},
 		{ 
 			"suit": "hearts",
 			"name": "9",
-			"src": "Hearts-9.png",
+			"src": "images/blackjack/hearts/Hearts-9.png",
 			"value": 9
 		},
 		{ 
 			"suit": "hearts",
 			"name": "10",
-			"src": "Hearts-10.png",
+			"src": "images/blackjack/hearts/Hearts-10.png",
 			"value": 10
 		},
 		{ 
 			"suit": "hearts",
 			"name": "ace",
-			"src": "Hearts-Ace.png",
+			"src": "images/blackjack/hearts/Hearts-Ace.png",
 			"value": 11
 		},
 		{ 
 			"suit": "hearts",
 			"name": "jack",
-			"src": "Hearts-Jack.png",
+			"src": "images/blackjack/hearts/Hearts-Jack.png",
 			"value": 10
 		},
 		{ 
 			"suit": "hearts",
 			"name": "king",
-			"src": "Hearts-King.png",
+			"src": "images/blackjack/hearts/Hearts-King.png",
 			"value": 10
 		},
 		{ 
 			"suit": "hearts",
 			"name": "queen",
-			"src": "Hearts-Queen.png",
+			"src": "images/blackjack/hearts/Hearts-Queen.png",
 			"value": 10
 		},
 		{ 
