@@ -53,7 +53,7 @@ setGravity(3200)
 scene("game", () => {
 
 	const PIPE_OPEN = 250
-	const PIPE_MIN = 300
+	const PIPE_MIN = 100
 	const JUMP_FORCE = 800
 	const SPEED = 320
 	const CEILING = -60
