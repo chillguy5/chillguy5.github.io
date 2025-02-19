@@ -173,21 +173,15 @@ loadSprite("player", selectedCharacterName);
 	]);
 	
 	onUpdate(() => {
-		// Verhoog de score en update de coins elke keer dat een pijp wordt gepasseerd
 		get("pipe").forEach(p => {
 			if (p.pos.x + p.width <= bean.pos.x && p.passed === false) {
-				// Verhoog de score
 				score++;
 				p.passed = true;
-	
-				// Update de score label
 				scoreLabel.text = "Score: " + score;
-	
-				// Coins gelijk maken aan score (1 score = 1 coin)
-				localStorage.setItem("coins", score);
 			}
 		});
-	});	
+	});
+	
 	
 	bean.onCollide("pipe", () => {
 		play("hit");
