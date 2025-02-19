@@ -183,22 +183,22 @@ const player = add([
     "player"
 ]);
 
-onKeyDown(["left"], () => {
-    player.move(-PLAYER_SPEED, 0);
-    if (player.pos.x < 0) player.pos.x = width();
-});
+onKeyDown("left", () => {
+    player.move(-PLAYER_SPEED, 0)
+    if (player.pos.x < 0) player.pos.x = width()
+})
 
-onKeyDown(["right"], () => {
-    player.move(PLAYER_SPEED, 0);
-    if (player.pos.x > width()) player.pos.x = 0;
-});
+onKeyDown("right", () => {
+    player.move(PLAYER_SPEED, 0)
+    if (player.pos.x > width()) player.pos.x = 0
+})
 
-onKeyPress(["up"], () => {
+onKeyPress("up", () => {
     insaneMode = true;
     if (music) music.speed = 2;
 });
 
-onKeyRelease(["up"], () => {
+onKeyRelease("up", () => {
     insaneMode = false;
     if (music) music.speed = 1;
 });
@@ -441,9 +441,9 @@ scene("win", ({ score }) => {
 
     add([text("YOU WIN! You get 100 coins.", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-    add([text(`Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
-    add([text(`Score: ${score} seconds`, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-    add([text(`Highscore: ${highscores} seconds`, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
+    add([text(Coins: ${coins}, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
+    add([text(Score: ${score} seconds, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+    add([text(Highscore: ${highscores} seconds, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
@@ -454,8 +454,8 @@ scene("win", ({ score }) => {
 scene("lose", () => {
     add([text("YOU LOSE!", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-    add([text(`Highscore: ${highscores} seconds`, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-    add([text(`Total Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
+    add([text(Highscore: ${highscores} seconds, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
+    add([text(Total Coins: ${coins}, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 300),  () => {
@@ -465,7 +465,7 @@ scene("lose", () => {
 
 scene("mainMenu", () => {
     add([text("Welcome to Chill Guy Shooter."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
-    add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
+    add([text(Highscore: ${highscores} seconds), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
