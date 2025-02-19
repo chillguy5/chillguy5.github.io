@@ -212,50 +212,27 @@
         document.getElementById("coins").textContent = coins;
 
     
-        // Functie om het geluid in te schakelen of uit te schakelen
-        function initializeSound() {
-            let soundOn = localStorage.getItem("soundOn");
-            let soundButton = document.querySelector(".sound-button"); // Nieuw: knop selecteren
-    
-            if (soundOn === "true") {
-                document.getElementById("sound-icon").style.transform = "none"; // Verwijder de rode streep (oude code)
-                playSound();
-                soundButton.classList.remove("sound-off"); // Nieuw: rode lijn verwijderen
-            } else {
-                document.getElementById("sound-icon").style.transform = "none"; // Zorgt dat icoon recht blijft
-                stopSound();
-                soundButton.classList.add("sound-off"); // Nieuw: rode lijn toevoegen
-            }
-        }
-    
-        function playSound() {
-            let audio = document.getElementById("background-audio");
-            audio.play();
-        }
-    
-        function stopSound() {
-            let audio = document.getElementById("background-audio");
-            audio.pause();
-        }
-    
-        function toggleSound() {
-            let soundOn = localStorage.getItem("soundOn") === "true";
-            let soundButton = document.querySelector(".sound-button"); // Nieuw: knop selecteren
-    
-            if (soundOn) {
-                localStorage.setItem("soundOn", "false");
-                document.getElementById("sound-icon").style.transform = "none"; // Zorgt dat icoon recht blijft
-                soundButton.classList.add("sound-off"); // Nieuw: rode lijn toevoegen
-                stopSound();
-            } else {
-                localStorage.setItem("soundOn", "true");
-                document.getElementById("sound-icon").style.transform = "none"; // Zorgt dat icoon recht blijft
-                soundButton.classList.remove("sound-off"); // Nieuw: rode lijn verwijderen
-                playSound();
-            }
-        }
-    
-        window.onload = initializeSound;
+        // Controleer of geluid is ingeschakeld in localStorage
+function initializeSound() {
+let soundOn = localStorage.getItem("soundOn");
+if (soundOn === "true") {
+    playSound();
+}
+}
+
+function playSound() {
+let audio = document.getElementById("background-audio");
+if (!audio) {
+    let audioElement = document.createElement('audio');
+    audioElement.id = "background-audio";
+    audioElement.autoplay = true;
+    audioElement.loop = true;
+    audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
+    document.body.appendChild(audioElement);
+}
+}
+
+window.onload = initializeSound;
     </script>
     
 </body>
