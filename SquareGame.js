@@ -250,7 +250,6 @@ function rotate() {
   }
 }
 
-let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
 
 function drop() {
   if (!move('down')) {
