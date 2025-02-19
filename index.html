@@ -191,18 +191,6 @@
     cursor: pointer;
 }
 
-#sorry-button{
-    font-size: 20px;
-    position: fixed;
-    top: 5px;
-    left: 30%;
-    width: 600px;
-    height: auto;
-    background: greenyellow;
-    border: none;
-    cursor: pointer;
-}
-
 
     </style>
 </head>
@@ -259,37 +247,6 @@
             alert("Onjuist wachtwoord!");
         }
         });
-
-document.addEventListener("DOMContentLoaded", function () {
-    const button = document.getElementById("sorry-button");
-
-    if (!button) {
-        console.error("Knop niet gevonden! Zorg ervoor dat er een knop met id 'sorry-button' in je HTML staat.");
-        return;
-    }
-
-    // Controleer of de knop al eerder is gebruikt
-    if (localStorage.getItem("button2Clicked") === "true") {
-        button.style.display = "none"; // Verberg de knop voor altijd
-    } else {
-        button.style.display = "block"; // Zorg ervoor dat de knop zichtbaar is als hij niet eerder is geklikt
-    }
-
-    button.addEventListener("click", function () {
-        let coins = parseInt(localStorage.getItem("coins") || "0");
-        coins += 5000; // Voeg 5000 coins toe
-        localStorage.setItem("coins", coins);
-        document.getElementById("coin-count").textContent = coins;
-        alert("Je hebt 5000 coins ontvangen!");
-
-        // Markeer de knop als gebruikt en verberg deze
-        localStorage.setItem("button2Clicked", "true");
-        button.style.display = "none";
-    });
-});
-
-
-
 
         // Code om coins op te slaan en weer te geven
         document.addEventListener("DOMContentLoaded", function () {
