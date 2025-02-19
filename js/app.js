@@ -14,7 +14,7 @@ let slot_costs_list = [
 ];
 var pegs = []; //Store pegs objects
 var openning; //Store the openning
-var bet = 100.00; //Bet amount
+var bet = 1000; //Bet amount
 var points = localStorage.getItem('coins') || 0;
 let music;
 var top_bounce = 0.5;
@@ -405,14 +405,14 @@ window.onload = function () {
 
     document.getElementById("points-bet-wrapper__bet--increase").addEventListener("click", () => {
         if (points > bet) {
-            bet += 100.00;
+            bet += 1000;
             document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}.00`;
         }
     })
 
     document.getElementById("points-bet-wrapper__bet--decrease").addEventListener("click", () => {
-        if (bet > 100.00) {
-            bet -= 100.00;
+        if (bet > 1000) {
+            bet -= 1000;
             document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}.00`;
         }
     })
