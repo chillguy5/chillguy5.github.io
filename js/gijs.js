@@ -183,22 +183,22 @@ const player = add([
     "player"
 ]);
 
-onKeyDown("left", () => {
-    player.move(-PLAYER_SPEED, 0)
-    if (player.pos.x < 0) player.pos.x = width()
-})
+onKeyDown(["left", "a"], () => {
+    player.move(-PLAYER_SPEED, 0);
+    if (player.pos.x < 0) player.pos.x = width();
+});
 
-onKeyDown("right", () => {
-    player.move(PLAYER_SPEED, 0)
-    if (player.pos.x > width()) player.pos.x = 0
-})
+onKeyDown(["right", "d"], () => {
+    player.move(PLAYER_SPEED, 0);
+    if (player.pos.x > width()) player.pos.x = 0;
+});
 
-onKeyPress("up", () => {
+onKeyPress(["up", "w"], () => {
     insaneMode = true;
     if (music) music.speed = 2;
 });
 
-onKeyRelease("up", () => {
+onKeyRelease(["up", "w"], () => {
     insaneMode = false;
     if (music) music.speed = 1;
 });
