@@ -250,24 +250,36 @@ let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waa
 
 function drop() {
   if (!move('down')) {
-    // The piece has landed.
+    // Het blok heeft de grond bereikt
     score += 10;
+    coins += 10; // Voeg 10 coins toe aan de totale coins
+    localStorage.setItem("coins", coins); // Sla de nieuwe coin-waarde op
+
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
-      coins += points
-      localStorage.setItem("coins", coins);
     });
-    removeLines();
+
+    removeLines(); // Check of er lijnen verwijderd moeten worden
+    
     current = next;
     next = randomPiece();
+
+    if (!current || !next) {
+      console.error("Fout: current of next is null!");
+      lose();
+      return;
+    }
+
     invalidateCourt();
     invalidateNext();
     actions = [];
+
     if (occupied(current.type, current.x, current.y, current.dir)) {
       lose();
     }
   }
 }
+
 
 function removeLines() {
   let completedLines = [];
@@ -294,7 +306,7 @@ function reallyDestroyLines(linesToRemove) {
   let removalsMade = 0;
   while (linesToRemove.length) {
     let yy = linesToRemove.shift();
-    // Slide everything down by 1.
+    // Slide alles naar beneden
     for (let y = yy; y >= 1; --y) {
       for (let x = 0; x < nx; ++x) {
         setBlock(x, y, getBlock(x, y-1));
@@ -303,14 +315,17 @@ function reallyDestroyLines(linesToRemove) {
     removalsMade += 1;
   }
   if (removalsMade >= 1) {
-    console.assert(removalsMade <= 4); // with an "i" block
-    addRows(removalsMade);
-    let points = [0, 100, 400, 900, 1600];
-    score += points[removalsMade];
-    coins += points
-    localStorage.setItem("coins", coins);
+    console.assert(removalsMade <= 4); // maximaal 4 rijen in één keer
+
+    let points = [0, 100, 400, 900, 1600]; // Punten per aantal verwijderde rijen
+    let earned = points[removalsMade];
+
+    score += earned; // Voeg punten toe aan score
+    coins += earned; // Voeg punten toe aan coins
+    localStorage.setItem("coins", coins); // Sla de nieuwe coin-waarde op
   }
 }
+
 
 //-------------------------------------------------------------------------
 // RENDERING
