@@ -1,4 +1,6 @@
 
+let coins = parseInt(localStorage.getItem('coins')) || 0; // Haal munten op uit Local Storage
+
 function hide(id)       { document.getElementById(id).style.visibility = 'hidden'; }
 function show(id)       { document.getElementById(id).style.visibility = null;     }
 function html(id, html) { document.getElementById(id).innerHTML = html;            }
@@ -248,11 +250,14 @@ function rotate() {
 
 function drop() {
   if (!move('down')) {
-    // The piece has landed.
     score += 10;
+    coins += 10; // Voeg score toe aan munten
+    updateCoinsUI(); // Update de weergave en sla op
+
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
     });
+
     removeLines();
     current = next;
     next = randomPiece();
@@ -265,32 +270,10 @@ function drop() {
   }
 }
 
-function removeLines() {
-  let completedLines = [];
-  for (let y = 0; y < ny; ++y) {
-    let complete = true;
-    for (let x = 0; x < nx; ++x) {
-      if (!getBlock(x, y)) {
-        complete = false;
-      }
-    }
-    if (complete) {
-      completedLines.push(y);
-    }
-  }
-
-  if (completedLines.length) {
-    // Flash the removed rows.
-    removalAnimationIsHappening = 1;
-    removalAnimationLines = completedLines;
-  }
-}
-
 function reallyDestroyLines(linesToRemove) {
   let removalsMade = 0;
   while (linesToRemove.length) {
     let yy = linesToRemove.shift();
-    // Slide everything down by 1.
     for (let y = yy; y >= 1; --y) {
       for (let x = 0; x < nx; ++x) {
         setBlock(x, y, getBlock(x, y-1));
@@ -299,12 +282,23 @@ function reallyDestroyLines(linesToRemove) {
     removalsMade += 1;
   }
   if (removalsMade >= 1) {
-    console.assert(removalsMade <= 4); // with an "i" block
-    addRows(removalsMade);
     let points = [0, 100, 400, 900, 1600];
     score += points[removalsMade];
+    coins += points[removalsMade]; // Voeg munten toe
+    updateCoinsUI(); // Sla munten op en update de UI
   }
 }
+
+// Zorg dat de coins worden opgehaald uit Local Storage bij het starten van het spel
+let coins = parseInt(localStorage.getItem('coins')) || 0;
+updateCoinsUI();
+
+// Update functie zodat coins altijd worden opgeslagen
+function updateCoinsUI() {
+  localStorage.setItem('coins', coins); // Sla de munten op in Local Storage
+  html('coins', coins); // Update de weergave van de munten
+}
+
 
 //-------------------------------------------------------------------------
 // RENDERING
@@ -392,4 +386,10 @@ window.onload = function () {
   resize(); // setup all our sizing information
   reset();  // reset the per-game variables
   frame();  // start the first frame
+  
+  function updateCoinsUI() {
+    localStorage.setItem('coins', coins); // Sla de munten op in Local Storage
+    html('coins', coins);
+  }
+
 };
