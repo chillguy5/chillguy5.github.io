@@ -214,6 +214,8 @@ class Play {
                         document.getElementById("points-bet-wrapper__points--player-points").innerHTML = window.points
                         window.document.getElementById("points-bet-wrapper__won-flash").classList.add("points-bet-wrapper__won-flash__animate")
 
+                        localStorage.setItem("coins", points);
+
                         let tableGameHistory =  window.document.getElementById("game-history-table-body");
                         tableGameHistory.innerHTML =
                             `<tr>
