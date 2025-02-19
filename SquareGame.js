@@ -312,6 +312,7 @@ window.onload = function () {
     last = now;
     window.requestAnimationFrame(frame);
   }
+}
 
 
 
