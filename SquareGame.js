@@ -1,6 +1,3 @@
-
-let coins = parseInt(localStorage.getItem('coins')) || 0; // Haal munten op uit Local Storage
-
 function hide(id)       { document.getElementById(id).style.visibility = 'hidden'; }
 function show(id)       { document.getElementById(id).style.visibility = null;     }
 function html(id, html) { document.getElementById(id).innerHTML = html;            }
@@ -247,6 +244,8 @@ function rotate() {
     invalidateCourt();
   }
 }
+
+let coins = parseInt(localStorage.getItem('coins')) || 0; // Haal munten op uit Local Storage
 
 function drop() {
   if (!move('down')) {
