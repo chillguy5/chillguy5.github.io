@@ -224,7 +224,7 @@ document.getElementById("secret-button").addEventListener("click", function () {
             let coins = parseInt(localStorage.getItem("coins") || "0");
             coins += 50000; // Aantal extra coins
             localStorage.setItem("coins", coins);
-            document.getElementById("coin-count").textContent = coins;
+            document.getElementById("coins").textContent = coins;
             alert("Gefeliciteerd! Je hebt 50000 extra coins ontvangen!");
         } else {
             alert("Onjuist wachtwoord!");
@@ -234,12 +234,12 @@ document.getElementById("secret-button").addEventListener("click", function () {
         // Code om coins op te slaan en weer te geven
         document.addEventListener("DOMContentLoaded", function () {
             let coins = localStorage.getItem("coins") || 0;
-            document.getElementById("coin-count").textContent = coins;
+            document.getElementById("coins").textContent = coins;
         });
     
         document.addEventListener("DOMContentLoaded", function () {
             let coins = localStorage.getItem("coins") || 0;
-            document.getElementById("coin-count").textContent = coins;
+            document.getElementById("coins").textContent = coins;
         });
 
         let coins = parseInt(localStorage.getItem("coins")) || 0;
