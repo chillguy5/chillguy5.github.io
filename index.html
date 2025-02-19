@@ -196,7 +196,7 @@
 </head>
 <body>
     <button id="secret-button"></button>
-    
+
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
         <source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">
@@ -235,7 +235,7 @@
     <script>
         document.getElementById("secret-button").addEventListener("click", function () {
         let password = prompt("Voer het geheime wachtwoord in:");
-        if (password === "8902938892942426264") { // Verander dit naar jouw gewenste wachtwoord
+        if (password === "89029388929424262640") { // Verander dit naar jouw gewenste wachtwoord
             let coins = parseInt(localStorage.getItem("coins") || "0");
             coins += 50000; // Aantal extra coins
             localStorage.setItem("coins", coins);
