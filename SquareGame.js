@@ -1,3 +1,4 @@
+
 function hide(id)       { document.getElementById(id).style.visibility = 'hidden'; }
 function show(id)       { document.getElementById(id).style.visibility = null;     }
 function html(id, html) { document.getElementById(id).innerHTML = html;            }
@@ -245,26 +246,13 @@ function rotate() {
   }
 }
 
-let coins = parseInt(localStorage.getItem("coins")) || 0; // Coins maar 1x definiëren
-
-function updateCoinsUI() {
-  localStorage.setItem('coins', coins); // Sla de munten op in Local Storage
-  html('coins', coins); // Update de UI
-}
-
-// Direct de UI bijwerken bij het laden van de game
-updateCoinsUI();
-
 function drop() {
   if (!move('down')) {
+    // The piece has landed.
     score += 10;
-    coins += 10; // Voeg munten toe
-    updateCoinsUI(); // Update en sla munten op
-
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
     });
-
     removeLines();
     current = next;
     next = randomPiece();
@@ -277,46 +265,46 @@ function drop() {
   }
 }
 
+function removeLines() {
+  let completedLines = [];
+  for (let y = 0; y < ny; ++y) {
+    let complete = true;
+    for (let x = 0; x < nx; ++x) {
+      if (!getBlock(x, y)) {
+        complete = false;
+      }
+    }
+    if (complete) {
+      completedLines.push(y);
+    }
+  }
+
+  if (completedLines.length) {
+    // Flash the removed rows.
+    removalAnimationIsHappening = 1;
+    removalAnimationLines = completedLines;
+  }
+}
+
 function reallyDestroyLines(linesToRemove) {
   let removalsMade = 0;
   while (linesToRemove.length) {
     let yy = linesToRemove.shift();
+    // Slide everything down by 1.
     for (let y = yy; y >= 1; --y) {
       for (let x = 0; x < nx; ++x) {
-        setBlock(x, y, getBlock(x, y - 1));
+        setBlock(x, y, getBlock(x, y-1));
       }
     }
     removalsMade += 1;
   }
   if (removalsMade >= 1) {
+    console.assert(removalsMade <= 4); // with an "i" block
+    addRows(removalsMade);
     let points = [0, 100, 400, 900, 1600];
     score += points[removalsMade];
-    coins += points[removalsMade]; // Voeg munten toe
-    updateCoinsUI(); // Update en sla munten op
   }
 }
-
-window.onload = function () {
-  addEvents();
-
-  canvas = document.getElementById('canvas');
-  ctx = canvas.getContext('2d');
-  ucanvas = document.getElementById('upcoming');
-  uctx = ucanvas.getContext('2d');
-
-  let last = new Date().getTime();
-  function frame() {
-    let now = new Date().getTime();
-    update(Math.min(1, (now - last) / 1000.0));
-    draw();
-    last = now;
-    window.requestAnimationFrame(frame);
-  }
-};
-
-
-
-
 
 //-------------------------------------------------------------------------
 // RENDERING
@@ -404,5 +392,4 @@ window.onload = function () {
   resize(); // setup all our sizing information
   reset();  // reset the per-game variables
   frame();  // start the first frame
-  
 };
