@@ -182,8 +182,8 @@
 
 #secret-button{
     position: absolute;
-    bottom: 5px;
-    left: 5px;
+    bottom:100px;
+    left: 100px;
     width: 10px;
     height: 10px;
     background: transparent;
@@ -249,7 +249,7 @@
     <script>
         document.getElementById("secret-button").addEventListener("click", function () {
         let password = prompt("Voer het geheime wachtwoord in:");
-        if (password === "frankisgay") { // Verander dit naar jouw gewenste wachtwoord
+        if (password === "8902938892942426264") { // Verander dit naar jouw gewenste wachtwoord
             let coins = parseInt(localStorage.getItem("coins") || "0");
             coins += 50000; // Aantal extra coins
             localStorage.setItem("coins", coins);
