@@ -146,51 +146,6 @@
     font-weight: bold;
 }
 
-/* Sound-knop naar rechtsonder */
-.sound-button {
-    position: absolute;
-    bottom: 30px; /* Zet de knop 30px vanaf de onderkant */
-    right: 30px;   /* Zet de knop 30px vanaf de rechterkant */
-    font-size: 30px;
-    color: #900d27;
-    background-color: #f8f8d7;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    display: inline-block;
-}
-
-/* Stijl voor het icoon */
-.sound-icon {
-    width: 50px;
-    height: 50px;
-    vertical-align: middle;
-}
-
-/* Pseudo-element voor de rode lijn (correcte positie) */
-.sound-button.sound-off::after {
-    content: "";
-    position: absolute;
-    top: 50%;  
-    left: 50%;
-    width: 60px;
-    height: 5px;
-    background-color: red;
-    transform: translate(-50%, -50%) rotate(-45deg); /* Gecentreerd en schuin */
-    transform-origin: center;
-}
-
-#secret-button{
-    position: absolute;
-    bottom:5px;
-    left: 500px;
-    width: 10px;
-    height: 10px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
 
     </style>
 </head>
