@@ -215,33 +215,37 @@
     }
 
     function initializeGame() {
-        // Zet coins naar 500 als het de eerste keer is
-        if (!localStorage.getItem("coins")) {
-            localStorage.setItem("coins");
-        }
-        updateCoinDisplay();
+    // Check of er een geselecteerd karakter is opgeslagen, anders stel 'Tim' in als standaard
+    if (!localStorage.getItem("selectedCharacter")) {
+        localStorage.setItem("selectedCharacter", "images/characters/timgame.png");
+    }
 
-        let selectedCharacter = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
+    updateCoinDisplay();
 
-        document.querySelectorAll('.gallery div').forEach(div => {
-            let img = div.querySelector('img');
-            let textElement = div.querySelector('.selected-text');
-            let unlockElement = div.querySelector('.unlock-block');
+    let selectedCharacter = localStorage.getItem("selectedCharacter");
 
-            if (img) {
-                let characterName = img.getAttribute("onclick").match(/'([^']+)'/)[1];
+    document.querySelectorAll('.gallery div').forEach(div => {
+        let img = div.querySelector('img');
+        let textElement = div.querySelector('.selected-text');
+        let unlockElement = div.querySelector('.unlock-block');
 
-                if (characterName === selectedCharacter) {
-                    textElement.style.display = 'block';
-                } else {
-                    textElement.style.display = 'none';
-                }
+        if (img) {
+            let characterName = img.getAttribute("onclick").match(/'([^']+)'/)[1];
 
-                if (unlockElement && isUnlocked(characterName)) {
-                    unlockElement.style.display = 'none';
-                }
+            if (characterName === selectedCharacter) {
+                textElement.style.display = 'block';
+            } else {
+                textElement.style.display = 'none';
             }
-        });
+
+            if (unlockElement && isUnlocked(characterName)) {
+                unlockElement.style.display = 'none';
+            }
+        }
+    });
+
+    // Geluid initialiseren
+
 
         // Geluid initialiseren
         initializeSound();
