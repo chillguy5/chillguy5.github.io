@@ -140,8 +140,8 @@ function jump() {
     function spawnTree() {
         add([
             sprite("tree"), // Gebruik de geladen sprite
-            area({ shape: new Rect(vec2(0), 120, 180) }), // Pas hitbox aan op zichtbare grootte
-            pos(width(), height() - FLOOR_HEIGHT - 10), // Voorkom dat de boom te laag spawnt 
+            area(), 
+            pos(width(), height() - FLOOR_HEIGHT), 
             anchor("botleft"),
             scale(0.25), // Pas de grootte aan zodat de boom goed past
             move(LEFT, SPEED),
