@@ -150,7 +150,7 @@ function jump() {
             { passed: false },
         ]);
 
-        wait(rand(0.55, 1.25), spawnTree);
+        wait(rand(0.65, 1.25), spawnTree);
     }
 
     spawnTree();
