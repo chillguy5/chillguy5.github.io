@@ -245,14 +245,21 @@ function rotate() {
   }
 }
 
-let coins = parseInt(localStorage.getItem("coins")) || 0;
-document.getElementById("coins").textContent = coins;
+let coins = parseInt(localStorage.getItem("coins")) || 0; // Coins maar 1x definiëren
+
+function updateCoinsUI() {
+  localStorage.setItem('coins', coins); // Sla de munten op in Local Storage
+  html('coins', coins); // Update de UI
+}
+
+// Direct de UI bijwerken bij het laden van de game
+updateCoinsUI();
 
 function drop() {
   if (!move('down')) {
     score += 10;
-    coins += 10; // Voeg score toe aan munten
-    updateCoinsUI(); // Update de weergave en sla op
+    coins += 10; // Voeg munten toe
+    updateCoinsUI(); // Update en sla munten op
 
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
@@ -276,7 +283,7 @@ function reallyDestroyLines(linesToRemove) {
     let yy = linesToRemove.shift();
     for (let y = yy; y >= 1; --y) {
       for (let x = 0; x < nx; ++x) {
-        setBlock(x, y, getBlock(x, y-1));
+        setBlock(x, y, getBlock(x, y - 1));
       }
     }
     removalsMade += 1;
@@ -285,19 +292,27 @@ function reallyDestroyLines(linesToRemove) {
     let points = [0, 100, 400, 900, 1600];
     score += points[removalsMade];
     coins += points[removalsMade]; // Voeg munten toe
-    updateCoinsUI(); // Sla munten op en update de UI
+    updateCoinsUI(); // Update en sla munten op
   }
 }
 
-// Zorg dat de coins worden opgehaald uit Local Storage bij het starten van het spel
-let coins = parseInt(localStorage.getItem('coins')) || 0;
-updateCoinsUI();
+window.onload = function () {
+  addEvents();
 
-// Update functie zodat coins altijd worden opgeslagen
-function updateCoinsUI() {
-  localStorage.setItem('coins', coins); // Sla de munten op in Local Storage
-  html('coins', coins); // Update de weergave van de munten
-}
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
+  ucanvas = document.getElementById('upcoming');
+  uctx = ucanvas.getContext('2d');
+
+  let last = new Date().getTime();
+  function frame() {
+    let now = new Date().getTime();
+    update(Math.min(1, (now - last) / 1000.0));
+    draw();
+    last = now;
+    window.requestAnimationFrame(frame);
+  }
+
 
 
 //-------------------------------------------------------------------------
@@ -387,9 +402,4 @@ window.onload = function () {
   reset();  // reset the per-game variables
   frame();  // start the first frame
   
-  function updateCoinsUI() {
-    localStorage.setItem('coins', coins); // Sla de munten op in Local Storage
-    html('coins', coins);
-  }
-
 };
