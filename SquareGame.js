@@ -246,10 +246,14 @@ function rotate() {
   }
 }
 
+let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
+
 function drop() {
   if (!move('down')) {
     // The piece has landed.
     score += 10;
+    coins += points
+    localStorage.setItem("coins", coins);
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
     });
@@ -303,6 +307,8 @@ function reallyDestroyLines(linesToRemove) {
     addRows(removalsMade);
     let points = [0, 100, 400, 900, 1600];
     score += points[removalsMade];
+    coins += points
+    localStorage.setItem("coins", coins);
   }
 }
 
