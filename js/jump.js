@@ -171,24 +171,28 @@ function jump() {
     player.onCollide("tree", () => {
         loadSound("gameover", "sound/Voicy_bomboclart.mp3");
         play("gameover");
-        coins += score;
+    
+        let earnedCoins = score * 5; // Score x 5 voor coins
+        coins += earnedCoins; // Voeg de verdiende coins toe
         localStorage.setItem("coins", coins);
-
+    
         if (score > highscore) {
             highscore = score;
             localStorage.setItem("highscore", highscore);
         }
-
+    
         go("lose", score);
         addKaboom(player.pos);
     });
+    
 });
 
 scene("lose", (score) => {
-    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
+    let earnedCoins = score * 5; // Bereken de verdiende coins opnieuw
     add([text("Score: " + score, { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
     add([text("Highscore: " + highscore, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-    add([text("Total Coins: " + coins, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
+    add([text("Coins Earned: " + earnedCoins, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
+    add([text("Total Coins: " + coins, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
