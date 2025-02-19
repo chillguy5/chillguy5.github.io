@@ -146,9 +146,6 @@ $("#chip-allin").click(function(){
     if (remainingBalance > 0) {  
         currentWager += remainingBalance;  
         updateVisibleChipBalances();
-
-        // Disable all other chip buttons
-        $(".chip").off().addClass("disabled-button");
     }
 });
 
