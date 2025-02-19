@@ -403,14 +403,14 @@ window.onload = function () {
 
     document.getElementById("points-bet-wrapper__bet--increase").addEventListener("click", () => {
         if (points > bet) {
-            bet += 1.00;
+            bet += 100.00;
             document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}.00`;
         }
     })
 
     document.getElementById("points-bet-wrapper__bet--decrease").addEventListener("click", () => {
         if (bet > 1.00) {
-            bet -= 1.00;
+            bet -= 100.00;
             document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}.00`;
         }
     })
