@@ -38,8 +38,6 @@ let score = 0;  // current score (in reality)
 let vscore = 0;  // currently displayed score (it catches up in small chunks)
 let rows = 0;  // number of rows completed so far in this game
 let step = 0; // how long before current piece drops by 1 row
-let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
-let coins = "coins"
 
 //-------------------------------------------------------------------------
 // tetris pieces
@@ -250,6 +248,8 @@ function rotate() {
   }
 }
 
+let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
+let coins = "coins"
 
 function drop() {
   if (!move('down')) {
