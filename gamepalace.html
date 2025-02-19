@@ -56,10 +56,31 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .store-button {
+        .back-link {
             position: absolute;
             display: inline-block;
             top: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            font-size: 30px;
+            color: #cd3f2b;
+            background-color: #f8f8d7;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .back-link:hover{
+            background-color: #f0aa5e;
+            transform: scale(1.1);
+        }
+
+        .store-button {
+            position: absolute;
+            display: inline-block;
+            top: 90px;
             left: 30px;
             padding: 10px 20px;
             font-size: 30px;
@@ -80,7 +101,7 @@
         .stats-button {
             position: absolute;
             display: inline-block;
-            top: 90px;
+            top: 150px;
             left: 30px;
             padding: 10px 20px;
             font-size: 30px;
@@ -150,7 +171,7 @@
     </style>
 </head>
 <body>
-    <button id="secret-button"></button>
+    <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
 
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
