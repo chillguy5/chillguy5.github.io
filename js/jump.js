@@ -140,7 +140,7 @@ function jump() {
     function spawnTree() {
         add([
             sprite("tree"), // Gebruik de geladen sprite
-            area(),
+            area({ shape: new Rect(vec2(0), 100, 200) }), // Pas de breedte/hoogte aan
             pos(width(), height() - FLOOR_HEIGHT), 
             anchor("botleft"),
             scale(0.25), // Pas de grootte aan zodat de boom goed past
