@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="./images//gg-plink-logo.png" type="png" />
+    <script src="https://pixijs.download/v7.2.0-rc.3/pixi.js"></script>
+    <script src="js/app.js"></script>
+    <title>Plinko</title>
+</head>
+
+<body>
+    <div class="game-wrapper">
+        <div class="heading">
+            <img class="gg-logo" src="images/gg-logo.png" height="30" alt="gg-logo" />
+            <span>Plinko</span>
+            <img class="info-logo" id="info-logo" src="images/info.png" height="40" alt="gg-logo" />
+        </div>
+        <div class="canvas-wrapper">
+            <div id="canvas">
+                <div class="canvas-options">
+                    <span class="canvas-options_title">Lines</span>
+                    <div id="canvas-option_div" class="selected-line">8</div>
+                    <div id="canvas-option_div">9</div>
+                    <div id="canvas-option_div">10</div>
+                    <div id="canvas-option_div">11</div>
+                    <div id="canvas-option_div">12</div>
+                    <div id="canvas-option_div">13</div>
+                    <div id="canvas-option_div">14</div>
+                    <div id="canvas-option_div">15</div>
+                    <div id="canvas-option_div">16</div>
+                </div>
+                <div id="play-button" class="play-button">
+                    <label>Play</label>
+                </div>
+                <div class="points-bet-wrapper">
+                    <div class="points-bet-wrapper__won-flash" id="points-bet-wrapper__won-flash">
+                        <span>Won</span>
+                        &nbsp;
+                        <span id="points-won"></span>
+                        &nbsp;
+                        <span>points</span>
+                    </div>
+                    <div class="points-bet-wrapper__bet">
+                        <div id="points-bet-wrapper__bet--decrease" class="points-bet-wrapper__bet--decrease">-</div>
+                        <span>Bet: </span>&nbsp;
+                        <span id="points-bet-wrapper__bet--amount">1.00</span>
+                        <div id="points-bet-wrapper__bet--increase" class="points-bet-wrapper__bet--increase">+</div>
+                    </div>
+                    <div class="points-bet-wrapper__points">
+                        <span>Points: </span>
+                        &nbsp;
+                        <span id="points-bet-wrapper__points--player-points"></span>
+                    </div>
+                    <div class="points-bet-wrapper__weight">
+                        
+                        <span style="font-size: 15px">Ball weight: </span>&nbsp;
+                        <span id="points-bet-wrapper__weight--amount">50</span>
+                        <div id="points-bet-wrapper__weight--decrease" class="points-bet-wrapper__weight--decrease">-</div>
+                        <div id="points-bet-wrapper__weight--increase" class="points-bet-wrapper__weight--increase">+</div>
+                    </div>
+                </div>
+                <img class="rocket" src="./images//SimpleRocket.gif" alt="rocket" />
+            </div>
+        </div>
+        <div class="game-history">
+            <div class="table-wrapper" id="table-wrapper">
+                <table>
+                    <tr>
+                        <th>
+                            <span>Time</span>
+                        </th>
+                        <th>
+                            <span>Bet</span>
+                        </th>
+                        <th>
+                            <span>Slot Cost</span>
+                        </th>
+                        <th>
+                            <span>Return</span>
+                        </th>
+                    </tr>
+                </table>
+                <table>
+                    <tbody id="game-history-table-body">
+
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+            
+    </div>
+    <div class="game-info-wrapper" id="game-info-wrapper">
+        <div class="game-info-wrapper-infomation">
+            <h1>Welcome to GG-Plinko</h1>
+            <br />
+            <br />
+            <h3>What is Plinko?</h3>
+            <br />
+            <p>
+                Plinko is a popular game of chance that is often played on television game shows and mobile/ PC. 
+                The game involves a large board with a series of pegs arranged in a grid pattern, and a number of slots at the bottom. 
+                The player drops a small disc or ball into the top of the board, and it bounces around on the pegs as it falls toward the bottom.
+                As the disc or ball moves through the pegs, it may hit one or more of them, changing its direction and speed. 
+                The goal of the game is to get the disc or ball to land in one of the slots at the bottom, each of which has a different prize associated with it.
+            </p>
+            <br />
+            <p>
+                Plinko is a game of pure luck, as the player has no control over where the disc or ball lands. 
+                It is often used as a fun and entertaining way to give away prizes or determine the order of contestants in a competition. 
+                The game has become a classic staple of many game shows and has entertained millions of viewers for decades.
+            </p>
+            <br />
+            <h3>How to play?</h3>
+            <br />
+            <p >
+                - Bet the number points you want to bet by pressing the increase <span class="points-bet-wrapper__bet--increase">+</span> &nbsp;
+                or decrease &nbsp; <span class="points-bet-wrapper__bet--decrease">-</span> button.
+                <br />
+                <br />
+                - Choose the number of board lines you want to play on of the right side.
+                <br />
+                <br />
+                - Press the play button to start playing.
+                <br />
+                <br />
+                - You can icrease the Weight of the ball by pressing the increase <span class="points-bet-wrapper__weight--increase">+</span> &nbsp;
+                or decrease &nbsp; <span class="points-bet-wrapper__weight--decrease">-</span> button.
+                <br />
+                <br />
+                <h4>Note:</h4>
+                - Each new ball played when pressing the play button has its own betting points and weight.
+                <br />
+                <br />
+                - You can play any number of balls you want at anytime as long as the bet is higher than your available number of points.
+                <br />
+                <br />
+                - When you increase the Weight of the ball, the ball becomes heavy and bounces less.
+                <br />
+                <br />
+                - There's a 50% chances the ball could go either right or left for each beg on the board.
+                <br />
+                <br />
+                - The slots have different possibilities that the ball could lend either on one of them. That depends on the number of paths to it. The higher the number of paths to a slot,
+                the higher the chances the ball can lend on it.
+            </p>
+            <br />
+            <div class="start-button-wrapper">
+                <button id="start-button-wrapper__button">Start</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
