@@ -199,8 +199,9 @@ loadSprite("player", selectedCharacterName);
 			localStorage.setItem("highscoref", highscoref);
 		}
 	
-		// Coins exact gelijkstellen aan score (geen verdubbeling)
-		localStorage.setItem("coins", coins + score);
+		// Coins exact gelijkstellen aan score * 5 en optellen bij bestaande coins
+		coins += score * 5;
+		localStorage.setItem("coins", coins);
 	
 		go("lose", score);
 	});
