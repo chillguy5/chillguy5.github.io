@@ -180,22 +180,10 @@
     transform-origin: center;
 }
 
-#secret-button{
-    position: absolute;
-    bottom:5px;
-    left: 500px;
-    width: 10px;
-    height: 10px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
 
     </style>
 </head>
 <body>
-    <button id="secret-button"></button>
 
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
@@ -227,30 +215,6 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
-        document.getElementById("secret-button").addEventListener("click", function () {
-        let password = prompt("Voer het geheime wachtwoord in:");
-        if (password === "89029388929424262640") { // Verander dit naar jouw gewenste wachtwoord
-            let coins = parseInt(localStorage.getItem("coins") || "0");
-            coins += 50000; // Aantal extra coins
-            localStorage.setItem("coins", coins);
-            document.getElementById("coin-count").textContent = coins;
-            alert("Gefeliciteerd! Je hebt 50000 extra coins ontvangen!");
-        } else {
-            alert("Onjuist wachtwoord!");
-        }
-        });
-
-        // Code om coins op te slaan en weer te geven
-        document.addEventListener("DOMContentLoaded", function () {
-            let coins = localStorage.getItem("coins") || 0;
-            document.getElementById("coin-count").textContent = coins;
-        });
-    
-        document.addEventListener("DOMContentLoaded", function () {
-            let coins = localStorage.getItem("coins") || 0;
-            document.getElementById("coin-count").textContent = coins;
-        });
-    
         // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
             let soundOn = localStorage.getItem("soundOn");
