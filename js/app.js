@@ -406,14 +406,14 @@ window.onload = function () {
     document.getElementById("points-bet-wrapper__bet--increase").addEventListener("click", () => {
         if (points > bet) {
             bet += 1000;
-            document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}.00`;
+            document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}`;
         }
     })
 
     document.getElementById("points-bet-wrapper__bet--decrease").addEventListener("click", () => {
         if (bet > 1000) {
             bet -= 1000;
-            document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}.00`;
+            document.getElementById("points-bet-wrapper__bet--amount").innerHTML = `${bet}`;
         }
     })
 
