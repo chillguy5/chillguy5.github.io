@@ -14,8 +14,8 @@ let slot_costs_list = [
 ];
 var pegs = []; //Store pegs objects
 var openning; //Store the openning
-var bet = 1.00; //Bet amount
-var points = 100 //Amount of points
+var bet = 100.00; //Bet amount
+var points = localStorage.getItem('coins') || 0;
 let music;
 var top_bounce = 0.5;
 var incr_weight_value = 0;
