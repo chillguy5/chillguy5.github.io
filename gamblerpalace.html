@@ -205,6 +205,8 @@
 
     <script>
         let coins = parseInt(localStorage.getItem("coins")) || 0;
+        document.getElementById("coins").textContent = coins;
+
     
         // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
