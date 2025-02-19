@@ -243,4 +243,8 @@
             <canvas id="canvas"></canvas>
         </div>
     </body>
+    <script>
+        let coins = parseInt(localStorage.getItem("coins")) || 0;
+        document.getElementById("coins").textContent = coins;
+    </script>
 </html>
