@@ -141,6 +141,12 @@ $("#chip-200").click(function(){selectWager(200)});
 $("#chip-500").click(function(){selectWager(500)});
 $("#chip-1000").click(function(){selectWager(1000)});
 $("#chip-2000").click(function(){selectWager(2000)});
+$("#chip-10000").click(function(){selectWager(10000)});
+$("#chip-50000").click(function(){selectWager(50000)});
+$("#chip-100000").click(function(){selectWager(100000)});
+$("#chip-500000").click(function(){selectWager(500000)});
+$("#chip-1mil").click(function(){selectWager(1000000)});
+$("#chip-10mil").click(function(){selectWager(10000000)});
 $("#chip-allin").click(function(){ 
     let remainingBalance = currentChipBalance - currentWager;
     if (remainingBalance > 0) {  
