@@ -26,6 +26,8 @@ let dy = 0;  // pixel height of a single block
 let removalAnimationIsHappening = 0;
 let removalAnimationLines = [];
 
+
+
 let blocks = [];  // 2 dimensional array (nx*ny) representing tetris court - either empty block or occupied by a 'piece'
 let actions = [];  // queue of user actions (inputs)
 let playing = false;  // game is in progress
@@ -35,7 +37,9 @@ let next = null;  // next piece
 let score = 0;  // current score (in reality)
 let vscore = 0;  // currently displayed score (it catches up in small chunks)
 let rows = 0;  // number of rows completed so far in this game
-let step = 0;  // how long before current piece drops by 1 row
+let step = 0; // how long before current piece drops by 1 row
+let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de huidige waarde van coins op
+let coins = "coins"
 
 //-------------------------------------------------------------------------
 // tetris pieces
