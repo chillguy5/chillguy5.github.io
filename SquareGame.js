@@ -245,7 +245,8 @@ function rotate() {
   }
 }
 
-let coins = parseInt(localStorage.getItem('coins')) || 0; // Haal munten op uit Local Storage
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+document.getElementById("coins").textContent = coins;
 
 function drop() {
   if (!move('down')) {
