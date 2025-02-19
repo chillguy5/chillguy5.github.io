@@ -140,7 +140,7 @@ function jump() {
     function spawnTree() {
         add([
             sprite("tree"), // Gebruik de geladen sprite
-            area({ shape: new Rect(vec2(0), 100, 200) }), // Pas de breedte/hoogte aan
+            area(), 
             pos(width(), height() - FLOOR_HEIGHT), 
             anchor("botleft"),
             scale(0.25), // Pas de grootte aan zodat de boom goed past
@@ -204,6 +204,28 @@ scene("mainMenu", () => {
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
         window.location.href = "index.html";
     });
+});
+
+
+//disables zoom
+$(document).ready(function(){
+	$(document).keydown(function(event) {
+	    	    if (event.ctrlKey==true && (event.which == '61' || event.which == '107' || event.which == '173' || event.which == '109'  || event.which == '187'  || event.which == '189'  ) ) {
+         alert('disabling zooming'); 
+		event.preventDefault();
+		// 107 Num Key  +
+		//109 Num Key  -
+		//173 Min Key  hyphen/underscor Hey
+		// 61 Plus key  +/=
+	     }
+	});
+
+	$(window).bind('mousewheel DOMMouseScroll', function (event) {
+	       if (event.ctrlKey == true) {
+           alert('disabling zooming'); 
+		   event.preventDefault();
+	       }
+	});
 });
 
 go("mainMenu");
