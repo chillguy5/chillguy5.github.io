@@ -208,6 +208,7 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
+        let coins = parseInt(localStorage.getItem("coins")) || 0;
     
         // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
