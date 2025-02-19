@@ -169,7 +169,7 @@ scene("battle", () => {
         { name: "images/characters/pessigame1.png", scale: 0.15 }
     ];
 
-    let selectedCharacterName = localStorage.getItem("selectedCharacter") || "Tim";
+    let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
     let playerData = players.find(p => p.name.includes(selectedCharacterName)) || players[0]; 
     loadSprite("player", playerData.name);
     
