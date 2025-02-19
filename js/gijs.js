@@ -184,21 +184,41 @@ const player = add([
 ]);
 
 onKeyDown("left", () => {
-    player.move(-PLAYER_SPEED, 0)
-    if (player.pos.x < 0) player.pos.x = width()
-})
+    player.move(-PLAYER_SPEED, 0);
+    if (player.pos.x < 0) player.pos.x = width();
+});
+
+onKeyDown("a", () => {
+    player.move(-PLAYER_SPEED, 0);
+    if (player.pos.x < 0) player.pos.x = width();
+});
 
 onKeyDown("right", () => {
-    player.move(PLAYER_SPEED, 0)
-    if (player.pos.x > width()) player.pos.x = 0
-})
+    player.move(PLAYER_SPEED, 0);
+    if (player.pos.x > width()) player.pos.x = 0;
+});
+
+onKeyDown("d", () => {
+    player.move(PLAYER_SPEED, 0);
+    if (player.pos.x > width()) player.pos.x = 0;
+});
 
 onKeyPress("up", () => {
     insaneMode = true;
     if (music) music.speed = 2;
 });
 
+onKeyPress("w", () => {
+    insaneMode = true;
+    if (music) music.speed = 2;
+});
+
 onKeyRelease("up", () => {
+    insaneMode = false;
+    if (music) music.speed = 1;
+});
+
+onKeyRelease("w", () => {
     insaneMode = false;
     if (music) music.speed = 1;
 });
