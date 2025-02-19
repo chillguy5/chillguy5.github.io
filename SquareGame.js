@@ -252,10 +252,10 @@ function drop() {
   if (!move('down')) {
     // The piece has landed.
     score += 10;
-    coins += points
-    localStorage.setItem("coins", coins);
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
+      coins += points
+      localStorage.setItem("coins", coins);
     });
     removeLines();
     current = next;
