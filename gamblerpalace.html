@@ -211,6 +211,9 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
+    
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    document.getElementById("coins").textContent = coins;
 
 document.getElementById("secret-button").addEventListener("click", function () {
         let password = prompt("Voer het geheime wachtwoord in:");
