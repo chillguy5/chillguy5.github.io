@@ -114,7 +114,7 @@ function Horse(id, x, y){
 		//Win horse
 		if (results.length == 1){
 			if (this.number == bethorse){
-				coins += amount; // Winnen
+				coins += amount * 5; // Winnen
 			}else{
 				coins -= amount; // Verliezen
 			}
