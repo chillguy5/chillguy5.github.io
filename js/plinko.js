@@ -98,7 +98,7 @@ class Slot {
      * @returns new slot
      */
     create() {
-        let slot = PIXI.Sprite.from(`images/plinko/${this.cost}.png`);
+        let slot = PIXI.Sprite.from(`./images/plinko/${this.cost}.png`);
         slot.anchor.set(this.anchor);
         slot.x = this.x;
         slot.y = this.y;
