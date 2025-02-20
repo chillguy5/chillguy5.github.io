@@ -127,7 +127,9 @@ function Horse(id, x, y){
 	}
 }
 
-var num_lap = 1, results = [], funds = 100, bethorse, amount;
+var points = localStorage.getItem('coins') || 0;
+
+var num_lap = 1, results = [], funds = "coins", bethorse, amount;
 
 //Start the function when the document loaded
 document.addEventListener("DOMContentLoaded", function(event) {
