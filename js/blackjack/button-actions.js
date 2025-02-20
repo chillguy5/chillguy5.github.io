@@ -5,7 +5,7 @@ var startGame = function() {
 	if (currentWager === 0) {
 		Materialize.toast("You must select a bet to play", 1000);
 	} else if (currentChipBalance < currentWager) {
-		Materialize.toast("You don't have so uch chips to bet! Reset the game to continue" , 2000);
+		Materialize.toast("You don't have so much chips to bet! Reset the game to continue" , 2000);
 	} else if (currentChipBalance < currentWager) {
 		Materialize.toast("Insufficient chip balance, please select a lower bet" , 1500);
 	} else {
