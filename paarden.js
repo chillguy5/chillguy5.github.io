@@ -114,11 +114,12 @@ function Horse(id, x, y){
 		//Win horse
 		if (results.length == 1){
 			if (this.number == bethorse){
-				coins += amount;
+				coins += amount; // Winnen
 			}else{
-				coins -= amount;
+				coins -= amount; // Verliezen
 			}
 			document.getElementById('coins').innerText = coins;
+			localStorage.setItem('coins', coins); // Update in localStorage
 		
 		}else if (results.length == 4){
 			//All horse arrived, enable again the Start Button
