@@ -113,13 +113,13 @@ function Horse(id, x, y){
 
 		//Win horse
 		if (results.length == 1){
-			//If win horse is the bet horse, then add the fund
 			if (this.number == bethorse){
 				coins += amount;
 			}else{
 				coins -= amount;
 			}
 			document.getElementById('coins').innerText = coins;
+		
 		}else if (results.length == 4){
 			//All horse arrived, enable again the Start Button
 			document.getElementById('start').disabled = false;
