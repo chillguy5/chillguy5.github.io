@@ -132,6 +132,7 @@ var num_lap = 1, results = [], bethorse, amount;
 
 //Start the function when the document loaded
 document.addEventListener("DOMContentLoaded", function(event) {
+document.getElementById('coins').innerText = coins; // Zet de juiste coins-waarde in het scherm
 
 	var horse1 = new Horse('horse1', 20, 4);
 	var horse2 = new Horse('horse2', 20, 8);
@@ -179,4 +180,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			horse4.run();
 		}
 	}
+	
 });
