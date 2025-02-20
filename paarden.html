@@ -15,11 +15,6 @@ Date: 30/04/17
     <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
 </head>
 <script>
-            // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
-            let coins = parseInt(localStorage.getItem("coins")) || 0; 
-        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
-
-            // Controleer of geluid is ingeschakeld in localStorage
 function initializeSound() {
 let soundOn = localStorage.getItem("soundOn");
 if (soundOn === "true") {
@@ -40,6 +35,12 @@ if (!audio) {
 }
 
 window.onload = initializeSound;
+
+            // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
+            let coins = parseInt(localStorage.getItem("coins")) || 0; 
+        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
+
+            // Controleer of geluid is ingeschakeld in localStorage
 </script>
 <style>
 	.home-icon{

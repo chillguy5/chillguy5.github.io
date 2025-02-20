@@ -214,6 +214,28 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
+
+                  // Controleer of geluid is ingeschakeld in localStorage
+function initializeSound() {
+let soundOn = localStorage.getItem("soundOn");
+if (soundOn === "true") {
+    playSound();
+}
+}
+
+function playSound() {
+let audio = document.getElementById("background-audio");
+if (!audio) {
+    let audioElement = document.createElement('audio');
+    audioElement.id = "background-audio";
+    audioElement.autoplay = true;
+    audioElement.loop = true;
+    audioElement.innerHTML = '<source src="sound/MANGOS MANGOS PHONK.mp3" type="audio/mpeg">';
+    document.body.appendChild(audioElement);
+}
+}
+
+window.onload = initializeSound;
     
     let coins = parseInt(localStorage.getItem("coins")) || 0;
     document.getElementById("coins").textContent = coins;
@@ -241,29 +263,6 @@ document.getElementById("secret-button").addEventListener("click", function () {
             let coins = localStorage.getItem("coins") || 0;
             document.getElementById("coins").textContent = coins;
         });
-
-    
-          // Controleer of geluid is ingeschakeld in localStorage
-function initializeSound() {
-let soundOn = localStorage.getItem("soundOn");
-if (soundOn === "true") {
-    playSound();
-}
-}
-
-function playSound() {
-let audio = document.getElementById("background-audio");
-if (!audio) {
-    let audioElement = document.createElement('audio');
-    audioElement.id = "background-audio";
-    audioElement.autoplay = true;
-    audioElement.loop = true;
-    audioElement.innerHTML = '<source src="sound/MANGOS MANGOS PHONK.mp3" type="audio/mpeg">';
-    document.body.appendChild(audioElement);
-}
-}
-
-window.onload = initializeSound;
     </script>
     
 </body>

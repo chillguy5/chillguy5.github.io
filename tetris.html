@@ -252,19 +252,8 @@
         <script type="text/javascript" src="js/tetris.js"></script>
     </head>
     <script>
-        // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
-        let coins = parseInt(localStorage.getItem("coins")) || 0; 
-        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
-        
-        // Zorg ervoor dat de score ook direct goed wordt weergegeven en dat de coins bij elke scoreverhoging worden bijgewerkt.
-        function updateCoins(newCoins) {
-            coins = newCoins; // Update de coins
-            localStorage.setItem("coins", coins); // Sla de nieuwe coin waarde op in localStorage
-            document.getElementById("coins").textContent = coins; // Werk de weergave van de coins bij
-        }
-        
             // Controleer of geluid is ingeschakeld in localStorage
-    function initializeSound() {
+            function initializeSound() {
         let soundOn = localStorage.getItem("soundOn");
         if (soundOn === "true") {
             playSound();
@@ -284,6 +273,17 @@
     }
 
     window.onload = initializeSound;
+
+        // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
+        let coins = parseInt(localStorage.getItem("coins")) || 0; 
+        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
+        
+        // Zorg ervoor dat de score ook direct goed wordt weergegeven en dat de coins bij elke scoreverhoging worden bijgewerkt.
+        function updateCoins(newCoins) {
+            coins = newCoins; // Update de coins
+            localStorage.setItem("coins", coins); // Sla de nieuwe coin waarde op in localStorage
+            document.getElementById("coins").textContent = coins; // Werk de weergave van de coins bij
+        }
             </script>
     <body>
 
