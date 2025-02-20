@@ -18,6 +18,28 @@ Date: 30/04/17
             // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
             let coins = parseInt(localStorage.getItem("coins")) || 0; 
         document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
+
+            // Controleer of geluid is ingeschakeld in localStorage
+function initializeSound() {
+let soundOn = localStorage.getItem("soundOn");
+if (soundOn === "true") {
+    playSound();
+}
+}
+
+function playSound() {
+let audio = document.getElementById("background-audio");
+if (!audio) {
+    let audioElement = document.createElement('audio');
+    audioElement.id = "background-audio";
+    audioElement.autoplay = true;
+    audioElement.loop = true;
+    audioElement.innerHTML = '<source src="sound/MANGOS MANGOS PHONK.mp3" type="audio/mpeg">';
+    document.body.appendChild(audioElement);
+}
+}
+
+window.onload = initializeSound;
 </script>
 <style>
 	.home-icon{
