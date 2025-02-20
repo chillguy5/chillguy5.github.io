@@ -459,7 +459,7 @@ scene("win", ({ score }) => {
         localStorage.setItem("highscores", highscores);
     }
 
-    add([text("YOU WIN! You get 100 coins.", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
+    add([text("YOU WIN! You get 1000 coins.", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text(`Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
     add([text(`Score: ${score} seconds`, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
