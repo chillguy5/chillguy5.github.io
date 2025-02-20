@@ -369,7 +369,7 @@ onCollide("bullet", "boss", (b, e) => {
 		addExplode(b.pos, 1, 24, 1);
 		if (e.hp() <= 0) {
 			addExplode2(center(), 12, 120, 30)
-			coins += 1000; // Voeg 100 coins toe
+			coins += 1500; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
 			wait(0.5, () => go("win"));
