@@ -52,7 +52,7 @@ class Peg {
      * @returns new peg
      */
     create() {
-        let peg = PIXI.Sprite.from("./images/circle.png");
+        let peg = PIXI.Sprite.from("images/plinko/circle.png");
         peg.anchor.set(this.anchor);
         peg.x = this.x;
         peg.y = this.y;
@@ -98,7 +98,7 @@ class Slot {
      * @returns new slot
      */
     create() {
-        let slot = PIXI.Sprite.from(`./images/${this.cost}.png`);
+        let slot = PIXI.Sprite.from(`plinko/${this.cost}.png`);
         slot.anchor.set(this.anchor);
         slot.x = this.x;
         slot.y = this.y;
@@ -131,7 +131,7 @@ class Play {
         this.fraction = fraction
         this.pegs = pegs
         this.slots = slots
-        this.pinkBall = PIXI.Sprite.from(`./images/pink_ball.png`);
+        this.pinkBall = PIXI.Sprite.from(`images/plinko/pink_ball.png`);
         this.cost_scored = 0
         this.bet = bet
         this.time = Date().split(" ")[4]
@@ -340,7 +340,7 @@ window.onload = function () {
             slots.push(slot_obj);
         }
 
-        openning = PIXI.Sprite.from(`./images/bC.png`);
+        openning = PIXI.Sprite.from(`images/plinko/bC.png`);
         openning.anchor.set(0)
         openning.x = pegs[1].x - (8 * fraction);
         openning.y = (50 * fraction);
