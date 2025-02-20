@@ -13,6 +13,11 @@ Date: 30/04/17
     <link rel="stylesheet" href="paarden.css" />
     <script src="paarden.js"></script>
 </head>
+<script>
+            // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
+            let coins = parseInt(localStorage.getItem("coins")) || 0; 
+        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
+</script>
 <style>
 	.home-icon{
             width: 40px; /* Pas de grootte aan */
