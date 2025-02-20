@@ -1,27 +1,3 @@
-// Controleer of geluid is ingeschakeld in localStorage
-function initializeSound() {
-    let soundOn = localStorage.getItem("soundOn");
-    if (soundOn === "true") {
-    }
-}
-
-function playSound() {
-    let audio = document.getElementById("background-audio");
-
-    if (!audio) {
-        let audioElement = document.createElement("audio");
-        audioElement.id = "background-audio";
-        audioElement.autoplay = true;
-        audioElement.loop = true;
-        audioElement.volume = 0.5; // Volume aanpassen indien nodig
-        audioElement.src = "sound/MANGOS MANGOS PHONK.mp3";
-        document.body.appendChild(audioElement);
-    }
-}
-
-window.onload = initializeSound;
-
-
 var fraction; //Amount to shrink the pegs and solts by when increasing number of lines
 var slots = []; //Store slots objects
 let initial_level = 8; // Initial game lines.
