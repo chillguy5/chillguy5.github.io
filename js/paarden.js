@@ -5,6 +5,28 @@ Filename: game.js
 Date: 30/04/17
 */
 
+       // Controleer of geluid is ingeschakeld in localStorage
+	   function initializeSound() {
+		let soundOn = localStorage.getItem("soundOn");
+		if (soundOn === "true") {
+			playSound();
+		}
+		}
+		
+		function playSound() {
+		let audio = document.getElementById("background-audio");
+		if (!audio) {
+			let audioElement = document.createElement('audio');
+			audioElement.id = "background-audio";
+			audioElement.autoplay = true;
+			audioElement.loop = true;
+			audioElement.innerHTML = '<source src="sound/MANGOS MANGOS PHONK.mp3" type="audio/mpeg">';
+			document.body.appendChild(audioElement);
+		}
+		}
+		
+		window.onload = initializeSound;
+
 /*Create a Javascript Object for a horse with 3 parameters: HTML ID, position x and y*/
 function Horse(id, x, y){
 	this.element = document.getElementById(id);/*HTML element of the horse*/
