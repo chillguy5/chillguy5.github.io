@@ -127,8 +127,7 @@ function Horse(id, x, y){
 	}
 }
 
-var points = localStorage.getItem('coins') || 0;
-
+var coins = localStorage.getItem('coins') || 0;
 var num_lap = 1, results = [], funds = "coins", bethorse, amount;
 
 //Start the function when the document loaded
