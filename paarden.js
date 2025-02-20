@@ -126,9 +126,6 @@ function Horse(id, x, y){
 		}
 	}
 }
-        // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
-        let coins = parseInt(localStorage.getItem("coins")) || 0; 
-        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
 
 var coins = localStorage.getItem('coins') || 0;
 var num_lap = 1, results = [], funds = "coins", bethorse, amount;
