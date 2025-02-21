@@ -155,17 +155,13 @@ var coins = parseInt(localStorage.getItem('coins')) || 0;
 // Debugging: Kijk in de console of de waarde klopt
 console.log("Loaded coins from localStorage:", coins);
 
+var num_lap = 1, results = [], bethorse, amount;
+
 // Zorg ervoor dat de juiste waarde in de UI wordt gezet
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById('coins').innerText = coins; 
     localStorage.setItem('coins', coins); // Zorg ervoor dat de waarde correct blijft
 });
-var num_lap = 1, results = [], bethorse, amount;
-
-//Start the function when the document loaded
-document.addEventListener("DOMContentLoaded", function(event) {
-document.getElementById('coins').innerText = coins; // Zet de juiste coins-waarde in het scherm
-localStorage.setItem('coins', coins); // Update in localStorage
 
 	var horse1 = new Horse('horse1', 20, 4);
 	var horse2 = new Horse('horse2', 20, 8);
