@@ -115,11 +115,11 @@ function Horse(id, x, y){
 		if (results.length == 1){
 			//If win horse is the bet horse, then add the fund
 			if (this.number == bethorse){
-				funds += amount * 4;
+				coins += amount * 4;
 			}else{
-				funds -= amount;
+				coins -= amount;
 			}
-			document.getElementById('funds').innerText = funds;
+			document.getElementById('coins').innerText = coins;
 		}else if (results.length == 4){
 			//All horse arrived, enable again the Start Button
 			document.getElementById('start').disabled = false;
@@ -127,7 +127,7 @@ function Horse(id, x, y){
 	}
 }
 
-var num_lap = 1, results = [], funds = localStorage.getItem('coins') || 0; bethorse, amount;
+var num_lap = 1, results = [], coins = localStorage.getItem('coins') || 0; bethorse, amount;
 
 //Start the  when the document loaded
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		num_lap = parseInt(document.getElementById('num_lap').value);
 		bethorse = parseInt(document.getElementById('bethorse').value);
 
-		if (funds < amount){
+		if (coins < amount){
 			alert('Not enough coins.');
 		}
 		else if (num_lap <= 0){
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				tds[i].className = 'result';//Reset the result.
 			}
 
-			document.getElementById('funds').innerText = funds;
+			document.getElementById('coins').innerText = coins;
 			results = [];//Results array is to save the horse numbers when the race is finished.
 			horse1.run();
 			horse2.run();
