@@ -188,6 +188,7 @@
     </style>
 </head>
 <body>
+    <button id="secret-button-visible" class="secret-button">Geheime Bonus</button>
 
     <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
 
@@ -247,10 +248,10 @@ document.getElementById("secret-button").addEventListener("click", function () {
         let password = prompt("Voer het geheime wachtwoord in:");
         if (password === "billenchapper123") { // Verander dit naar jouw gewenste wachtwoord
             let coins = parseInt(localStorage.getItem("coins") || "0");
-            coins +=  1000000000; // Aantal extra coins
+            coins +=  75000; // Aantal extra coins
             localStorage.setItem("coins", coins);
             document.getElementById("coins").textContent = coins;
-            alert("Gefeliciteerd! Je hebt 1000000000 extra coins ontvangen!");
+            alert("Gefeliciteerd! Je hebt 75000 extra coins ontvangen!");
         } else {
             alert("Onjuist wachtwoord!");
         }
