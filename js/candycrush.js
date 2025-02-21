@@ -182,13 +182,11 @@ function candyCrushGame() {
                 rowOfFour.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
-                updateScore(highscorec) {
-                    if (score > highscorec) {
-                        highscorec = score;
-                        localStorage.setItem("highscorec", highscorec);
-                        highscorecDisplay.innerHTML = highscorec;
-                        document.getElementById("highscorec").textContent = highscorec;
-                    }
+                if (score > highscorec) {
+                    highscorec = score;
+                    localStorage.setItem("highscorec", highscorec);
+                    highscorecDisplay.innerHTML = highscorec;
+                    document.getElementById("highscorec").textContent = highscorec;
                 }
             }
         }
@@ -219,14 +217,12 @@ function candyCrushGame() {
                 columnOfFour.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
-                updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
                         localStorage.setItem("highscorec", highscorec);
                         highscorecDisplay.innerHTML = highscorec;
                         document.getElementById("highscorec").textContent = highscorec;
                     }
-                }
             }
         }
     }
@@ -274,13 +270,11 @@ function candyCrushGame() {
                 rowOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
-                updateScore(highscorec) {
-                    if (score > highscorec) {
-                        highscorec = score;
-                        localStorage.setItem("highscorec", highscorec);
-                        highscorecDisplay.innerHTML = highscorec;
-                        document.getElementById("highscorec").textContent = highscorec;
-                    }
+                if (score > highscorec) {
+                    highscorec = score;
+                    localStorage.setItem("highscorec", highscorec);
+                    highscorecDisplay.innerHTML = highscorec;
+                    document.getElementById("highscorec").textContent = highscorec;
                 }
             }
         }
@@ -311,13 +305,11 @@ function candyCrushGame() {
                 columnOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
-                updateScore(highscorec) {
-                    if (score > highscorec) {
-                        highscorec = score;
-                        localStorage.setItem("highscorec", highscorec);
-                        highscorecDisplay.innerHTML = highscorec;
-                        document.getElementById("highscorec").textContent = highscorec;
-                    }
+                if (score > highscorec) {
+                    highscorec = score;
+                    localStorage.setItem("highscorec", highscorec);
+                    highscorecDisplay.innerHTML = highscorec;
+                    document.getElementById("highscorec").textContent = highscorec;
                 }
             }
         }
