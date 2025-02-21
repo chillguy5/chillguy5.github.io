@@ -5,12 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
 function candyCrushGame() {
     const grid = document.querySelector(".grid");
     const scoreDisplay = document.getElementById("score");
+    const highscoreDisplay = document.getElementById("highscore");
+    const coinsDisplay = document.getElementById("coins");
     const width = 8;
     const squares = [];
+
     let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-    const coinsDisplay = document.getElementById("coins");
-    coinsDisplay.innerHTML = coins;
+    let highscore = localStorage.getItem("highscore") ? parseInt(localStorage.getItem("highscore")) : 0;
     let score = 0;
+
+    // Initialiseer de displays
+    coinsDisplay.innerHTML = coins;
+    highscoreDisplay.innerHTML = highscore;
 
     const candyColors = [
         "url(https://raw.githubusercontent.com/arpit456jain/Amazing-Js-Projects/master/Candy%20Crush/utils/red-candy.png)",
@@ -34,6 +40,21 @@ function candyCrushGame() {
         }
     }
     createBoard();
+
+    function updateScore(points) {
+        score += points;
+        coins += points;
+        scoreDisplay.innerHTML = score;
+        coinsDisplay.innerHTML = coins;
+        localStorage.setItem("coins", coins);
+
+        // Highscore bijwerken
+        if (score > highscore) {
+            highscore = score;
+            localStorage.setItem("highscore", highscore);
+            highscoreDisplay.innerHTML = highscore;
+        }
+    }
 
     // Dragging the Candy
     let colorBeingDragged;
