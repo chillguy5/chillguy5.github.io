@@ -251,18 +251,6 @@
 
         /* 40px chunks */
     </style>
-    <script>
-        // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
-        let coins = parseInt(localStorage.getItem("coins")) || 0; 
-        document.getElementById("coins").textContent = coins; // Weergeven van de coins bij pagina-laden
-        
-        // Zorg ervoor dat de score ook direct goed wordt weergegeven en dat de coins bij elke scoreverhoging worden bijgewerkt.
-        function updateCoins(newCoins) {
-            coins = newCoins; // Update de coins
-            localStorage.setItem("coins", coins); // Sla de nieuwe coin waarde op in localStorage
-            document.getElementById("coins").textContent = coins; // Werk de weergave van de coins bij
-        }
-            </script>
     <body>
 
         <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
@@ -281,7 +269,7 @@
                 </p>
 
                 <p>
-                    Coins: <span id="coins"></span>
+                    Coins: <span id="coins">0</span>
                 </p>
             </div>
             <canvas id="canvas"></canvas>
