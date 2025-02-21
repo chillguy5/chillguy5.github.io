@@ -136,11 +136,11 @@ function Horse(id, x, y){
 		//Win horse
 		if (results.length == 1){
 			if (this.number == bethorse){
- 				coins += amount * 4; // 5x winnen
-			}else{
+				coins += amount * 4; // Winnen
 			}
+			console.log("Coins after race:", coins); // Debug log
 			document.getElementById('coins').innerText = coins;
-			localStorage.setItem('coins', coins); // Update in localStorage
+			localStorage.setItem('coins', coins); // Opslaan in localStorage
 		
 		}else if (results.length == 4){
 			//All horse arrived, enable again the Start Button
@@ -151,6 +151,8 @@ function Horse(id, x, y){
 
 // Haal coins uit localStorage en zorg ervoor dat het een getal is
 var coins = parseInt(localStorage.getItem('coins')) || 0; 
+console.log("Loaded coins from localStorage:", coins); 
+document.getElementById('coins').innerText = coins; // <-- Direct updaten
 
 // Debugging: Kijk in de console of de waarde klopt
 console.log("Loaded coins from localStorage:", coins);
@@ -187,8 +189,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	
 		coins -= amount; // Verliezen
+		console.log("Coins after betting:", coins); // Debug log
 		document.getElementById('coins').innerText = coins;
 		localStorage.setItem('coins', coins); // Update in localStorage
+		
 
 			/*Started the game*/
 			this.disabled = true;/*Disable the start button*/
