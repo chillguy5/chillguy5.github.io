@@ -262,6 +262,29 @@
             localStorage.setItem("coins", coins); // Sla de nieuwe coin waarde op in localStorage
             document.getElementById("coins").textContent = coins; // Werk de weergave van de coins bij
         }
+
+            // Controleer of geluid is ingeschakeld in localStorage
+    function initializeSound() {
+        let soundOn = localStorage.getItem("soundOn");
+        if (soundOn === "true") {
+            playSound();
+        }
+    }
+
+    function playSound() {
+        let audio = document.getElementById("background-audio");
+        if (!audio) {
+            let audioElement = document.createElement('audio');
+            audioElement.id = "background-audio";
+            audioElement.autoplay = true;
+            audioElement.loop = true;
+            audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
+            document.body.appendChild(audioElement);
+        }
+    }
+
+    window.onload = initializeSound;
+        
             </script>
     <body>
 
@@ -287,27 +310,5 @@
             <canvas id="canvas"></canvas>
         </div>
     </body>
-    <script>
-            // Controleer of geluid is ingeschakeld in localStorage
-    function initializeSound() {
-        let soundOn = localStorage.getItem("soundOn");
-        if (soundOn === "true") {
-            playSound();
-        }
-    }
-
-    function playSound() {
-        let audio = document.getElementById("background-audio");
-        if (!audio) {
-            let audioElement = document.createElement('audio');
-            audioElement.id = "background-audio";
-            audioElement.autoplay = true;
-            audioElement.loop = true;
-            audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
-            document.body.appendChild(audioElement);
-        }
-    }
-
-    window.onload = initializeSound;
-</script>
+    
 </html>
