@@ -170,15 +170,15 @@ localStorage.setItem('coins', coins); // Update in localStorage
 		bethorse = parseInt(document.getElementById('bethorse').value);
 
 		if (amount === 0) {
-			Materialize.toast("You must select a bet to play");
+			Materialize.toast("You must select a bet to play.");
 		} else if (coins < amount) {
-			Materialize.toast("You don't have so much chips to bet! Reset the game to continue" , 2000);
+			Materialize.toast("You don't have so much chips to bet! Reset the game to continue.");
 		}
 	
 		coins -= amount; // Verliezen
 		document.getElementById('coins').innerText = coins;
 		localStorage.setItem('coins', coins); // Update in localStorage
-		
+
 		else if (num_lap <= 0){
 			alert('Number of lap must be greater than 0.');
 		}else{
