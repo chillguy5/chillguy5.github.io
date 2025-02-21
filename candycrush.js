@@ -103,24 +103,23 @@ function candyCrushGame() {
             ].style.backgroundImage = colorBeingDragged;
     }
 
-    //Dropping candies once some have been cleared
     function moveIntoSquareBelow() {
-        for (i = 0; i < 55; i++) {
+        for (let i = 0; i < 55; i++) {
             if (squares[i + width].style.backgroundImage === "") {
-                squares[i + width].style.backgroundImage =
-                    squares[i].style.backgroundImage;
+                squares[i + width].style.backgroundImage = squares[i].style.backgroundImage;
                 squares[i].style.backgroundImage = "";
-                const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
-                const isFirstRow = firstRow.includes(i);
-                if (isFirstRow && squares[i].style.backgroundImage === "") {
-                    let randomColor = Math.floor(
-                        Math.random() * candyColors.length
-                    );
-                    squares[i].style.backgroundImage = candyColors[randomColor];
-                }
+            }
+        }
+    
+        // Controleer en vul de bovenste rij met nieuwe candy's
+        for (let i = 0; i < width; i++) {
+            if (squares[i].style.backgroundImage === "") {
+                let randomColor = Math.floor(Math.random() * candyColors.length);
+                squares[i].style.backgroundImage = candyColors[randomColor];
             }
         }
     }
+    
 
     ///-> Checking for Matches <-///
 
