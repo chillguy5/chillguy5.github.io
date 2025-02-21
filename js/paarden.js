@@ -138,7 +138,6 @@ function Horse(id, x, y){
 			if (this.number == bethorse){
  				coins += amount * 4; // 5x winnen
 			}else{
-				coins -= amount; // Verliezen
 			}
 			document.getElementById('coins').innerText = coins;
 			localStorage.setItem('coins', coins); // Update in localStorage
@@ -165,7 +164,9 @@ localStorage.setItem('coins', coins); // Update in localStorage
 
 	//Event listener to the Start button
 	document.getElementById('start').onclick = function(){
-		amount = parseInt(document.getElementById('amount').value);
+	amount = parseInt(document.getElementById('amount').value);
+	coins -= amount; // Verliezen
+	document.getElementById('coins').innerText = coins;
 
 		// Check for negative or zero amount
 		if (amount <= 0) {
@@ -178,6 +179,7 @@ localStorage.setItem('coins', coins); // Update in localStorage
 			alert('Please enter a valid bet amount.');
 			return;
 		}
+
 
 		num_lap = parseInt(document.getElementById('num_lap').value);
 		bethorse = parseInt(document.getElementById('bethorse').value);
