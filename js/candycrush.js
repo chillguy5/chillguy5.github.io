@@ -179,6 +179,14 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                function updateScore(points) {
+                    if (score > highscore) {
+                        highscore = score;
+                        localStorage.setItem("highscore", highscore);
+                        highscoreDisplay.innerHTML = highscore;
+                        document.getElementById("highscore").textContent = highscore;
+                    }
+                }
                 rowOfFour.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
@@ -208,6 +216,14 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                function updateScore(points) {
+                    if (score > highscore) {
+                        highscore = score;
+                        localStorage.setItem("highscore", highscore);
+                        highscoreDisplay.innerHTML = highscore;
+                        document.getElementById("highscore").textContent = highscore;
+                    }
+                }
                 columnOfFour.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
@@ -255,6 +271,14 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                function updateScore(points) {
+                    if (score > highscore) {
+                        highscore = score;
+                        localStorage.setItem("highscore", highscore);
+                        highscoreDisplay.innerHTML = highscore;
+                        document.getElementById("highscore").textContent = highscore;
+                    }
+                }
                 rowOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
@@ -284,6 +308,14 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                function updateScore(points) {
+                    if (score > highscore) {
+                        highscore = score;
+                        localStorage.setItem("highscore", highscore);
+                        highscoreDisplay.innerHTML = highscore;
+                        document.getElementById("highscore").textContent = highscore;
+                    }
+                }
                 columnOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
