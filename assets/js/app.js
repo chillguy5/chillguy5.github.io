@@ -19,7 +19,7 @@ let wheel = document.getElementsByClassName('wheel')[0];
 let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 function resetGame(){
-	bankValue = localStorage.getItem('coins') || 0;
+	bankValue = 1000;
 	currentBet = 0;
 	wager = 5;
 	bet = [];
