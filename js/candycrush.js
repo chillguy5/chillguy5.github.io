@@ -179,7 +179,7 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
-                function updateScore(points) {
+                updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
                         localStorage.setItem("highscorec", highscorec);
@@ -216,7 +216,7 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
-                function updateScore(points) {
+                updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
                         localStorage.setItem("highscorec", highscorec);
@@ -271,7 +271,7 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
-                function updateScore(points) {
+                updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
                         localStorage.setItem("highscorec", highscorec);
@@ -308,7 +308,7 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
-                function updateScore(points) {
+                updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
                         localStorage.setItem("highscorec", highscorec);
