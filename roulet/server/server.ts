@@ -1,4 +1,5 @@
 import { createServer } from "http";
+import { Server } from "socket.io";
 import { GameData, GameStages, PlacedChip, ValueType, Winner} from "../src/Global";
 import { Timer } from "easytimer.js";
 
@@ -57,6 +58,23 @@ timer.addEventListener('secondsUpdated', function (e: any) {
     sendStageEvent(gameData)
   }
 
+});
+
+io.on("connection", (socket) => {
+  
+  socket.on('enter', (data: string) => {
+    users.set(socket.id, data);
+    sendStageEvent(gameData);
+  });
+
+  socket.on('place-bet', (data: string) => {
+    var gameData = JSON.parse(data) as PlacedChip[]
+    usersData.set(socket.id, gameData)
+  });
+  socket.on("disconnect", (reason) => {
+    users.delete(socket.id);
+    usersData.delete(socket.id);
+  });
 });
 
 httpServer.listen(8000, () =>{
