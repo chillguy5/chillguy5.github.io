@@ -162,26 +162,27 @@ localStorage.setItem('coins', coins); // Update in localStorage
 	var horse3 = new Horse('horse3', 20, 12);
 	var horse4 = new Horse('horse4', 20, 16);
 
-	//Event listener to the Start button
 	document.getElementById('start').onclick = function(){
-	amount = parseInt(document.getElementById('amount').value);
-
+		amount = parseInt(document.getElementById('amount').value);
 		num_lap = parseInt(document.getElementById('num_lap').value);
 		bethorse = parseInt(document.getElementById('bethorse').value);
-
+	
 		if (amount === 0) {
 			Materialize.toast("You must select a bet to play.");
-		} else if (coins < amount) {
+			return;
+		} 
+		if (coins < amount) {
 			Materialize.toast("You don't have so much chips to bet! Reset the game to continue.");
+			return;
+		}
+		if (num_lap <= 0) {
+			alert('Number of laps must be greater than 0.');
+			return;
 		}
 	
 		coins -= amount; // Verliezen
 		document.getElementById('coins').innerText = coins;
 		localStorage.setItem('coins', coins); // Update in localStorage
-
-		else if (num_lap <= 0){
-			alert('Number of lap must be greater than 0.');
-		}else{
 
 			/*Started the game*/
 			this.disabled = true;/*Disable the start button*/
