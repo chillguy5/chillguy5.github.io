@@ -69,7 +69,6 @@ var split = function() {
 	// This is the first card in the deck, so want to cancel out the previous offset/stacking and have it go to the initial normal spot
 	cardImage.appendTo($(playerSplitGameBoard)).offset({left: 60}).css("margin-right", "auto").show();
 
-	currentChipBalance -= currentWager; 
 	currentWager = currentWager * 2;
 	updateVisibleChipBalances();
 
