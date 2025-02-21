@@ -53,6 +53,7 @@ function candyCrushGame() {
             highscore = score;
             localStorage.setItem("highscore", highscore);
             highscoreDisplay.innerHTML = highscore;
+            document.getElementById("highscore").textContent = highscore;
         }
     }
 
