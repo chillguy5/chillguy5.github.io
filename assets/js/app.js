@@ -1,4 +1,4 @@
-let bankValue = 1000;
+let bankValue = ;
 let currentBet = 0;
 let wager = 5;
 let lastWager = 0;
@@ -19,7 +19,7 @@ let wheel = document.getElementsByClassName('wheel')[0];
 let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 function resetGame(){
-	bankValue = 1000;
+	bankValue = localStorage.getItem('coins') || 0;
 	currentBet = 0;
 	wager = 5;
 	bet = [];
