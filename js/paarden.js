@@ -167,6 +167,7 @@ localStorage.setItem('coins', coins); // Update in localStorage
 	amount = parseInt(document.getElementById('amount').value);
 	coins -= amount; // Verliezen
 	document.getElementById('coins').innerText = coins;
+	localStorage.setItem('coins', coins); // Update in localStorage
 
 		// Check for negative or zero amount
 		if (amount <= 0) {
