@@ -292,17 +292,11 @@ function candyCrushGame() {
     }
 
     function updateScore(points) {
-        score += points;
-        coins += points;
-        scoreDisplay.innerHTML = score;
-        coinsDisplay.innerHTML = coins;
-        localStorage.setItem("coins", coins);
-    
-        // Highscore bijwerken en opslaan in localStorage
         if (score > highscore) {
             highscore = score;
             localStorage.setItem("highscore", highscore);
             highscoreDisplay.innerHTML = highscore;
+            document.getElementById("highscore").textContent = highscore;
         }
     }
     checkColumnForThree();
