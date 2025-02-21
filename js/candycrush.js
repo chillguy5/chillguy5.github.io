@@ -14,7 +14,6 @@ function candyCrushGame() {
     let highscore = localStorage.getItem("highscore") ? parseInt(localStorage.getItem("highscore")) : 0;
     let score = 0;
 
-    // Update de weergegeven waarden bij het starten van het spel
     coinsDisplay.innerHTML = coins;
     highscoreDisplay.innerHTML = highscore;
     scoreDisplay.innerHTML = score;
@@ -41,21 +40,6 @@ function candyCrushGame() {
         }
     }
     createBoard();
-
-function updateScore(points) {
-    score += points;
-    coins += points;
-    scoreDisplay.innerHTML = score;
-    coinsDisplay.innerHTML = coins;
-    localStorage.setItem("coins", coins);
-
-    // Highscore bijwerken en opslaan in localStorage
-    if (score > highscore) {
-        highscore = score;
-        localStorage.setItem("highscore", highscore);
-        highscoreDisplay.innerHTML = highscore;
-    }
-}
 
 
     // Dragging the Candy
@@ -304,6 +288,21 @@ function updateScore(points) {
                     squares[index].style.backgroundImage = "";
                 });
             }
+        }
+    }
+
+    function updateScore(points) {
+        score += points;
+        coins += points;
+        scoreDisplay.innerHTML = score;
+        coinsDisplay.innerHTML = coins;
+        localStorage.setItem("coins", coins);
+    
+        // Highscore bijwerken en opslaan in localStorage
+        if (score > highscore) {
+            highscore = score;
+            localStorage.setItem("highscore", highscore);
+            highscoreDisplay.innerHTML = highscore;
         }
     }
     checkColumnForThree();
