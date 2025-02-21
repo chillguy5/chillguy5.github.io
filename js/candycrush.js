@@ -169,6 +169,7 @@ function candyCrushGame() {
                 coins += 4; // Bijvoorbeeld, 2 coins per match van 4
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
+                localStorage.setItem("coins", coins);
                 rowOfFour.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
@@ -195,6 +196,7 @@ function candyCrushGame() {
                 coins += 4;
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
+                localStorage.setItem("coins", coins);
                 columnOfFour.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
@@ -239,6 +241,7 @@ function candyCrushGame() {
                 coins += 3; // Bijvoorbeeld, 1 coin per match van 3
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
+                localStorage.setItem("coins", coins);
                 rowOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
@@ -265,6 +268,7 @@ function candyCrushGame() {
                 coins += 3; // Bijvoorbeeld, 1 coin per match van 3
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
+                localStorage.setItem("coins", coins);
                 columnOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
