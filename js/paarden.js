@@ -178,6 +178,7 @@ localStorage.setItem('coins', coins); // Update in localStorage
 		coins -= amount; // Verliezen
 		document.getElementById('coins').innerText = coins;
 		localStorage.setItem('coins', coins); // Update in localStorage
+		
 		else if (num_lap <= 0){
 			alert('Number of lap must be greater than 0.');
 		}else{
