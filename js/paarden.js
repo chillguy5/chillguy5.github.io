@@ -129,38 +129,45 @@ function updateCoins(newAmount) {
 
 document.getElementById('start').onclick = function() {
     amount = parseInt(document.getElementById('amount').value);
-
+    
     if (amount <= 0 || isNaN(amount)) {
         alert('Please enter a valid positive bet amount.');
         return;
     }
-	
-
+    
     num_lap = parseInt(document.getElementById('num_lap').value);
     bethorse = parseInt(document.getElementById('bethorse').value);
-	
-	if (coins < amount) {
-		alert('Not enough coins.');
-		return;
-	}
-
-    } else if (num_lap <= 0) {
+    
+    if (coins < amount) {
+        alert('Not enough coins.');
+        return;
+    }
+    
+    if (num_lap <= 0) {
         alert('Number of laps must be greater than 0.');
-    } else {
-        this.disabled = true;
-        var tds = document.querySelectorAll('#results .result');
-        for (var i = 0; i < tds.length; i++) {
-            tds[i].className = 'result';
-        }
+        return;
+    }
+    
+    this.disabled = true; // Disable the start button during the race
+    var tds = document.querySelectorAll('#results .result');
+    for (var i = 0; i < tds.length; i++) {
+        tds[i].className = 'result'; // Reset result table
+    }
+    
+    results = [];
+    
+    // Start de paardenrace
+    horse1.run();
+    horse2.run();
+    horse3.run();
+    horse4.run();
+};
 
-        results = [];
-
-        // Start de paardenrace
-        horse1.run();
-        horse2.run();
-        horse3.run();
-        horse4.run();
-    };
+// Paarden objecten moeten worden geïnitialiseerd voordat de race begint
+var horse1 = new Horse('horse1', 10, 10); // Zet de beginpositie van elk paard
+var horse2 = new Horse('horse2', 10, 20);
+var horse3 = new Horse('horse3', 10, 30);
+var horse4 = new Horse('horse4', 10, 40);
 
 // Pas updateCoins toe in arrive()
 Horse.prototype.arrive = function() {
@@ -173,11 +180,11 @@ Horse.prototype.arrive = function() {
 
     if (results.length == 1) {
         if (this.number == bethorse) {
-            updateCoins(coins + amount * 4);
+            updateCoins(coins + amount * 4); // Winst bij juiste voorspelling
         } else {
-            updateCoins(coins - amount);
+            updateCoins(coins - amount); // Verlies bij verkeerde voorspelling
         }
     } else if (results.length == 4) {
-        document.getElementById('start').disabled = false;
+        document.getElementById('start').disabled = false; // Enable start button again
     }
 };
