@@ -252,42 +252,28 @@
         /* 40px chunks */
     </style>
     <script>
-        // Controleer of geluid is ingeschakeld in localStorage
-        function initializeSound() {
-            let soundOn = localStorage.getItem("soundOn");
-            if (soundOn === "true") {
-                playSound();
-            }
-        }
+    // Controleer of geluid is ingeschakeld in localStorage
+    function initializeSound() {
+    let soundOn = localStorage.getItem("soundOn");
+    if (soundOn === "true") {
+    playSound();
+    }
+    }
 
-        function playSound() {
-            let audio = document.getElementById("background-audio");
-            if (!audio) {
-                let audioElement = document.createElement('audio');
-                audioElement.id = "background-audio";
-                audioElement.autoplay = true;
-                audioElement.loop = true;
-                audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
-                document.body.appendChild(audioElement);
-            }
-        }
+    function playSound() {
+    let audio = document.getElementById("background-audio");
+    if (!audio) {
+        let audioElement = document.createElement('audio');
+        audioElement.id = "background-audio";
+        audioElement.autoplay = true;
+        audioElement.loop = true;
+        audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
+        document.body.appendChild(audioElement);
+    }
+    }
 
-        // Haal de opgeslagen coins op uit localStorage, of gebruik 0 als ze nog niet zijn ingesteld
-        let coins = parseInt(localStorage.getItem("coins")) || 0; 
-
-        window.onload = function () {
-            initializeSound(); // Start het geluid als het aanstaat
-            document.getElementById("coins").textContent = coins; // Toon de coins bij het laden van de pagina
-        };
-
-        // Zorg ervoor dat de score ook direct goed wordt weergegeven en dat de coins bij elke scoreverhoging worden bijgewerkt.
-        function updateCoins(newCoins) {
-            coins = newCoins; // Update de coins
-            localStorage.setItem("coins", coins); // Sla de nieuwe coin-waarde op in localStorage
-            document.getElementById("coins").textContent = coins; // Werk de weergave van de coins bij
-        }
-    </script>
-
+    window.onload = initializeSound;
+            </script>
     <body>
 
         <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
