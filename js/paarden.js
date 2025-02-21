@@ -149,7 +149,17 @@ function Horse(id, x, y){
 	}
 }
 
-var coins = parseInt(localStorage.getItem('coins')) || 0;
+// Haal coins uit localStorage en zorg ervoor dat het een getal is
+var coins = parseInt(localStorage.getItem('coins')) || 0; 
+
+// Debugging: Kijk in de console of de waarde klopt
+console.log("Loaded coins from localStorage:", coins);
+
+// Zorg ervoor dat de juiste waarde in de UI wordt gezet
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('coins').innerText = coins; 
+    localStorage.setItem('coins', coins); // Zorg ervoor dat de waarde correct blijft
+});
 var num_lap = 1, results = [], bethorse, amount;
 
 //Start the function when the document loaded
