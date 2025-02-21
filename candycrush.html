@@ -7,7 +7,40 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap" rel="stylesheet">
     <script src="js/candycrush.js" charset="utf-8"></script>
   </head>
+  <style>
+  .home-icon{
+    width: 40px; /* Pas de grootte aan */
+    height: 40px;
+    margin-left: 0px;
+    vertical-align: middle;
+}
+
+.back-link {
+    position: absolute;
+    display: inline-block;
+    top: 80px;
+    left: 15px;
+    padding: 10px 20px;
+    font-size: 30px;
+    color: #cd3f2b;
+    background-color: #f8f8d7;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, transform 0.2s;
+    font-weight: bold;
+}
+
+.back-link:hover{
+    background-color: #f0aa5e;
+    transform: scale(1.1);
+}
+
+    /* 40px chunks */
+</style>
   <body>
+    <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
+
     <div class="scoreBoard">
       <h3>Score: <span id="score">0</span></h3>
       <h3>Coins: <span id="coins">0</span></h3>
