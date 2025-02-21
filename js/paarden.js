@@ -166,23 +166,18 @@ localStorage.setItem('coins', coins); // Update in localStorage
 	document.getElementById('start').onclick = function(){
 	amount = parseInt(document.getElementById('amount').value);
 
-	if (amount === 0) {
-		Materialize.toast("You must select a bet to play", 1000);
-	} else if (coins < amount) {
-		Materialize.toast("You don't have so much chips to bet! Reset the game to continue" , 2000);
-	}
-
-	coins -= amount; // Verliezen
-	document.getElementById('coins').innerText = coins;
-	localStorage.setItem('coins', coins); // Update in localStorage
-
-
 		num_lap = parseInt(document.getElementById('num_lap').value);
 		bethorse = parseInt(document.getElementById('bethorse').value);
 
-		if (coins < amount){
-			alert('Not enough coins.');
+		if (amount === 0) {
+			Materialize.toast("You must select a bet to play");
+		} else if (coins < amount) {
+			Materialize.toast("You don't have so much chips to bet! Reset the game to continue" , 2000);
 		}
+	
+		coins -= amount; // Verliezen
+		document.getElementById('coins').innerText = coins;
+		localStorage.setItem('coins', coins); // Update in localStorage
 		else if (num_lap <= 0){
 			alert('Number of lap must be greater than 0.');
 		}else{
