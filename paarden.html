@@ -44,6 +44,10 @@ Date: 30/04/17
             transform: scale(1.1);
         }
 </style>
+<script>
+            let coins = parseInt(localStorage.getItem("coins")) || 0;
+            document.getElementById("coins").textContent = coins;
+</script>
 <body>
     <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
 
