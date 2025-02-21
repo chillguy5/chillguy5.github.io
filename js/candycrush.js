@@ -7,8 +7,9 @@ function candyCrushGame() {
     const scoreDisplay = document.getElementById("score");
     const width = 8;
     const squares = [];
-    let coins = 0;
+    let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
     const coinsDisplay = document.getElementById("coins");
+    coinsDisplay.innerHTML = coins;
     let score = 0;
 
     const candyColors = [
