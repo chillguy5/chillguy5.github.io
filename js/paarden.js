@@ -5,28 +5,6 @@ Filename: game.js
 Date: 30/04/17
 */
 
-       // Controleer of geluid is ingeschakeld in localStorage
-	   function initializeSound() {
-		let soundOn = localStorage.getItem("soundOn");
-		if (soundOn === "true") {
-			playSound();
-		}
-		}
-		
-		function playSound() {
-		let audio = document.getElementById("background-audio");
-		if (!audio) {
-			let audioElement = document.createElement('audio');
-			audioElement.id = "background-audio";
-			audioElement.autoplay = true;
-			audioElement.loop = true;
-			audioElement.innerHTML = '<source src="sound/MANGOS MANGOS PHONK.mp3" type="audio/mpeg">';
-			document.body.appendChild(audioElement);
-		}
-		}
-		
-		window.onload = initializeSound;
-
 /*Create a Javascript Object for a horse with 3 parameters: HTML ID, position x and y*/
 function Horse(id, x, y){
 	this.element = document.getElementById(id);/*HTML element of the horse*/
@@ -135,13 +113,13 @@ function Horse(id, x, y){
 
 		//Win horse
 		if (results.length == 1){
+			//If win horse is the bet horse, then add the fund
 			if (this.number == bethorse){
-				coins += amount * 4; // Winnen
+				funds += amount;
+			}else{
+				funds -= amount;
 			}
-			console.log("Coins after race:", coins); // Debug log
-			document.getElementById('coins').innerText = coins;
-			localStorage.setItem('coins', coins); // Opslaan in localStorage
-		
+			document.getElementById('funds').innerText = funds;
 		}else if (results.length == 4){
 			//All horse arrived, enable again the Start Button
 			document.getElementById('start').disabled = false;
@@ -149,50 +127,41 @@ function Horse(id, x, y){
 	}
 }
 
-// Haal coins uit localStorage en zorg ervoor dat het een getal is
-var coins = parseInt(localStorage.getItem('coins')) || 0; 
-console.log("Loaded coins from localStorage:", coins); 
-document.getElementById('coins').innerText = coins; // <-- Direct updaten
+var num_lap = 1, results = [], funds = localStorage.getItem('coins') || 0; bethorse, amount;
 
-// Debugging: Kijk in de console of de waarde klopt
-console.log("Loaded coins from localStorage:", coins);
-
-var num_lap = 1, results = [], bethorse, amount;
-
-// Zorg ervoor dat de juiste waarde in de UI wordt gezet
+//Start the  when the document loaded
 document.addEventListener("DOMContentLoaded", function(event) {
-    document.getElementById('coins').innerText = coins; 
-    localStorage.setItem('coins', coins); // Zorg ervoor dat de waarde correct blijft
-});
 
 	var horse1 = new Horse('horse1', 20, 4);
 	var horse2 = new Horse('horse2', 20, 8);
 	var horse3 = new Horse('horse3', 20, 12);
 	var horse4 = new Horse('horse4', 20, 16);
 
+	//Event listener to the Start button
 	document.getElementById('start').onclick = function(){
 		amount = parseInt(document.getElementById('amount').value);
+
+		// Check for negative or zero amount
+		if (amount <= 0) {
+			alert('Please enter a positive bet amount.');
+			return;
+		}
+
+		// Check for invalid amount (not a number)
+		if (isNaN(amount)) {
+			alert('Please enter a valid bet amount.');
+			return;
+		}
+
 		num_lap = parseInt(document.getElementById('num_lap').value);
 		bethorse = parseInt(document.getElementById('bethorse').value);
-	
-		if (amount === 0) {
-			Materialize.toast("You must select a bet to play.");
-			return;
-		} 
-		if (coins < amount) {
-			Materialize.toast("You don't have so much chips to bet! Reset the game to continue.");
-			return;
+
+		if (funds < amount){
+			alert('Not enough coins.');
 		}
-		if (num_lap <= 0) {
-			alert('Number of laps must be greater than 0.');
-			return;
-		}
-	
-		coins -= amount; // Verliezen
-		console.log("Coins after betting:", coins); // Debug log
-		document.getElementById('coins').innerText = coins;
-		localStorage.setItem('coins', coins); // Update in localStorage
-		
+		else if (num_lap <= 0){
+			alert('Number of lap must be greater than 0.');
+		}else{
 
 			/*Started the game*/
 			this.disabled = true;/*Disable the start button*/
@@ -201,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				tds[i].className = 'result';//Reset the result.
 			}
 
-			document.getElementById('coins').innerText = coins;
+			document.getElementById('funds').innerText = funds;
 			results = [];//Results array is to save the horse numbers when the race is finished.
 			horse1.run();
 			horse2.run();
@@ -209,5 +178,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			horse4.run();
 		}
 	}
-	
 });
