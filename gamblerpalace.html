@@ -185,6 +185,15 @@
     cursor: pointer;
 }
 
+        /* Zorg dat de tekst niet beïnvloed wordt */
+        .item p {
+            position: relative;
+            z-index: 2; /* Zorgt dat de tekst boven de overlay blijft */
+            text-align: center;
+            margin-top: 10px;
+            color: #f8f8d7;
+        }
+
     </style>
 </head>
 <body>
