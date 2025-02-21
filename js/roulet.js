@@ -461,7 +461,7 @@ function setBet(e, n, t, o){
 			if(bet[i].numbers == n && bet[i].type == t){
 				bet[i].amt = bet[i].amt + wager;
 				let chipColour = (bet[i].amt < 5)? 'red' : ((bet[i].amt < 10)? 'blue' : ((bet[i].amt < 100)? 'orange' : 'gold'));
-				e.querySelector('.chip').style.cssText = '';
+				e.querySelector('.chip').roulet.cssText = '';
 				e.querySelector('.chip').setAttribute('class', 'chip ' + chipColour);
 				let chipSpan = e.querySelector('.chipSpan');
 				chipSpan.innerText = bet[i].amt;
