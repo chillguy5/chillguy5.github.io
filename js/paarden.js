@@ -134,12 +134,16 @@ document.getElementById('start').onclick = function() {
         alert('Please enter a valid positive bet amount.');
         return;
     }
+	
 
     num_lap = parseInt(document.getElementById('num_lap').value);
     bethorse = parseInt(document.getElementById('bethorse').value);
+	
+	if (coins < amount) {
+		alert('Not enough coins.');
+		return;
+	}
 
-    if (coins < amount) {
-        alert('Not enough coins.');
     } else if (num_lap <= 0) {
         alert('Number of laps must be greater than 0.');
     } else {
@@ -156,8 +160,7 @@ document.getElementById('start').onclick = function() {
         horse2.run();
         horse3.run();
         horse4.run();
-    }
-};
+    };
 
 // Pas updateCoins toe in arrive()
 Horse.prototype.arrive = function() {
