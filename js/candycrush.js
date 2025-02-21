@@ -5,17 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
 function candyCrushGame() {
     const grid = document.querySelector(".grid");
     const scoreDisplay = document.getElementById("score");
-    const highscoreDisplay = document.getElementById("highscore");
+    const highscorecDisplay = document.getElementById("highscorec");
     const coinsDisplay = document.getElementById("coins");
     const width = 8;
     const squares = [];
 
     let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-    let highscore = localStorage.getItem("highscore") ? parseInt(localStorage.getItem("highscore")) : 0;
+    let highscorec = localStorage.getItem("highscorec") ? parseInt(localStorage.getItem("highscorec")) : 0;
     let score = 0;
 
     coinsDisplay.innerHTML = coins;
-    highscoreDisplay.innerHTML = highscore;
+    highscorecDisplay.innerHTML = highscorec;
     scoreDisplay.innerHTML = score;
 
     const candyColors = [
@@ -180,11 +180,11 @@ function candyCrushGame() {
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
                 function updateScore(points) {
-                    if (score > highscore) {
-                        highscore = score;
-                        localStorage.setItem("highscore", highscore);
-                        highscoreDisplay.innerHTML = highscore;
-                        document.getElementById("highscore").textContent = highscore;
+                    if (score > highscorec) {
+                        highscorec = score;
+                        localStorage.setItem("highscorec", highscorec);
+                        highscorecDisplay.innerHTML = highscorec;
+                        document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
                 rowOfFour.forEach((index) => {
@@ -217,11 +217,11 @@ function candyCrushGame() {
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
                 function updateScore(points) {
-                    if (score > highscore) {
-                        highscore = score;
-                        localStorage.setItem("highscore", highscore);
-                        highscoreDisplay.innerHTML = highscore;
-                        document.getElementById("highscore").textContent = highscore;
+                    if (score > highscorec) {
+                        highscorec = score;
+                        localStorage.setItem("highscorec", highscorec);
+                        highscorecDisplay.innerHTML = highscorec;
+                        document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
                 columnOfFour.forEach((index) => {
@@ -272,11 +272,11 @@ function candyCrushGame() {
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
                 function updateScore(points) {
-                    if (score > highscore) {
-                        highscore = score;
-                        localStorage.setItem("highscore", highscore);
-                        highscoreDisplay.innerHTML = highscore;
-                        document.getElementById("highscore").textContent = highscore;
+                    if (score > highscorec) {
+                        highscorec = score;
+                        localStorage.setItem("highscorec", highscorec);
+                        highscorecDisplay.innerHTML = highscorec;
+                        document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
                 rowOfThree.forEach((index) => {
@@ -309,26 +309,17 @@ function candyCrushGame() {
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
                 function updateScore(points) {
-                    if (score > highscore) {
-                        highscore = score;
-                        localStorage.setItem("highscore", highscore);
-                        highscoreDisplay.innerHTML = highscore;
-                        document.getElementById("highscore").textContent = highscore;
+                    if (score > highscorec) {
+                        highscorec = score;
+                        localStorage.setItem("highscorec", highscorec);
+                        highscorecDisplay.innerHTML = highscorec;
+                        document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
                 columnOfThree.forEach((index) => {
                     squares[index].style.backgroundImage = "";
                 });
             }
-        }
-    }
-
-    function updateScore(points) {
-        if (score > highscore) {
-            highscore = score;
-            localStorage.setItem("highscore", highscore);
-            highscoreDisplay.innerHTML = highscore;
-            document.getElementById("highscore").textContent = highscore;
         }
     }
     checkColumnForThree();
