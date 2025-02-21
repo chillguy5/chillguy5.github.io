@@ -179,6 +179,9 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                rowOfFour.forEach((index) => {
+                    squares[index].style.backgroundImage = "";
+                });
                 updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
@@ -187,9 +190,6 @@ function candyCrushGame() {
                         document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
-                rowOfFour.forEach((index) => {
-                    squares[index].style.backgroundImage = "";
-                });
             }
         }
     }
@@ -216,6 +216,9 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                columnOfFour.forEach((index) => {
+                    squares[index].style.backgroundImage = "";
+                });
                 updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
@@ -224,9 +227,6 @@ function candyCrushGame() {
                         document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
-                columnOfFour.forEach((index) => {
-                    squares[index].style.backgroundImage = "";
-                });
             }
         }
     }
@@ -271,6 +271,9 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                rowOfThree.forEach((index) => {
+                    squares[index].style.backgroundImage = "";
+                });
                 updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
@@ -279,9 +282,6 @@ function candyCrushGame() {
                         document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
-                rowOfThree.forEach((index) => {
-                    squares[index].style.backgroundImage = "";
-                });
             }
         }
     }
@@ -308,6 +308,9 @@ function candyCrushGame() {
                 localStorage.setItem("coins", coins);
                     // Update de weergave van coins in de HTML
                 document.getElementById("coins").textContent = coins;
+                columnOfThree.forEach((index) => {
+                    squares[index].style.backgroundImage = "";
+                });
                 updateScore(highscorec) {
                     if (score > highscorec) {
                         highscorec = score;
@@ -316,9 +319,6 @@ function candyCrushGame() {
                         document.getElementById("highscorec").textContent = highscorec;
                     }
                 }
-                columnOfThree.forEach((index) => {
-                    squares[index].style.backgroundImage = "";
-                });
             }
         }
     }
