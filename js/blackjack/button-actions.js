@@ -11,6 +11,7 @@ var startGame = function() {
 	} else {
 		currentChipBalance -= currentWager;
 		updateVisibleChipBalances();
+		localStorage.setItem("coins", currentChipBalance);
 		$("#welcome").hide();
 		$("#game-over").hide();
 		$(".brand-logo").text("blackjack"); 
