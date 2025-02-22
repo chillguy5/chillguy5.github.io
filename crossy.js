@@ -592,7 +592,6 @@ function animate(timestamp) {
 
 // Update de weergave van de coins
 coinsDOM.innerHTML = "Coins: " + coins; // Beginwaarde tonen
-highscorerDOM.innerHTML = highscorer;
 
 // Zodra een stap is beëindigd
 if (moveDeltaTime > stepTime) {
