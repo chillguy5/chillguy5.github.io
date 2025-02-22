@@ -599,7 +599,7 @@ function animate(timestamp) {
           currentLane--;
           counterDOM.innerHTML = currentLane;
           break;
-          coinsDOM.innerHTML("coins") += currentLane;
+          coinsDOM.innerHTML("coins") -= currentLane;
         }
         case 'left': {
           currentColumn--;
