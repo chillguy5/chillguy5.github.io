@@ -600,22 +600,23 @@ if (moveDeltaTime > stepTime) {
       // Voeg de coins toe gebaseerd op het aantal lanes
       coins += currentLane;
       coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
+        // Sla de bijgewerkte coins op in localStorage
+      localStorage.setItem("coins", coins);
 
       break;
     }
-    case 'backward': {
+    case 'backward': {  
       currentLane--;
       counterDOM.innerHTML = currentLane;
 
       // Verwijder coins gebaseerd op het aantal lanes
       coins -= currentLane;
       coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
+        // Sla de bijgewerkte coins op in localStorage
+      localStorage.setItem("coins", coins);
 
       break;
     }
-
-  // Sla de bijgewerkte coins op in localStorage
-  localStorage.setItem("coins", coins);
 
         case 'left': {
           currentColumn--;
