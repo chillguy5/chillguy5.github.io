@@ -311,15 +311,29 @@
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
 
   
-        if (lines > 0) {
-          score += lines * this['level' + this.level][1];
-          this.incLines(lines);
-          this.incCoins(lines * this['level' + this.level][1]);
-      }
-      if (shape === true) {
-          score += shape * this['level' + this.level][2];
-          this.incCoins(shape * this['level' + this.level][2]);
-      }
+        calcScore: function (args) {
+          var lines = args.lines || 0;
+          var shape = args.shape || false;
+          var score = 0;
+      
+          if (lines > 0) {
+              score += lines * this['level' + this.level][1];
+              this.incLines(lines);
+              
+              // Coins worden bijgewerkt en opgeslagen
+              this.incCoins(lines * this['level' + this.level][1]);
+          }
+      
+          if (shape === true) {
+              score += shape * this['level' + this.level][2];
+              
+              // Coins worden bijgewerkt en opgeslagen
+              this.incCoins(shape * this['level' + this.level][2]);
+          }
+      
+          this.incScore(score);
+      },
+      
         /*if (speed > 0){ score += speed * this["level" +this .level[3]];}*/
         this.incScore(score);
       },
