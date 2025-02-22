@@ -123,6 +123,7 @@
         this.setInfo('time');
         this.setInfo('score');
         this.setInfo('coins');
+        this.setInfo('highscoret');
         this.setInfo('level');
         this.setInfo('lines');
       },
