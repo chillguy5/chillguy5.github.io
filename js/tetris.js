@@ -614,7 +614,7 @@
         tetris.init();
         document.addEventListener("DOMContentLoaded", function () {
           let savedHighscore = localStorage.getItem("highscoret") || 0;
-          document.getElementById("highscore").textContent = savedHighscore;
+          document.getElementById("highscoret").textContent = savedHighscore;
       });
       }
     });
