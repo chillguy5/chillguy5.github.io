@@ -28,7 +28,7 @@ let removalAnimationLines = [];
 
 
 let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-let highscorec = localStorage.getItem("highscorec") ? parseInt(localStorage.getItem("highscorec")) : 0;
+let highscoret = localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0;
 let blocks = [];  // 2 dimensional array (nx*ny) representing tetris court - either empty block or occupied by a 'piece'
 let actions = [];  // queue of user actions (inputs)
 let playing = false;  // game is in progress
