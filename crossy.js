@@ -421,10 +421,11 @@ function Lane(index) {
 }
 
 document.querySelector("#retry").addEventListener("click", () => {
-  lanes.forEach(lane => scene.remove( lane.mesh ));
-  initaliseValues();
-  endDOM.style.visibility = 'hidden';
-});
+    lanes.forEach(lane => scene.remove(lane.mesh));
+    initaliseValues();
+    endDOM.style.visibility = 'hidden';
+    gameOver = false; // Beweging weer toestaan
+  });
 
 document.getElementById('forward').addEventListener("click", () => move('forward'));
 
@@ -455,7 +456,7 @@ window.addEventListener("keydown", event => {
 
 function move(direction) {
     if (gameOver) return; // Stop beweging als het spel voorbij is
-    
+
   const finalPositions = moves.reduce((position,move) => {
     if(move === 'forward') return {lane: position.lane+1, column: position.column};
     if(move === 'backward') return {lane: position.lane-1, column: position.column};
