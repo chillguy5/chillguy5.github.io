@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('start').onclick = function(){
 		amount = parseInt(document.getElementById('amount').value);
 
-		if (coins = amount){
+		if (coins == amount){
 				coins -= amount;
 				localStorage.setItem("coins", coins);
 			}
