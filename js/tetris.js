@@ -27,7 +27,8 @@ let removalAnimationIsHappening = 0;
 let removalAnimationLines = [];
 
 
-var coins = parseInt(localStorage.getItem('coins')) || 0;
+let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
+let highscorec = localStorage.getItem("highscorec") ? parseInt(localStorage.getItem("highscorec")) : 0;
 let blocks = [];  // 2 dimensional array (nx*ny) representing tetris court - either empty block or occupied by a 'piece'
 let actions = [];  // queue of user actions (inputs)
 let playing = false;  // game is in progress
@@ -259,6 +260,13 @@ function drop() {
     // Update de weergave van coins in de HTML
     document.getElementById("coins").textContent = coins;
 
+    if (score > highscoret) {
+      highscoret = score;
+      localStorage.setItem("highscoret", highscoret);
+      highscoretDisplay.innerHTML = highscoret;
+      document.getElementById("highscoret").textContent = highscoret;
+  }
+
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
     });
@@ -331,6 +339,13 @@ function reallyDestroyLines(linesToRemove) {
 
     // Update de weergave van coins in de HTML
     document.getElementById("coins").textContent = coins;
+
+    if (score > highscoret) {
+      highscoret = score;
+      localStorage.setItem("highscoret", highscoret);
+      highscoretDisplay.innerHTML = highscoret;
+      document.getElementById("highscoret").textContent = highscoret;
+  }
   }
 }
 
