@@ -539,7 +539,7 @@
               document.getElementById("highscoret").textContent = newScore;
           }
       }
-      
+      this.checkHighScoret();
       },
       shiftRow: function (y, amount) {
         var me = this;
