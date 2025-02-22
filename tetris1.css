@@ -9,16 +9,9 @@ body {
   }
   
   #tetris {
-    width: 80%; /* Zorgt ervoor dat het spel groter wordt en niet te klein blijft */
-    max-width: 600px; /* Maximumgrootte voor het spel */
-    height: 80%; /* Dit maakt het spel groter in de hoogte */
-    max-height: 800px; /* Maximum hoogte */
+    width: 360px;
     border: 1px solid black;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
   
   #canvas {
