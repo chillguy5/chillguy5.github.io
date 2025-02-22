@@ -118,10 +118,8 @@ function Horse(id, x, y){
 			if (this.number == bethorse){
 				coins += amount * 4;
 				localStorage.setItem("coins", coins);
-			}else{
-				coins -= amount;
-				localStorage.setItem("coins", coins);
 			}
+
 			document.getElementById('coins').innerText = coins;
 		}else if (results.length == 4){
 			//All horse arrived, enable again the Start Button
@@ -157,6 +155,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	//Event listener to the Start button
 	document.getElementById('start').onclick = function(){
 		amount = parseInt(document.getElementById('amount').value);
+
+		if (coins = amount){
+				coins -= amount;
+				localStorage.setItem("coins", coins);
+			}
+		}
+
+		if (coins > amount){
+				coins -= amount;
+				localStorage.setItem("coins", coins);
+			}
+		}
+
 
 		// Check for negative or zero amount
 		if (amount <= 0) {
