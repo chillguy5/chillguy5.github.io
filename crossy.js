@@ -583,17 +583,22 @@ function animate(timestamp) {
         break;
       }
     }
+
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+
     // Once a step has ended
     if(moveDeltaTime > stepTime) {
       switch(moves[0]) {
         case 'forward': {
           currentLane++;
           counterDOM.innerHTML = currentLane;
+          coinsDOM.innerHTML("coins") += currentLane;
           break;
         }
         case 'backward': {
           currentLane--;
           counterDOM.innerHTML = currentLane;
+          coinsDOM.innerHTML += currentLane;
           break;
         }
         case 'left': {
