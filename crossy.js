@@ -1,5 +1,6 @@
 const counterDOM = document.getElementById('counter');
 const coinsDOM = document.getElementById('coinsDisplay');
+const highscorerDOM = document.getElementById('highscorerDisplay');
 const endDOM = document.getElementById('end');
 
 const scene = new THREE.Scene();
@@ -586,6 +587,7 @@ function animate(timestamp) {
     }
 
     let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de coins op uit localStorage
+    let highscorer = parseInt(localStorage.getItem("highscorer")) || 0;
 
 // Update de weergave van de coins
 coinsDOM.innerHTML = "Coins: " + coins; // Beginwaarde tonen
@@ -602,6 +604,12 @@ if (moveDeltaTime > stepTime) {
       coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
         // Sla de bijgewerkte coins op in localStorage
       localStorage.setItem("coins", coins);
+      
+      if (counterDOM.innerHTML > highscorer) {
+        highscorer = counterDOM.innerHTML;
+        localStorage.setItem("highscorer", highscorer);
+        highscorerDOM.innerHTML = highscorer;
+    }
 
       break;
     }
@@ -614,6 +622,12 @@ if (moveDeltaTime > stepTime) {
       coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
         // Sla de bijgewerkte coins op in localStorage
       localStorage.setItem("coins", coins);
+
+      if (counterDOM.innerHTML > highscorer) {
+        highscorer = counterDOM.innerHTML;
+        localStorage.setItem("highscorer", highscorer);
+        highscorerDOM.innerHTML = highscorer;
+    }
 
       break;
     }

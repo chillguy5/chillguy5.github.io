@@ -17,9 +17,14 @@ button {
   top: 20px;
   right: 20px;
 }
-#coinsDisplay {
+#highscorerDisplay {
     position: absolute;
     top: 60px;
+    right: 20px;
+  }
+#coinsDisplay {
+    position: absolute;
+    top: 100px;
     right: 20px;
   }
 
