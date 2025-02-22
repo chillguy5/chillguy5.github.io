@@ -110,81 +110,83 @@ function Horse(id, x, y){
 
 		//Push the horse number to results array, according the the results array, we know the order of race results
 		results.push(this.number);
+
+		//Win horse
+		if (results.length == 1){
+			//If win horse is the bet horse, then add the fund
+			if (this.number == bethorse){
+				coins += amount;
+			}else{
+				coins -= amount;
+			}
+			document.getElementById('coins').innerText = coins;
+		}else if (results.length == 4){
+			//All horse arrived, enable again the Start Button
+			document.getElementById('start').disabled = false;
+		}
 	}
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Initialiseer de paardenobjecten zodra de pagina geladen is
-    var horse1 = new Horse('horse1', 10, 10);
-    var horse2 = new Horse('horse2', 10, 20);
-    var horse3 = new Horse('horse3', 10, 30);
-    var horse4 = new Horse('horse4', 10, 40);
+var num_lap = 1, results = [], coins = parseInt(localStorage.getItem('coins')) || 0, bethorse, amount;
 
-    var num_lap = 1, results = [], coins = parseInt(localStorage.getItem('coins')) || 0, bethorse, amount;
+// Update de weergave van coins bij het laden van de pagina
+document.getElementById('coins').innerText = coins; // Laat de juiste waarde zien
 
-    // Update de weergave van coins bij het laden van de pagina
-    document.getElementById('coins').innerText = coins; // Laat de juiste waarde zien
+// Pas de coins aan en sla op in localStorage
+function updateCoins(newAmount) {
+	coins = newAmount;
+	localStorage.setItem('coins', coins); // Opslaan in localStorage
+	document.getElementById('coins').innerText = coins; // UI bijwerken
+}
 
-    // Pas de coins aan en sla op in localStorage
-    function updateCoins(newAmount) {
-        coins = newAmount;
-        localStorage.setItem('coins', coins); // Opslaan in localStorage
-        document.getElementById('coins').innerText = coins; // UI bijwerken
-    }
+//Start the function when the document loaded
+document.addEventListener("DOMContentLoaded", function(event) {
 
-    document.getElementById('start').onclick = function() {
-        amount = parseInt(document.getElementById('amount').value);
+	var horse1 = new Horse('horse1', 20, 4);
+	var horse2 = new Horse('horse2', 20, 8);
+	var horse3 = new Horse('horse3', 20, 12);
+	var horse4 = new Horse('horse4', 20, 16);
 
-        if (amount <= 0 || isNaN(amount)) {
-            alert('Please enter a valid positive bet amount.');
-            return;
-        }
+	//Event listener to the Start button
+	document.getElementById('start').onclick = function(){
+		amount = parseInt(document.getElementById('amount').value);
 
-        num_lap = parseInt(document.getElementById('num_lap').value);
-        bethorse = parseInt(document.getElementById('bethorse').value);
+		// Check for negative or zero amount
+		if (amount <= 0) {
+			alert('Please enter a positive bet amount.');
+			return;
+		}
 
-        if (coins < amount) {
-            alert('Not enough coins.');
-            return;
-        }
+		// Check for invalid amount (not a number)
+		if (isNaN(amount)) {
+			alert('Please enter a valid bet amount.');
+			return;
+		}
 
-        if (num_lap <= 0) {
-            alert('Number of laps must be greater than 0.');
-            return;
-        }
+		num_lap = parseInt(document.getElementById('num_lap').value);
+		bethorse = parseInt(document.getElementById('bethorse').value);
 
-        this.disabled = true; // Disable the start button during the race
-        var tds = document.querySelectorAll('#results .result');
-        for (var i = 0; i < tds.length; i++) {
-            tds[i].className = 'result'; // Reset result table
-        }
+		if (coins < amount){
+			alert('Not enough coins.');
+		}
+		else if (num_lap <= 0){
+			alert('Number of lap must be greater than 0.');
+		}else{
 
-        results = [];
+			/*Started the game*/
+			this.disabled = true;/*Disable the start button*/
+			var tds = document.querySelectorAll('#results .result');//Get all cells of result table.
+			for (var i = 0; i < tds.length; i++) {
+				tds[i].className = 'result';//Reset the result.
+			}
 
-        // Start de paardenrace
-        horse1.run();
-        horse2.run();
-        horse3.run();
-        horse4.run();
-    };
-
-    // Pas updateCoins toe in arrive()
-    Horse.prototype.arrive = function() {
-        this.element.className = 'horse standRight';
-        this.lap = 0;
-
-        var tds = document.querySelectorAll('#results .result');
-        tds[results.length].className = 'result horse' + this.number;
-        results.push(this.number);
-
-        if (results.length == 1) {
-            if (this.number == bethorse) {
-                updateCoins(coins + amount * 4); // Winst bij juiste voorspelling
-            } else {
-                updateCoins(coins - amount); // Verlies bij verkeerde voorspelling
-            }
-        } else if (results.length == 4) {
-            document.getElementById('start').disabled = false; // Enable start button again
-        }
-    };
+			document.getElementById('coins').innerText = coins;
+			results = [];//Results array is to save the horse numbers when the race is finished.
+			horse1.run();
+			horse2.run();
+			horse3.run();
+			horse4.run();
+		}
+	}
 });
+
