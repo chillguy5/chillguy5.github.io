@@ -81,7 +81,6 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
-      highscoret: localStorage.getItem("highscoret") || 0,
   
       init: function () {
         isStart = true;
@@ -115,15 +114,12 @@
           .getElementsByTagName('span')[0];
           this.coinsDisplay = document.getElementById('coins').querySelector('span');
           this.setInfo('coins');
-          this.highscoretDisplay = document.getElementById('highscoret').querySelector('span');
-          this.setInfo('highscoret');  
         this.linesDisplay = document
           .getElementById('lines')
           .getElementsByTagName('span')[0];
         this.setInfo('time');
         this.setInfo('score');
         this.setInfo('coins');
-        this.setInfo('highscoret');
         this.setInfo('level');
         this.setInfo('lines');
       },
@@ -290,10 +286,9 @@
         this.setInfo('time');
       },
       incScore: function (amount) {
-        this.score += amount;
+        this.score = this.score + amount;
         this.setInfo('score');
-        this.checkHighScoret();  // <--- Highscore check na elke score-update
-    },
+      },
       incCoins: function (amount) {
         this.coins += amount;
         this.setInfo('coins');
@@ -314,7 +309,6 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        var highscoret = localStorage.getItem("highscoret") || 0;
 
   
         if (lines > 0) {
@@ -336,14 +330,6 @@
           this.incLevel();
         }
       },
-      checkHighScoret: function () {
-        if (this.score > this.highscoret) {
-            this.highscoret = this.score;
-            localStorage.setItem("highscoret", this.highscoret);
-            this.highscoretDisplay.textContent = this.highscoret;
-        }  // Deze accolade sluit de if-statement correct af
-    }
-    
       gameOver: function () {
         this.clearTimers();
         isStart = false;
@@ -531,15 +517,6 @@
         if (c > 0) {
           this.calcScore({ lines: c });
         }
-        
-        function updateHighscore(newScore) {
-          let savedHighscore = localStorage.getItem("highscoret") || 0;
-          if (newScore > savedHighscore) {
-              localStorage.setItem("highscoret", newScore);
-              document.getElementById("highscoret").textContent = newScore;
-          }
-      }
-      this.checkHighScoret();
       },
       shiftRow: function (y, amount) {
         var me = this;
@@ -628,10 +605,6 @@
         tetris.init();
       }
     });
-    document.addEventListener("DOMContentLoaded", function () {
-      let savedHighscore = localStorage.getItem("highscoret") || 0;
-      document.getElementById("highscoret").textContent = savedHighscore;
-  });
   })();
   
   if (!Array.prototype.eachdo) {
