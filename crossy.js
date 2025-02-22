@@ -1,4 +1,5 @@
 const counterDOM = document.getElementById('counter');
+const coinsDOM = document.getElementById('coinsDisplay');
 const endDOM = document.getElementById('end');
 
 const scene = new THREE.Scene();
@@ -592,14 +593,14 @@ function animate(timestamp) {
         case 'forward': {
           currentLane++;
           counterDOM.innerHTML = currentLane;
-          break;
           coinsDOM.innerHTML("coins") += currentLane;
+          break;
         }
         case 'backward': {
           currentLane--;
           counterDOM.innerHTML = currentLane;
-          break;
           coinsDOM.innerHTML("coins") -= currentLane;
+          break;
         }
         case 'left': {
           currentColumn--;
