@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 		
 		if (num_lap <= 0 || isNaN(num_lap)) {
-			alert('You must select a positive amoun lap/laps.');
+			alert('You must select a positive amount lap/laps.');
 			return; // Stop de rest van de code
 		}else{
 
