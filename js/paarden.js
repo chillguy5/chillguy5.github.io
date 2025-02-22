@@ -118,9 +118,6 @@ function Horse(id, x, y){
 			if (this.number == bethorse){
 				coins += amount * 4;
 				localStorage.setItem("coins", coins);
-			}else{
-				coins -= amount;
-				localStorage.setItem("coins", coins);
 			}
 			document.getElementById('coins').innerText = coins;
 		}else if (results.length == 4){
@@ -170,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			return;
 		}
 
+
 		num_lap = parseInt(document.getElementById('num_lap').value);
 		bethorse = parseInt(document.getElementById('bethorse').value);
 
@@ -194,6 +192,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			horse3.run();
 			horse4.run();
 		}
+		coins -= amount;
+		localStorage.setItem("coins", coins);
 	}
 });
 
