@@ -313,6 +313,7 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
+        var highscoret = localStorage.getItem("highscoret") || 0,
 
   
         if (lines > 0) {
@@ -340,6 +341,7 @@
           localStorage.setItem("highscoret", this.highscoret);
           this.highscoretDisplay.textContent = this.highscoret;
       }
+      this.incHighscoret(highscoret);
       },
       gameOver: function () {
         this.clearTimers();
