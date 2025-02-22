@@ -35,7 +35,6 @@ let startMoving;
 let moves;
 let stepStartTimestamp;
 let gameOver = false;
-let hit = false;
 
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
@@ -503,8 +502,7 @@ function checkGameOver() {
 function animate(timestamp) {
   requestAnimationFrame( animate );
   
-  if (hit) {
-    endDOM.style.visibility = 'visible';
+  if (endDOM.style.visibility = 'visible') {
     gameOver = true; // Speler kan niet meer bewegen
   }
 
