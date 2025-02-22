@@ -463,7 +463,7 @@ function move(direction) {
     if(move === 'right') return {lane: position.lane, column: position.column+1};
   }, {lane: currentLane, column: currentColumn})
   
-  if (gameOver = true) {
+  if (gameOver == true) {
     alert('You can not move anymore.');
     return;
 }
