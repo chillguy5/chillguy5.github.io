@@ -175,10 +175,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		if (coins < amount){
 			alert('Not enough coins.');
 		}else{
-			(coins >= amount){
-				coins -= amount;
-				localStorage.setItem("coins", coins);
-			}
+			coins -= amount;
+			localStorage.setItem("coins", coins);
 		}
 		
 		if (num_lap <= 0){
