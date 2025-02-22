@@ -585,23 +585,38 @@ function animate(timestamp) {
       }
     }
 
-    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de coins op uit localStorage
 
-    // Once a step has ended
-    if(moveDeltaTime > stepTime) {
-      switch(moves[0]) {
-        case 'forward': {
-          currentLane++;
-          counterDOM.innerHTML = currentLane;
-          coinsDOM.innerHTML("coins") += currentLane;
-          break;
-        }
-        case 'backward': {
-          currentLane--;
-          counterDOM.innerHTML = currentLane;
-          coinsDOM.innerHTML("coins") -= currentLane;
-          break;
-        }
+// Update de weergave van de coins
+coinsDOM.innerHTML = "Coins: " + coins; // Beginwaarde tonen
+
+// Zodra een stap is beëindigd
+if (moveDeltaTime > stepTime) {
+  switch (moves[0]) {
+    case 'forward': {
+      currentLane++;
+      counterDOM.innerHTML = currentLane;
+
+      // Voeg de coins toe gebaseerd op het aantal lanes
+      coins += currentLane;
+      coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
+
+      break;
+    }
+    case 'backward': {
+      currentLane--;
+      counterDOM.innerHTML = currentLane;
+
+      // Verwijder coins gebaseerd op het aantal lanes
+      coins -= currentLane;
+      coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
+
+      break;
+    }
+
+  // Sla de bijgewerkte coins op in localStorage
+  localStorage.setItem("coins", coins);
+
         case 'left': {
           currentColumn--;
           break;
