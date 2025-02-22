@@ -592,14 +592,14 @@ function animate(timestamp) {
         case 'forward': {
           currentLane++;
           counterDOM.innerHTML = currentLane;
-          coinsDOM.innerHTML("coins") += currentLane;
           break;
+          coinsDOM.innerHTML("coins") += currentLane;
         }
         case 'backward': {
           currentLane--;
           counterDOM.innerHTML = currentLane;
-          coinsDOM.innerHTML += currentLane;
           break;
+          coinsDOM.innerHTML("coins") += currentLane;
         }
         case 'left': {
           currentColumn--;
