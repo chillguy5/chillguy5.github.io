@@ -632,8 +632,6 @@ function animate(timestamp) {
           }
           break;
         }
-      }
-    }
     
 
         case 'left': {
