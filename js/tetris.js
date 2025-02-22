@@ -331,10 +331,10 @@
         }
       },
       checkHighScoret: function () {
-        let highscoret = localStorage.getItem("tetrisHighscoret") || 0;
+        let highscoret = localStorage.getItem("highscoret") || 0;
         
         if (this.score > highscoret) {
-            localStorage.setItem("tetrisHighscoret", this.score);
+            localStorage.setItem("highscoret", this.score);
             document.getElementById("highscoret").textContent = this.score;
             this.checkHighScoret();
         }
