@@ -587,8 +587,7 @@ function animate(timestamp) {
     }
 
     let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de coins op uit localStorage
-    let highscorer = 0;
-    localStorage.setItem("highscorer", highscorer);
+    let highscorer = parseInt(localStorage.getItem("highscorer")) || 0;
 
 // Update de weergave van de coins
 coinsDOM.innerHTML = "Coins: " + coins; // Beginwaarde tonen
