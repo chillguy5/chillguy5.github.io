@@ -585,7 +585,7 @@ function animate(timestamp) {
     }
 
     let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de coins op uit localStorage
-    let highscorer = 0
+    let highscorer = parseInt(localStorage.getItem("highscorer")) || 0; // Haal de highscore op uit localStorage
     const coinsDOM = document.getElementById("coins");
     const highscorerDOM = document.getElementById("highscorer");
     
