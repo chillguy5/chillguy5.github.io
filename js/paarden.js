@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		if (coins < amount){
 			alert('Not enough coins.');
+			return;
 		}else{
 			coins -= amount;
 			localStorage.setItem("coins", coins);
