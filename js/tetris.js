@@ -531,6 +531,15 @@
         if (c > 0) {
           this.calcScore({ lines: c });
         }
+        
+        function updateHighscore(newScore) {
+          let savedHighscore = localStorage.getItem("highscoret") || 0;
+          if (newScore > savedHighscore) {
+              localStorage.setItem("highscoret", newScore);
+              document.getElementById("highscoret").textContent = newScore;
+          }
+      }
+      
       },
       shiftRow: function (y, amount) {
         var me = this;
