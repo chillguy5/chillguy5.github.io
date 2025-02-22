@@ -335,13 +335,11 @@
         }
       },
       checkHighScoret: function () {
-        let highscoret = localStorage.getItem("highscoret") || 0;
-        
-        if (this.score > highscoret) {
-            localStorage.setItem("highscoret", this.score);
-            document.getElementById("highscoret").textContent = this.score;
-            this.checkHighScoret();
-        }
+        if (this.score > this.highscoret) {
+          this.highscoret = this.score;
+          localStorage.setItem("highscoret", this.highscoret);
+          this.highscoretDisplay.textContent = this.highscoret;
+      }
       },
       gameOver: function () {
         this.clearTimers();
