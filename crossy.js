@@ -36,7 +36,6 @@ let moves;
 let stepStartTimestamp;
 let gameOver = false;
 let hit = false
-let coins = parseInt(localStorage.getItem("coins")) || 0;
 
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
@@ -422,11 +421,6 @@ function Lane(index) {
   }
 }
 
-// Update de weergave van je coins op de pagina
-function updateCoinsDisplay() {
-    document.getElementById('coinsDisplay').innerHTML = `Coins: ${coins}`;
-  }
-
 document.querySelector("#retry").addEventListener("click", () => {
     lanes.forEach(lane => scene.remove(lane.mesh)); // Verwijder alle lanes
     initaliseValues(); // Reset game-waarden
@@ -506,13 +500,6 @@ function move(direction) {
   moves.push(direction);
 }
 
-// Coins verhogen als je een bepaalde actie voltooit, bijvoorbeeld wanneer je een lane verder gaat
-function addCoins(amount) {
-    coins += amount;
-    localStorage.setItem("coins", coins); // Sla de nieuwe hoeveelheid op in localStorage
-    updateCoinsDisplay(); // Werk de weergave bij
-  }
-
 function checkGameOver() {
     if (gameOver) {
       alert('You can not move anymore.');
@@ -521,39 +508,34 @@ function checkGameOver() {
     return false;
   }
 
-  function animate(timestamp) {
-    requestAnimationFrame( animate );
-    
-    if (hit) {
-      endDOM.style.visibility = 'visible';
-      gameOver = true; // Speler kan niet meer bewegen
-      localStorage.setItem("coins", coins); // Sla de coins op wanneer het spel eindigt
-    }
+function animate(timestamp) {
+  requestAnimationFrame( animate );
   
-    if (gameOver) return; // Stop animatie als gameOver actief is
-  
-    if(!previousTimestamp) previousTimestamp = timestamp;
-    const delta = timestamp - previousTimestamp;
-    previousTimestamp = timestamp;
-  
-    // Animate cars and trucks moving on the lane
-    lanes.forEach(lane => {
-      if(lane.type === 'car' || lane.type === 'truck') {
-        const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/2 - positionWidth*2*zoom;
-        const aBitAfterTheEndOFLane = boardWidth*zoom/2 + positionWidth*2*zoom;
-        lane.vechicles.forEach(vechicle => {
-          if(lane.direction) {
-            vechicle.position.x = vechicle.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : vechicle.position.x -= lane.speed/16*delta;
-          }else{
-            vechicle.position.x = vechicle.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : vechicle.position.x += lane.speed/16*delta;
-          }
-        });
-      }
-    });
-  
-    // Hier moet je verdergaan met de animatie
+  if (hit) {
+    endDOM.style.visibility = 'visible';
+    gameOver = true; // Speler kan niet meer bewegen
   }
-  
+
+  if (gameOver) return; // Stop animatie als gameOver actief is
+
+  if(!previousTimestamp) previousTimestamp = timestamp;
+  const delta = timestamp - previousTimestamp;
+  previousTimestamp = timestamp;
+
+  // Animate cars and trucks moving on the lane
+  lanes.forEach(lane => {
+    if(lane.type === 'car' || lane.type === 'truck') {
+      const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/2 - positionWidth*2*zoom;
+      const aBitAfterTheEndOFLane = boardWidth*zoom/2 + positionWidth*2*zoom;
+      lane.vechicles.forEach(vechicle => {
+        if(lane.direction) {
+          vechicle.position.x = vechicle.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : vechicle.position.x -= lane.speed/16*delta;
+        }else{
+          vechicle.position.x = vechicle.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : vechicle.position.x += lane.speed/16*delta;
+        }
+      });
+    }
+  });
 
   if(startMoving) {
     stepStartTimestamp = timestamp;
@@ -601,33 +583,33 @@ function checkGameOver() {
         break;
       }
     }
-// Verhoog coins wanneer de speler een lane verder komt
-if (moveDeltaTime > stepTime) {
-    switch(moves[0]) {
-      case 'forward': {
-        currentLane++;
-        counterDOM.innerHTML = currentLane;
-        addCoins(1); // Voeg 1 coins toe elke keer als de speler vooruit gaat
-        break;
+    // Once a step has ended
+    if(moveDeltaTime > stepTime) {
+      switch(moves[0]) {
+        case 'forward': {
+          currentLane++;
+          counterDOM.innerHTML = currentLane;
+          break;
+        }
+        case 'backward': {
+          currentLane--;
+          counterDOM.innerHTML = currentLane;
+          break;
+        }
+        case 'left': {
+          currentColumn--;
+          break;
+        }
+        case 'right': {
+          currentColumn++;
+          break;
+        }
       }
-      case 'backward': {
-        currentLane--;
-        counterDOM.innerHTML = currentLane;
-        break;
-      }
-      case 'left': {
-        currentColumn--;
-        break;
-      }
-      case 'right': {
-        currentColumn++;
-        break;
-      }
+      moves.shift();
+      // If more steps are to be taken then restart counter otherwise stop stepping
+      stepStartTimestamp = moves.length === 0 ? null : timestamp;
     }
-    moves.shift();
-    stepStartTimestamp = moves.length === 0 ? null : timestamp;
   }
-  
 
   if (lanes[currentLane].type === 'car' || lanes[currentLane].type === 'truck') {
     const chickenMinX = chicken.position.x - chickenSize * zoom / 2;
@@ -647,10 +629,5 @@ if (moveDeltaTime > stepTime) {
   }
   renderer.render( scene, camera );
 }
-
-// Laad coins bij het opstarten van de pagina
-window.onload = function() {
-  updateCoinsDisplay(); // Werk de weergave van coins bij
-};
 
 requestAnimationFrame( animate );
