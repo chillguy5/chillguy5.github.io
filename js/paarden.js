@@ -192,8 +192,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			horse3.run();
 			horse4.run();
 		}
-		coins -= amount;
-		localStorage.setItem("coins", coins);
 	}
+	coins -= amount;
+	localStorage.setItem("coins", coins);
 });
 
