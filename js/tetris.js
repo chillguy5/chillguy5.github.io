@@ -260,13 +260,6 @@ function drop() {
     // Update de weergave van coins in de HTML
     document.getElementById("coins").textContent = coins;
 
-    if (score > highscoret) {
-      highscoret = score;
-      localStorage.setItem("highscoret", highscoret);
-      highscoretDisplay.innerHTML = highscoret;
-      document.getElementById("highscoret").textContent = highscoret;
-  }
-
     eachblock(current.type.blocks[current.dir], current.x, current.y, function(x, y) {
       setBlock(x, y, current.type);
     });
@@ -289,6 +282,12 @@ function drop() {
     if (occupied(current.type, current.x, current.y, current.dir)) {
       lose();
     }
+    if (score > highscoret) {
+      highscoret = score;
+      localStorage.setItem("highscoret", highscoret);
+      highscoretDisplay.innerHTML = highscoret;
+      document.getElementById("highscoret").textContent = highscoret;
+  }
   }
 }
 
