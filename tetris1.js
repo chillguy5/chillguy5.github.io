@@ -79,6 +79,8 @@
       sTimer: null,
       speed: 700,
       lines: 0,
+      coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
+      coinsDisplay = document.getElementById("coins");
   
       init: function () {
         isStart = true;
@@ -110,11 +112,15 @@
         this.scoreDisplay = document
           .getElementById('score')
           .getElementsByTagName('span')[0];
+          this.coinsDisplay = document
+          .getElementById('coins')
+          .getElementsByTagName('span')[0];
         this.linesDisplay = document
           .getElementById('lines')
           .getElementsByTagName('span')[0];
         this.setInfo('time');
         this.setInfo('score');
+        this.setInfo('coins');
         this.setInfo('level');
         this.setInfo('lines');
       },
@@ -284,6 +290,12 @@
         this.score = this.score + amount;
         this.setInfo('score');
       },
+      incCoins: function (amount) {
+        this.coins = this.coins + amount;
+        this.setInfo('coins');
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").textContent = coins;
+      },
       incLevel: function () {
         this.level++;
         this.speed = this.speed - 75;
@@ -302,9 +314,15 @@
         if (lines > 0) {
           score += lines * this['level' + this.level][1];
           this.incLines(lines);
+          coins += lines * this['level' + this.level][1];
+          localStorage.setItem("coins", coins);
+          document.getElementById("coins").textContent = coins;
         }
         if (shape === true) {
           score += shape * this['level' + this.level][2];
+          coins += shape * this['level' + this.level][2];
+          localStorage.setItem("coins", coins);
+          document.getElementById("coins").textContent = coins;
         }
         /*if (speed > 0){ score += speed * this["level" +this .level[3]];}*/
         this.incScore(score);
