@@ -551,6 +551,8 @@ function animate(timestamp) {
     }
   });
 
+}
+
   if(startMoving) {
     stepStartTimestamp = timestamp;
     startMoving = false;
