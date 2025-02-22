@@ -17,6 +17,12 @@ button {
   top: 20px;
   right: 20px;
 }
+#coinsDisplay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
 #end {
   position: absolute;
   min-width: 100%;
