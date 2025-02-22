@@ -311,41 +311,17 @@
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
 
   
-        calcScore: function (args) {
-          var lines = args.lines || 0;
-          var shape = args.shape || false;
-          var score = 0;
-      
-          // Haal de huidige coins op uit localStorage (of stel ze in op 0 als ze nog niet bestaan)
-          var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-      
-          // Update coins bij het verdwijnen van lijnen
-          if (lines > 0) {
-              score += lines * this['level' + this.level][1];
-              this.incLines(lines);
-              
-              // Coins worden verhoogd en opgeslagen
-              coins += lines * this['level' + this.level][1];
-          }
-      
-          // Update coins bij het voltooien van een shape
-          if (shape === true) {
-              score += shape * this['level' + this.level][2];
-              
-              // Coins worden verhoogd en opgeslagen
-              coins += shape * this['level' + this.level][2];
-          }
-      
-          // Sla de nieuwe coins op in localStorage
-          localStorage.setItem("coins", coins);
-      
-          // Werk de weergave van coins bij in de HTML
-          document.getElementById("coins").textContent = coins;
-      
-          // Zet de score bij
-          this.incScore(score);
-      },
-      
+        if (lines > 0) {
+          score += lines * this['level' + this.level][1];
+          this.incLines(lines);
+          this.incCoins(lines * this['level' + this.level][1]);
+          
+      }
+      if (shape === true) {
+          score += shape * this['level' + this.level][2];
+          this.incCoins(shape * this['level' + this.level][2]);
+          
+      }
         /*if (speed > 0){ score += speed * this["level" +this .level[3]];}*/
         this.incScore(score);
       },
