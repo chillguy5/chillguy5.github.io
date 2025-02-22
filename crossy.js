@@ -456,36 +456,23 @@ window.addEventListener("keydown", event => {
 
 function move(direction) {
     if (gameOver) return; // Stop beweging als het spel voorbij is
-
-  const finalPositions = moves.reduce((position,move) => {
-    if(move === 'forward') return {lane: position.lane+1, column: position.column};
-    if(move === 'backward') return {lane: position.lane-1, column: position.column};
-    if(move === 'left') return {lane: position.lane, column: position.column-1};
-    if(move === 'right') return {lane: position.lane, column: position.column+1};
-  }, {lane: currentLane, column: currentColumn})
-
-  if (direction === 'forward') {
-    if(lanes[finalPositions.lane+1].type === 'forest' && lanes[finalPositions.lane+1].occupiedPositions.has(finalPositions.column)) return;
-    if(!stepStartTimestamp) startMoving = true;
-    addLane();
+  
+    let newLane = currentLane;
+    let newColumn = currentColumn;
+  
+    if (direction === 'forward') newLane++;
+    if (direction === 'backward') newLane--;
+    if (direction === 'left') newColumn--;
+    if (direction === 'right') newColumn++;
+  
+    // Check of de nieuwe positie geldig is
+    if (newLane < 0 || newColumn < 0 || newColumn >= columns) return;
+    if (lanes[newLane].type === 'forest' && lanes[newLane].occupiedPositions.has(newColumn)) return;
+  
+    moves.push(direction);
+    if (!stepStartTimestamp) startMoving = true;
   }
-  else if (direction === 'backward') {
-    if(finalPositions.lane === 0) return;
-    if(lanes[finalPositions.lane-1].type === 'forest' && lanes[finalPositions.lane-1].occupiedPositions.has(finalPositions.column)) return;
-    if(!stepStartTimestamp) startMoving = true;
-  }
-  else if (direction === 'left') {
-    if(finalPositions.column === 0) return;
-    if(lanes[finalPositions.lane].type === 'forest' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column-1)) return;
-    if(!stepStartTimestamp) startMoving = true;
-  }
-  else if (direction === 'right') {
-    if(finalPositions.column === columns - 1 ) return;
-    if(lanes[finalPositions.lane].type === 'forest' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column+1)) return;
-    if(!stepStartTimestamp) startMoving = true;
-  }
-  moves.push(direction);
-}
+  
 
 function animate(timestamp) {
   requestAnimationFrame( animate );
