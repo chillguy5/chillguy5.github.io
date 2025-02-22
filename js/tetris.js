@@ -115,7 +115,7 @@
           .getElementsByTagName('span')[0];
           this.coinsDisplay = document.getElementById('coins').querySelector('span');
           this.setInfo('coins');
-          this.highscoretDisplay = document.getElementById('highscoret').querySelector('span');
+          this.highscoretDisplay = document.getElementById('highscoret');
           this.setInfo('highscoret');  
         this.linesDisplay = document
           .getElementById('lines')
