@@ -330,6 +330,15 @@
           this.incLevel();
         }
       },
+      checkHighScoret: function () {
+        let highscoret = localStorage.getItem("tetrisHighscoret") || 0;
+        
+        if (this.score > highscoret) {
+            localStorage.setItem("tetrisHighscoret", this.score);
+            document.getElementById("highscoret").textContent = this.score;
+            this.checkHighScoret();
+        }
+      },
       gameOver: function () {
         this.clearTimers();
         isStart = false;
