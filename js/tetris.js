@@ -345,31 +345,6 @@ var invalid = {};
 function invalidateCourt() { invalid.court = true; }
 function invalidateNext() { invalid.next = true; }
 
-// Voeg een highscore toe
-var highscoret = parseInt(localStorage.getItem('highscoret')) || 0;
-
-// Update de highscore in de HTML
-document.getElementById("highscore").textContent = highscoret;
-
-function updateHighscore() {
-  if (score > highscoret) {
-    highscoret = score;
-    localStorage.setItem("highscoret", highscoret);
-    
-    // Update de weergave van highscore in de HTML
-    document.getElementById("highscore").textContent = highscoret;
-  }
-}
-
-// Pas de lose-functie aan om de highscore bij te werken
-function lose() {
-  updateHighscore(); // Check of de highscore moet worden bijgewerkt
-  show('start');
-  vscore = score;
-  playing = false;
-}
-
-// Pas de draw-functie aan om de highscore weer te geven
 function draw() {
   ctx.save();
   ctx.lineWidth = 1;
@@ -378,10 +353,8 @@ function draw() {
   drawNext();
   html('score', ("00000" + Math.floor(vscore)).slice(-5));
   html('rows', rows);
-  html('highscore', ("00000" + Math.floor(highscoret)).slice(-5)); // Update highscore weergave
   ctx.restore();
 }
-
 
 function drawCourt() {
   if (invalid.court) {
