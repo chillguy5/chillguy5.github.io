@@ -81,6 +81,7 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
+      highscoret: localStorage.getItem("highscoret") || 0;
   
       init: function () {
         isStart = true;
@@ -114,6 +115,8 @@
           .getElementsByTagName('span')[0];
           this.coinsDisplay = document.getElementById('coins').querySelector('span');
           this.setInfo('coins');
+          this.highscoretDisplay = document.getElementById('highscoret').querySelector('span');
+          this.setInfo('highscoret');  
         this.linesDisplay = document
           .getElementById('lines')
           .getElementsByTagName('span')[0];
