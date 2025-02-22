@@ -521,37 +521,39 @@ function checkGameOver() {
     return false;
   }
 
-function animate(timestamp) {
-  requestAnimationFrame( animate );
-  
-  if (hit) {
-    endDOM.style.visibility = 'visible';
-    gameOver = true; // Speler kan niet meer bewegen
-    localStorage.setItem("coins", coins); // Sla de coins op wanneer het spel eindigt
-  }
-
-  if (gameOver) return; // Stop animatie als gameOver actief is
-
-  if(!previousTimestamp) previousTimestamp = timestamp;
-  const delta = timestamp - previousTimestamp;
-  previousTimestamp = timestamp;
-
-  // Animate cars and trucks moving on the lane
-  lanes.forEach(lane => {
-    if(lane.type === 'car' || lane.type === 'truck') {
-      const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/2 - positionWidth*2*zoom;
-      const aBitAfterTheEndOFLane = boardWidth*zoom/2 + positionWidth*2*zoom;
-      lane.vechicles.forEach(vechicle => {
-        if(lane.direction) {
-          vechicle.position.x = vechicle.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : vechicle.position.x -= lane.speed/16*delta;
-        }else{
-          vechicle.position.x = vechicle.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : vechicle.position.x += lane.speed/16*delta;
-        }
-      });
+  function animate(timestamp) {
+    requestAnimationFrame( animate );
+    
+    if (hit) {
+      endDOM.style.visibility = 'visible';
+      gameOver = true; // Speler kan niet meer bewegen
+      localStorage.setItem("coins", coins); // Sla de coins op wanneer het spel eindigt
     }
-  });
-
-}
+  
+    if (gameOver) return; // Stop animatie als gameOver actief is
+  
+    if(!previousTimestamp) previousTimestamp = timestamp;
+    const delta = timestamp - previousTimestamp;
+    previousTimestamp = timestamp;
+  
+    // Animate cars and trucks moving on the lane
+    lanes.forEach(lane => {
+      if(lane.type === 'car' || lane.type === 'truck') {
+        const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/2 - positionWidth*2*zoom;
+        const aBitAfterTheEndOFLane = boardWidth*zoom/2 + positionWidth*2*zoom;
+        lane.vechicles.forEach(vechicle => {
+          if(lane.direction) {
+            vechicle.position.x = vechicle.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : vechicle.position.x -= lane.speed/16*delta;
+          }else{
+            vechicle.position.x = vechicle.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : vechicle.position.x += lane.speed/16*delta;
+          }
+        });
+      }
+    });
+  
+    // Hier moet je verdergaan met de animatie
+  }
+  
 
   if(startMoving) {
     stepStartTimestamp = timestamp;
