@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			localStorage.setItem("coins", coins);
 		}
 		
-		else if (num_lap <= 0){
+		if (num_lap <= 0){
 			alert('Number of lap must be greater than 0.');
 		}else{
 
