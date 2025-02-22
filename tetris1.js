@@ -79,8 +79,8 @@
       sTimer: null,
       speed: 700,
       lines: 0,
-      coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-      coinsDisplay = document.getElementById("coins");
+      coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
+      coinsDisplay: document.getElementById("coins"),
   
       init: function () {
         isStart = true;
@@ -112,9 +112,8 @@
         this.scoreDisplay = document
           .getElementById('score')
           .getElementsByTagName('span')[0];
-          this.coinsDisplay = document
-          .getElementById('coins')
-          .getElementsByTagName('span')[0];
+          this.coinsDisplay = document.getElementById('coins').querySelector('span');
+          this.setInfo('coins');
         this.linesDisplay = document
           .getElementById('lines')
           .getElementsByTagName('span')[0];
@@ -291,11 +290,10 @@
         this.setInfo('score');
       },
       incCoins: function (amount) {
-        this.coins = this.coins + amount;
+        this.coins += amount;
         this.setInfo('coins');
-        localStorage.setItem("coins", coins);
-        document.getElementById("coins").textContent = coins;
-      },
+        localStorage.setItem("coins", this.coins);
+    },
       incLevel: function () {
         this.level++;
         this.speed = this.speed - 75;
@@ -316,16 +314,12 @@
         if (lines > 0) {
           score += lines * this['level' + this.level][1];
           this.incLines(lines);
-          coins += lines * this['level' + this.level][1];
-          localStorage.setItem("coins", coins);
-          document.getElementById("coins").textContent = coins;
-        }
-        if (shape === true) {
+          this.incCoins(lines * this['level' + this.level][1]);
+      }
+      if (shape === true) {
           score += shape * this['level' + this.level][2];
-          coins += shape * this['level' + this.level][2];
-          localStorage.setItem("coins", coins);
-          document.getElementById("coins").textContent = coins;
-        }
+          this.incCoins(shape * this['level' + this.level][2]);
+      }
         /*if (speed > 0){ score += speed * this["level" +this .level[3]];}*/
         this.incScore(score);
       },
@@ -603,21 +597,12 @@
       },
     };
     const btn = document.querySelector('#start');
-    let isStart = false; // Zorgt ervoor dat de variabele bestaat
-    
     btn.addEventListener('click', function () {
-        console.log("Startknop is ingedrukt"); // Debugging
-        btn.style.display = 'none';
-        if (!isStart) {
-            isStart = true; // Zet de status op gestart
-            if (typeof tetris.init === "function") {
-                tetris.init(); // Start het spel
-                console.log("Spel gestart!");
-            } else {
-                console.error("tetris.init() bestaat niet!");
-            }
-        }
-    });    
+      btn.style.display = 'none';
+      if (!isStart) {
+        tetris.init();
+      }
+    });
   })();
   
   if (!Array.prototype.eachdo) {
