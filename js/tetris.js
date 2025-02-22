@@ -293,7 +293,7 @@
         this.score += amount;
         this.setInfo('score');
         this.checkHighScoret();  // <--- Highscore check na elke score-update
-    }
+    },
       incCoins: function (amount) {
         this.coins += amount;
         this.setInfo('coins');
