@@ -160,13 +160,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				coins -= amount;
 				localStorage.setItem("coins", coins);
 			}
-		}
 
 		if (coins > amount){
 				coins -= amount;
 				localStorage.setItem("coins", coins);
 			}
-		}
 
 
 		// Check for negative or zero amount
