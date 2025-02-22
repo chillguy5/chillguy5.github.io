@@ -156,15 +156,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('start').onclick = function(){
 		amount = parseInt(document.getElementById('amount').value);
 
-		if (coins == amount){
-				coins -= amount;
-				localStorage.setItem("coins", coins);
-			}
-
-		if (coins > amount){
-				coins -= amount;
-				localStorage.setItem("coins", coins);
-			}
+		if (coins >= amount){
+			coins -= amount;
+			localStorage.setItem("coins", coins);
+			document.getElementById('coins').innerText = coins; // Update de UI met het nieuwe aantal coins
+		} else {
+			alert('Not enough coins.');
+			return;
+		}
 
 
 		// Check for negative or zero amount
