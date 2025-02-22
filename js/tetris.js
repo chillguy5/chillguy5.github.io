@@ -337,12 +337,12 @@
       },
       checkHighScoret: function () {
         if (this.score > this.highscoret) {
-          this.highscoret = this.score;
-          localStorage.setItem("highscoret", this.highscoret);
-          this.highscoretDisplay.textContent = this.highscoret;
-      }
-      this.incHighscoret(highscoret);
-      },
+            this.highscoret = this.score;
+            localStorage.setItem("highscoret", this.highscoret);
+            this.highscoretDisplay.textContent = this.highscoret;
+        }  // Deze accolade sluit de if-statement correct af
+    }
+    
       gameOver: function () {
         this.clearTimers();
         isStart = false;
