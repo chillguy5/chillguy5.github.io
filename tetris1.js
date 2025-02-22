@@ -603,12 +603,21 @@
       },
     };
     const btn = document.querySelector('#start');
+    let isStart = false; // Zorgt ervoor dat de variabele bestaat
+    
     btn.addEventListener('click', function () {
-      btn.style.display = 'none';
-      if (!isStart) {
-        tetris.init();
-      }
-    });
+        console.log("Startknop is ingedrukt"); // Debugging
+        btn.style.display = 'none';
+        if (!isStart) {
+            isStart = true; // Zet de status op gestart
+            if (typeof tetris.init === "function") {
+                tetris.init(); // Start het spel
+                console.log("Spel gestart!");
+            } else {
+                console.error("tetris.init() bestaat niet!");
+            }
+        }
+    });    
   })();
   
   if (!Array.prototype.eachdo) {
