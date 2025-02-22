@@ -25,6 +25,7 @@ const columns = 17;
 const boardWidth = positionWidth*columns;
 
 const stepTime = 200; // Miliseconds it takes for the chicken to take a step forward, backward, left or right
+const gameOver = false;
 
 let lanes;
 let currentLane;
@@ -34,7 +35,6 @@ let previousTimestamp;
 let startMoving;
 let moves;
 let stepStartTimestamp;
-let gameOver = false;
 
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
