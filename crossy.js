@@ -35,6 +35,7 @@ let startMoving;
 let moves;
 let stepStartTimestamp;
 let gameOver = false;
+let hit = false;
 
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
