@@ -34,6 +34,8 @@ let previousTimestamp;
 let startMoving;
 let moves;
 let stepStartTimestamp;
+let gameOver = false;
+
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
 const carBackTexture = new Texture(40,80,[{x: 10, y: 10, w: 30, h: 60 }]);
@@ -452,6 +454,8 @@ window.addEventListener("keydown", event => {
 });
 
 function move(direction) {
+    if (gameOver) return; // Stop beweging als het spel voorbij is
+    
   const finalPositions = moves.reduce((position,move) => {
     if(move === 'forward') return {lane: position.lane+1, column: position.column};
     if(move === 'backward') return {lane: position.lane-1, column: position.column};
@@ -484,6 +488,11 @@ function move(direction) {
 
 function animate(timestamp) {
   requestAnimationFrame( animate );
+  
+  if (hit) {
+    endDOM.style.visibility = 'visible';
+    gameOver = true; // Speler kan niet meer bewegen
+  }
 
   if(!previousTimestamp) previousTimestamp = timestamp;
   const delta = timestamp - previousTimestamp;
