@@ -130,14 +130,17 @@ function Horse(id, x, y){
 var num_lap = 1, results = [], coins = parseInt(localStorage.getItem('coins')) || 0, bethorse, amount;
 
 // Update de weergave van coins bij het laden van de pagina
-document.getElementById('coins').innerText = coins; // Laat de juiste waarde zien
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('coins').innerText = coins; // Laat de juiste waarde zien
+});
 
 // Pas de coins aan en sla op in localStorage
 function updateCoins(newAmount) {
-	coins = newAmount;
-	localStorage.setItem('coins', coins); // Opslaan in localStorage
-	document.getElementById('coins').innerText = coins; // UI bijwerken
+    coins = newAmount;
+    localStorage.setItem('coins', coins); // Opslaan in localStorage
+    document.getElementById('coins').innerText = coins; // UI bijwerken
 }
+
 
 //Start the function when the document loaded
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -146,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var horse2 = new Horse('horse2', 20, 8);
 	var horse3 = new Horse('horse3', 20, 12);
 	var horse4 = new Horse('horse4', 20, 16);
+
 
 	//Event listener to the Start button
 	document.getElementById('start').onclick = function(){
