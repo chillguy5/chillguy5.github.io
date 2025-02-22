@@ -179,8 +179,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			localStorage.setItem("coins", coins);
 		}
 		
-		if (num_lap <= 0){
-			alert('Number of lap must be greater than 0.');
+		if (num_lap <= 0 || isNaN(num_lap)) {
+			alert('You must select a positive amoun lap/laps.');
+			return; // Stop de rest van de code
 		}else{
 
 			/*Started the game*/
