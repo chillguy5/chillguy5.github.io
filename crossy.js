@@ -455,6 +455,7 @@ window.addEventListener("keydown", event => {
 });
 
 function move(direction) {
+    if (checkGameOver()) return; // Stop als gameOver true is
 
   const finalPositions = moves.reduce((position,move) => {
     if(move === 'forward') return {lane: position.lane+1, column: position.column};
@@ -491,6 +492,14 @@ function move(direction) {
   moves.push(direction);
 }
 
+function checkGameOver() {
+    if (gameOver) {
+      alert('You can not move anymore.');
+      return true; // Hiermee voorkomen we verdere code-uitvoering
+    }
+    return false;
+  }
+
 function animate(timestamp) {
   requestAnimationFrame( animate );
   
@@ -498,6 +507,8 @@ function animate(timestamp) {
     endDOM.style.visibility = 'visible';
     gameOver = true; // Speler kan niet meer bewegen
   }
+
+  if (gameOver) return; // Stop animatie als gameOver actief is
 
   if(!previousTimestamp) previousTimestamp = timestamp;
   const delta = timestamp - previousTimestamp;
