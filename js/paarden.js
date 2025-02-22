@@ -111,13 +111,16 @@ function Horse(id, x, y){
 		//Push the horse number to results array, according the the results array, we know the order of race results
 		results.push(this.number);
 
+		
 		//Win horse
 		if (results.length == 1){
 			//If win horse is the bet horse, then add the fund
 			if (this.number == bethorse){
-				coins += amount;
+				coins += amount * 4;
+				localStorage.setItem("coins", coins);
 			}else{
 				coins -= amount;
+				localStorage.setItem("coins", coins);
 			}
 			document.getElementById('coins').innerText = coins;
 		}else if (results.length == 4){
