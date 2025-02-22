@@ -115,7 +115,7 @@
           .getElementsByTagName('span')[0];
           this.coinsDisplay = document.getElementById('coins').querySelector('span');
           this.setInfo('coins');
-          this.highscoretDisplay = document.getElementById('highscoret');
+          this.highscoretDisplay = document.getElementById('highscoret').querySelector('span');
           this.setInfo('highscoret');  
         this.linesDisplay = document
           .getElementById('lines')
@@ -290,9 +290,10 @@
         this.setInfo('time');
       },
       incScore: function (amount) {
-        this.score = this.score + amount;
+        this.score += amount;
         this.setInfo('score');
-      },
+        this.checkHighScoret();  // <--- Highscore check na elke score-update
+    }
       incCoins: function (amount) {
         this.coins += amount;
         this.setInfo('coins');
@@ -313,7 +314,7 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        var highscoret = localStorage.getItem("highscoret") || 0,
+        var highscoret = localStorage.getItem("highscoret") || 0;
 
   
         if (lines > 0) {
@@ -616,12 +617,12 @@
       btn.style.display = 'none';
       if (!isStart) {
         tetris.init();
-        document.addEventListener("DOMContentLoaded", function () {
-          let savedHighscore = localStorage.getItem("highscoret") || 0;
-          document.getElementById("highscoret").textContent = savedHighscore;
-      });
       }
     });
+    document.addEventListener("DOMContentLoaded", function () {
+      let savedHighscore = localStorage.getItem("highscoret") || 0;
+      document.getElementById("highscoret").textContent = savedHighscore;
+  });
   })();
   
   if (!Array.prototype.eachdo) {
