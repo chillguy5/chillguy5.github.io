@@ -422,10 +422,18 @@ function Lane(index) {
 }
 
 document.querySelector("#retry").addEventListener("click", () => {
-    lanes.forEach(lane => scene.remove(lane.mesh));
-    initaliseValues();
-    endDOM.style.visibility = 'hidden';
-  });
+    lanes.forEach(lane => scene.remove(lane.mesh)); // Verwijder alle lanes
+    initaliseValues(); // Reset game-waarden
+
+    // 🔥 Reset belangrijke variabelen
+    hit = false;
+    gameOver = false; 
+    moves = [];
+    currentLane = 0;
+    currentColumn = Math.floor(columns / 2); // Zet de kip terug in het midden
+
+    endDOM.style.visibility = 'hidden'; // Verberg het game-over scherm
+});
 
 document.getElementById('forward').addEventListener("click", () => move('forward'));
 
