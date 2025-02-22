@@ -1,6 +1,4 @@
 const counterDOM = document.getElementById('counter');
-const coinsDOM = document.getElementById('coinsDisplay');
-const highscorerDOM = document.getElementById('highscorerDisplay');
 const endDOM = document.getElementById('end');
 
 const scene = new THREE.Scene();
@@ -587,53 +585,56 @@ function animate(timestamp) {
     }
 
     let coins = parseInt(localStorage.getItem("coins")) || 0; // Haal de coins op uit localStorage
-    let highscorer = 0
+    let highscorer = parseInt(localStorage.getItem("highscorer")) || 0; // Haal de highscore op uit localStorage
+    const coinsDOM = document.getElementById("coins");
+    const highscorerDOM = document.getElementById("highscorer");
+    
+    // Weergave van coins en highscore
+    coinsDOM.innerHTML = "Coins: " + coins; 
     highscorerDOM.innerHTML = "Highscore: " + highscorer;
-
-// Update de weergave van de coins
-coinsDOM.innerHTML = "Coins: " + coins; // Beginwaarde tonen
-
-// Zodra een stap is beëindigd
-if (moveDeltaTime > stepTime) {
-  switch (moves[0]) {
-    case 'forward': {
-      currentLane++;
-      counterDOM.innerHTML = currentLane;
-
-      // Voeg de coins toe gebaseerd op het aantal lanes
-      coins += 1;
-      coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
-        // Sla de bijgewerkte coins op in localStorage
-      localStorage.setItem("coins", coins);
-      
-      if (counterDOM.innerHTML > highscorer) {
-        highscorer = counterDOM.innerHTML;
-        localStorage.setItem("highscorer", highscorer);
-        highscorerDOM.innerHTML = highscorer;
-        document.getElementById("highscorer").textContent = highscorer;
+    
+    // Zodra een stap is beëindigd
+    if (moveDeltaTime > stepTime) {
+      switch (moves[0]) {
+        case 'forward': {
+          currentLane++;
+          counterDOM.innerHTML = currentLane;
+    
+          // Voeg de coins toe afhankelijk van het aantal lanes
+          coins += 1;
+          coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
+          // Sla de bijgewerkte coins op in localStorage
+          localStorage.setItem("coins", coins);
+    
+          // Update highscore als currentLane hoger is dan de huidige highscore
+          if (currentLane > highscorer) {
+            highscorer = currentLane;
+            localStorage.setItem("highscorer", highscorer);
+            highscorerDOM.innerHTML = "Highscore: " + highscorer; // Update de highscore weergave
+          }
+          break;
+        }
+        case 'backward': {
+          currentLane--;
+          counterDOM.innerHTML = currentLane;
+    
+          // Verwijder coins afhankelijk van het aantal lanes
+          coins -= 1;
+          coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
+          // Sla de bijgewerkte coins op in localStorage
+          localStorage.setItem("coins", coins);
+    
+          // Update highscore als currentLane hoger is dan de huidige highscore
+          if (currentLane > highscorer) {
+            highscorer = currentLane;
+            localStorage.setItem("highscorer", highscorer);
+            highscorerDOM.innerHTML = "Highscore: " + highscorer; // Update de highscore weergave
+          }
+          break;
+        }
+      }
     }
-
-      break;
-    }
-    case 'backward': {  
-      currentLane--;
-      counterDOM.innerHTML = currentLane;
-
-      // Verwijder coins gebaseerd op het aantal lanes
-      coins -= 1;
-      coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
-        // Sla de bijgewerkte coins op in localStorage
-      localStorage.setItem("coins", coins);
-
-      if (counterDOM.innerHTML > highscorer) {
-        highscorer = counterDOM.innerHTML;
-        localStorage.setItem("highscorer", highscorer);
-        highscorerDOM.innerHTML = highscorer;
-        document.getElementById("highscorer").textContent = highscorer;
-    }
-
-      break;
-    }
+    
 
         case 'left': {
           currentColumn--;
