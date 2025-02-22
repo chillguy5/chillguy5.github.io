@@ -424,7 +424,6 @@ document.querySelector("#retry").addEventListener("click", () => {
     lanes.forEach(lane => scene.remove(lane.mesh));
     initaliseValues();
     endDOM.style.visibility = 'hidden';
-    gameOver = false; // Beweging weer toestaan
   });
 
 document.getElementById('forward').addEventListener("click", () => move('forward'));
