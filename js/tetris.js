@@ -81,7 +81,7 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
-      highscoret: localStorage.getItem("highscoret") || 0;
+      highscoret: localStorage.getItem("highscoret") || 0,
   
       init: function () {
         isStart = true;
