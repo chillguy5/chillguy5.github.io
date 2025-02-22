@@ -598,7 +598,7 @@ if (moveDeltaTime > stepTime) {
       counterDOM.innerHTML = currentLane;
 
       // Voeg de coins toe gebaseerd op het aantal lanes
-      coins += currentLane;
+      coins += 1;
       coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
         // Sla de bijgewerkte coins op in localStorage
       localStorage.setItem("coins", coins);
@@ -610,7 +610,7 @@ if (moveDeltaTime > stepTime) {
       counterDOM.innerHTML = currentLane;
 
       // Verwijder coins gebaseerd op het aantal lanes
-      coins -= currentLane;
+      coins -= 1;
       coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
         // Sla de bijgewerkte coins op in localStorage
       localStorage.setItem("coins", coins);
