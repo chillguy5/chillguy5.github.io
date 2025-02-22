@@ -35,6 +35,7 @@ let startMoving;
 let moves;
 let stepStartTimestamp;
 let gameOver = false;
+let hit = false
 
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
@@ -502,7 +503,8 @@ function checkGameOver() {
 function animate(timestamp) {
   requestAnimationFrame( animate );
   
-  if (endDOM.style.visibility = 'visible') {
+  if (hit) {
+    endDOM.style.visibility = 'visible';
     gameOver = true; // Speler kan niet meer bewegen
   }
 
@@ -601,19 +603,21 @@ function animate(timestamp) {
     }
   }
 
-  // Hit test
-  if(lanes[currentLane].type === 'car' || lanes[currentLane].type === 'truck') {
-    const chickenMinX = chicken.position.x - chickenSize*zoom/2;
-    const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
-    const vechicleLength = { car: 60, truck: 105}[lanes[currentLane].type];
-    lanes[currentLane].vechicles.forEach(vechicle => {
-      const carMinX = vechicle.position.x - vechicleLength*zoom/2;
-      const carMaxX = vechicle.position.x + vechicleLength*zoom/2;
-      if(chickenMaxX > carMinX && chickenMinX < carMaxX) {
-        endDOM.style.visibility = 'visible';
-      }
-    });
+  if (lanes[currentLane].type === 'car' || lanes[currentLane].type === 'truck') {
+    const chickenMinX = chicken.position.x - chickenSize * zoom / 2;
+    const chickenMaxX = chicken.position.x + chickenSize * zoom / 2;
+    const vechicleLength = { car: 60, truck: 105 }[lanes[currentLane].type];
 
+    lanes[currentLane].vechicles.forEach(vechicle => {
+        const carMinX = vechicle.position.x - vechicleLength * zoom / 2;
+        const carMaxX = vechicle.position.x + vechicleLength * zoom / 2;
+
+        if (chickenMaxX > carMinX && chickenMinX < carMaxX) {
+            hit = true;  // 🔥 Voeg dit toe!
+            endDOM.style.visibility = 'visible';
+            gameOver = true;
+        }
+    });
   }
   renderer.render( scene, camera );
 }
