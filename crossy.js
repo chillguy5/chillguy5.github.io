@@ -25,7 +25,6 @@ const columns = 17;
 const boardWidth = positionWidth*columns;
 
 const stepTime = 200; // Miliseconds it takes for the chicken to take a step forward, backward, left or right
-const gameOver = false;
 
 let lanes;
 let currentLane;
@@ -35,6 +34,7 @@ let previousTimestamp;
 let startMoving;
 let moves;
 let stepStartTimestamp;
+let gameOver = false;
 
 
 const carFrontTexture = new Texture(40,80,[{x: 0, y: 10, w: 30, h: 60 }]);
@@ -455,24 +455,41 @@ window.addEventListener("keydown", event => {
 });
 
 function move(direction) {
-    if (gameOver) return; // Stop beweging als het spel voorbij is
+
+  const finalPositions = moves.reduce((position,move) => {
+    if(move === 'forward') return {lane: position.lane+1, column: position.column};
+    if(move === 'backward') return {lane: position.lane-1, column: position.column};
+    if(move === 'left') return {lane: position.lane, column: position.column-1};
+    if(move === 'right') return {lane: position.lane, column: position.column+1};
+  }, {lane: currentLane, column: currentColumn})
   
-    let newLane = currentLane;
-    let newColumn = currentColumn;
-  
-    if (direction === 'forward') newLane++;
-    if (direction === 'backward') newLane--;
-    if (direction === 'left') newColumn--;
-    if (direction === 'right') newColumn++;
-  
-    // Check of de nieuwe positie geldig is
-    if (newLane < 0 || newColumn < 0 || newColumn >= columns) return;
-    if (lanes[newLane].type === 'forest' && lanes[newLane].occupiedPositions.has(newColumn)) return;
-  
-    moves.push(direction);
-    if (!stepStartTimestamp) startMoving = true;
+  if (gameOver <= true) {
+    alert('You can not move anymore.');
+    return;
+}
+
+  if (direction === 'forward') {
+    if(lanes[finalPositions.lane+1].type === 'forest' && lanes[finalPositions.lane+1].occupiedPositions.has(finalPositions.column)) return;
+    if(!stepStartTimestamp) startMoving = true;
+    addLane();
   }
-  
+  else if (direction === 'backward') {
+    if(finalPositions.lane === 0) return;
+    if(lanes[finalPositions.lane-1].type === 'forest' && lanes[finalPositions.lane-1].occupiedPositions.has(finalPositions.column)) return;
+    if(!stepStartTimestamp) startMoving = true;
+  }
+  else if (direction === 'left') {
+    if(finalPositions.column === 0) return;
+    if(lanes[finalPositions.lane].type === 'forest' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column-1)) return;
+    if(!stepStartTimestamp) startMoving = true;
+  }
+  else if (direction === 'right') {
+    if(finalPositions.column === columns - 1 ) return;
+    if(lanes[finalPositions.lane].type === 'forest' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column+1)) return;
+    if(!stepStartTimestamp) startMoving = true;
+  }
+  moves.push(direction);
+}
 
 function animate(timestamp) {
   requestAnimationFrame( animate );
