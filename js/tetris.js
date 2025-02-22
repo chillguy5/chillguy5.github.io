@@ -612,6 +612,10 @@
       btn.style.display = 'none';
       if (!isStart) {
         tetris.init();
+        document.addEventListener("DOMContentLoaded", function () {
+          let savedHighscore = localStorage.getItem("tetrisHighscore") || 0;
+          document.getElementById("highscore").textContent = savedHighscore;
+      });
       }
     });
   })();
