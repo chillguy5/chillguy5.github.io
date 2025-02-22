@@ -609,6 +609,7 @@ if (moveDeltaTime > stepTime) {
         highscorer = counterDOM.innerHTML;
         localStorage.setItem("highscorer", highscorer);
         highscorerDOM.innerHTML = highscorer;
+        document.getElementById("highscorer").textContent = highscorer;
     }
 
       break;
@@ -627,6 +628,7 @@ if (moveDeltaTime > stepTime) {
         highscorer = counterDOM.innerHTML;
         localStorage.setItem("highscorer", highscorer);
         highscorerDOM.innerHTML = highscorer;
+        document.getElementById("highscorer").textContent = highscorer;
     }
 
       break;
