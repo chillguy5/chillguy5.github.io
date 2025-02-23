@@ -321,7 +321,7 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        var highscorete = localStorage.getItem("highscorete") ? parseInt(localStorage.getItem("highscorete")) : 0
+        var highscorete = localStorage.getItem("highscorete") ? parseInt(localStorage.getItem("highscorete")) : 0;
   
         if (lines > 0) {
           score += lines * this['level' + this.level][1];
