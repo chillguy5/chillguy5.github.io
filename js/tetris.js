@@ -299,7 +299,6 @@
           this.highscorete = this.score;
           this.setInfo('highscorete');
           localStorage.setItem("highscorete", this.highscorete);
-          document.getElementById("highscorete").textContent = this.highscorete;
       }
       },
       incCoins: function (amount) {
@@ -333,8 +332,8 @@
           score += shape * this['level' + this.level][2];
           this.incCoins(shape * this['level' + this.level][2]);
       }
-      if (this.score > this.highscorete) {
-        this.highscorete = this.score;
+      if (score > this.highscorete) {
+        this.highscorete = score;
         localStorage.setItem("highscorete", this.highscorete); // Opslaan in localStorage
         // Update de weergave van de highscore op de pagina
         document.getElementById("highscorete").textContent = this.highscorete;
