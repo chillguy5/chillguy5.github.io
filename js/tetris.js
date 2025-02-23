@@ -81,6 +81,8 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
+      highscore: localStorage.getItem("hoghscoret") ? parseInt(localStorage.getItem("highscoret")) : 0,
+      hoghscoreDisplay: document.getElementById("highscoret"),
   
       init: function () {
         isStart = true;
@@ -114,11 +116,14 @@
           .getElementsByTagName('span')[0];
           this.coinsDisplay = document.getElementById('coins').querySelector('span');
           this.setInfo('coins');
+          this.highscoretDisplay = document.getElementById('highscoret').querySelector('span');
+          this.setInfo('highscoret');
         this.linesDisplay = document
           .getElementById('lines')
           .getElementsByTagName('span')[0];
         this.setInfo('time');
         this.setInfo('score');
+        this.setInfo('highscoret');
         this.setInfo('coins');
         this.setInfo('level');
         this.setInfo('lines');
@@ -289,6 +294,12 @@
         this.score = this.score + amount;
         this.setInfo('score');
       },
+      incHighscoret: function () {
+        if (this.score > this.highscoret) {
+          this.highscorec = this.score;
+          localStorage.setItem("highscoret", this.highscoret);
+      }
+      },
       incCoins: function (amount) {
         this.coins += amount;
         this.setInfo('coins');
@@ -309,18 +320,17 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
+        var highscoret = localStorage.getItem("hoghscoret") ? parseInt(localStorage.getItem("highscoret")) : 0;
 
   
         if (lines > 0) {
           score += lines * this['level' + this.level][1];
           this.incLines(lines);
           this.incCoins(lines * this['level' + this.level][1]);
-          
       }
       if (shape === true) {
           score += shape * this['level' + this.level][2];
           this.incCoins(shape * this['level' + this.level][2]);
-          
       }
         /*if (speed > 0){ score += speed * this["level" +this .level[3]];}*/
         this.incScore(score);
