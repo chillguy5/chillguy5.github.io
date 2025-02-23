@@ -332,8 +332,8 @@
           this.incCoins(shape * this['level' + this.level][2]);
       }
         // Update highscore als huidige score hoger is
-      if (this.score > this.highscore) {
-          this.highscore = this.score;
+      if (this.score > this.highscoretr) {
+          this.highscorete = this.score;
           localStorage.setItem("highscore", this.highscore); // Opslaan in localStorage
       }
 
