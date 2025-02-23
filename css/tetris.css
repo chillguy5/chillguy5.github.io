@@ -98,8 +98,8 @@ body {
   }
   
   #info {
-    background-color: #000;
-    color: #fff;
+    background-color: white;
+    color: black;
     float: right;
     width: 110px;
     height: 420px;
