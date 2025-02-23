@@ -81,7 +81,7 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
-      highscore: localStorage.getItem("hoghscoret") ? parseInt(localStorage.getItem("highscoret")) : 0,
+      highscore: localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0,
       hoghscoreDisplay: document.getElementById("highscoret"),
   
       init: function () {
@@ -320,7 +320,7 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        var highscoret = localStorage.getItem("hoghscoret") ? parseInt(localStorage.getItem("highscoret")) : 0;
+        var highscoret = localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0;
 
   
         if (lines > 0) {
