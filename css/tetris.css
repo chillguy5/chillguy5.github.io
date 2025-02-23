@@ -10,7 +10,7 @@ body {
   
   #tetris {
     width: 360px;
-    border: 5px solid black;
+    border: 1px solid white;
     padding: 20px;
   }
   
@@ -92,7 +92,7 @@ body {
   #next_shape {
     position: relative;
     background-color: #000;
-    border: 5px solid white;
+    border: 1px solid white;
     width: 110px;
     height: 110px;
   }
