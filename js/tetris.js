@@ -299,6 +299,7 @@
           this.highscorete = this.score;
           this.setInfo('highscorete');
           localStorage.setItem("highscorete", this.highscorete);
+          document.getElementById("highscorete").textContent = this.highscorete;
       }
       },
       incCoins: function (amount) {
