@@ -320,8 +320,7 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        var highscorete = localStorage.getItem("highscorete") ? parseInt(localStorage.getItem("highscorete")) : 0;
-
+        var highscorete = localStorage.getItem("highscorete") ? parseInt(localStorage.getItem("highscorete")) : 0
   
         if (lines > 0) {
           score += lines * this['level' + this.level][1];
@@ -332,6 +331,12 @@
           score += shape * this['level' + this.level][2];
           this.incCoins(shape * this['level' + this.level][2]);
       }
+        // Update highscore als huidige score hoger is
+      if (this.score > this.highscore) {
+          this.highscore = this.score;
+          localStorage.setItem("highscore", this.highscore); // Opslaan in localStorage
+      }
+
         /*if (speed > 0){ score += speed * this["level" +this .level[3]];}*/
         this.incScore(score);
       },
