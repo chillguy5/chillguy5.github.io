@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
+    <link rel="icon" type="image/x-icon" href="../images/overig/icon.png">
     <title>Chill Guy Games</title>
     <style>
         body {
@@ -17,7 +17,7 @@
             height: 100vh;
             margin: 0;
             position: relative;
-            background-image: url('images/overig/achtergrond.png'); /* Vervang dit met jouw afbeelding */
+            background-image: url('../images/overig/achtergrond.png'); /* Vervang dit met jouw afbeelding */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -178,36 +178,36 @@
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
+    <a href="index.html" class="back-link">Main menu<img src="../images/overig/homeicon.png" alt="home" class="home-icon"></a>
 
-    <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+    <div><img src="../images/overig/naam.png" alt="icon" class="title"></div>
     
-    <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></span></div>
+    <div class="coin-counter"><img src="../images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></span></div>
 
     <div class="game-container">
         <a href="jumper.html" class="game-link">
-            <img src="images/gameicons/timicon.png" alt="Jump Game" class="game-image">
+            <img src="../images/gameicons/timicon.png" alt="Jump Game" class="game-image">
         </a>
         <a href="gijs.html" class="game-link">
-            <img src="images/gameicons/gijsicon.png" alt="Shooter" class="game-image">
+            <img src="../images/gameicons/gijsicon.png" alt="Shooter" class="game-image">
         </a>
         <a href="flappy.html" class="game-link">
-            <img src="images/gameicons/flappyicon.png" alt="Flappy" class="game-image">
+            <img src="../images/gameicons/flappyicon.png" alt="Flappy" class="game-image">
         </a>
         <a href="tetris.html" class="game-link">
-            <img src="images/gameicons/tetrisicon.png" alt="Tetris" class="game-image">
+            <img src="../images/gameicons/tetrisicon.png" alt="Tetris" class="game-image">
         </a>
         <a href="candycrush.html" class="game-link">
-            <img src="images/gameicons/candycrushicon.png" alt="Candy Crush" class="game-image">
+            <img src="../images/gameicons/candycrushicon.png" alt="Candy Crush" class="game-image">
         </a>
     </div>
     <div class="game-container">
         <a href="crossy.html" class="game-link">
-            <img src="images/gameicons/crossyicon.png" alt="Crossy Road" class="game-image">
+            <img src="../images/gameicons/crossyicon.png" alt="Crossy Road" class="game-image">
         </a>
     </div>
     
-    <a href="store.html" class="store-button">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a>
+    <a href="store.html" class="store-button">Store<img src="../images/overig/storeicon.png" alt="cart" class="cart-icon"></a>
 
     <div class="credit">Made by Chill Guy Productions</div>
 
@@ -232,7 +232,7 @@ if (!audio) {
     audioElement.id = "background-audio";
     audioElement.autoplay = true;
     audioElement.loop = true;
-    audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
+    audioElement.innerHTML = '<source src="../sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
     document.body.appendChild(audioElement);
 }
 }
