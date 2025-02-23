@@ -58,7 +58,7 @@ const initGame = () => {
         highScore = score >= highScore ? score : highScore;
         localStorage.setItem("highscorea", highScore);
         scoreElement.innerText = `Score: ${score}`;
-        coins.innerText = `Coins: ${coins}`;
+        coinsElement.innerText = `Coins: ${coins}`;
         highScoreElement.innerText = `Highscore: ${highScore}`;
     }
     // Updating the snake's head position based on the current velocity
