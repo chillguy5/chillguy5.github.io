@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gijs game</title>
-    <script defer src="../js/gijs.js"></script> <!-- Link to your JavaScript game file -->
+    <script defer src="js/gijs.js"></script> <!-- Link to your JavaScript game file -->
     <script src="https://unpkg.com/kaboom/dist/kaboom.js"></script> <!-- Load Kaboom.js -->
-    <link rel="icon" type="image/x-icon" href="../images/overig/icon.png">
+    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
 </head>
 <script>
 // Controleer of geluid is ingeschakeld in localStorage
@@ -24,7 +24,7 @@ if (!audio) {
     audioElement.id = "background-audio";
     audioElement.autoplay = true;
     audioElement.loop = true;
-    audioElement.innerHTML = '<source src="../sound/53SanctuaryGuardian.mp3" type="audio/mpeg">';
+    audioElement.innerHTML = '<source src="sound/53SanctuaryGuardian.mp3" type="audio/mpeg">';
     document.body.appendChild(audioElement);
 }
 }
