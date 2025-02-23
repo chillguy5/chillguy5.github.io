@@ -297,6 +297,7 @@
       incHighscorete: function () {
         if (this.score > this.highscorete) {
           this.highscorete = this.score;
+          this.setInfo('highscorete');
           localStorage.setItem("highscorete", this.highscorete);
       }
       },
