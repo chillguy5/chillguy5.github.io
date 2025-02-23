@@ -81,8 +81,8 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
-      highscore: localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0,
-      hoghscoreDisplay: document.getElementById("highscoret"),
+      highscoret: localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0,
+      highscoretDisplay: document.getElementById("highscoret"),
   
       init: function () {
         isStart = true;
@@ -296,7 +296,7 @@
       },
       incHighscoret: function () {
         if (this.score > this.highscoret) {
-          this.highscorec = this.score;
+          this.highscoret = this.score;
           localStorage.setItem("highscoret", this.highscoret);
       }
       },
