@@ -10,8 +10,8 @@ let snakeBody = [];
 let setIntervalId;
 let score = 0;
 // Getting high score from the local storage
-let highScore = localStorage.getItem("high-score") || 0;
-highScoreElement.innerText = `High Score: ${highScore}`;
+let highScore = localStorage.getItem("highscorea") || 0;
+highScoreElement.innerText = `Highscore: ${highScore}`;
 const updateFoodPosition = () => {
     // Passing a random 1 - 30 value as food position
     foodX = Math.floor(Math.random() * 30) + 1;
@@ -50,9 +50,9 @@ const initGame = () => {
         snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
         score++; // increment score by 1
         highScore = score >= highScore ? score : highScore;
-        localStorage.setItem("high-score", highScore);
+        localStorage.setItem("highscorea", highScore);
         scoreElement.innerText = `Score: ${score}`;
-        highScoreElement.innerText = `High Score: ${highScore}`;
+        highScoreElement.innerText = `Highscore: ${highScore}`;
     }
     // Updating the snake's head position based on the current velocity
     snakeX += velocityX;
