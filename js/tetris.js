@@ -81,8 +81,8 @@
       lines: 0,
       coins: localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0,
       coinsDisplay: document.getElementById("coins"),
-      highscoret: localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0,
-      highscoretDisplay: document.getElementById("highscoret"),
+      highscorete: localStorage.getItem("highscorete") ? parseInt(localStorage.getItem("highscorete")) : 0,
+      highscoreteDisplay: document.getElementById("highscorete"),
   
       init: function () {
         isStart = true;
@@ -116,14 +116,14 @@
           .getElementsByTagName('span')[0];
           this.coinsDisplay = document.getElementById('coins').querySelector('span');
           this.setInfo('coins');
-          this.highscoretDisplay = document.getElementById('highscoret').querySelector('span');
-          this.setInfo('highscoret');
+          this.highscoreteDisplay = document.getElementById('highscorete').querySelector('span');
+          this.setInfo('highscorete');
         this.linesDisplay = document
           .getElementById('lines')
           .getElementsByTagName('span')[0];
         this.setInfo('time');
         this.setInfo('score');
-        this.setInfo('highscoret');
+        this.setInfo('highscorete');
         this.setInfo('coins');
         this.setInfo('level');
         this.setInfo('lines');
@@ -294,10 +294,10 @@
         this.score = this.score + amount;
         this.setInfo('score');
       },
-      incHighscoret: function () {
-        if (this.score > this.highscoret) {
-          this.highscoret = this.score;
-          localStorage.setItem("highscoret", this.highscoret);
+      incHighscorete: function () {
+        if (this.score > this.highscorete) {
+          this.highscorete = this.score;
+          localStorage.setItem("highscorete", this.highscorete);
       }
       },
       incCoins: function (amount) {
@@ -320,7 +320,7 @@
         var speed = args.speed || 0;
         var score = 0;
         var coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-        var highscoret = localStorage.getItem("highscoret") ? parseInt(localStorage.getItem("highscoret")) : 0;
+        var highscorete = localStorage.getItem("highscorete") ? parseInt(localStorage.getItem("highscorete")) : 0;
 
   
         if (lines > 0) {
