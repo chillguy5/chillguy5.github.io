@@ -9,7 +9,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="snake.js" defer></script>
   </head>
+  <style>
+    .home-icon{
+      width: 40px; /* Pas de grootte aan */
+      height: 40px;
+      margin-left: 0px;
+      vertical-align: middle;
+  }
+  
+  .back-link {
+      position: absolute;
+      display: inline-block;
+      z-index: 1000;
+      top: 80px;
+      left: 15px;
+      padding: 10px 20px;
+      font-size: 30px;
+      color: #cd3f2b;
+      background-color: #f8f8d7;
+      text-decoration: none;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.2s, transform 0.2s;
+      font-weight: bold;
+  }
+  
+  .back-link:hover{
+      background-color: #f0aa5e;
+      transform: scale(1.1);
+  }
+  
+      /* 40px chunks */
+  </style>
   <body>
+    <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
+
+
     <div class="wrapper">
       <div class="game-details">
         <span class="score">Score: 0</span>
