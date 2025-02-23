@@ -46,9 +46,9 @@ scene("start", () => {
     addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
-let selectedCharacter = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
+let selectedCharacter = localStorage.getItem("selectedCharacter") || "../images/characters/timgame.png";
 loadSprite("player", selectedCharacter);
-loadSprite("background", "images/overig/school.jpg"); // Laad de achtergrondafbeelding
+loadSprite("background", "../images/overig/school.jpg"); // Laad de achtergrondafbeelding
 
 scene("game", () => {
     setGravity(2400);
@@ -81,22 +81,22 @@ scene("game", () => {
     });
 
     const players = [
-        { name: "images/characters/timgame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "images/characters/gijsgame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "images/characters/samuelgame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "images/characters/ardagame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "images/characters/amirgame.png", x: 80, y: 40, scale: 0.65 },
-        { name: "images/characters/bashargame.png", x: 80, y: 40, scale: 0.5 },
-        { name: "images/characters/69game.png", x: 80, y: 40, scale: 0.55 },
-        { name: "images/characters/chillguygame1.png", x: 80, y: 40, scale: 0.25 },
-        { name: "images/characters/mangogame1.webp", x: 80, y: 40, scale: 0.1 },
-        { name: "images/characters/johnporkgame1.png", x: 80, y: 40, scale: 0.15 },
-        { name: "images/characters/pessigame1.png", x: 80, y: 40, scale: 0.20 },
-        { name: "images/characters/goldgame.png", x: 80, y: 40, scale: 0.2 }
+        { name: "../images/characters/timgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "../images/characters/gijsgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "../images/characters/samuelgame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "../images/characters/ardagame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "../images/characters/amirgame.png", x: 80, y: 40, scale: 0.65 },
+        { name: "../images/characters/bashargame.png", x: 80, y: 40, scale: 0.5 },
+        { name: "../images/characters/69game.png", x: 80, y: 40, scale: 0.55 },
+        { name: "../images/characters/chillguygame1.png", x: 80, y: 40, scale: 0.25 },
+        { name: "../images/characters/mangogame1.webp", x: 80, y: 40, scale: 0.1 },
+        { name: "../images/characters/johnporkgame1.png", x: 80, y: 40, scale: 0.15 },
+        { name: "../images/characters/pessigame1.png", x: 80, y: 40, scale: 0.20 },
+        { name: "../images/characters/goldgame.png", x: 80, y: 40, scale: 0.2 }
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
-let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
+let selectedCharacterName = localStorage.getItem("selectedCharacter") || "../images/characters/timgame.png";
 
 // Zoek het bijbehorende karakter in de players array
 let playerData = players.find(p => p.name === selectedCharacterName);
@@ -136,7 +136,7 @@ function jump() {
     onKeyPress("space", jump);
     onClick(jump);
 
-    loadSprite("tree", "images/overig/lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
+    loadSprite("tree", "../images/overig/lennon.png"); // Zorg ervoor dat "boom.png" in je project staat
 
     function spawnTree() {
         add([
