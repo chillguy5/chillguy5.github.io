@@ -238,7 +238,7 @@
         document.getElementById("coins").textContent = coins;
 
         document.addEventListener("DOMContentLoaded", function() {
-        if (localStorage.getItem("dailyClaimed3") === "true") {
+        if (localStorage.getItem("dailyClaimed4") === "true") {
             document.querySelector(".daily-login-button").style.display = "none";
         }
     });
@@ -246,13 +246,13 @@
     function claimDailyReward() {
         let dailyButton = document.querySelector(".daily-login-button");
         dailyButton.style.display = "none"; // Verberg de knop na klikken
-        localStorage.setItem("dailyClaimed3", "true"); // Opslaan dat de beloning is opgehaald
+        localStorage.setItem("dailyClaimed4", "true"); // Opslaan dat de beloning is opgehaald
         
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         coins += 25000; // Voeg 100 coins toe als dagelijkse beloning
         localStorage.setItem("coins", coins);
         document.getElementById("coins").textContent = coins;
-        alert("Gefeliciteerd! Je hebt 25000 extra coins ontvangen vanwegeje daily login!");
+        alert("Gefeliciteerd! Je hebt 25000 extra coins ontvangen vanwege je daily login!");
     }
 
         // Functie om het geluid in te schakelen of uit te schakelen
