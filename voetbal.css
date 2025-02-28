@@ -54,7 +54,7 @@ body {
   /* Game board CSS rules */
   
   .game-board {
-    background: url("../images/background.png") no-repeat center center fixed; 
+    background: url("background.png") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -63,7 +63,7 @@ body {
   }
   
   .winScreen {
-    background: url("../images/wingif.gif") no-repeat center center fixed;
+    background: url("wingif.gif") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

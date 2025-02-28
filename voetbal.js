@@ -74,7 +74,7 @@ window.onload = function() {
         var start;
     
         function topLeft() {
-          hopeSoloImageSource = "images/solo-topleft.png";
+          hopeSoloImageSource = "solo-topleft.png";
           if (that.x !== 185 && that.y !== 250) {
             that.x -=5;
             that.y -=3;
@@ -91,7 +91,7 @@ window.onload = function() {
         }
     
         function topRight() {
-          hopeSoloImageSource = "images/solo-topright.png";
+          hopeSoloImageSource = "solo-topright.png";
           if (that.x !== 1000 && that.y !== 250) {
             that.x += 5;
             that.y -= 5;
@@ -108,7 +108,7 @@ window.onload = function() {
         }
     
         function bottomLeft() {
-          hopeSoloImageSource = "images/solo-bottomleft.png";
+          hopeSoloImageSource = "solo-bottomleft.png";
           if (that.x !== 185 && that.y !== 500) {
             that.x -= 5;
             that.y += 1;
@@ -125,7 +125,7 @@ window.onload = function() {
         }
       
         function bottomRight() {
-          hopeSoloImageSource = "images/solo-bottomright.png";
+          hopeSoloImageSource = "solo-bottomright.png";
           if (that.x !== 700 && that.y !== 500) {
             that.x += 5;
             that.y += 3;
@@ -269,7 +269,7 @@ window.onload = function() {
         this.y = 660;     
         this.width = 80;  
         this.height = 80; 
-        this.img = "images/ball.png"; 
+        this.img = "ball.png"; 
       }
     
     // Draw the ball
@@ -277,7 +277,7 @@ window.onload = function() {
       Ball.prototype.drawBall = function(){ 
         var ballPosition = this; 
         fieldctx.drawImage(theBall, ballPosition.x, ballPosition.y, ballPosition.width, ballPosition.height);
-        theBall.src = "images/ball.png"
+        theBall.src = "ball.png"
       }
     
     // Shoot the ball
@@ -435,7 +435,7 @@ window.onload = function() {
             currentGame.ball = theBall;
             var theKeeper = new Keeper();
             currentGame.keeper = theKeeper;
-            hopeSoloImageSource = "images/solo-ready.png";
+            hopeSoloImageSource = "solo-ready.png";
           }, 2200)
         }
       }
@@ -477,7 +477,7 @@ window.onload = function() {
         currentGame.ball = theBall;
         var theKeeper = new Keeper();
         currentGame.keeper = theKeeper;
-        hopeSoloImageSource = "images/solo-ready.png";
+        hopeSoloImageSource = "solo-ready.png";
         animateGame();
         endGame();
       }
