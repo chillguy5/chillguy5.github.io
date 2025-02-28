@@ -166,8 +166,32 @@
     color: #f8f8d7;
     font-weight: bold;
 }
+
+.loadingScreen {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+  background-color: #4a1015;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingScreen img {
+    width: 600px;  /* Pas dit aan naar gewenste breedte */
+    height: 200px; /* Pas dit aan naar gewenste hoogte */
+}
     </style>
 <script>
+    var loadingScreen = document.querySelector(".loadingScreen");
+
+window.addEventListener('load', function() {
+setTimeout(function() {
+    loadingScreen.style.display = 'none';
+}, 2500); // 2500 milliseconden = 2.5 seconden
+});
+
     function updateCoinDisplay() {
         document.getElementById("coin-count").textContent = localStorage.getItem("coins") || 0;
     }
@@ -276,6 +300,9 @@
 
 </head>
 <body>
+    <div class="loadingScreen">
+        <h1><img src="loading.gif" alt="disc" /></h1>
+      </div>
 
     <h1 class="store-title">STORE<img src="images/overig/storeicon.png" alt="Winkelmandje" class="cart-icon"></h1>
     <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coin-count">0</span></div>

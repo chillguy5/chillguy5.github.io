@@ -174,10 +174,28 @@
     font-weight: bold;
 }
 
+.loadingScreen {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+  background-color: #4a1015;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.loadingScreen img {
+    width: 600px;  /* Pas dit aan naar gewenste breedte */
+    height: 200px; /* Pas dit aan naar gewenste hoogte */
+}
     </style>
 </head>
 <body>
+    <div class="loadingScreen">
+        <h1><img src="loading.gif" alt="disc" /></h1>
+      </div>
+
     <a href="index.html" class="back-link">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
 
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
@@ -215,6 +233,14 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
+    var loadingScreen = document.querySelector(".loadingScreen");
+
+window.addEventListener('load', function() {
+setTimeout(function() {
+    loadingScreen.style.display = 'none';
+}, 2500); // 2500 milliseconden = 2.5 seconden
+});
+
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
 
