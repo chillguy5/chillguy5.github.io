@@ -204,6 +204,7 @@
     </style>
 </head>
 <body>
+    <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()">Daily Login<img src="images/overig/daily.png" alt="coin" class="coin-icon"></a>
     
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
@@ -251,6 +252,7 @@
         coins += 25000; // Voeg 100 coins toe als dagelijkse beloning
         localStorage.setItem("coins", coins);
         document.getElementById("coins").textContent = coins;
+        alert("Gefeliciteerd! Je hebt 25000 extra coins ontvangen vanwegeje daily login!");
     }
 
         // Functie om het geluid in te schakelen of uit te schakelen
