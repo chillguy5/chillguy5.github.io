@@ -1,0 +1,172 @@
+/* General CSS Rules */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  
+  
+  /* Modal CSS Rules */
+  
+  #modal {
+    color: #333;
+    padding: 30px;
+    width: 100%;
+  }
+  
+  #modal img {
+    display: block;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+  
+  #modal button {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background-color: #008df9;
+    border: 1px outset #008df9;
+    color: white;
+    border-radius: 0;
+    margin-left: 130px;
+    height: 50px;
+    width: 170px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+  }
+  
+  #modal button:hover {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background-color: #2fad08;
+    border: 1px outset #2fad08;
+    color: white;
+    border-radius: 0;
+    margin-left: 130px;
+    height: 50px;
+    width: 170px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+  }
+  
+  
+  /* Game board CSS rules */
+  
+  .game-board {
+    background: url("../images/background.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed; 
+  }
+  
+  .winScreen {
+    background: url("../images/wingif.gif") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute; 
+  }
+  
+  #theField {
+    z-index: 1;
+  }
+  
+  
+  
+  /* Scoreboard CSS rules */
+  
+  .scoreboard {
+    position: absolute;
+    height: 60px;
+    width: 400px;
+    background-color: rgba(119, 119, 119,0.8);
+    border-radius: 10px;
+    margin-top: 45px;
+    margin-left: 34%;
+    margin-right: auto;
+  }
+  
+  .scoreboard img {
+    position: absolute;
+    height: 50px;
+    background-color: rgba(128,128,128,0);
+    padding-top: 10px;
+    padding-left: 30px;
+  }
+  
+  .shot1 {
+    position: absolute;
+    height: 40px; 
+    width: 40px;
+    background-color: rgba(255, 255, 255,0.3);
+    border:3px solid #fff;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    margin-top: 10px;
+    margin-left: 110px;
+  }
+  
+  .shot2 {
+    position: absolute;
+    height: 40px; 
+    width: 40px;
+    background-color: rgba(255, 255, 255,0.3);
+    border:3px solid #fff;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    margin-top: 10px;
+    margin-left: 160px;
+  }
+  
+  .shot3 {
+    position: absolute;
+    height: 40px; 
+    width: 40px;
+    background-color: rgba(255, 255, 255,0.3);
+    border:3px solid #fff;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    margin-top: 10px;
+    margin-left: 210px;
+  }
+  
+  .shot4 {
+    position: absolute;
+    height: 40px; 
+    width: 40px;
+    background-color: rgba(255, 255, 255,0.3);
+    border:3px solid #fff;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    margin-top: 10px;
+    margin-left: 260px;
+  }
+  
+  .shot5 {
+    position: absolute;
+    height: 40px; 
+    width: 40px;
+    background-color: rgba(255, 255, 255,0.3);
+    border:3px solid #fff;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    margin-top: 10px;
+    margin-left: 310px;
+  }
+  
+  .goal {
+    background-color: #2fad08;
+  }
+  
+  .saved {
+    background-color: #ce1404;
+  }

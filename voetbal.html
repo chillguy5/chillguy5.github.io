@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+  <link rel="stylesheet" href="voetbal.css">
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <script src="voetbal.js"></script>
+
+  <title>PK Shootout</title>
+</head>
+
+<body>
+
+<!-- Opening Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body" id="modal" style="background-color: #fff;">
+          <h3><strong>PK Shootout</strong></h3>
+          <p>Can you best Hope Solo in a penalty kick shootout? <strong>Expand your screen to full size</strong> and Press <strong>START GAME</strong> below to find out.</p>
+            <ul>
+              <li>Use the <strong>A</strong>, <strong>S</strong>, <strong>Z</strong>, and <strong>X</strong> keys to pick your spot and shoot.</li>
+              <li>Score 3 goals out of 5, you win!</li>
+            </ul>
+          <img src="./images/instructions.png" alt="A key shoots top left, S key shoots top right, Z key shoots bottom left, X key shoots bottom right." width="450px">
+          <button type="button" class="btn btn-primary" id="start-button" data-dismiss="modal">START GAME</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="game-board">
+    <div class="scoreboard">
+      <img src="images/ironhack.png">
+      <div class="shot1"></div>
+      <div class="shot2"></div>
+      <div class="shot3"></div>
+      <div class="shot4"></div>
+      <div class="shot5"></div>
+    </div>
+    <canvas id="theField" width="1275" height="735"></canvas>
+  </div>
+  
+</body>
+</html>
