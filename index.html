@@ -238,9 +238,16 @@
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
 
-        function claimDailyReward() {
+        document.addEventListener("DOMContentLoaded", function() {
+        if (localStorage.getItem("dailyClaimed") === "true") {
+            document.querySelector(".daily-login-button").style.display = "none";
+        }
+    });
+
+    function claimDailyReward() {
         let dailyButton = document.querySelector(".daily-login-button");
         dailyButton.style.display = "none"; // Verberg de knop na klikken
+        localStorage.setItem("dailyClaimed", "true"); // Opslaan dat de beloning is opgehaald
         
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         coins += 100; // Voeg 100 coins toe als dagelijkse beloning
