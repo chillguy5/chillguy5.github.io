@@ -221,6 +221,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.loadingScreen img {
+    width: 600px;  /* Pas dit aan naar gewenste breedte */
+    height: 200px; /* Pas dit aan naar gewenste hoogte */
+}
     </style>
 </head>
 <body>
@@ -266,7 +271,7 @@
     window.addEventListener('load', function() {
     setTimeout(function() {
         loadingScreen.style.display = 'none';
-    }, 2000); // 2000 milliseconden = 2 seconden
+    }, 5000); // 5000 milliseconden = 5 seconden
 });
 
         let coins = parseInt(localStorage.getItem("coins")) || 0;
