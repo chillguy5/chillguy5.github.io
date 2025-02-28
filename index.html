@@ -180,10 +180,32 @@
     transform-origin: center;
 }
 
+.daily-login-button {
+        position: absolute;
+        display: inline-block;
+        top: 170px; /* Onder de Stats-knop */
+        left: 30px;
+        padding: 10px 20px;
+        font-size: 30px;
+        color: #cd3f2b;
+        background-color: #f8f8d7;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.2s, transform 0.2s;
+        font-weight: bold;
+    }
+
+    .daily-login-button:hover {
+        background-color: #f0aa5e;
+        transform: scale(1.1);
+    }
 
     </style>
 </head>
 <body>
+
+    <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()">Daily Login</a>
 
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
@@ -215,6 +237,16 @@
     <script>
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
+
+        function claimDailyReward() {
+        let dailyButton = document.querySelector(".daily-login-button");
+        dailyButton.style.display = "none"; // Verberg de knop na klikken
+        
+        let coins = parseInt(localStorage.getItem("coins")) || 0;
+        coins += 100; // Voeg 100 coins toe als dagelijkse beloning
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").textContent = coins;
+    }
 
         // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
