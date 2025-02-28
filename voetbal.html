@@ -1,55 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Penalty Shootout</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="normalize.min.css">
+        <link rel="stylesheet" href="voetbal.css">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
-  <link rel="stylesheet" href="voetbal.css">
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-  <script src="voetbal.js"></script>
+        <!-- favicon -->
+        <link rel="icon" type="image/png" href="img/favicons/zee-ball-16x16.png" sizes="16x16">
+        <link rel="apple-touch-icon" sizes="152x152" type="image/png" href="img/favicons/zee-ball-43x43.png" sizes="43x43">
 
-  <title>PK Shootout</title>
-</head>
 
-<body>
+        <script src="vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-<!-- Opening Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body" id="modal" style="background-color: #fff;">
-          <h3><strong>PK Shootout</strong></h3>
-          <p>Can you best Hope Solo in a penalty kick shootout? <strong>Expand your screen to full size</strong> and Press <strong>START GAME</strong> below to find out.</p>
-            <ul>
-              <li>Use the <strong>A</strong>, <strong>S</strong>, <strong>Z</strong>, and <strong>X</strong> keys to pick your spot and shoot.</li>
-              <li>Score 3 goals out of 5, you win!</li>
-            </ul>
-          <img src="instructions.png" alt="A key shoots top left, S key shoots top right, Z key shoots bottom left, X key shoots bottom right." width="450px">
-          <button type="button" class="btn btn-primary" id="start-button" data-dismiss="modal">START GAME</button>
+        <div id="zee-game">
+
+          <!-- game objects -->
+          <div class="goal-keeper standing" id="goal-keeper-state-1"></div>
+          <div class="goal-keeper left-jump" id="goal-keeper-state-2"></div>
+          <div class="goal-keeper right-jump" id="goal-keeper-state-3"></div>
+          <img id="zee-ball" src="img/zee-ball.png" width="43" height="43"/>
+          <canvas id="kickAnimation"></canvas>
+
+          <!-- modals -->
+          <div id="modal-1" class="modal">Click to fix vertical direction</div>
+          <div id="modal-2" class="modal">Click to fix horizontal direction</div>
+          <div id="modal-3" class="modal">Click to adjust power and kick</div>
+          <div id="modal-4" class="modal">Click to try again</div>
+          <div id="modal-5" class="modal">Goal!</div>
+          <div id="modal-6" class="modal">Go on, give it another shot</div>
+          <div id="modal-7" class="modal">Congrats! You won!</div>
+
+          <!-- control meters -->
+          <div id="vertical-direction"></div>
+          <div id="vertical-direction-indicator" class="small-ball one-end"></div>
+          <div id="horizontal-direction"></div>
+          <div id="horizontal-direction-indicator" class="small-ball one-end"></div>
+          <div id="power-level"></div>
+          <div id="power-level-indicator" class="small-ball one-end"></div>
+
+          <!-- scoring -->
+          <ul id="score-board">
+            <li><img src="img/zee-ball.png" width="32" height="32"></li>
+            <li><img src="img/zee-ball.png" width="32" height="32"></li>
+            <li><img src="img/zee-ball.png" width="32" height="32"></li>
+            <li><img src="img/zee-ball.png" width="32" height="32"></li>
+            <li><img src="img/zee-ball.png" width="32" height="32"></li>
+          </ul>
+
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="game-board">
-    <div class="scoreboard">
-      <img src="ironhack.png">
-      <div class="shot1"></div>
-      <div class="shot2"></div>
-      <div class="shot3"></div>
-      <div class="shot4"></div>
-      <div class="shot5"></div>
-    </div>
-    <canvas id="theField" width="1275" height="735"></canvas>
-  </div>
-  
-</body>
+
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script> -->
+
+        <script src="pathAnimator.js"></script>
+        <script src="voetbal.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script> -->
+    </body>
 </html>

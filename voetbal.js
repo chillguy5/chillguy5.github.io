@@ -1,510 +1,439 @@
-window.onload = function() {
+// kick animation using William Malone's code 
+// http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
 
-    ////////////////////////////////////////////
-    ///// - - - - -    Global    - - - - - /////
-    ////////////////////////////////////////////
-    
-    $('.modal').modal({backdrop: 'static', keyboard: false});
-    $('.modal').modal('show');
-    
-    var currentGame;
-    var scoresArr = [];
-    var attempt = 0;
-    var score = 0;
-    
-    
-    ////////////////////////////////////////////
-    ////// - - - -     Sounds     - - - - //////
-    ////////////////////////////////////////////
-    
-    function sound(src) {
-      this.sound = document.createElement("audio");
-      this.sound.src = src;
-      this.sound.setAttribute("preload", "auto");
-      this.sound.setAttribute("controls", "none");
-      this.sound.style.display = "none";
-      document.body.appendChild(this.sound);
-      this.play = function(){
-          this.sound.play();
-      }
-      this.stop = function(){
-          this.sound.pause();
-      }
+// Copyright 2013 William Malone (www.williammalone.com)
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+ 
+(function() {
+	// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+	// http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+	// requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+	// MIT license
+
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
-    var soundOle;
-    var whistle;
-    var cheering;
-    var win;
-    var lose;
-    
-    soundOle = new sound("audio/oleole.mp3");
-        soundOle.play();
-    
-    whistle = new sound("audio/whistle.mp3");
-    cheering = new sound("audio/cheering.mp3");
-    win = new sound("audio/win.mp3");
-    lose = new sound("audio/lose.mp3");
-    
-    
-    ////////////////////////////////////////////
-    ///// - - - -    The keeper    - - - - /////
-    ////////////////////////////////////////////
-    
-    // The keeper
-      var Keeper = function(){
-        this.x = 590;     
-        this.y = 410;     
-        this.width = 89;  
-        this.height = 190; 
-      }
-    
-    // Draw the keeper
-      var hopeSoloImageSource;
-      var theKeeper = new Image(); 
-      Keeper.prototype.drawKeeper = function() { 
-        // scope thing, this function has its own scope so it needs to be called
-        var keeperPosition = this;
-        fieldctx.drawImage(theKeeper, keeperPosition.x, keeperPosition.y);
-        theKeeper.src = hopeSoloImageSource
-      }
-    
-    // Make the keeper dive
-      Keeper.prototype.dive = function(keyPressed) {
-        var that = this;
-        var start;
-    
-        function topLeft() {
-          hopeSoloImageSource = "solo-topleft.png";
-          if (that.x !== 185 && that.y !== 250) {
-            that.x -=5;
-            that.y -=3;
-          }
-          if (that.x !== 185) {
-            that.x -= 5;
-          }
-          if (that.y !==250) {
-              that.y -= 1;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
-    
-        function topRight() {
-          hopeSoloImageSource = "solo-topright.png";
-          if (that.x !== 1000 && that.y !== 250) {
-            that.x += 5;
-            that.y -= 5;
-          }
-          if (that.x !== 1000) {
-            that.x += 5;
-          }
-          if (that.y !==250) {
-            that.y -= 5;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
-    
-        function bottomLeft() {
-          hopeSoloImageSource = "solo-bottomleft.png";
-          if (that.x !== 185 && that.y !== 500) {
-            that.x -= 5;
-            that.y += 1;
-          }
-          if (that.x !== 185) {
-            that.x -= 5;
-          }
-          if (that.y !== 500) {
-            that.y += 1;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
+
+
+
+// stopping the oscillating indicators, recording values of indicators and keeping track of goals
+var verticalBallStopped = false;
+var horizontalBallStopped = false;
+var powerBallStopped = false;
+var x1, x2, x3;
+var chanceCount = 0;
+// recording the direction of the jump by the player, goal or not and the end co-ordinates of the ball
+var direction;
+var endTop = 440;
+var endLeft = 390;
+var score = 0;     
+// variables to store user information
+var thisName;
+var thisTel;
+var thisEmail;
+var thisCity;
+
+function kick(el, et) {
+  
+	var player,
+		playerImage,
+		canvas,
+		isItOver;
+		
+	isItOver = false;
+
+	function gameLoop () {
+	  if (isItOver == false) {
+	    window.requestAnimationFrame(gameLoop);
+
+	    player.update();
+	    player.render();
+	  }
+	}
+	
+	function sprite (options) {
+	
+		var that = {},
+			frameIndex = 0,
+			tickCount = 0,
+			ticksPerFrame = options.ticksPerFrame || 0,
+			numberOfFrames = options.numberOfFrames || 1;
+		
+		that.context = options.context;
+		that.width = options.width;
+		that.height = options.height;
+		that.image = options.image;
+		
+		that.update = function () {
+
+            tickCount += 1;
+
+            if (tickCount > ticksPerFrame) {
+
+				    tickCount = 0;
+				
+                // If the current frame index is in range
+                if (frameIndex < numberOfFrames - 2) {
+                    // Go to the next frame
+                    frameIndex += 1;
+                }
+                else if (frameIndex == numberOfFrames - 2) {
+                    frameIndex += 1;
+                    // start moving the ball
+                    moveBall(el, et);
+                    // make the goal keeper jump
+                    keeperJump();
+                }
+                else if (frameIndex < numberOfFrames - 1) {
+                    frameIndex += 1;
+                }
+                else {
+                    // frameIndex = 0; // don't repeat the animation
+                    isItOver = true;
+                }
+            }
+        };
+		
+		that.render = function () {
+		
+		  // Clear the canvas
+		  that.context.clearRect(0, 0, that.width, that.height);
+		  
+		  // Draw the animation
+		  that.context.drawImage(
+		    that.image,
+		    frameIndex * that.width / numberOfFrames,
+		    0,
+		    that.width / numberOfFrames,
+		    that.height,
+		    0,
+		    0,
+		    that.width / numberOfFrames,
+		    that.height);
+		};
+		
+		return that;
+	}
+	
+	// Get canvas
+	canvas = document.getElementById("kickAnimation");
+	canvas.width = 150;
+	canvas.height = 270;
+	
+	// Create sprite sheet
+	playerImage = new Image();	
+	
+	// Create sprite
+	player = sprite({
+		context: canvas.getContext("2d"),
+		width: 300,
+		height: 270,
+		image: playerImage,
+		numberOfFrames: 2,
+		ticksPerFrame: 20
+	});
+	
+	// Load sprite sheet
+	playerImage.addEventListener("load", gameLoop);
+	playerImage.src = "img/slow-kick-right.png";
+	
+}
+
+function keeperJump() {
+                    var randomBinary = Math.floor(Math.random()*2);
+                    var someTimeAfter = window.setTimeout(function() {
+                      if ((randomBinary == 0) && (x3 >= 0.55)) {
+                    document.getElementById('goal-keeper-state-1').style.display = "none";
+                        document.getElementById('goal-keeper-state-2').style.display = "block";
+                        direction = "left";
+                      }
+                      else if ((randomBinary == 1) && (x3 >= 0.55)) {
+                    document.getElementById('goal-keeper-state-1').style.display = "none";
+                        document.getElementById('goal-keeper-state-3').style.display = "block";
+                        direction = "right";
+                      }
+                    }, 0);
+}
+
+function moveBall(el, et) {
+  var path = "M " + "390" + "," + "440" + " "+ el + "," + et; // Ml Mt Ql Qt El Et " Q " + "460" + "," + "340" + 
+	  pathAnimator = new PathAnimator( path ),	// initiate a new pathAnimator object
+	  objToAnimate = document.getElementById('zee-ball'),	// The object that will move along the path
+	  speed = 0.5,	 		// seconds that will take going through the whole path
+	  reverse = false,	// go back of forward along the path
+	  startOffset = 0		// between 0% to 100%
+	  
+  // start animating the ball
+  pathAnimator.start( speed, step, reverse, startOffset, finish);
+
+  // make the ball smaller in size with respect to the distance from the eye please!
+
+  function step( point, angle ){
+	  // do something every "frame" with: point.x, point.y & angle
+	  objToAnimate.style.cssText = "top:" + point.y + "px;" +
+								  "left:" + point.x + "px;" +
+								  "transform:rotate("+ angle +"deg);" +
+								  "-webkit-transform:rotate("+ angle +"deg);";
+  }
+  
+  function finish(){
+	  // see if the ball has reached the goal
+	  if ((endTop >= 98)&&(endTop <= 292)&&(endLeft >= 114)&&(endLeft <= 710)) {
+	    if ((direction == "right")&&(endLeft < 362)) {
+	      // increase the score and indicate it on the score board
+	      incrementScore();
+	      if (chanceCount < 4) {modalElem5.setAttribute("class","modal active");}
+	      else {
+	        if (score > 4) {modalElem7.setAttribute("class","modal active");}
+	        else {modalElem6.innerHTML = "You scored " + score + " goal(s) out of 5. Click to try again";
+	              modalElem6.setAttribute("class","modal active");}
+	      }
+	    }
+	    else if ((direction == "left")&&(endLeft >= 362)) {
+	      // increase the score and indicate it on the score board
+	      incrementScore();
+	      if (chanceCount < 4) {modalElem5.setAttribute("class","modal active");}
+	      else {
+	        if (score > 4) {modalElem7.setAttribute("class","modal active");}
+	        else {modalElem6.innerHTML = "You scored " + score + " goal(s) out of 5. Click to try again";
+	              modalElem6.setAttribute("class","modal active");}
+	      }
+	    }
+	    else {
+	      if (chanceCount < 4) {modalElem4.setAttribute("class","modal active");}
+	      else {
+	        modalElem6.innerHTML = "You scored " + score + " goal(s) out of 5. Click to try again";
+	        modalElem6.setAttribute("class","modal active");
+	      }
+	    }
+	  }
+	  else {
+	      if (chanceCount < 4) {modalElem4.setAttribute("class","modal active");}
+	      else {
+	        modalElem6.innerHTML = "You scored " + score + " goal(s) out of 5. Click to try again";
+	        modalElem6.setAttribute("class","modal active");
+	      }
+	  }
+  }
+}
+
+// to osciallte the vertical direction indicator
+function moveVerticalSmallBall() {
+  var thing = document.getElementById('vertical-direction-indicator');
+  if (thing.getAttribute('class') == "small-ball one-end") {
+    thing.setAttribute('class','small-ball other-end');
+  }
+  else if (thing.getAttribute('class') == "small-ball other-end") {
+    thing.setAttribute('class','small-ball one-end');
+  }
+}
+
+var verticalIndicatorOscillate = window.setInterval(moveVerticalSmallBall, 320);
+
+// to osciallte the horizontal direction indicator
+function moveHorizontalSmallBall() {
+  var thing = document.getElementById('horizontal-direction-indicator');
+  if (thing.getAttribute('class') == "small-ball one-end") {
+    thing.setAttribute('class','small-ball other-end');
+  }
+  else if (thing.getAttribute('class') == "small-ball other-end") {
+    thing.setAttribute('class','small-ball one-end');
+  }
+}
+
+var verticalIndicatorOscillate = window.setInterval(moveHorizontalSmallBall, 320);
+
+// to osciallte the vertical direction indicator
+function movePowerSmallBall() {
+  var thing = document.getElementById('power-level-indicator');
+  if (thing.getAttribute('class') == "small-ball one-end") {
+    thing.setAttribute('class','small-ball other-end');
+  }
+  else if (thing.getAttribute('class') == "small-ball other-end") {
+    thing.setAttribute('class','small-ball one-end');
+  }
+}
+
+var powerLevelOscillate = window.setInterval(movePowerSmallBall, 320);
+
+function refreshScene() {
+  // stop the meters
+  document.getElementById('vertical-direction-indicator').setAttribute('style','')
+  document.getElementById('vertical-direction-indicator').setAttribute('class','small-ball one-end');
+  document.getElementById('horizontal-direction-indicator').setAttribute('style','')
+  document.getElementById('horizontal-direction-indicator').setAttribute('class','small-ball one-end');
+  document.getElementById('power-level-indicator').setAttribute('style','')
+  document.getElementById('power-level-indicator').setAttribute('class','small-ball one-end');
+  verticalBallStopped = false;
+  horizontalBallStopped = false;
+  powerBallStopped = false;
+  
+  // stop the ball
+  document.getElementById('zee-ball').setAttribute('style','')
+  document.getElementById('zee-ball').setAttribute('class','');
+  
+  // clear the canvas or in other words, make the player vanish
+  var contextForNow = document.getElementById('kickAnimation').getContext('2d');
+  contextForNow.clearRect(0,0,150,270);
+  
+  // reset position of the goal keeper
+  document.getElementById('goal-keeper-state-2').style.display = "none";
+  document.getElementById('goal-keeper-state-3').style.display = "none";
+  document.getElementById('goal-keeper-state-1').style.display = "block";
+}
+
+function stopVerticalBall() {
+      var element = document.getElementById('vertical-direction-indicator'),
+        style = window.getComputedStyle(element),
+        top = style.getPropertyValue('top');
+      x1 = parseInt(top.substring(0,3), 10);
+      x1 = (459-x1)/117;
+      console.log(x1);
+      // fix the position of the small ball to wherever it is
+      element.setAttribute("class", "small-ball");
+      element.style.top = top;
+      verticalBallStopped = true;
+}
+
+function stopHorizontalBall() {
+      var element = document.getElementById('horizontal-direction-indicator'),
+        style = window.getComputedStyle(element),
+        left = style.getPropertyValue('left');
+      x2 = parseInt(left.substring(0,3), 10);
+      x2 = (x2-60)/119;
+      console.log(x2);
+      // fix the position of the small ball to wherever it is
+      element.setAttribute("class", "small-ball");
+      element.style.left = left;
+      horizontalBallStopped = true;
+}
+
+function stopPowerBallAndKick() {
+      // get position of the small ball
+      var element = document.getElementById('power-level-indicator'),
+        style = window.getComputedStyle(element),
+        right = style.getPropertyValue('right');
+      x3 = parseInt(right.substring(0,3), 10);
+      x3 = (191-x3)/121;
+      console.log(x3);
       
-        function bottomRight() {
-          hopeSoloImageSource = "solo-bottomright.png";
-          if (that.x !== 700 && that.y !== 500) {
-            that.x += 5;
-            that.y += 3;
-          }
-          if (that.x !== 700) {
-            that.x += 5;
-          }
-          if (that.y !== 500) {
-            that.y += 3;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
-    
-      switch(keyPressed) {
-        case 65: //top left
-          if (diveSelection === 1) {
-            start = setInterval(topLeft, 1);
-            attempt++;
-            scoresArr.push("save");
-          }
-          if (diveSelection === 2) {
-            start = setInterval(topRight, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 3) {
-            start = setInterval(bottomLeft, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 4) {
-            start = setInterval(bottomRight, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          break;
-        
-        case 83: //top right
-          if (diveSelection === 1) {
-            start = setInterval(topLeft, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 2) {
-            start = setInterval(topRight, 1);
-            attempt++;
-            scoresArr.push("save");
-          }
-          if (diveSelection === 3) {
-            start = setInterval(bottomLeft, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 4) {
-            start = setInterval(bottomRight, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          break;
-        
-        case 90: //bottom left
-          if (diveSelection === 1) {
-            start = setInterval(topLeft, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 2) {
-            start = setInterval(topRight, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 3) {
-            start = setInterval(bottomLeft, 1);
-            attempt++;
-            scoresArr.push("save");
-          }
-          if (diveSelection === 4) {
-            start = setInterval(bottomRight, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          break;
-        
-        case 88: //bottom right
-          if (diveSelection === 1) {
-            start = setInterval(topLeft, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 2) {
-            start = setInterval(topRight, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 3) {
-            start = setInterval(bottomLeft, 1);
-            attempt++;
-            score++;
-            scoresArr.push("goal");
-          }
-          if (diveSelection === 4) {
-            start = setInterval(bottomRight, 1);
-            attempt++;
-            scoresArr.push("save");
-          }
-          break;
-        default:
-      }
-      updateScore();
-      endGame();
-    }
-    
-    // Randomize keeper dive position
-    function getRandomInt() {
-      var numArray = [1, 2, 3, 4];
-      return numArray[Math.floor(Math.random() * numArray.length)];
-    }
-    var diveSelection;
-    
-    
-    ////////////////////////////////////////////
-    ///// - - - - -   The ball   - - - - - /////
-    ////////////////////////////////////////////
-    
-    // The ball
-      var Ball = function(){
-        this.x = 595;     
-        this.y = 660;     
-        this.width = 80;  
-        this.height = 80; 
-        this.img = "ball.png"; 
-      }
-    
-    // Draw the ball
-      var theBall = new Image(); 
-      Ball.prototype.drawBall = function(){ 
-        var ballPosition = this; 
-        fieldctx.drawImage(theBall, ballPosition.x, ballPosition.y, ballPosition.width, ballPosition.height);
-        theBall.src = "ball.png"
-      }
-    
-    // Shoot the ball
-      Ball.prototype.shoot = function(keyPressed) {
-        var that = this;
-        var start;
-    
-        function topLeft() {
-          if (that.x !== 185 && that.y !== 250) {
-            that.x -= 5;
-            that.y -= 5;
-          }
-          if (that.x !== 185) {
-            that.x -= 5;
-          }
-          if (that.y !==250) {
-            that.y -= 5;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
-    
-        function topRight() {
-          if (that.x !== 1000 && that.y !== 250) {
-            that.x += 5;
-            that.y -= 5;
-          }
-          if (that.x !== 1000) {
-            that.x += 5;
-          }
-          if (that.y !==250) {
-            that.y -= 5;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
-    
-        function bottomLeft() {
-          if (that.x !== 185 && that.y !== 500) {
-            that.x -= 5;
-            that.y -= 3;
-          }
-          if (that.x !== 185) {
-            that.x -= 5;
-          }
-          if (that.y !== 500) {
-            that.y -= 1;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
+      // fix the position of the small ball to wherever it is
+      element.setAttribute("class", "small-ball");
+      element.style.right = right;
+      powerBallStopped = true;
       
-        function bottomRight() {
-          if (that.x !== 1010 && that.y !== 500) {
-            that.x += 5;
-            that.y -= 3;
-          }
-          if (that.x !== 1010) {
-            that.x += 5;
-          }
-          if (that.y !== 500) {
-            that.y -= 1;
-          }
-          else {
-            clearInterval(start);
-          }
-        }
-    
-      switch(keyPressed) {
-          case 65:
-          start = setInterval(topLeft, 10);
-          break;
-          case 83:
-          start = setInterval(topRight, 10);
-          break;
-          case 90:
-          start = setInterval(bottomLeft, 10);
-          break;
-          case 88:
-          start = setInterval(bottomRight, 10);
-          break;
-          default:
-      }
-    }
-    
-    
-    ////////////////////////////////////////////
-    ///// - - - - -  Animation   - - - - - /////
-    ////////////////////////////////////////////
-    
-    // Animate the ball and keeper
-      function animateGame() {
-          setInterval (function(){
-          fieldctx.clearRect(0, 0, 1275, 735);
-          currentGame.keeper.drawKeeper();
-          currentGame.ball.drawBall();
-        }, 50)
-      }
-    
-    // Keep score
-      function updateScore() {
-        var scoreBoardDivs = $('.scoreboard div');
-        scoresArr.forEach(function(eachScore, index) {
-          if(eachScore === "goal") {
-            scoreBoardDivs.eq(index).addClass("goal");
-          } else if (eachScore === "save") {
-            scoreBoardDivs.eq(index).addClass("saved");
-          }
-        })
-      }
-    
-    // Function to end game or continue to next turn
-      function endGame() {
-        if (scoresArr.length === 5 && score >= 3) {
-          // fieldctx.clearRect(0, 0, 1275, 735);
-          // $(".game-board").addClass("winScreen");
-          win.play();
-          setTimeout(function () {
-            // alert("You win!!! Click OK to play again.");
-            swal({
-              title: "You win!",
-              text: "Click below to play again.",
-              confirmButtonText: "PLAY AGAIN",
-              confirmButtonColor: "#008df9",
-          }, function() {
-              window.location = "index.html";
-          });
-          }, 1100)
-          // setTimeout (function () {
-            // location.reload();
-          // },2001)
-        } else if (scoresArr.length === 5 && score < 3) {
-          lose.play();
-          setTimeout(function () {
-            // alert("Looks like you need some more practice. Click OK to try again.")
-            swal({
-              title: "You Lose!",
-              text: "Looks like you need some more practice. Click below to face off against Hope Solo again.",
-              confirmButtonText: "PLAY AGAIN",
-              confirmButtonColor: "#008df9",
-          }, function() {
-              window.location = "index.html";
-          });
-          }, 1100)
-          // setTimeout(function () {
-          //   location.reload();
-          // },2001)
-        } else {
-          cheering.play();
-          setTimeout(function () {
-            var theBall = new Ball();
-            currentGame.ball = theBall;
-            var theKeeper = new Keeper();
-            currentGame.keeper = theKeeper;
-            hopeSoloImageSource = "solo-ready.png";
-          }, 2200)
-        }
-      }
-    
-    
-    ////////////////////////////////////////////
-    ///// - - - - -    Canvas    - - - - - /////
-    ////////////////////////////////////////////
-    
-    // Canvas
-      var fieldCanvas = document.getElementById('theField');
-      var fieldctx = fieldCanvas.getContext('2d');
-      fieldCanvas.style.width = window.innerWidth + "px";
-      fieldCanvas.style.height = window.innerHeight + "px";
+      // Calculate the ending position of the ball
+      var Et, El, Qt, Ql;
+      Et = 440 - ((0.8 + x1)/1.8)*x3*440 + 0.3*x3*((Math.abs(0.5-x2))/0.5)*440;
+      var stringEt = Et.toString(10);
+      El = 405 + x3*(x2-0.5)*810
+      var stringEl = El.toString(10);
+                      
+      // ending co-ordinates of the ball
+      endTop = Et;
+      endLeft = El;
       
-    
-    ////////////////////////////////////////////
-    ///// - - - -  Game functions  - - - - /////
-    ////////////////////////////////////////////
-    
-    // Game function
-    var Game = function() {
-      this.keeper = {};
-      this.ball = {};
+      // let the player kick the ball now!
+      console.log(stringEl + " " + stringEt);
+      kick(stringEl, stringEt)
+}
+
+function kickingProcess() {
+    if ((verticalBallStopped == false) && (horizontalBallStopped == false) && (powerBallStopped == false)) {
+      stopVerticalBall();
     }
-    
-    // Start game on click
-      document.getElementById("start-button").onclick = function() {
-        startGame();
-      };
-    
-    // Start game function
-      function startGame() {
-        soundOle.stop();
-        whistle.play();
-        cheering.play();
-        currentGame = new Game();
-        var theBall = new Ball();
-        currentGame.ball = theBall;
-        var theKeeper = new Keeper();
-        currentGame.keeper = theKeeper;
-        hopeSoloImageSource = "solo-ready.png";
-        animateGame();
-        endGame();
+    else if ((verticalBallStopped == true) && (horizontalBallStopped == false) && (powerBallStopped == false)) {
+      stopHorizontalBall();
+    }
+    else if ((verticalBallStopped == true) && (horizontalBallStopped == true) && (powerBallStopped == false)) {
+      stopPowerBallAndKick();
+    }
+    else if ((verticalBallStopped == true) && (horizontalBallStopped == true) && (powerBallStopped == true)) {
+      if (chanceCount < 4) {
+        chanceCount += 1;
       }
-    
-      document.onkeydown = function(event) {
-        if (event.which === 65 || event.which === 83 || event.which === 90 || event.which === 88) {
-        }
-        var shotCode = event.which;
-        diveSelection = getRandomInt();
-        currentGame.ball.shoot(shotCode);
-        currentGame.keeper.dive(shotCode);
+      else {
+        chanceCount = 0;
+        score = 0;
+        document.getElementById('score-board').getElementsByTagName('li')[0].setAttribute('class', '');
+        document.getElementById('score-board').getElementsByTagName('li')[1].setAttribute('class', '');
+        document.getElementById('score-board').getElementsByTagName('li')[2].setAttribute('class', '');
+        document.getElementById('score-board').getElementsByTagName('li')[3].setAttribute('class', '');
+        document.getElementById('score-board').getElementsByTagName('li')[4].setAttribute('class', '');
       }
-    
-    
-    ////////////////////////////////////////////
-    ///// - - - - -   Styling    - - - - - /////
-    ////////////////////////////////////////////
-    
-    // Prevent scrolling
-      document.getElementById("theField").onwheel = function(event){
-        event.preventDefault();
-      };
-    
-      document.getElementById("theField").onmousewheel = function(event){
-        event.preventDefault();
-      };
-    
-    
-    
-    } //close window.onload function
+      modalElem4.setAttribute("class","modal");
+      modalElem5.setAttribute("class","modal");
+      modalElem6.setAttribute('class','modal');
+      modalElem7.setAttribute('class','modal');
+      refreshScene();
+    }
+}
+
+function incrementScore() {
+  if ((chanceCount == 0)) {
+      document.getElementById('score-board').getElementsByTagName('li')[0].setAttribute('class', 'scored');
+      score += 1;
+  }
+  else if ((chanceCount == 1)) {
+      document.getElementById('score-board').getElementsByTagName('li')[1].setAttribute('class', 'scored');
+      score += 1;
+  }
+  else if ((chanceCount == 2)) {
+      document.getElementById('score-board').getElementsByTagName('li')[2].setAttribute('class', 'scored');
+      score += 1;
+  }
+  else if ((chanceCount == 3)) {
+      document.getElementById('score-board').getElementsByTagName('li')[3].setAttribute('class', 'scored');
+      score += 1;
+  }
+  else if ((chanceCount == 4)) {
+      document.getElementById('score-board').getElementsByTagName('li')[4].setAttribute('class', 'scored');
+      score += 1;
+  }
+}
+
+// =======================================================================================================
+
+window.onclick = function() {
+  kickingProcess();
+}
+
+// all the modals to be displayed
+modalElem1 = document.getElementById('modal-1');
+modalElem2 = document.getElementById('modal-2');
+modalElem3 = document.getElementById('modal-3');
+modalElem4 = document.getElementById('modal-4');
+modalElem5 = document.getElementById('modal-5');
+modalElem6 = document.getElementById('modal-6');
+modalElem7 = document.getElementById('modal-7');
