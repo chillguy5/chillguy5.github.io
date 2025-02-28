@@ -265,8 +265,10 @@
     var loadingScreen = document.querySelector(".loadingScreen");
 
     window.addEventListener('load', function() {
+    setTimeout(function() {
         loadingScreen.style.display = 'none';
-    })
+    }, 5000); // 5000 milliseconden = 5 seconden
+});
 
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
