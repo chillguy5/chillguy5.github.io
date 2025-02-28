@@ -262,6 +262,12 @@
 
     <div class="credit">Made by Chill Guy Productions</div>
     <script>
+    var loadingScreen = document.querySelector(".loadingScreen");
+
+    window.addEventListener('load', function() {
+        loadingScreen.style.display = 'none';
+    })
+
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
 
