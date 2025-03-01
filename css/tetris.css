@@ -10,16 +10,16 @@ body {
   
   #tetris {
     width: 360px;
-    border: 1px solid white;
+    border: 1px solid #f8f8d7;
     padding: 20px;
   }
   
   #canvas {
     width: 200px;
     height: 440px;
-    background-color: white;
+    background-color: #f8f8d7;
     position: relative;
-    color: #fff;
+    color: #f8f8d7;
   }
   
   #canvas h1 {
@@ -31,7 +31,7 @@ body {
   }
   
   .piece {
-    border: 1px solid white;
+    border: 1px solid #f8f8d7;
     position: absolute;
   }
   
@@ -39,7 +39,7 @@ body {
     animation: blink .7s steps(2, start) infinite;
     background: #E1FF5F;
     border-radius: 2px;
-    color: #202020;
+    color: #f0aa5e;
     cursor: pointer;
     font-size: 28px;
   }
@@ -58,7 +58,7 @@ body {
     position: absolute;
     width: 19px;
     height: 19px;
-    border: 1px solid black;
+    border: 1px solid #f0aa5e;
   }
   
   .type0 {
@@ -91,15 +91,15 @@ body {
   
   #next_shape {
     position: relative;
-    background-color: white;
-    border: 1px solid black;
+    background-color: #f8f8d7;
+    border: 1px solid #f0aa5e;
     width: 110px;
     height: 110px;
   }
   
   #info {
-    background-color: white;
-    color: black;
+    background-color: #f8f8d7;
+    color: #f0aa5e;
     float: right;
     width: 110px;
     height: 420px;
