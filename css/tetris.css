@@ -39,7 +39,7 @@ body {
     animation: blink .7s steps(2, start) infinite;
     background: #E1FF5F;
     border-radius: 2px;
-    color: #f0aa5e;
+    color: #cd3f2b;
     cursor: pointer;
     font-size: 28px;
   }
