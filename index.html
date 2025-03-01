@@ -285,17 +285,20 @@
 
 function countup() {
     var now = new Date();
-    var startDate = new Date(2025, 1, 2, 17, 26, 37); // April is maand 3 (zero-based)
+    var startDate = new Date(2025, 1, 2, 17, 26, 37); // 2 februari 2025 om 17:26:37
     var timeElapsed = now - startDate;
 
     var days = Math.floor(timeElapsed / (1000 * 60 * 60 * 24));
+    var years = Math.floor(days / 365);  // Bereken aantal jaren
+    days = days % 365;  // Overgebleven dagen na het aftrekken van de jaren
+
     var hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
 
     document.getElementById('countup-site-age').innerHTML = 
-        "The site exists for " + days + " days, " + hours + " hours, " 
-        + minutes + " minutes and " + seconds + " seconds!";
+        "The site exists for " + years + " years, " + days + " days, " 
+        + hours + " hours, " + minutes + " minutes and " + seconds + " seconds!";
 }
 
 // Roep de functie elke seconde aan
@@ -303,6 +306,7 @@ setInterval(countup, 1000);
 
 // Voer de functie meteen uit bij het laden van de pagina
 countup();
+
 
 
         let coins = parseInt(localStorage.getItem("coins")) || 0;
