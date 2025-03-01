@@ -26,6 +26,7 @@
         .title {
             width: 600px;
             margin-bottom: 20px;
+            color: #f8f8d7;
         }
 
         .highscore-container {
@@ -53,51 +54,11 @@
             margin-bottom: 10px;
         }
 
-        .back-button {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            padding: 10px 20px;
-            font-size: 30px;
-            color: #cd3f2b;
-            background-color: #f8f8d7;
-            text-decoration: none;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-weight: bold;
-        }
-
-        .back-button:hover {
-            background-color: #f0aa5e;
-            transform: scale(1.1);
-        }
-
         .home-icon{
             width: 40px; /* Pas de grootte aan */
             height: 40px;
             margin-left: 0px;
             vertical-align: middle;
-        }
-
-        .store-button {
-            position: absolute;
-            display: inline-block;
-            top: 100px;
-            left: 30px;
-            padding: 10px 20px;
-            font-size: 30px;
-            color: #cd3f2b;
-            background-color: #f8f8d7;
-            text-decoration: none;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.2s, transform 0.2s;
-            font-weight: bold;
-        }
-
-        .store-button:hover {
-            background-color: #f0aa5e;
-            transform: scale(1.1);
         }
 
         .cart-icon {
@@ -223,10 +184,6 @@
     </style>
 </head>
 <body>
-
-    <a href="index.html" class="back-button">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
-
-    <a href="store.html" class="store-button">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a>
     
     <div id="menu">
         <div id="menu-bar" onclick="menuOnClick()">
