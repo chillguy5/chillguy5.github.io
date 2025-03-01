@@ -58,7 +58,7 @@ body {
     position: absolute;
     width: 19px;
     height: 19px;
-    border: 1px solid #f0aa5e;
+    border: 1px solid #cd3f2b;
   }
   
   .type0 {
@@ -92,14 +92,14 @@ body {
   #next_shape {
     position: relative;
     background-color: #f8f8d7;
-    border: 1px solid #f0aa5e;
+    border: 1px solid #cd3f2b;
     width: 110px;
     height: 110px;
   }
   
   #info {
     background-color: #f8f8d7;
-    color: #f0aa5e;
+    color: #cd3f2b;
     float: right;
     width: 110px;
     height: 420px;
