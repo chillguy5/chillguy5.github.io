@@ -284,17 +284,26 @@
 });
 
 function countup() {
-            var now = new Date();
-            var startDate = new Date(2023, 4, 21, 20, 6, 16);
-            var timeElapsed = now - startDate;
+    var now = new Date();
+    var startDate = new Date(2023, 3, 21, 20, 6, 16); // April is maand 3 (zero-based)
+    var timeElapsed = now - startDate;
 
-            var days = Math.floor(timeElapsed / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
+    var days = Math.floor(timeElapsed / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
 
-            document.getElementById('countup-site-age').innerHTML = "The site exists for " + days + " days, " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds!";
-        }
+    document.getElementById('countup-site-age').innerHTML = 
+        "The site exists for " + days + " days, " + hours + " hours, " 
+        + minutes + " minutes and " + seconds + " seconds!";
+}
+
+// Roep de functie elke seconde aan
+setInterval(countup, 1000);
+
+// Voer de functie meteen uit bij het laden van de pagina
+countup();
+
 
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
