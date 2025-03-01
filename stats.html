@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
+    <title>Highscores - Chill Guy Games</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('images/overig/achtergrond.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .title {
+            width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .highscore-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+        }
+
+        .highscore-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            text-align: center;
+        }
+
+        .highscore-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            font-size: 30px;
+            color: #cd3f2b;
+            background-color: #f8f8d7;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #f0aa5e;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-button">Terug</a>
+
+    <h1 class="title">Highscores</h1>
+
+    <div class="highscore-container">
+        <div class="highscore-box">
+            <img src="images/gameicons/timicon.png" alt="Chill Guy Jumper">
+            <h3>Chill Guy Jumper</h3>
+            <p>Highscore: <span id="highscore-jumper">0</span></p>
+        </div>
+        <div class="highscore-box">
+            <img src="images/gameicons/gijsicon.png" alt="Chill Guy Shooter">
+            <h3>Chill Guy Shooter</h3>
+            <p>Highscore: <span id="highscore-shooter">∞</span></p>
+        </div>
+        <div class="highscore-box">
+            <img src="images/gameicons/flappyicon.png" alt="Chill Guy Flappy">
+            <h3>Chill Guy Flappy</h3>
+            <p>Highscore: <span id="highscore-flappy">0</span></p>
+        </div>
+        <div class="highscore-box">
+            <img src="images/gameicons/tetrisicon.png" alt="Chill Guy Tetris">
+            <h3>Chill Guy Tetris</h3>
+            <p>Highscore: <span id="highscore-tetris">0</span></p>
+        </div>
+        <div class="highscore-box">
+            <img src="images/gameicons/candycrushicon.png" alt="Chill Guy Candy Crush">
+            <h3>Chill Guy Candy Crush</h3>
+            <p>Highscore: <span id="highscore-candy">0</span></p>
+        </div>
+        <div class="highscore-box">
+            <img src="images/gameicons/snakeicon.png" alt="Chill Guy Snake">
+            <h3>Chill Guy Snake</h3>
+            <p>Highscore: <span id="highscore-snake">0</span></p>
+        </div>
+        <div class="highscore-box">
+            <img src="images/gameicons/crossyicon.png" alt="Chill Guy Crossy Road">
+            <h3>Chill Guy Crossy Road</h3>
+            <p>Highscore: <span id="highscore-crossy">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("highscore-jumper").textContent = localStorage.getItem("highscore") || 0;
+        document.getElementById("highscore-shooter").textContent = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : "∞";
+        document.getElementById("highscore-flappy").textContent = localStorage.getItem("highscoref") || 0;
+        document.getElementById("highscore-tetris").textContent = localStorage.getItem("highscorete") || 0;
+        document.getElementById("highscore-candy").textContent = localStorage.getItem("highscorec") || 0;
+        document.getElementById("highscore-snake").textContent = localStorage.getItem("highscorea") || 0;
+        document.getElementById("highscore-crossy").textContent = localStorage.getItem("highscorer") || 0;
+    </script>
+
+</body>
+</html>
