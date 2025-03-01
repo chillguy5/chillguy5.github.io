@@ -228,6 +228,11 @@
     width: 600px;  /* Pas dit aan naar gewenste breedte */
     height: 200px; /* Pas dit aan naar gewenste hoogte */
 }
+
+#countup-site-age {
+            margin-top: 60px;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -240,6 +245,10 @@
         <div id="date"></div>
         <div id="time"></div>
       </div>
+
+      <p id="countup-site-age">JavaScript is turned off and this site will not work without JavaScript or the page is
+        still loading.
+    <p>
     
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
@@ -275,6 +284,19 @@
         loadingScreen.style.display = 'none';
     }, 2500); // 2500 milliseconden = 2.5 seconden
 });
+
+function countup() {
+            var now = new Date();
+            var startDate = new Date(2023, 4, 21, 20, 6, 16);
+            var timeElapsed = now - startDate;
+
+            var days = Math.floor(timeElapsed / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
+
+            document.getElementById('countup-site-age').innerHTML = "The site exists for " + days + " days, " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds!";
+        }
 
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
