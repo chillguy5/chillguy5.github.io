@@ -244,13 +244,13 @@
     <div class="loadingScreen">
               <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
             </div>
-
-    <p id="countup-site-age"><p>
             
     <div id="timedate">
         <div id="date"></div>
         <div id="time"></div>
       </div>
+
+      <p id="countup-site-age"><p>
     
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
@@ -277,7 +277,7 @@
     
     <a href="store.html" class="store-button">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a>
 
-    <div class="credit">Deze site is gemaakt door Chill Guy Productions en bestaat</div>
+    <div class="credit">Made by Chill Guy Productions</div>
     <script>
     var loadingScreen = document.querySelector(".loadingScreen");
 
@@ -301,8 +301,8 @@ function countup() {
     var seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
 
     document.getElementById('countup-site-age').innerHTML = 
-        " + years + " jaren, " + days + " dagen, " 
-        + hours + " uur, " + minutes + " minuten en " + seconds + " seconden.";
+        "Deze website is " + years + " jaren, " + days + " dagen, " 
+        + hours + " uur, " + minutes + " minuten and " + seconds + " seconden opgestart.";
 }
 
 // Roep de functie elke seconde aan
