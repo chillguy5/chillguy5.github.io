@@ -71,11 +71,41 @@
             background-color: #f0aa5e;
             transform: scale(1.1);
         }
+
+        .store-button {
+            position: absolute;
+            display: inline-block;
+            top: 100px;
+            left: 30px;
+            padding: 10px 20px;
+            font-size: 30px;
+            color: #cd3f2b;
+            background-color: #f8f8d7;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .store-button:hover {
+            background-color: #f0aa5e;
+            transform: scale(1.1);
+        }
+
+        .cart-icon {
+            width: 30px; /* Pas de grootte aan */
+            height: 30px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-button">Terug</a>
+    <a href="index.html" class="back-button">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a>
+
+    <a href="store.html" class="store-button">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a>
 
     <h1 class="title">Highscores</h1>
 
