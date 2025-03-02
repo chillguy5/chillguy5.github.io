@@ -14,7 +14,6 @@ var startGame = function() {
 		localStorage.setItem("coins", currentChipBalance);
 		$("#welcome").hide();
 		$("#game-over").hide();
-		$(".brand-logo").text("blackjack"); 
 		$("#game-board").show("fade", 1000);
 		cardsInDeck = cards;
 		cardsInDeck.sort(function() {return 0.5 - Math.random()});
