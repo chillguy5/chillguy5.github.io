@@ -38,7 +38,6 @@ let highscores = localStorage.getItem("highscores") ? parseFloat(localStorage.ge
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
 const objs = {
@@ -466,9 +465,6 @@ scene("win", ({ score }) => {
     add([text(`Highscore: ${highscores} seconds`, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
-        window.location.href = "index.html";
-    });
 });
 
 scene("lose", () => {
@@ -478,18 +474,12 @@ scene("lose", () => {
     add([text(`Total Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300),  () => {
-        window.location.href = "index.html";
-    });
 });
 
 scene("mainMenu", () => {
     add([text("Welcome to Chill Guy Shooter."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
     add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
-        window.location.href = "index.html";
-    });
 });
 
 go("mainMenu");
