@@ -43,7 +43,6 @@ let highscore = parseInt(localStorage.getItem("highscore")) || 0;
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => go("mainMenu"));
 });
 
 let selectedCharacter = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
@@ -196,9 +195,6 @@ scene("lose", (score) => {
     add([text("Total Coins: " + coins, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
 
     addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 300), () => {
-        window.location.href = "index.html";
-    });
 });
 
 scene("mainMenu", () => {
@@ -206,9 +202,6 @@ scene("mainMenu", () => {
     add([text("Highscore: " + highscore), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
     add([text("Tripple jump is enabled."), pos(width() / 2, height() / 2 + 200), anchor("center"), scale(1), color(248, 248, 215)]);
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("game"));
-    addButton("Main Menu", vec2(width() / 2, height() / 2 + 100), () => {
-        window.location.href = "index.html";
-    });
 });
 
 go("mainMenu");
