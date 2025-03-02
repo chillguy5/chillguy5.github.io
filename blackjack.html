@@ -64,27 +64,27 @@
   transform: translateY(4px);
 }
 
-.nav {
+.nav1 {
   transition: 0.3s ease;
   display: none;
 }
 
-.nav ul {
+.nav1 ul {
   padding: 0 22px;
 }
 
-.nav li {
+.nav1 li {
   list-style: none;
   padding: 12px 0;
 }
 
-.nav li a {
+.nav1 li a {
   color: #cd3f2b;
   font-size: 20px;
   text-decoration: none;
 }
 
-.nav li a:hover {
+.nav1 li a:hover {
   font-weight: bold;
 }
 
@@ -135,7 +135,7 @@
 <script>
     function menuOnClick() {
 document.getElementById("menu-bar").classList.toggle("change");
-document.getElementById("nav").classList.toggle("change");
+document.getElementById("nav1").classList.toggle("change");
 document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
@@ -174,24 +174,23 @@ window.onload = initializeSound;
 			</ul>
 	    </div>
 	</nav>
+	<div id="menu">
+		<div id="menu-bar" onclick="menuOnClick()">
+		  <div id="bar1" class="bar"></div>
+		  <div id="bar2" class="bar"></div>
+		  <div id="bar3" class="bar"></div>
+		</div>
+		<nav1 class="nav1" id="nav1">
+		  <ul>
+			<li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
+			<li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
+			<li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+		</ul>
+		</nav1> 
+	  </div>
+	  
+	  <div class="menu-bg" id="menu-bg"></div>
 </div>
-
-<div id="menu">
-	<div id="menu-bar" onclick="menuOnClick()">
-	  <div id="bar1" class="bar"></div>
-	  <div id="bar2" class="bar"></div>
-	  <div id="bar3" class="bar"></div>
-	</div>
-	<nav class="nav" id="nav">
-	  <ul>
-		<li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
-		<li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
-		<li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
-	</ul>
-	</nav> 
-  </div>
-  
-  <div class="menu-bg" id="menu-bg"></div>
 
 <div class="container" id="rules">
   	<div class="row">
