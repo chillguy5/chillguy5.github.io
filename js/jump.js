@@ -156,7 +156,7 @@ function jump() {
     spawnTree();
 
     let score = 0;
-    const scoreLabel = add([text("Score: " + score), pos(24, 24)]);
+    const scoreLabel = add([text("Score: " + score), pos(1342, 24)]);
 
     onUpdate(() => {
         get("tree").forEach((tree) => {
