@@ -162,7 +162,7 @@ loadSprite("player", selectedCharacterName);
 	// Score label toevoegen
 	let scoreLabel = add([
 		text("Score: 0"),
-		pos(1332, 12),
+		pos(32, 12),
 		fixed(),  // Zorg ervoor dat het label vast blijft op de positie
 		{
 			value: 0,
