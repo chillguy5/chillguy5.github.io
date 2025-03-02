@@ -229,7 +229,7 @@
         <div class="highscore-box">
             <img src="images/gameicons/gijsicon.png" alt="Chill Guy Shooter">
             <h3>Chill Guy Shooter</h3>
-            <p>Highscore: <span id="highscore-shooter">∞</span></p>
+            <p>Highscore: <span id="highscore-shooter">0</span></p>
         </div>
         <div class="highscore-box">
             <img src="images/gameicons/flappyicon.png" alt="Chill Guy Flappy">
@@ -269,7 +269,7 @@
         document.getElementById("coins").textContent = coins;
 
         document.getElementById("highscore-jumper").textContent = localStorage.getItem("highscore") || 0;
-        document.getElementById("highscore-shooter").textContent = localStorage.getItem("highscores123") ? parseFloat(localStorage.getItem("highscores123")) : "∞";
+        document.getElementById("highscore-shooter").textContent = localStorage.getItem("highscores123") ? parseFloat(localStorage.getItem("highscores123")) : "0";
         document.getElementById("highscore-flappy").textContent = localStorage.getItem("highscoref") || 0;
         document.getElementById("highscore-tetris").textContent = localStorage.getItem("highscorete") || 0;
         document.getElementById("highscore-candy").textContent = localStorage.getItem("highscorec") || 0;
