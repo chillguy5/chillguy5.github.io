@@ -346,7 +346,7 @@ on("hurt", "enemy", (e) => {
 
 const timer = add([
     text(0),
-    pos(12, 32),
+    pos(1332, 32),
     fixed(),
     { time: 0 },
 ]);
