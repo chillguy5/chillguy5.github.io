@@ -339,7 +339,7 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-        
+          <a href="javascript:void(0);" class="daily-login-button" onclick="claimdailyreward()">daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon"></a>
 
     <!-- Geluidspeler -->
     <audio id="background-audio" autoplay loop>
@@ -408,7 +408,7 @@ function menuOnClick() {
         document.getElementById("coins").textContent = coins;
 
         document.addEventListener("DOMContentLoaded", function() {
-        if (localStorage.getItem("dailyClaim") === "true") {
+        if (localStorage.getItem("dailyClaim1") === "true") {
             document.querySelector(".daily-login-button").style.display = "none";
         }
     });
@@ -416,7 +416,7 @@ function menuOnClick() {
     function claimDailyReward() {
         let dailyButton = document.querySelector(".daily-login-button");
         dailyButton.style.display = "none"; // Verberg de knop na klikken
-        localStorage.setItem("dailyClaim", "true"); // Opslaan dat de beloning is opgehaald
+        localStorage.setItem("dailyClaim1", "true"); // Opslaan dat de beloning is opgehaald
         
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         coins += 20000; // Voeg 100 coins toe als dagelijkse beloning
