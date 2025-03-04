@@ -13,153 +13,33 @@
     <meta name="keywords" content="pacman">
     <meta name="news_keywords" content="pacman">
     <meta name="description" content="Pacman - Doodle Jump">
-    <link rel="stylesheet" type="text/css" href="rs/css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
-
-<style>
-	.home-icon{
-            width: 40px; /* Pas de grootte aan */
-            height: 40px;
-            margin-left: 0px;
-            vertical-align: middle;
-        }
-
-		.cart-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-        .stats-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-
-
-#menu {
-  z-index: 2;
-}
-
-#menu-bar {
-  width: 45px;
-  height: 40px;
-  margin: 30px 0 20px 20px;
-  cursor: pointer;
-}
-
-.bar {
-  height: 5px;
-  width: 100%;
-  background-color: #f8f8d7;
-  display: block;
-  border-radius: 5px;
-  transition: 0.3s ease;
-}
-
-#bar1 {
-  transform: translateY(-4px);
-}
-
-#bar3 {
-  transform: translateY(4px);
-}
-
-.nav1 {
-  transition: 0.3s ease;
-  display: none;
-}
-
-.nav1 ul {
-  padding: 0 22px;
-}
-
-.nav1 li {
-  list-style: none;
-  padding: 12px 0;
-}
-
-.nav1 li a {
-  color: #cd3f2b;
-  font-size: 20px;
-  text-decoration: none;
-}
-
-.nav1 li a:hover {
-  font-weight: bold;
-}
-
-.menu-bg, #menu {
-  top: 0;
-  left: 0;
-  position: absolute;
-}
-
-.menu-bg {
-  z-index: 1;
-  width: 0;
-  height: 0;
-  margin: 30px 0 20px 20px;
-  background: radial-gradient(circle, #f8f8d7, #f8f8d7);
-  border-radius: 50%;
-  transition: 0.3s ease;
-}
-
-.change {
-  display: block;
-}
-
-.change .bar {
-  background-color: #cd3f2b;
-}
-
-.change #bar1 {
-  transform: translateY(4px) rotateZ(-45deg);
-}
-
-.change #bar2 {
-  opacity: 0;
-}
-
-.change #bar3 {
-  transform: translateY(-6px) rotateZ(45deg);
-}
-
-.change-bg {
-  width: 600px;
-  height: 540px;
-  transform: translate(-60%,-30%);
-}
-		
-</style>
 
 <body><!--MENU-->
 <header id="header">
     <div class="container">
         <div class="row">
             <div class="p-r d-flex sp al header-bar">
+                <div class="bar-logo">
+                    <a class="logo-text" href="/">Doodle Jump</a>
+                </div>
                 <nav class="navigation">
-                    <div id="menu">
-                        <div id="menu-bar" onclick="menuOnClick()">
-                          <div id="bar1" class="bar"></div>
-                          <div id="bar2" class="bar"></div>
-                          <div id="bar3" class="bar"></div>
-                        </div>
-                        <nav1 class="nav1" id="nav1">
-                          <ul>
-                            <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
-                            <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
-                            <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
-                        </ul>
-                        </nav1> 
-                      </div>
-                      
-                      <div class="menu-bg" id="menu-bg"></div>
+                    <ul>
+                                                    <li>
+                                <a class="menu-link" href="/doodle-jump-2">
+                                    <span class="text-menu-link">Doodle Jump 2</span>
+                                </a>
+                            </li>
+                                                    <li>
+                                <a class="menu-link" href="/flappy-bird">
+                                    <span class="text-menu-link">Flappy Bird</span>
+                                </a>
+                            </li>
+                                            </ul>
                 </nav>
                 <div class="center-box merge_icon icon-menu-mobile">
                     <svg fill="#555" height="24" viewBox="0 -21 384 384" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -180,22 +60,18 @@
 <div class="mobile-dropdown" id="mobile-dropdown">
     <div class="row">
         <nav class="nav-mobile-controler">
-            <div id="menu">
-                <div id="menu-bar" onclick="menuOnClick()">
-                  <div id="bar1" class="bar"></div>
-                  <div id="bar2" class="bar"></div>
-                  <div id="bar3" class="bar"></div>
-                </div>
-                <nav1 class="nav1" id="nav1">
-                  <ul>
-                    <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
-                    <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
-                    <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
-                </ul>
-                </nav1> 
-              </div>
-              
-              <div class="menu-bg" id="menu-bg"></div>
+            <ul>
+                                    <li>
+                        <a class="menu-link-mobile" href="/doodle-jump-2">
+                            <span class="text-menu-link">Doodle Jump 2</span>
+                        </a>
+                    </li>
+                                    <li>
+                        <a class="menu-link-mobile" href="/flappy-bird">
+                            <span class="text-menu-link">Flappy Bird</span>
+                        </a>
+                    </li>
+                            </ul>
         </nav>
     </div>
 </div>
@@ -238,6 +114,91 @@
         </div>
         <br />
 
+        <div class="row">
+            <div class="uk-grid-clayover">
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/flappy-bird">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/flappy-bird.jpg1.JPG" title="Flappy Bird" alt="Flappy Bird" />
+                                <span class="text-overflow uk-game-title">Flappy Bird</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/doodle-jump">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/doodle-jump.jpg" title="Doodle Jump" alt="Doodle Jump" />
+                                <span class="text-overflow uk-game-title">Doodle Jump</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/slope-game">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/slope-game.jpg" title="Slope Game" alt="Slope Game" />
+                                <span class="text-overflow uk-game-title">Slope Game</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/dinosaur-game">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/dinosaur-game.jpg" title="Dinosaur Game" alt="Dinosaur Game" />
+                                <span class="text-overflow uk-game-title">Dinosaur Game</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/doodle-champion-island">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/doodle-champion-island.jpg" title="Doodle Champion Island" alt="Doodle Champion Island" />
+                                <span class="text-overflow uk-game-title">Doodle Champion Island</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/doodle-jump-2">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/doodle-jump-2.jpg" title="Doodle Jump 2" alt="Doodle Jump 2" />
+                                <span class="text-overflow uk-game-title">Doodle Jump 2</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/geometry-dash">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/geometry-dash.jpg" title="Geometry Dash" alt="Geometry Dash" />
+                                <span class="text-overflow uk-game-title">Geometry Dash</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/donkey-kong">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/donkey-kong.jpg" title="Donkey Kong" alt="Donkey Kong" />
+                                <span class="text-overflow uk-game-title">Donkey Kong</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/retro-bowl">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/retro-bowl.jpg" title="Retro Bowl" alt="Retro Bowl" />
+                                <span class="text-overflow uk-game-title">Retro Bowl</span>
+                                                            </div>
+                        </a>
+                    </div>
+                                    <div class="uk-grid-game">
+													<a class="uk-game-link" href="/monkey-mart">
+						                            <div class="uk-wrap-image">
+                                <img width="95" height="95" src="rs/imgs/monkey-mart.jpg" title="Monkey Mart" alt="Monkey Mart" />
+                                <span class="text-overflow uk-game-title">Monkey Mart</span>
+                                                            </div>
+                        </a>
+                    </div>
+                            </div>
+        </div>
+
         <br />
         <div class="uk-p10">
             <div class="row">
@@ -270,13 +231,4 @@
     <script src="js/footer.js"></script>
 </footer>
 </body>
-
-<script>
-    function menuOnClick() {
-document.getElementById("menu-bar").classList.toggle("change");
-document.getElementById("nav1").classList.toggle("change");
-document.getElementById("menu-bg").classList.toggle("change-bg");
-}
-</script>
-
 </html>
