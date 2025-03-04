@@ -19,16 +19,147 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 
+<style>
+	.home-icon{
+            width: 40px; /* Pas de grootte aan */
+            height: 40px;
+            margin-left: 0px;
+            vertical-align: middle;
+        }
+
+		.cart-icon {
+            width: 30px; /* Pas de grootte aan */
+            height: 30px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .stats-icon {
+            width: 30px; /* Pas de grootte aan */
+            height: 30px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+
+#menu {
+  z-index: 2;
+}
+
+#menu-bar {
+  width: 45px;
+  height: 40px;
+  margin: 30px 0 20px 20px;
+  cursor: pointer;
+}
+
+.bar {
+  height: 5px;
+  width: 100%;
+  background-color: #f8f8d7;
+  display: block;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+#bar1 {
+  transform: translateY(-4px);
+}
+
+#bar3 {
+  transform: translateY(4px);
+}
+
+.nav1 {
+  transition: 0.3s ease;
+  display: none;
+}
+
+.nav1 ul {
+  padding: 0 22px;
+}
+
+.nav1 li {
+  list-style: none;
+  padding: 12px 0;
+}
+
+.nav1 li a {
+  color: #cd3f2b;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.nav1 li a:hover {
+  font-weight: bold;
+}
+
+.menu-bg, #menu {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.menu-bg {
+  z-index: 1;
+  width: 0;
+  height: 0;
+  margin: 30px 0 20px 20px;
+  background: radial-gradient(circle, #f8f8d7, #f8f8d7);
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+.change {
+  display: block;
+}
+
+.change .bar {
+  background-color: #cd3f2b;
+}
+
+.change #bar1 {
+  transform: translateY(4px) rotateZ(-45deg);
+}
+
+.change #bar2 {
+  opacity: 0;
+}
+
+.change #bar3 {
+  transform: translateY(-6px) rotateZ(45deg);
+}
+
+.change-bg {
+  width: 600px;
+  height: 540px;
+  transform: translate(-60%,-30%);
+}
+		
+</style>
+
 <body><!--MENU-->
 <header id="header">
     <div class="container">
         <div class="row">
             <div class="p-r d-flex sp al header-bar">
-                <div class="bar-logo">
-                    <a class="logo-text" href="/">Doodle Jump</a>
-                </div>
                 <nav class="navigation">
-
+                    <div id="menu">
+                        <div id="menu-bar" onclick="menuOnClick()">
+                          <div id="bar1" class="bar"></div>
+                          <div id="bar2" class="bar"></div>
+                          <div id="bar3" class="bar"></div>
+                        </div>
+                        <nav1 class="nav1" id="nav1">
+                          <ul>
+                            <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
+                            <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
+                            <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+                        </ul>
+                        </nav1> 
+                      </div>
+                      
+                      <div class="menu-bg" id="menu-bg"></div>
                 </nav>
                 <div class="center-box merge_icon icon-menu-mobile">
                     <svg fill="#555" height="24" viewBox="0 -21 384 384" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -49,18 +180,22 @@
 <div class="mobile-dropdown" id="mobile-dropdown">
     <div class="row">
         <nav class="nav-mobile-controler">
-            <ul>
-                                    <li>
-                        <a class="menu-link-mobile" href="/doodle-jump-2">
-                            <span class="text-menu-link">Doodle Jump 2</span>
-                        </a>
-                    </li>
-                                    <li>
-                        <a class="menu-link-mobile" href="/flappy-bird">
-                            <span class="text-menu-link">Flappy Bird</span>
-                        </a>
-                    </li>
-                            </ul>
+            <div id="menu">
+                <div id="menu-bar" onclick="menuOnClick()">
+                  <div id="bar1" class="bar"></div>
+                  <div id="bar2" class="bar"></div>
+                  <div id="bar3" class="bar"></div>
+                </div>
+                <nav1 class="nav1" id="nav1">
+                  <ul>
+                    <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
+                    <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
+                    <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+                </ul>
+                </nav1> 
+              </div>
+              
+              <div class="menu-bg" id="menu-bg"></div>
         </nav>
     </div>
 </div>
@@ -135,4 +270,13 @@
     <script src="js/footer.js"></script>
 </footer>
 </body>
+
+<script>
+    function menuOnClick() {
+document.getElementById("menu-bar").classList.toggle("change");
+document.getElementById("nav1").classList.toggle("change");
+document.getElementById("menu-bg").classList.toggle("change-bg");
+}
+</script>
+
 </html>

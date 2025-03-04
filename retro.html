@@ -181,18 +181,22 @@
 <div class="mobile-dropdown" id="mobile-dropdown">
     <div class="row">
         <nav class="nav-mobile-controler">
-            <ul>
-                                    <li>
-                        <a class="menu-link-mobile" href="/doodle-jump-2">
-                            <span class="text-menu-link">Doodle Jump 2</span>
-                        </a>
-                    </li>
-                                    <li>
-                        <a class="menu-link-mobile" href="/flappy-bird">
-                            <span class="text-menu-link">Flappy Bird</span>
-                        </a>
-                    </li>
-                            </ul>
+            <div id="menu">
+                <div id="menu-bar" onclick="menuOnClick()">
+                  <div id="bar1" class="bar"></div>
+                  <div id="bar2" class="bar"></div>
+                  <div id="bar3" class="bar"></div>
+                </div>
+                <nav1 class="nav1" id="nav1">
+                  <ul>
+                    <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
+                    <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
+                    <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+                </ul>
+                </nav1> 
+              </div>
+              
+              <div class="menu-bg" id="menu-bg"></div>
         </nav>
     </div>
 </div>
