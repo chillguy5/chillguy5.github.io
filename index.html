@@ -409,7 +409,7 @@ function menuOnClick() {
         document.getElementById("coins").textContent = coins;
 
         document.addEventListener("DOMContentLoaded", function() {
-        if (localStorage.getItem("dailyClaim3") === "true") {
+        if (localStorage.getItem("dailyClaim4") === "true") {
             document.querySelector(".daily-login-button").style.display = "none";
         }
     });
@@ -417,7 +417,7 @@ function menuOnClick() {
     function claimDailyReward() {
         let dailyButton = document.querySelector(".daily-login-button");
         dailyButton.style.display = "none"; // Verberg de knop na klikken
-        localStorage.setItem("dailyClaim3", "true"); // Opslaan dat de beloning is opgehaald
+        localStorage.setItem("dailyClaim4", "true"); // Opslaan dat de beloning is opgehaald
         
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         coins += 20000; // Voeg 100 coins toe als dagelijkse beloning
