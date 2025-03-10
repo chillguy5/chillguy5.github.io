@@ -7,7 +7,7 @@
   "background_color": "#000000",
   "display": "fullScreen",
   "orientation": "any",
-  "start_url": "index.html",
+  "start_url": "templerun.html",
   "icons": [
     {
       "src": "img/icons/icon-72x72.png",
