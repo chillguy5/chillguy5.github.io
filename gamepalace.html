@@ -334,17 +334,31 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
-    // Functie om coins bij te werken
-    function addCoins() {
-        let coins = localStorage.getItem("coins"); // Haal huidige waarde op
-        coins = coins ? parseInt(coins) : 0; // Als er nog geen coins zijn, begin bij 0
-        coins += 50; // Voeg 50 coins toe
-        localStorage.setItem("coins", coins); // Update localStorage
-        console.log("Coins: " + coins); // Debugging (je kunt dit later verwijderen)
+ // Functie om coins op te slaan in localStorage
+ function saveCoins(coins) {
+        localStorage.setItem("coins", coins);
     }
 
-    // Roep de functie elke seconde aan
-    setInterval(addCoins, 1000);
+    // Functie om coins op te halen uit localStorage
+    function loadCoins() {
+        return localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
+    }
+
+    // Functie om de coin-teller te updaten
+    function updateCoinDisplay() {
+        document.getElementById("coins").textContent = coins;
+    }
+
+    // Coins ophalen uit localStorage bij het laden van de pagina
+    let coins = loadCoins();
+    updateCoinDisplay();
+
+    // Elke seconde 50 coins toevoegen
+    setInterval(() => {
+        coins += 50;
+        saveCoins(coins);
+        updateCoinDisplay();
+    }, 1000);
 
 function menuOnClick() {
   document.getElementById("menu-bar").classList.toggle("change");
