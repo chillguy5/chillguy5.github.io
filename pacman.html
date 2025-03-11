@@ -9,28 +9,6 @@
   gtag('js', new Date());
 
   gtag('config', 'G-R1ZCLH6XCR');
-
-  function updateCoinDisplay() {
-      let coins = localStorage.getItem("coins") || 0;
-      document.getElementById("coinCounter").innerText = coins;
-  }
-
-  function addCoins() {
-      let coins = localStorage.getItem("coins");
-      coins = coins ? parseInt(coins) : 0;
-      coins += 50;
-      localStorage.setItem("coins", coins);
-      updateCoinDisplay(); // Update de weergave
-  }
-
-  setInterval(addCoins, 1000);
-  updateCoinDisplay(); // Update direct bij paginalaad
-
-  function menuOnClick() {
-document.getElementById("menu-bar").classList.toggle("change");
-document.getElementById("nav1").classList.toggle("change");
-document.getElementById("menu-bg").classList.toggle("change-bg");
-}
 </script>
 	<title>Pac-Man</title>
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
@@ -221,6 +199,28 @@ document.getElementById("menu-bg").classList.toggle("change-bg");
  * fix what happens when a ghost is eaten (should go back to base)
  * do proper ghost mechanics (blinky/wimpy etc)
  */
+
+ function updateCoinDisplay() {
+      let coins = localStorage.getItem("coins") || 0;
+      document.getElementById("coinCounter").innerText = coins;
+  }
+
+  function addCoins() {
+      let coins = localStorage.getItem("coins");
+      coins = coins ? parseInt(coins) : 0;
+      coins += 50;
+      localStorage.setItem("coins", coins);
+      updateCoinDisplay(); // Update de weergave
+  }
+
+  setInterval(addCoins, 1000);
+  updateCoinDisplay(); // Update direct bij paginalaad
+
+  function menuOnClick() {
+document.getElementById("menu-bar").classList.toggle("change");
+document.getElementById("nav1").classList.toggle("change");
+document.getElementById("menu-bg").classList.toggle("change-bg");
+}
 
 var NONE        = 4,
     UP          = 3,
