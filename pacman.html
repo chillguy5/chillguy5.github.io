@@ -97,27 +97,27 @@
   transform: translateY(4px);
 }
 
-.nav1 {
+.nav {
   transition: 0.3s ease;
   display: none;
 }
 
-.nav1 ul {
+.nav ul {
   padding: 0 22px;
 }
 
-.nav1 li {
+.nav li {
   list-style: none;
   padding: 12px 0;
 }
 
-.nav1 li a {
+.nav li a {
   color: #cd3f2b;
   font-size: 20px;
   text-decoration: none;
 }
 
-.nav1 li a:hover {
+.nav li a:hover {
   font-weight: bold;
 }
 
@@ -1471,7 +1471,7 @@ $(function(){
   }
 });
 
-function updateCoinDisplay() {
+ function updateCoinDisplay() {
       let coins = localStorage.getItem("coins") || 0;
       document.getElementById("coinCounter").innerText = coins;
   }
@@ -1489,7 +1489,7 @@ function updateCoinDisplay() {
 
   function menuOnClick() {
 document.getElementById("menu-bar").classList.toggle("change");
-document.getElementById("nav1").classList.toggle("change");
+document.getElementById("nav").classList.toggle("change");
 document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 	</script>
