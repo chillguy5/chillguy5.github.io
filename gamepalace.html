@@ -334,21 +334,6 @@
     <div class="credit">Made by Chill Guy Productions</div>
 
     <script>
-    function updateCoinDisplay() {
-        let coins = localStorage.getItem("coins") || 0;
-        document.getElementById("coinCounter").innerText = coins;
-    }
-
-    function addCoins() {
-        let coins = localStorage.getItem("coins");
-        coins = coins ? parseInt(coins) : 0;
-        coins += 50;
-        localStorage.setItem("coins", coins);
-        updateCoinDisplay(); // Update de weergave
-    }
-
-    setInterval(addCoins, 1000);
-    updateCoinDisplay(); // Update direct bij paginalaad
 
 function menuOnClick() {
   document.getElementById("menu-bar").classList.toggle("change");
