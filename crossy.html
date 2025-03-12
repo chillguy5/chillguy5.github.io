@@ -197,17 +197,27 @@ document.getElementById("menu-bar").classList.toggle("change");
 document.getElementById("nav").classList.toggle("change");
 document.getElementById("menu-bg").classList.toggle("change-bg");
 }
-let totalSeconds = parseInt(localStorage.getItem("totalTimeSpent")) || 0; // Haal de opgeslagen tijd op
-
-// Functie die de tijd elke seconde bijwerkt
-function updateTimer() {
-    totalSeconds++; // Verhoog de verstreken tijd met 1 seconde
-    localStorage.setItem("totalTimeSpent", totalSeconds); // Sla de nieuwe tijd op in localStorage
-    document.getElementById("timeSpent").textContent = totalSeconds; // Toon de nieuwe tijd op de pagina
+// Haal de starttijd op, of zet hem op de huidige tijd als deze niet bestaat
+let startTime = parseInt(localStorage.getItem("startTime"), 10);
+if (!startTime) {
+    startTime = Date.now(); // Starttijd in milliseconden
+    localStorage.setItem("startTime", startTime);
 }
 
-// Start de timer
-setInterval(updateTimer, 1000); // Start de timer die elke seconde de tijd bijwerkt
+// Functie om de verstreken tijd correct te berekenen
+function updateTimer() {
+    let currentTime = Date.now(); // Huidige tijd in milliseconden
+    let elapsedSeconds = Math.floor((currentTime - startTime) / 1000); // Bereken aantal seconden verstreken
+
+    // Toon de tijd op de pagina
+    document.getElementById("timeSpent").textContent = elapsedSeconds;
+}
+
+// Update de timer elke seconde
+setInterval(updateTimer, 1000);
+
+// Voer de functie direct uit bij het laden van de pagina
+updateTimer();
 </script>
 
 </html>
