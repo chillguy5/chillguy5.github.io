@@ -305,6 +305,35 @@ function updateTimer() {
 
 // Start de timer
 setInterval(updateTimer, 1000); // Start de timer die elke seconde de tijd bijwerkt
+
+
+// Haal de opgeslagen tijd op uit localStorage, of gebruik 0 als deze nog niet bestaat
+let timeslope = parseInt(localStorage.getItem("time-slope")) || 0;
+
+// Functie die de tijd omrekent naar dagen, uren, minuten en seconden
+function formatTime(seconds) {
+    let days = Math.floor(seconds / (24 * 60 * 60)); // Bereken dagen
+    seconds -= days * (24 * 60 * 60);
+
+    let hours = Math.floor(seconds / (60 * 60)); // Bereken uren
+    seconds -= hours * (60 * 60);
+
+    let minutes = Math.floor(seconds / 60); // Bereken minuten
+    seconds -= minutes * 60;
+
+    // Retourneer de tijd in het formaat "dagen:uren:minuten:seconden"
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+// Functie die de tijd elke seconde bijwerkt
+function updateTimer() {
+    timeslope++; // Verhoog de verstreken tijd met 1 seconde
+    localStorage.setItem("time-slope", timeslope); // Sla de nieuwe tijd op in localStorage
+    document.getElementById("slope").textContent = formatTime(timeslope); // Toon de nieuwe tijd in het juiste formaat
+}
+
+// Start de timer als de gebruiker de pagina bezoekt
+setInterval(updateTimer, 1000); // Start de timer die elke seconde de tijd bijwerkt
 </script>
 
 </html>
