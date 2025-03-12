@@ -255,11 +255,6 @@
             <h3>Chill Guy Crossy Road</h3>
             <p>Highscore: <span id="highscore-crossy">0</span></p>
         </div>
-        <div class="highscore-box">
-          <img src="images/gameicons/slope-game.jpg" alt="slope">
-          <h3>Slope</h3>
-          <p>time spend: <span id="time-slope">0</span></p>
-      </div>
     </div>
 
     <!-- Timer Display -->
@@ -284,9 +279,6 @@
         document.getElementById("highscore-candy").textContent = localStorage.getItem("highscorec") || 0;
         document.getElementById("highscore-snake").textContent = localStorage.getItem("highscorea") || 0;
         document.getElementById("highscore-crossy").textContent = localStorage.getItem("highscorer") || 0;
-
-        document.getElementById("time-slope").textContent = localStorage.getItem("timeslope") || 0;
-
 
 // Haal de opgeslagen tijd op uit localStorage, of gebruik 0 als deze nog niet bestaat
 let totalSeconds = parseInt(localStorage.getItem("totalTimeSpent")) || 0;
