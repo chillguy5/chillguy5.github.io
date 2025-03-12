@@ -285,6 +285,30 @@ document.getElementById("menu-bar").classList.toggle("change");
 document.getElementById("nav").classList.toggle("change");
 document.getElementById("menu-bg").classList.toggle("change-bg");
 }
+
+let startTime = Date.now();
+let activeTime = parseInt(localStorage.getItem("activeTime")) || 0;
+let lastActiveTime = startTime;
+
+function updateActiveTime() {
+    if (document.visibilityState === "visible") {
+        lastActiveTime = Date.now();
+    } else {
+        activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
+        localStorage.setItem("activeTime", activeTime); // Tijd opslaan
+    }
+}
+
+// Luister naar wanneer de pagina actief/inactief wordt
+document.addEventListener("visibilitychange", updateActiveTime);
+
+// Sla de tijd om de paar seconden op (voor het geval de gebruiker de pagina sluit)
+setInterval(() => {
+    if (document.visibilityState === "visible") {
+        let currentTime = activeTime + Math.floor((Date.now() - lastActiveTime) / 1000);
+        localStorage.setItem("activeTime", currentTime);
+    }
+}, 5000);
     </script>
   </body>
 </html>
