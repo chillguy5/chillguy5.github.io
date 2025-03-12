@@ -182,6 +182,24 @@ function updateTimer() {
 // Start de timer
 setInterval(updateTimer, 1000); // Start de timer die elke seconde de tijd bijwerkt
 
+let gameStartTime = Date.now();
+
+// Functie om de speeltijd op te slaan en bij te werken wanneer de game eindigt
+function endGame() {
+    let gameEndTime = Date.now();
+    let gameDuration = Math.floor((gameEndTime - gameStartTime) / 1000); // Tijd in seconden
+
+    // Voeg de speeltijd toe aan de bestaande gespeelde tijd in localStorage
+    let currentTime = parseInt(localStorage.getItem("timeJumper")) || 0;
+    currentTime += gameDuration; // Voeg de speeltijd van deze sessie toe
+
+    // Sla de nieuwe tijd op in localStorage
+    localStorage.setItem("timeJumper", currentTime);
+
+    // Verzend de tijd naar de highscore-pagina (als je de tijd direct wilt bijwerken)
+    document.getElementById("time-jumper").textContent = formatTime(currentTime);
+}
+
     window.onload = initializeSound;
 </script>
 <body>

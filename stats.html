@@ -280,6 +280,37 @@
         document.getElementById("highscore-snake").textContent = localStorage.getItem("highscorea") || 0;
         document.getElementById("highscore-crossy").textContent = localStorage.getItem("highscorer") || 0;
 
+// Update de weergave van de tijd per game
+document.getElementById("time-jumper").textContent = formatTime(timeJumper);
+document.getElementById("time-shooter").textContent = formatTime(timeShooter);
+document.getElementById("time-flappy").textContent = formatTime(timeFlappy);
+document.getElementById("time-tetris").textContent = formatTime(timeTetris);
+document.getElementById("time-candy").textContent = formatTime(timeCandy);
+document.getElementById("time-snake").textContent = formatTime(timeSnake);
+document.getElementById("time-crossy").textContent = formatTime(timeCrossy);
+
+// Functie die de tijd bijwerkt en opslaat in localStorage voor een specifieke game
+function updateGameTime(game) {
+    let currentTime = parseInt(localStorage.getItem(game)) || 0;
+    currentTime++; // Verhoog de speeltijd met 1 seconde
+
+    // Sla de nieuwe tijd op in localStorage
+    localStorage.setItem(game, currentTime);
+
+    // Update de weergave van de tijd
+    document.getElementById("time-" + game).textContent = formatTime(currentTime);
+}
+
+// Dit moet worden aangeroepen in de gamepagina, bijvoorbeeld zodra de gebruiker de game start
+updateGameTime('jumper');  // Voor Chill Guy Jumper
+updateGameTime('shooter');  // Voor Chill Guy Shooter
+updateGameTime('flappy');   // Voor Chill Guy Flappy
+updateGameTime('tetris');   // Voor Chill Guy Tetris
+updateGameTime('candy');    // Voor Chill Guy Candy Crush
+updateGameTime('snake');    // Voor Chill Guy Snake
+updateGameTime('crossy');   // Voor Chill Guy Crossy Road
+
+
 // Haal de opgeslagen tijd op uit localStorage, of gebruik 0 als deze nog niet bestaat
 let totalSeconds = parseInt(localStorage.getItem("totalTimeSpent")) || 0;
 
