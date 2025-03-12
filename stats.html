@@ -263,51 +263,55 @@
     </div>
 
     <script>
-        function menuOnClick() {
-            document.getElementById("menu-bar").classList.toggle("change");
-            document.getElementById("nav").classList.toggle("change");
-            document.getElementById("menu-bg").classList.toggle("change-bg");
-        }
-
-        let coins = parseInt(localStorage.getItem("coins")) || 0;
-        document.getElementById("coins").textContent = coins;
-
-        document.getElementById("highscore-jumper").textContent = localStorage.getItem("highscore") || 0;
-        document.getElementById("highscore-shooter").textContent = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : "0";
-        document.getElementById("highscore-flappy").textContent = localStorage.getItem("highscoref") || 0;
-        document.getElementById("highscore-tetris").textContent = localStorage.getItem("highscorete") || 0;
-        document.getElementById("highscore-candy").textContent = localStorage.getItem("highscorec") || 0;
-        document.getElementById("highscore-snake").textContent = localStorage.getItem("highscorea") || 0;
-        document.getElementById("highscore-crossy").textContent = localStorage.getItem("highscorer") || 0;
-
-// Haal de opgeslagen tijd op uit localStorage, of gebruik 0 als deze nog niet bestaat
-let totalSeconds = parseInt(localStorage.getItem("totalTimeSpent")) || 0;
-
-// Functie die de tijd omrekent naar dagen, uren, minuten en seconden
-function formatTime(seconds) {
-    let days = Math.floor(seconds / (24 * 60 * 60)); // Bereken dagen
-    seconds -= days * (24 * 60 * 60);
-
-    let hours = Math.floor(seconds / (60 * 60)); // Bereken uren
-    seconds -= hours * (60 * 60);
-
-    let minutes = Math.floor(seconds / 60); // Bereken minuten
-    seconds -= minutes * 60;
-
-    // Retourneer de tijd in het formaat "dagen:uren:minuten:seconden"
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-
-// Functie die de tijd elke seconde bijwerkt
-function updateTimer() {
-    totalSeconds++; // Verhoog de verstreken tijd met 1 seconde
-    localStorage.setItem("totalTimeSpent", totalSeconds); // Sla de nieuwe tijd op in localStorage
-    document.getElementById("timeSpent").textContent = formatTime(totalSeconds); // Toon de nieuwe tijd in het juiste formaat
-}
-
-// Start de timer als de gebruiker de pagina bezoekt
-setInterval(updateTimer, 1000); // Start de timer die elke seconde de tijd bijwerkt
-    </script>
+      function menuOnClick() {
+          document.getElementById("menu-bar").classList.toggle("change");
+          document.getElementById("nav").classList.toggle("change");
+          document.getElementById("menu-bg").classList.toggle("change-bg");
+      }
+  
+      let coins = parseInt(localStorage.getItem("coins")) || 0;
+      document.getElementById("coins").textContent = coins;
+  
+      document.getElementById("highscore-jumper").textContent = localStorage.getItem("highscore") || 0;
+      document.getElementById("highscore-shooter").textContent = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : "0";
+      document.getElementById("highscore-flappy").textContent = localStorage.getItem("highscoref") || 0;
+      document.getElementById("highscore-tetris").textContent = localStorage.getItem("highscorete") || 0;
+      document.getElementById("highscore-candy").textContent = localStorage.getItem("highscorec") || 0;
+      document.getElementById("highscore-snake").textContent = localStorage.getItem("highscorea") || 0;
+      document.getElementById("highscore-crossy").textContent = localStorage.getItem("highscorer") || 0;
+  
+      // Haal de starttijd op, of zet op de huidige tijd als deze niet bestaat
+      let startTime = parseInt(localStorage.getItem("startTime"), 10);
+      if (!startTime) {
+          startTime = Date.now();
+          localStorage.setItem("startTime", startTime);
+      }
+  
+      function formatTime(seconds) {
+          let days = Math.floor(seconds / (24 * 3600));
+          seconds %= 24 * 3600;
+          let hours = Math.floor(seconds / 3600);
+          seconds %= 3600;
+          let minutes = Math.floor(seconds / 60);
+          seconds %= 60;
+  
+          return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+  
+      function updateTimer() {
+          let currentTime = Date.now();
+          let elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+  
+          document.getElementById("timeSpent").textContent = formatTime(elapsedSeconds);
+      }
+  
+      // Timer elke seconde bijwerken
+      setInterval(updateTimer, 1000);
+  
+      // Toon direct de juiste tijd bij paginalaad
+      updateTimer();
+  </script>
+  
 
 </body>
 </html>
