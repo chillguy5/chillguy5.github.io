@@ -405,26 +405,37 @@ function menuOnClick() {
   document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
-        let coins = parseInt(localStorage.getItem("coins")) || 0;
-        document.getElementById("coins").textContent = coins;
+document.addEventListener("DOMContentLoaded", function () {
+    let lastClaimTime = localStorage.getItem("lastClaimTime");
+    let now = Date.now();
+    
+    if (lastClaimTime) {
+        let timeDiff = now - parseInt(lastClaimTime);
+        let hoursPassed = timeDiff / (1000 * 60 * 60);
 
-        document.addEventListener("DOMContentLoaded", function() {
-        if (localStorage.getItem("dailyClaim7") === "true") {
+        if (hoursPassed < 24) {
             document.querySelector(".daily-login-button").style.display = "none";
         }
-    });
-
-    function claimDailyReward() {
-        let dailyButton = document.querySelector(".daily-login-button");
-        dailyButton.style.display = "none"; // Verberg de knop na klikken
-        localStorage.setItem("dailyClaim7", "true"); // Opslaan dat de beloning is opgehaald
-        
-        let coins = parseInt(localStorage.getItem("coins")) || 0;
-        coins += 20000; // Voeg 100 coins toe als dagelijkse beloning
-        localStorage.setItem("coins", coins);
-        document.getElementById("coins").textContent = coins;
-        alert("Gefeliciteerd! Je hebt 20000 extra coins ontvangen vanwege je daily login!");
     }
+
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    document.getElementById("coins").textContent = coins;
+});
+
+function claimDailyReward() {
+    let dailyButton = document.querySelector(".daily-login-button");
+    dailyButton.style.display = "none"; // Verberg de knop na klikken
+
+    localStorage.setItem("lastClaimTime", Date.now()); // Sla de tijd van de claim op
+    
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    coins += 20000; // Voeg 20.000 coins toe als dagelijkse beloning
+    localStorage.setItem("coins", coins);
+    document.getElementById("coins").textContent = coins;
+    
+    alert("Gefeliciteerd! Je hebt 20.000 extra coins ontvangen vanwege je daily login!");
+}
+
 
         // Functie om het geluid in te schakelen of uit te schakelen
         function initializeSound() {
