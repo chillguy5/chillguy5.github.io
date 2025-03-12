@@ -314,24 +314,32 @@ let startTime = Date.now();
 let activeTime = parseInt(localStorage.getItem("activeTime")) || 0;
 let lastActiveTime = startTime;
 
+// Functie om actieve tijd te updaten
 function updateActiveTime() {
-    if (document.visibilityState === "visible") {
-        lastActiveTime = Date.now();
-    } else {
+    if (document.visibilityState === "hidden") {
         activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
-        localStorage.setItem("activeTime", activeTime); // Tijd opslaan
-    }
+        localStorage.setItem("activeTime", activeTime); 
+    } 
+    lastActiveTime = Date.now(); // Reset starttijd
 }
 
-// Luister naar wanneer de pagina actief/inactief wordt
-document.addEventListener("visibilitychange", updateActiveTime);
-
-// Sla de tijd om de paar seconden op (voor het geval de gebruiker de pagina sluit)
+// Checkt elke seconde en slaat op
 setInterval(() => {
     if (document.visibilityState === "visible") {
-        let currentTime = activeTime + Math.floor((Date.now() - lastActiveTime) / 1000);
-        localStorage.setItem("activeTime", currentTime);
+        activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
+        localStorage.setItem("activeTime", activeTime);
+        lastActiveTime = Date.now(); 
     }
-}, 5000);
+}, 1000);
+
+// Luister naar zichtbaarheid wijzigingen
+document.addEventListener("visibilitychange", updateActiveTime);
+
+// Opslaan bij sluiten van de pagina
+window.addEventListener("beforeunload", () => {
+    activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
+    localStorage.setItem("activeTime", activeTime);
+});
+
 </script>
 </html>
