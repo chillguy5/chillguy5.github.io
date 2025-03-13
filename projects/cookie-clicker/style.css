@@ -64,6 +64,7 @@ body
 	user-select: none;
 	touch-action: manipulation;
 	
+	color:#fff;
 	background:#000 url(img/darkNoise.jpg);
 	font-family:Tahoma,Arial,sans-serif;
 	font-size:13px;
