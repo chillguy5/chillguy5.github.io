@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
 <!-- Google tag (gtag.js) -->
@@ -39,17 +39,21 @@ Feel free to alter this code to your liking, but please do not re-host it, do no
 <!--[if lt IE9]><script src="excanvas.compiled.js"></script><![endif]-->
 </head>
 <style>
+	body {
+		background: #4a1015;
+	  }
+	
 	  .home-icon{
 				width: 40px; /* Pas de grootte aan */
 				height: 40px;
-				margin-right: 0px;
+				margin-left: 0px;
 				vertical-align: middle;
 			}
 	
 			.cart-icon {
 				width: 30px; /* Pas de grootte aan */
 				height: 30px;
-				margin-right: 5px;
+				margin-left: 5px;
 				vertical-align: middle;
 			}
 	
@@ -61,7 +65,7 @@ Feel free to alter this code to your liking, but please do not re-host it, do no
 			}
 	
 	  #menu {
-		z-index: 1000;
+		z-index: 100000000;
 	  }
 	  
 	  #menu-bar {
@@ -119,7 +123,7 @@ Feel free to alter this code to your liking, but please do not re-host it, do no
 	  }
 	  
 	  .menu-bg {
-		z-index: 999;
+		z-index: 99999999;
 		width: 0;
 		height: 0;
 		margin: 30px 0 20px 20px;
@@ -175,7 +179,7 @@ Feel free to alter this code to your liking, but please do not re-host it, do no
 		  <div class="menu-bg" id="menu-bg"></div>
 		<div><b>Cookie Clicker</b>&trade; &copy; Orteil, 2021 - DashNet</div>
 		<div><a href="https://twitter.com/orteil42" target="_blank" id="topbarTwitter">twitter</a></div>
-		<div><a href="https://orteil42.tumblr.com" target="_blank" id="topbarTumblr">tumblr</a</div>
+		<div><a href="https://orteil42.tumblr.com" target="_blank" id="topbarTumblr">tumblr</a></div>
 		<div style="position:relative;"><div style="width:22px;height:32px;background:url(img/discord.png);position:absolute;left:0px;top:0px;pointer-events:none;"></div><a href="https://discordapp.com/invite/cookie" target="_blank" style="padding-left:16px;" id="topbarDiscord">Discord</a></div>
 		<div style="position:relative;"><div style="width:25px;height:32px;background:url(img/weeHoodie.png);position:absolute;left:-2px;top:0px;pointer-events:none;"></div><a class="blueLink" href="http://www.redbubble.com/people/dashnet" target="_blank" style="padding-left:12px;" id="topbarMerch">Merch!</a></div>
 		<div style="position:relative;"><div style="width:22px;height:32px;background:url(img/patreon.png);position:absolute;left:0px;top:0px;pointer-events:none;"></div><a class="orangeLink" href="https://www.patreon.com/dashnet" target="_blank" style="padding-left:16px;" id="topbarPatreon">Patreon</a></div>
@@ -287,7 +291,7 @@ Feel free to alter this code to your liking, but please do not re-host it, do no
 </div>
 </body>
 <script>
-	 function updateCoinDisplay() {
+	      function updateCoinDisplay() {
       let coins = localStorage.getItem("coins") || 0;
       document.getElementById("coinCounter").innerText = coins;
   }
@@ -313,32 +317,24 @@ let startTime = Date.now();
 let activeTime = parseInt(localStorage.getItem("activeTime")) || 0;
 let lastActiveTime = startTime;
 
-// Functie om actieve tijd te updaten
 function updateActiveTime() {
-    if (document.visibilityState === "hidden") {
+    if (document.visibilityState === "visible") {
+        lastActiveTime = Date.now();
+    } else {
         activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
-        localStorage.setItem("activeTime", activeTime); 
-    } 
-    lastActiveTime = Date.now(); // Reset starttijd
+        localStorage.setItem("activeTime", activeTime); // Tijd opslaan
+    }
 }
 
-// Checkt elke seconde en slaat op
-setInterval(() => {
-    if (document.visibilityState === "visible") {
-        activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
-        localStorage.setItem("activeTime", activeTime);
-        lastActiveTime = Date.now(); 
-    }
-}, 1000);
-
-// Luister naar zichtbaarheid wijzigingen
+// Luister naar wanneer de pagina actief/inactief wordt
 document.addEventListener("visibilitychange", updateActiveTime);
 
-// Opslaan bij sluiten van de pagina
-window.addEventListener("beforeunload", () => {
-    activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
-    localStorage.setItem("activeTime", activeTime);
-});
-
+// Sla de tijd om de paar seconden op (voor het geval de gebruiker de pagina sluit)
+setInterval(() => {
+    if (document.visibilityState === "visible") {
+        let currentTime = activeTime + Math.floor((Date.now() - lastActiveTime) / 1000);
+        localStorage.setItem("activeTime", currentTime);
+    }
+}, 5000);
 </script>
 </html>
