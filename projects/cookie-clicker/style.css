@@ -399,19 +399,19 @@ oh forget it this is just a mess
 	box-shadow:0px 0px 3px 1px rgba(255,255,255,0.2) inset;
 	padding:7px 8px 9px 8px;
 }
-#topBar b
+#topBar a
 {color:#fff;}
-#topBar b.blueLink
+#topBar a.blueLink
 {color:#06c;}
-#topBar b.blueLink:hover
+#topBar a.blueLink:hover
 {color:#28f;text-shadow:0px 0px 3px #06c;}
-#topBar b.lightblueLink
+#topBar a.lightblueLink
 {color:#6ad3ff;}
-#topBar b.lightblueLink:hover
+#topBar a.lightblueLink:hover
 {color:#74fffd;text-shadow:0px 0px 3px #6ad3ff;}
-b.orangeLink,#topBar b.orangeLink
+a.orangeLink,#topBar a.orangeLink
 {color:#f65f4d;}
-b.orangeLink:hover,#topBar b.orangeLink:hover
+a.orangeLink:hover,#topBar a.orangeLink:hover
 {color:#ff9580;text-shadow:0px 0px 3px #f65f4d;}
 
 #topBar>#links
