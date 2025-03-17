@@ -727,7 +727,7 @@ div {
   top: 0;
   width: 2rem; /* Grootte blijft klein */
   height: 2rem; /* Grootte blijft klein */
-  margin: 0.6rem; /* Meer ruimte tussen de chips */
+  margin: 0.7rem; /* Meer ruimte tussen de chips */
   font-size: 0.8rem; /* Tekst blijft klein */
   filter: drop-shadow(0 1px 4px #6e6e6e); /* Schaduw subtieler */
   border: 1.5px solid rgba(255, 255, 255, 0); /* Dikkere rand verwijderd */
@@ -748,7 +748,7 @@ div {
   cursor: pointer;
   transition: 0.2s all ease;
   outline: none;
-  margin: 0.6rem; /* Meer ruimte tussen de chips */
+  margin: 0.7rem; /* Meer ruimte tussen de chips */
 }
 
 
