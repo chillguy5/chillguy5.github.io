@@ -329,7 +329,7 @@ function updateLocalStorage() {
 }
 
 $(".part").click(function () {
-  if (bankSum > betSum + activeChipNumber) {
+  if (bankSum >= betSum + activeChipNumber) {
     if (playAudio) {
       chipPutSound.play();
     }
