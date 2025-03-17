@@ -329,6 +329,13 @@ function updateLocalStorage() {
 }
 
 $(".part").click(function () {
+  // Controleer eerst of de speler op "All In" klikt
+  if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
+    let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Haal coins op
+    activeChipNumber = playerBalance; // Zet activeChipNumber op de volledige balans
+  }
+
+  // Controleer of er genoeg geld is
   if (bankSum >= betSum + activeChipNumber) {
     if (playAudio) {
       chipPutSound.play();
@@ -340,15 +347,12 @@ $(".part").click(function () {
     $(".cash-total").html(`${cashSum}.00`);
     updateLocalStorage(); // Update localStorage
 
-          // "All In" functie
-          if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
-            let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
-            areaChipCount = playerBalance; // Zet de waarde op de volledige balans
-          }
-    else if ($(this).has(".betting-chip").length) {
+    let areaChipCount = 0;
+
+    if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
-    
+
       if (areaChipCount >= 10 && areaChipCount < 25) {
         activeChip = 10;
       } else if (areaChipCount >= 25 && areaChipCount < 50) {
@@ -378,7 +382,7 @@ $(".part").click(function () {
       } else if (areaChipCount >= 10000000) {
         activeChip = 10000000;
       }
-      
+
       $(this).html(
         `<div id="${areaChipCount}" class="betting-chip betting-chip-shadow betting-chip${activeChip}">${areaChipCount}</div>`
       );
@@ -391,6 +395,7 @@ $(".part").click(function () {
     $(".alert-money").addClass("alert-message-visible"); // Geld te weinig waarschuwing blijft
   }
 });
+
 
 $(".button-reset").click(function () {
   $(".number").removeClass("marked-area");
