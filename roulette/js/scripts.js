@@ -342,9 +342,20 @@ $(".part").click(function () {
 
           // "All In" functie
           if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
-            let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
-            areaChipCount = playerBalance; // Zet de waarde op de volledige balans
-          }
+            let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
+            
+            // Zet alles in
+            activeChipNumber = playerBalance;  
+            betSum += activeChipNumber;  
+            cashSum = 0; // Al het geld wordt ingezet
+            bankSum = 0; // Voorkomt "not enough money" melding
+        
+            $(".bet-total").html(`${betSum}.00`);
+            $(".cash-total").html(`${cashSum}.00`);
+            updateLocalStorage();
+        
+            return; // Stop de functie hier om verdere checks te voorkomen
+        }
     else if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
