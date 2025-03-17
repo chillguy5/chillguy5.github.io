@@ -319,7 +319,7 @@ chipSelection();
 
 // Chips placing start
 var betSum = 0;
-var cashSum = parseInt(localStorage.getItem('coins')) || 1000; // Standaardwaarde als er geen opslag is
+var cashSum = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
 var areaChipCount = 0;
 var bankSum = cashSum;
 $(".cash-total").html(`${cashSum}.00`);
