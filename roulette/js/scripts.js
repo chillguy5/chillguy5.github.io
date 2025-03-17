@@ -321,7 +321,7 @@ chipSelection();
 var betSum = 0;
 var cashSum = localStorage.getItem('coins') || 0;
 var minBet = 5;
-var maxBet = 1000;
+var maxBet = infinity;
 var areaChipCount = 0;
 var bankSum = cashSum;
 $(".cash-total").html(`${cashSum}.00`);
