@@ -341,22 +341,46 @@ $(".part").click(function () {
     updateLocalStorage(); // Update localStorage
 
     if ($(this).has(".betting-chip").length) {
-      areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id"));
+      areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
-
-      if (areaChipCount >= 5 && areaChipCount < 10) {
+    
+      if (areaChipCount >= 10 && areaChipCount < 25) {
         activeChip = 10;
-      } else if (areaChipCount >= 10 && areaChipCount < 20) {
-        activeChip = 10;
-      } else if (areaChipCount >= 20 && areaChipCount < 50) {
-        activeChip = 20;
+      } else if (areaChipCount >= 25 && areaChipCount < 50) {
+        activeChip = 25;
       } else if (areaChipCount >= 50 && areaChipCount < 100) {
         activeChip = 50;
       } else if (areaChipCount >= 100 && areaChipCount < 200) {
         activeChip = 100;
-      } else if (areaChipCount >= 200) {
+      } else if (areaChipCount >= 200 && areaChipCount < 500) {
         activeChip = 200;
+      } else if (areaChipCount >= 500 && areaChipCount < 1000) {
+        activeChip = 500;
+      } else if (areaChipCount >= 1000 && areaChipCount < 2000) {
+        activeChip = 1000;
+      } else if (areaChipCount >= 2000 && areaChipCount < 10000) {
+        activeChip = 2000;
+      } else if (areaChipCount >= 10000 && areaChipCount < 50000) {
+        activeChip = 10000;
+      } else if (areaChipCount >= 50000 && areaChipCount < 100000) {
+        activeChip = 50000;
+      } else if (areaChipCount >= 100000 && areaChipCount < 500000) {
+        activeChip = 100000;
+      } else if (areaChipCount >= 500000 && areaChipCount < 1000000) {
+        activeChip = 500000;
+      } else if (areaChipCount >= 1000000 && areaChipCount < 10000000) {
+        activeChip = 1000000;
+      } else if (areaChipCount >= 10000000) {
+        activeChip = 10000000;
       }
+    
+      // "All In" functie
+      if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
+        let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
+        activeChip = playerBalance; // Zet de waarde op de volledige balans
+      }
+    }
+    
       
       $(this).html(
         `<div id="${areaChipCount}" class="betting-chip betting-chip-shadow betting-chip${activeChip}">${areaChipCount}</div>`
