@@ -328,14 +328,8 @@ function updateLocalStorage() {
   localStorage.setItem('coins', cashSum); // Opslaan in localStorage
 }
 
-          // "All In" functie
-          if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
-            let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
-            areaChipCount = playerBalance; // Zet de waarde op de volledige balans
-          }
-
 $(".part").click(function () {
-  if (bankSum >= betSum + activeChipNumber) {
+  if (bankSum > betSum + activeChipNumber) {
     if (playAudio) {
       chipPutSound.play();
     }
@@ -346,8 +340,12 @@ $(".part").click(function () {
     $(".cash-total").html(`${cashSum}.00`);
     updateLocalStorage(); // Update localStorage
 
-
-     if ($(this).has(".betting-chip").length) {
+          // "All In" functie
+          if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
+            let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
+            areaChipCount = playerBalance; // Zet de waarde op de volledige balans
+          }
+    else if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
     
