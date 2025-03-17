@@ -748,7 +748,7 @@ div {
   cursor: pointer;
   transition: 0.2s all ease;
   outline: none;
-  margin: 0.8rem; /* Iets minder ruimte tussen de chips */
+  margin: 0.4rem; /* Iets minder ruimte tussen de chips */
 }
 
 
