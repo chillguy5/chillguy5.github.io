@@ -379,7 +379,6 @@ $(".part").click(function () {
         let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
         activeChip = playerBalance; // Zet de waarde op de volledige balans
       }
-    }
     
       
       $(this).html(
