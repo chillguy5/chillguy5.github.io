@@ -725,20 +725,20 @@ div {
   transform: translate(0, 0);
   left: 0;
   top: 0;
-  width: 2.5rem; /* Kleiner gemaakt */
-  height: 2.5rem; /* Kleiner gemaakt */
-  margin: 0.5rem; /* Iets meer ruimte tussen de chips */
-  font-size: 1rem; /* Tekst kleiner gemaakt */
-  filter: drop-shadow(0 2px 6px #6e6e6e); /* Schaduw iets subtieler */
-  border: 2px solid rgba(255, 255, 255, 0); /* Dikkere rand verwijderd */
+  width: 2rem; /* Nog kleiner gemaakt */
+  height: 2rem; /* Nog kleiner gemaakt */
+  margin: 0.4rem; /* Beetje ruimte tussen de chips */
+  font-size: 0.8rem; /* Tekst kleiner gemaakt */
+  filter: drop-shadow(0 1px 4px #6e6e6e); /* Schaduw subtieler */
+  border: 1.5px solid rgba(255, 255, 255, 0); /* Dikkere rand verwijderd */
 }
 
 .betting-chip {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2.5rem; /* Kleiner gemaakt */
-  height: 2.5rem; /* Kleiner gemaakt */
+  width: 2rem; /* Nog kleiner gemaakt */
+  height: 2rem; /* Nog kleiner gemaakt */
   background-position: center;
   background-size: contain; /* Zorgt ervoor dat de afbeelding goed past */
   background-repeat: no-repeat;
@@ -748,8 +748,9 @@ div {
   cursor: pointer;
   transition: 0.2s all ease;
   outline: none;
-  margin: 0.7rem; /* Iets meer ruimte tussen de chips */
+  margin: 0.6rem; /* Iets minder ruimte tussen de chips */
 }
+
 
 
 
