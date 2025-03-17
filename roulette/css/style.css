@@ -140,7 +140,7 @@ div {
 
 .roulette-table .top-bar .roulette-rolls-container {
   position: relative;
-  left: 50;
+  left: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
