@@ -727,7 +727,7 @@ div {
   top: 0;
   width: 2.5rem; /* Kleiner gemaakt */
   height: 2.5rem; /* Kleiner gemaakt */
-  margin: 0.3rem; /* Minder ruimte tussen de chips */
+  margin: 0.5rem; /* Iets meer ruimte tussen de chips */
   font-size: 1rem; /* Tekst kleiner gemaakt */
   filter: drop-shadow(0 2px 6px #6e6e6e); /* Schaduw iets subtieler */
   border: 2px solid rgba(255, 255, 255, 0); /* Dikkere rand verwijderd */
@@ -748,8 +748,9 @@ div {
   cursor: pointer;
   transition: 0.2s all ease;
   outline: none;
-  margin: 0.3rem; /* Minder ruimte tussen de chips */
+  margin: 0.5rem; /* Iets meer ruimte tussen de chips */
 }
+
 
 
 .betting-chip10 {
