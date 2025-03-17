@@ -317,83 +317,56 @@ const chipSelection = () => {
 
 chipSelection();
 
-//Chips placing start
+// Chips placing start
 var betSum = 0;
-var cashSum = 1000;
-var minBet = 5;
-var maxBet = 1000;
+var cashSum = localStorage.getItem('coins') || 0;
 var areaChipCount = 0;
 var bankSum = cashSum;
 $(".cash-total").html(`${cashSum}.00`);
 
 $(".part").click(function () {
-  if (bankSum >= betSum + activeChipNumber) {
-    if (maxBet >= betSum + activeChipNumber) {
-      if (playAudio) {
-        chipPutSound.play();
-      }
+  if (bankSum >= betSum + activeChipNumber) {  // Alleen saldo-check, maxBet verwijderd
+    if (playAudio) {
+      chipPutSound.play();
+    }
 
-      betSum = betSum + activeChipNumber;
-      cashSum = cashSum - activeChipNumber;
-      $(".bet-total").html(`${betSum}.00`);
-      $(".cash-total").html(`${cashSum}.00`);
+    betSum = betSum + activeChipNumber;
+    cashSum = cashSum - activeChipNumber;
+    $(".bet-total").html(`${betSum}.00`);
+    $(".cash-total").html(`${cashSum}.00`);
 
-      if ($(this).has(".betting-chip").length) {
-        areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id"));
-        areaChipCount = areaChipCount + activeChipNumber;
-        if (areaChipCount == 5) {
-          activeChip = 10;
-        } else if (areaChipCount >= 10 && areaChipCount < 20) {
-          activeChip = 10;
-        } else if (areaChipCount >= 20 && areaChipCount < 50) {
-          activeChip = 20;
-        } else if (areaChipCount >= 50 && areaChipCount < 100) {
-          activeChip = 50;
-        } else if (areaChipCount >= 100 && areaChipCount < 200) {
-          activeChip = 100;
-        } else if (areaChipCount >= 200) {
-          activeChip = 200;
-        }
-        $(this).html(
-          `<div id="${areaChipCount}" class="betting-chip betting-chip-shadow betting-chip${activeChip}">${areaChipCount}</div>`
-        );
-      } else {
-        $(this).html(
-          `<div id="${activeChipNumber}" class="betting-chip betting-chip-shadow betting-chip${activeChipNumber}">${activeChipNumber}</div>`
-        );
+    if ($(this).has(".betting-chip").length) {
+      areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id"));
+      areaChipCount = areaChipCount + activeChipNumber;
+
+      if (areaChipCount >= 5 && areaChipCount < 10) {
+        activeChip = 10;
+      } else if (areaChipCount >= 10 && areaChipCount < 20) {
+        activeChip = 10;
+      } else if (areaChipCount >= 20 && areaChipCount < 50) {
+        activeChip = 20;
+      } else if (areaChipCount >= 50 && areaChipCount < 100) {
+        activeChip = 50;
+      } else if (areaChipCount >= 100 && areaChipCount < 200) {
+        activeChip = 100;
+      } else if (areaChipCount >= 200) {
+        activeChip = 200;
       }
+      
+      $(this).html(
+        `<div id="${areaChipCount}" class="betting-chip betting-chip-shadow betting-chip${activeChip}">${areaChipCount}</div>`
+      );
     } else {
-      $(".alert-max-bet").addClass("alert-message-visible");
+      $(this).html(
+        `<div id="${activeChipNumber}" class="betting-chip betting-chip-shadow betting-chip${activeChipNumber}">${activeChipNumber}</div>`
+      );
     }
   } else {
-    $(".alert-money").addClass("alert-message-visible");
+    $(".alert-money").addClass("alert-message-visible"); // Geld te weinig waarschuwing blijft
   }
 });
 
-$(".circle-overlay").mouseover(function () {
-  if (playAudio && userInteraction) {
-    menuSound.play();
-  }
-});
-
-$(".circle-overlay").click(function () {
-  if (playAudio) {
-    selectSound.play();
-  }
-});
-
-$(".button-sound").click(function () {
-  if ($(".cross-line").hasClass("cross-line-display")) {
-    $(".cross-line").removeClass("cross-line-display");
-    playAudio = true;
-  } else {
-    $(".cross-line").addClass("cross-line-display");
-    playAudio = false;
-    ambientSound.pause();
-    backgroundMusic.pause();
-  }
-});
-
+// Reset-knop blijft hetzelfde
 $(".button-reset").click(function () {
   $(".number").removeClass("marked-area");
   $(".part").html("");
@@ -402,6 +375,7 @@ $(".button-reset").click(function () {
   $(".cash-total").html(`${cashSum}.00`);
   betSum = 0;
 });
+
 //Chips placing end
 
 var cashSumBefore = 0;
