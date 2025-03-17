@@ -343,7 +343,7 @@ $(".part").click(function () {
           // "All In" functie
           if ($(this).children(".betting-chip").attr("id") === "chipAllIn") {
             let playerBalance = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
-            activeChip = playerBalance; // Zet de waarde op de volledige balans
+            areaChipCount = playerBalance; // Zet de waarde op de volledige balans
           }
     else if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
