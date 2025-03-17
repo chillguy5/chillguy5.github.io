@@ -318,8 +318,8 @@ const chipSelection = () => {
 chipSelection();
 
 //Chips placing start
-var betSum = 0;
-var cashSum = 1000;
+var betSum = 0;.
+var cashSum = localStorage.getItem('coins') || 0;
 var minBet = 5;
 var maxBet = Infinity;
 var areaChipCount = 0;
