@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
+    <title>Chill Guy Games</title>
+</head>
+<body>
+    <p>Het is lastiger dan verwacht dus het duurt nog even voordat roulette komt</p>
+</body>
+<script>
+let startTime = Date.now();
+let activeTime = parseInt(localStorage.getItem("activeTime")) || 0;
+let lastActiveTime = startTime;
+
+function updateActiveTime() {
+    if (document.visibilityState === "visible") {
+        lastActiveTime = Date.now();
+    } else {
+        activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
+        localStorage.setItem("activeTime", activeTime); // Tijd opslaan
+    }
+}
+
+// Luister naar wanneer de pagina actief/inactief wordt
+document.addEventListener("visibilitychange", updateActiveTime);
+
+// Sla de tijd om de paar seconden op (voor het geval de gebruiker de pagina sluit)
+setInterval(() => {
+    if (document.visibilityState === "visible") {
+        let currentTime = activeTime + Math.floor((Date.now() - lastActiveTime) / 1000);
+        localStorage.setItem("activeTime", currentTime);
+    }
+}, 5000);
+</script>
+</html>
