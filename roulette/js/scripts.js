@@ -688,31 +688,4 @@ $(".alert-spin-result").click(function () {
 
   $(".bet-total").html("0.00");
   betSum = 0;
-  if (cashSum <= 0) {
-    $(".alert-game-over").addClass("alert-message-visible");
-  }
-});
-
-$(".answer").mouseover(function () {
-  if (playAudio) {
-    menuSound.play();
-  }
-});
-
-$(".answer-yes").click(function () {
-  $(".alert-game-over").removeClass("alert-message-visible");
-  rolledNumbersArray = [];
-  rolledNumbersColorArray = [];
-  cashSum = 1000; // Speler krijgt opnieuw 1000 coins
-  bankSum = cashSum;
-  betSum = 0;
-  $(".roll").html("");
-  $(".roll").removeClass("roll-red roll-black roll-green");
-  $(".cash-total").html(`${cashSum}.00`);
-  $(".bet-total").html(`${betSum}.00`);
-  updateLocalStorage(); // Coins opnieuw opslaan
-});
-
-$(".answer-no").click(function () {
-  $(".alert-game-over").removeClass("alert-message-visible");
 });
