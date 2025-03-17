@@ -319,21 +319,26 @@ chipSelection();
 
 // Chips placing start
 var betSum = 0;
-var cashSum = localStorage.getItem('coins') || 0;
+var cashSum = parseInt(localStorage.getItem('coins')) || 1000; // Standaardwaarde als er geen opslag is
 var areaChipCount = 0;
 var bankSum = cashSum;
 $(".cash-total").html(`${cashSum}.00`);
 
+function updateLocalStorage() {
+  localStorage.setItem('coins', cashSum); // Opslaan in localStorage
+}
+
 $(".part").click(function () {
-  if (bankSum >= betSum + activeChipNumber) {  // Alleen saldo-check, maxBet verwijderd
+  if (bankSum >= betSum + activeChipNumber) {
     if (playAudio) {
       chipPutSound.play();
     }
 
-    betSum = betSum + activeChipNumber;
-    cashSum = cashSum - activeChipNumber;
+    betSum += activeChipNumber;
+    cashSum -= activeChipNumber;
     $(".bet-total").html(`${betSum}.00`);
     $(".cash-total").html(`${cashSum}.00`);
+    updateLocalStorage(); // Update localStorage
 
     if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id"));
@@ -366,14 +371,14 @@ $(".part").click(function () {
   }
 });
 
-// Reset-knop blijft hetzelfde
 $(".button-reset").click(function () {
   $(".number").removeClass("marked-area");
   $(".part").html("");
   $(".bet-total").html("0.00");
-  cashSum = cashSum + betSum;
+  cashSum += betSum;
   $(".cash-total").html(`${cashSum}.00`);
   betSum = 0;
+  updateLocalStorage(); // Update localStorage
 });
 
 //Chips placing end
@@ -675,13 +680,14 @@ $(".answer-yes").click(function () {
   $(".alert-game-over").removeClass("alert-message-visible");
   rolledNumbersArray = [];
   rolledNumbersColorArray = [];
-  cashSum = 1000;
+  cashSum = 1000; // Speler krijgt opnieuw 1000 coins
   bankSum = cashSum;
   betSum = 0;
   $(".roll").html("");
   $(".roll").removeClass("roll-red roll-black roll-green");
   $(".cash-total").html(`${cashSum}.00`);
   $(".bet-total").html(`${betSum}.00`);
+  updateLocalStorage(); // Coins opnieuw opslaan
 });
 
 $(".answer-no").click(function () {
