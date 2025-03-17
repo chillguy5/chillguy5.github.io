@@ -467,24 +467,66 @@ div {
   transition: 0.2s all ease;
   outline: none;
 }
-.betting-chip5 {
-  background-image: url(../images/chips-5.png);
-}
 .betting-chip10 {
   background-image: url(../images/chips-10.png);
 }
-.betting-chip20 {
-  background-image: url(../images/chips-20.png);
+
+.betting-chip25 {
+  background-image: url(../images/chips-25.png);
 }
+
 .betting-chip50 {
   background-image: url(../images/chips-50.png);
 }
+
 .betting-chip100 {
   background-image: url(../images/chips-100.png);
 }
+
 .betting-chip200 {
   background-image: url(../images/chips-200.png);
 }
+
+.betting-chip500 {
+  background-image: url(../images/chips-500.png);
+}
+
+.betting-chip1000 {
+  background-image: url(../images/chips-1000.png);
+}
+
+.betting-chip2000 {
+  background-image: url(../images/chips-2000.png);
+}
+
+.betting-chip10000 {
+  background-image: url(../images/chips-10000.png);
+}
+
+.betting-chip50000 {
+  background-image: url(../images/chips-50000.png);
+}
+
+.betting-chip100000 {
+  background-image: url(../images/chips-100000.png);
+}
+
+.betting-chip500000 {
+  background-image: url(../images/chips-500000.png);
+}
+
+.betting-chip1000000 {
+  background-image: url(../images/chips-1000000.png);
+}
+
+.betting-chip10000000 {
+  background-image: url(../images/chips-10000000.png);
+}
+
+.betting-chip-all-in {
+  background-image: url(../images/chips-all-in.png);
+}
+
 
 .betting-chip-shadow {
   filter: drop-shadow(3px 3px 5px rgb(66, 66, 66));
