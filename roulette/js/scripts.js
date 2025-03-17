@@ -571,17 +571,11 @@ $(".button-spin").click(function () {
       return lastRollColor;
     };
 
-    $(".alert-spin-result").click(function () {
-      for (let i = 1; i <= 10; i++) {
-        (function (i) {
-          setTimeout(function () {
-            cashSumBefore = cashSumBefore + winAmountOnScreen / 10;
-            cashSum = Math.round(cashSumBefore); // Sla de bijgewerkte cashSum op
-            $(".cash-total").html(`${cashSum}.00`);
-            updateLocalStorage(); // Zorg dat de nieuwe cashSum wordt opgeslagen
-          }, 50 * i);
-        })(i);
-      }
+    const resultsDisplay = () => {
+      setTimeout(function () {
+        $(".alert-spin-result").addClass("alert-message-visible");
+        $(".results").addClass("alert-message-opacity");
+      }, 5000);
 
       $(".results").addClass(`roll-${lastRollColor()}`);
 
@@ -674,9 +668,6 @@ $(".alert-spin-result").click(function () {
   if (cashSum <= 0) {
     $(".alert-game-over").addClass("alert-message-visible");
   }
-
-  updateLocalStorage(); // Nogmaals opslaan na de animatie om zeker te zijn
-
 });
 
 $(".answer").mouseover(function () {
