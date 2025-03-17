@@ -630,6 +630,8 @@ $(".alert-spin-result").click(function () {
     })(i);
   }
 
+  updateLocalStorage(); // Update localStorage
+
   $(".roulette-wheel-container").removeClass("roulette-wheel-visible");
   setTimeout(function () {
     $(".roulette-wheel-container").removeClass("z-index-visible");
