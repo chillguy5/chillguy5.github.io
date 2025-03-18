@@ -317,15 +317,15 @@ const chipSelection = () => {
 
 chipSelection();
 
-// Chips plaatsen start
+// Chips placing start
 var betSum = 0;
-var cashSum = parseInt(localStorage.getItem('coins')) || 0; 
+var cashSum = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
 var areaChipCount = 0;
 var bankSum = cashSum;
 $(".cash-total").html(`${cashSum}.00`);
 
 function updateLocalStorage() {
-  localStorage.setItem('coins', cashSum); 
+  localStorage.setItem('coins', cashSum); // Opslaan in localStorage
 }
 
 $(".part").click(function () {
@@ -338,31 +338,61 @@ $(".part").click(function () {
     cashSum -= activeChipNumber;
     $(".bet-total").html(`${betSum}.00`);
     $(".cash-total").html(`${cashSum}.00`);
-    updateLocalStorage();
+    updateLocalStorage(); // Update localStorage
 
-    if ($(this).attr("id") === "chipAllIn") {
-        let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
-        if (playerBalance > 0) {
-            activeChipNumber = playerBalance;
-            betSum += activeChipNumber;
-            cashSum = 0;
-            bankSum = 0;
-            $(".bet-total").html(`${betSum}.00`);
-            $(".cash-total").html(`${cashSum}.00`);
-            updateLocalStorage();
-        } else {
-            $(".alert-money").addClass("alert-message-visible");
-        }
-        return;
+if ($(this).attr("id") === "chipAllIn") {
+    let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
+
+    if (playerBalance > 0) {  // Zorgt ervoor dat je niet 'All In' kunt doen met $0
+        activeChipNumber = playerBalance;
+        betSum += activeChipNumber;
+        cashSum = 0; // Al het geld wordt ingezet
+        bankSum = 0; // Voorkomt "not enough money" melding
+
+        $(".bet-total").html(`${betSum}.00`);
+        $(".cash-total").html(`${cashSum}.00`);
+        updateLocalStorage();
+    } else {
+        $(".alert-money").addClass("alert-message-visible"); // Niet genoeg geld
     }
 
-    if ($(this).has(".betting-chip").length) {
-      areaChipCount = Number($(this).children(".betting-chip").attr("id").replace("chip", ""));
-      areaChipCount += activeChipNumber;
+    return; // Stop de functie hier om verdere checks te voorkomen
+}
 
-      let chipValues = [10, 25, 50, 100, 200, 500, 1000, 2000, 10000, 50000, 100000, 500000, 1000000, 10000000];
-      activeChip = chipValues.find(value => areaChipCount >= value) || activeChipNumber;
-
+    else if ($(this).has(".betting-chip").length) {
+      areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
+      areaChipCount = areaChipCount + activeChipNumber;
+    
+      if (areaChipCount >= 10 && areaChipCount < 25) {
+        activeChip = 10;
+      } else if (areaChipCount >= 25 && areaChipCount < 50) {
+        activeChip = 25;
+      } else if (areaChipCount >= 50 && areaChipCount < 100) {
+        activeChip = 50;
+      } else if (areaChipCount >= 100 && areaChipCount < 200) {
+        activeChip = 100;
+      } else if (areaChipCount >= 200 && areaChipCount < 500) {
+        activeChip = 200;
+      } else if (areaChipCount >= 500 && areaChipCount < 1000) {
+        activeChip = 500;
+      } else if (areaChipCount >= 1000 && areaChipCount < 2000) {
+        activeChip = 1000;
+      } else if (areaChipCount >= 2000 && areaChipCount < 10000) {
+        activeChip = 2000;
+      } else if (areaChipCount >= 10000 && areaChipCount < 50000) {
+        activeChip = 10000;
+      } else if (areaChipCount >= 50000 && areaChipCount < 100000) {
+        activeChip = 50000;
+      } else if (areaChipCount >= 100000 && areaChipCount < 500000) {
+        activeChip = 100000;
+      } else if (areaChipCount >= 500000 && areaChipCount < 1000000) {
+        activeChip = 500000;
+      } else if (areaChipCount >= 1000000 && areaChipCount < 10000000) {
+        activeChip = 1000000;
+      } else if (areaChipCount >= 10000000) {
+        activeChip = 10000000;
+      }
+      
       $(this).html(
         `<div id="${areaChipCount}" class="betting-chip betting-chip-shadow betting-chip${activeChip}">${areaChipCount}</div>`
       );
@@ -372,7 +402,7 @@ $(".part").click(function () {
       );
     }
   } else {
-    $(".alert-money").addClass("alert-message-visible"); 
+    $(".alert-money").addClass("alert-message-visible"); // Geld te weinig waarschuwing blijft
   }
 });
 
@@ -435,26 +465,51 @@ $(".button-spin").click(function () {
     areaBetCheck("bet2to1-3", "", rouletteNumber % 3 == 1, 3);
 
     for (let i = 0; i <= 36; i++) {
+      //Black and red numbers check
       if (i < 18) {
         areaBetCheck("column-red", "", rouletteNumber == rouletteNumbersRed[i], 2);
         areaBetCheck("column-black", "", rouletteNumber == rouletteNumbersBlack[i], 2);
       }
+      //Regular numbers check
       areaBetCheck("regular", i, rouletteNumber == i, 36);
 
       if (i > 0) {
+        //Line check
         if (i > 3) {
           areaBetCheck("line", i, rouletteNumber == i || rouletteNumber == i - 3, 18);
         } else {
           areaBetCheck("line", i, rouletteNumber == i || rouletteNumber == 0, 18);
         }
+
+        //Between check
         if (i % 3 == 1) {
           areaBetCheck("between", i, rouletteNumber == i || rouletteNumber == i + 1 || rouletteNumber == i + 2, 12);
         } else {
           areaBetCheck("between", i, rouletteNumber == i || rouletteNumber == i - 1, 18);
         }
+
+        //Corners check
+        if (i == 1) {
+          areaBetCheck(
+            "corner",
+            i,
+            rouletteNumber == i || rouletteNumber == i + 1 || rouletteNumber == i + 2 || rouletteNumber == i - 1,
+            9
+          );
+        } else if (i == 2 || i == 3) {
+          areaBetCheck("corner", i, rouletteNumber == i || rouletteNumber == i - 1 || rouletteNumber == 0, 12);
+        } else if (i > 3) {
+          areaBetCheck(
+            "corner",
+            i,
+            rouletteNumber == i || rouletteNumber == i - 3 || rouletteNumber == i - 4 || rouletteNumber == i - 1,
+            9
+          );
+        }
       }
     }
 
+    //Marking roulette wheel with number glow start
     var tableNumbersWithChips = [];
     for (let i = 0; i <= 36; i++) {
       if ($(`.number${i}`).hasClass("marked-area")) {
@@ -471,6 +526,7 @@ $(".button-spin").click(function () {
         }
       }
     }
+    //Marking roulette wheel with number glow ends
 
     let rouletteWheelAnimation = () => {
       $(".ball-container").html('<div class="ball-spinner"><div class="ball"></div></div>');
@@ -485,28 +541,165 @@ $(".button-spin").click(function () {
 
       sheet.textContent = `
       @-webkit-keyframes ball-container-animation{
-        0%{ transform: rotate(1440deg); }
-        100%{ transform: rotate(${(360 / rouletteNumbersAmount) * ballLandingNumber}deg); }
-      }`;
+        0%{ 
+          transform: rotate(1440deg);
+        }
+        100%{
+          transform: rotate(${(360 / rouletteNumbersAmount) * ballLandingNumber}deg);
+        }`;
 
       ballContainer.appendChild(sheet);
 
       $(".roulette-wheel-container").addClass("z-index-visible").addClass("roulette-wheel-visible");
       $(".roulette-wheel-main").addClass("roulette-wheel-spin");
+      $(".roulette-cross-shadow").addClass("roulette-wheel-spin");
+      $(".roulette-cross").addClass("roulette-wheel-spin");
     };
 
     rouletteWheelAnimation();
+
+    const lastRollColor = () => {
+      let lastRoll;
+      for (let a = 0; a < 18; a++) {
+        if (rouletteNumber == rouletteNumbersRed[a]) {
+          lastRoll = "red";
+        }
+        if (rouletteNumber == rouletteNumbersBlack[a]) {
+          lastRoll = "black";
+        }
+        if (rouletteNumber == 0) {
+          lastRoll = "green";
+        }
+      }
+      return lastRoll;
+    };
+
+    const lastRollDisplay = () => {
+      rolledNumbersColorArray.splice(0, 0, lastRollColor());
+
+      rolledNumbersArray.splice(0, 0, rouletteNumber);
+
+      if (rolledNumbersArray.length > 5) {
+        rolledNumbersArray.splice(-1, 1);
+        rolledNumbersColorArray.splice(-1, 1);
+      }
+
+      setTimeout(function () {
+        for (i = 0; i < rolledNumbersArray.length; i++) {
+          let rolledNumberIndex = i + 1;
+          $(`.roll${rolledNumberIndex}`).html(rolledNumbersArray[i]);
+
+          switch (rolledNumbersColorArray[i]) {
+            case "red":
+              $(`.roll${rolledNumberIndex}`).removeClass("roll-black").removeClass("roll-green").addClass("roll-red");
+              break;
+            case "black":
+              $(`.roll${rolledNumberIndex}`).removeClass("roll-red").removeClass("roll-green").addClass("roll-black");
+              break;
+            case "green":
+              $(`.roll${rolledNumberIndex}`).removeClass("roll-red").removeClass("roll-black").addClass("roll-green");
+              break;
+          }
+        }
+      }, 5000);
+
+      return lastRollColor;
+    };
 
     const resultsDisplay = () => {
       setTimeout(function () {
         $(".alert-spin-result").addClass("alert-message-visible");
         $(".results").addClass("alert-message-opacity");
       }, 5000);
-      
+
+      $(".results").addClass(`roll-${lastRollColor()}`);
+
+      if (rouletteNumber < 19) {
+        $(".high-low").html("LOW");
+      } else {
+        $(".high-low").html("HIGH");
+      }
+
+      if (rouletteNumber % 2 == 1) {
+        $(".odd-even").html("ODD");
+      } else {
+        $(".odd-even").html("EVEN");
+      }
+
       $(".roll-number").html(rouletteNumber);
-      $(".win-lose").html(win ? "YOU WON" : "NO WIN");
-      $(".win-amount").html(winAmountOnScreen > 0 ? `$${winAmountOnScreen}.00` : "");
+
+      if (win == true) {
+        $(".win-lose").html("YOU WON");
+        setTimeout(function () {
+          if (playAudio) {
+            winSound.play();
+          }
+        }, 5300);
+      } else {
+        $(".win-lose").html("NO WIN");
+      }
+
+      if (winAmountOnScreen > 0) {
+        $(".win-amount").html(`$${winAmountOnScreen}.00`);
+      } else {
+        $(".win-amount").html("");
+      }
+      bankSum = cashSum;
     };
+    lastRollDisplay();
     resultsDisplay();
   }
+});
+
+$(".alert-message-container").click(function () {
+  $(".alert-message-container").removeClass("alert-message-visible");
+});
+
+$(".alert-spin-result").click(function () {
+  for (let i = 1; i <= 10; i++) {
+    (function (i) {
+      setTimeout(function () {
+        cashSumBefore = cashSumBefore + winAmountOnScreen / 10;
+        $(".cash-total").html(`${Math.round(cashSumBefore)}.00`);
+      }, 50 * i);
+    })(i);
+  }
+
+  updateLocalStorage(); // Update localStorage
+
+  $(".roulette-wheel-container").removeClass("roulette-wheel-visible");
+  setTimeout(function () {
+    $(".roulette-wheel-container").removeClass("z-index-visible");
+  }, 1000);
+
+  $(".number").removeClass("marked-area");
+
+  $(".results").removeClass("alert-message-opacity");
+  setTimeout(function () {
+    $(".alert-spin-result").removeClass("alert-message-visible");
+  }, 1000);
+
+  if (win == true) {
+    setTimeout(function () {
+      if (playAudio) {
+        winChipsSound.play();
+      }
+    }, 500);
+  }
+
+  $(".roulette-wheel-main").removeClass("roulette-wheel-spin");
+  $(".roulette-cross-shadow").removeClass("roulette-wheel-spin");
+  $(".roulette-cross").removeClass("roulette-wheel-spin");
+
+  $(".number-glow-container").html("");
+
+  setTimeout(function () {
+    $(".results").removeClass("roll-red roll-black roll-green");
+  }, 1000);
+
+  $(".ball-container").html("");
+  $(".part").html("");
+
+  $(".bet-total").html("0.00");
+  betSum = 0;
 });
