@@ -340,7 +340,7 @@ $(".part").click(function () {
     $(".cash-total").html(`${cashSum}.00`);
     updateLocalStorage(); // Update localStorage
 
-if ($(this).attr("id") === "chipAllIn") {
+    if ($(this).has(".betting-chip20").length) {
     let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
 
     if (playerBalance > 0) {  // Zorgt ervoor dat je niet 'All In' kunt doen met $0
