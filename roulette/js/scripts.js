@@ -298,13 +298,35 @@ $(".part").mouseleave(function () {
 
 const chipSelection = () => {
   $(".betting-chip-menu").click(function () {
+    // Verwijder de actieve klasse van alle chips
     $(".betting-chip-menu").removeClass("active-chip");
+    
+    // Voeg de actieve klasse toe aan de geklikte chip
     $(this).addClass("active-chip");
-    activeChipNumber = Number($(this).attr("id").substr(4));
-    if (playAudio) {
-      selectSound.play();
+
+    // Controleer of de geklikte chip de "All In"-knop is
+    if ($(this).attr("id") === "chipAllIn") {
+      // Voer de actie uit voor de All In knop, bv. alle chips inzetten
+      activeChipNumber = "allIn";  // Of stel dit in op de waarde die alle chips vertegenwoordigt
+
+      // Eventueel een extra actie om te zorgen dat het 'all in' zichtbaar is
+      if (playAudio) {
+        selectSound.play();
+      }
+
+      // Je kunt hier ook extra logica toevoegen voor 'All In'
+      console.log("Alle chips zijn ingezet!");
+    } else {
+      // Voor de andere chips: stel de actieve chip in op het nummer uit het ID
+      activeChipNumber = Number($(this).attr("id").substr(4));
+
+      // Speel geluid af als dat gewenst is
+      if (playAudio) {
+        selectSound.play();
+      }
     }
   });
+};
 
   $(".betting-chip-menu").mouseover(function () {
     if (playAudio && userInteraction) {
