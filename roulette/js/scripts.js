@@ -300,7 +300,14 @@ const chipSelection = () => {
   $(".betting-chip-menu").click(function () {
     $(".betting-chip-menu").removeClass("active-chip");
     $(this).addClass("active-chip");
-    activeChipNumber = Number($(this).attr("id").substr(4));
+    
+    // Controleer of de chip een 'all-in' chip is
+    if ($(this).attr("id") === "chipAllIn") {
+      activeChipNumber = parseInt(localStorage.getItem('coins')) || 0; // Standaardwaarde als er geen opslag is
+    } else {
+      activeChipNumber = Number($(this).attr("id").substr(4)); // Haal het nummer uit de ID
+    }
+    
     if (playAudio) {
       selectSound.play();
     }
@@ -312,6 +319,7 @@ const chipSelection = () => {
     }
   });
 
+  // Stel de standaardchip in als de actieve chip (kan bijvoorbeeld chip10 zijn)
   $(`.${activeChip}`).addClass("active-chip");
 };
 
