@@ -348,7 +348,7 @@ $(".part").click(function () {
     $(".cash-total").html(`${cashSum}.00`);
     updateLocalStorage(); // Update localStorage
 
-    if ($(this).has(".betting-chip10").length) {
+    if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
     
