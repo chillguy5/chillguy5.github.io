@@ -343,7 +343,6 @@ $(".part").click(function () {
     if ($(this).has(".betting-chip20").length) {
     let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
     areaChipCount = parseInt(localStorage.getItem('coins')) || 0;
-    areaChipCount = areaChipCount + activeChipNumber;
 }
 
     else if ($(this).has(".betting-chip10").length) {
