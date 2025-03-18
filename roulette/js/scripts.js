@@ -340,25 +340,25 @@ $(".part").click(function () {
     $(".cash-total").html(`${cashSum}.00`);
     updateLocalStorage(); // Update localStorage
 
-    if ($(this).attr("id") === "chipAllIn") {
-      let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
-  
-      if (playerBalance > 0) {  // Zorgt ervoor dat je niet 'All In' kunt doen met $0
-          activeChipNumber = playerBalance;
-          betSum += activeChipNumber;
-          cashSum = 0; // Al het geld wordt ingezet
-          bankSum = 0; // Voorkomt "not enough money" melding
-  
-          $(".bet-total").html(`${betSum}.00`);
-          $(".cash-total").html(`${cashSum}.00`);
-          updateLocalStorage();
-      } else {
-          $(".alert-money").addClass("alert-message-visible"); // Niet genoeg geld
-      }
-  
-      return; // Stop de functie hier om verdere checks te voorkomen
-  }
-  
+if ($(this).attr("id") === "chipAllIn") {
+    let playerBalance = parseInt(localStorage.getItem('coins')) || 0;
+
+    if (playerBalance > 0) {  // Zorgt ervoor dat je niet 'All In' kunt doen met $0
+        activeChipNumber = playerBalance;
+        betSum += activeChipNumber;
+        cashSum = 0; // Al het geld wordt ingezet
+        bankSum = 0; // Voorkomt "not enough money" melding
+
+        $(".bet-total").html(`${betSum}.00`);
+        $(".cash-total").html(`${cashSum}.00`);
+        updateLocalStorage();
+    } else {
+        $(".alert-money").addClass("alert-message-visible"); // Niet genoeg geld
+    }
+
+    return; // Stop de functie hier om verdere checks te voorkomen
+}
+
     else if ($(this).has(".betting-chip").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
