@@ -383,10 +383,8 @@ $(".part").click(function () {
         activeChip = 500000;
       } else if (areaChipCount >= 1000000 && areaChipCount < 10000000) {
         activeChip = 1000000;
-      } else if (areaChipCount >= 10000000 && areaChipCount < parseInt(localStorage.getItem('coins')) || 0;) {
+      } else if (areaChipCount >= 10000000) {
         activeChip = 10000000;
-      } else if (areaChipCount >= parseInt(localStorage.getItem('coins')) || 0;) {
-        activeChip = parseInt(localStorage.getItem('coins')) || 0;;
       
       
       $(this).html(
