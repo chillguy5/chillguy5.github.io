@@ -359,7 +359,7 @@ if ($(this).attr("id") === "chipAllIn") {
     return; // Stop de functie hier om verdere checks te voorkomen
 }
 
-    else if ($(this).has(".betting-chip").length) {
+    else if ($(this).has(".betting-chip10").length) {
       areaChipCount = Number(jQuery(this).children(".betting-chip").attr("id").replace("chip", ""));
       areaChipCount = areaChipCount + activeChipNumber;
     
