@@ -385,7 +385,7 @@ $(".part").click(function () {
         activeChip = 1000000;
       } else if (areaChipCount >= 10000000) {
         activeChip = 10000000;
-      
+      }
       
       $(this).html(
         `<div id="${areaChipCount}" class="betting-chip betting-chip-shadow betting-chip${activeChip}">${areaChipCount}</div>`
