@@ -352,7 +352,7 @@ function createBloodSplatters() {
             }
         }
 
-        splatter.src = `img/splat${splatterNum}.svg`;
+        splatter.src = `images/russianroulette/splat${splatterNum}.svg`;
         
         // Position using sector system
         const sector = selectSector(size);
