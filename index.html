@@ -167,9 +167,9 @@
   const bonusButton = document.getElementById('bonus-button');
 
   // Controleer of bonus al ontvangen is
-  const bonusClaimed1 = localStorage.getItem("bonusClaimed1");
+  const bonusClaimed2 = localStorage.getItem("bonusClaimed2");
 
-  if (bonusClaimed1 === "true") {
+  if (bonusClaimed2 === "true") {
     bonusButton.style.display = "none"; // Verberg knop als eerder ontvangen
   }
 
@@ -177,7 +177,7 @@
     let coins = parseInt(localStorage.getItem("coins")) || 0;
     coins += 100000000;
     localStorage.setItem("coins", coins);
-    localStorage.setItem("bonusClaimed1", "true");
+    localStorage.setItem("bonusClaimed2", "true");
     bonusButton.style.display = "none"; // Verberg knop na claimen
   });
 
