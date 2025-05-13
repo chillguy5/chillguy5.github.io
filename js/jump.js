@@ -172,7 +172,7 @@ function jump() {
         loadSound("gameover", "sound/Voicy_bomboclart.mp3");
         play("gameover");
     
-        let earnedCoins = score * 10; // Score x 10 voor coins
+        let earnedCoins = score * 100; // Score x 10 voor coins
         coins += earnedCoins; // Voeg de verdiende coins toe
         localStorage.setItem("coins", coins);
     
