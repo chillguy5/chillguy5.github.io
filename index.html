@@ -345,7 +345,7 @@ button#enterButton {
 </div>
 
 <div class="mainContent" style="display: none;">
-    
+
 <div class="loadingScreen">
               <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
             </div>
@@ -408,12 +408,10 @@ button#enterButton {
 
     
     <script>
-var loadingScreen = document.querySelector(".loadingScreen");
 var mainContent = document.querySelector(".mainContent");
 var enterButton = document.getElementById("enterButton");
 
 enterButton.addEventListener("click", function() {
-    loadingScreen.style.display = "none";
     mainContent.style.display = "block"; // Laat de rest van de site zien
 });
 
