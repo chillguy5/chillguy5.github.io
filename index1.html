@@ -307,42 +307,11 @@
   height: 540px;
   transform: translate(-60%,-30%);
 }
-
-.voorpagina {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #f5f5f5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-#verderKnop {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
     </style>
 </head>
 <body>
 
-<!-- Voorpagina -->
-<div class="voorpagina">
-  <h1>Welkom op mijn site</h1>
-  <button id="verderKnop">Ga verder</button>
-</div>
-
-<!-- De echte website -->
-<div class="mainContent" style="display: none;">
-
-  <div class="loadingScreen">
+    <div class="loadingScreen">
               <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
             </div>
             
@@ -400,21 +369,14 @@
 
     <div class="credit">Deze website is gemaakt door Chill Guy Productions en bestaat al</div>
 
-</div>
-
-
-  
-
     <script>
-var voorpagina = document.querySelector(".voorpagina");
-var mainContent = document.querySelector(".mainContent");
-var verderKnop = document.getElementById("verderKnop");
+    var loadingScreen = document.querySelector(".loadingScreen");
 
-verderKnop.addEventListener("click", function() {
-    voorpagina.style.display = "none";
-    mainContent.style.display = "block";
+    window.addEventListener('load', function() {
+    setTimeout(function() {
+        loadingScreen.style.display = 'none';
+    }, 2500); // 2500 milliseconden = 2.5 seconden
 });
-
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
