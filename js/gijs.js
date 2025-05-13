@@ -166,7 +166,22 @@ scene("battle", () => {
         { name: "images/characters/mangogame1.webp", scale: 0.1 },
         { name: "images/characters/johnporkgame1.png",scale: 0.15 },
         { name: "images/characters/pessigame1.png", scale: 0.15 },
-        { name: "images/characters/goldgame.png", scale: 0.2 }
+        { name: "images/characters/goldgame.png", scale: 0.2 },
+        { name: "images/italian/bever-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/boneca-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/brr_brr-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/cappacuno-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/chimpanzini-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/frulli-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/koe-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/krokodil-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/liri_lara-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/tralaleo-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/trippi-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/trulimero-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/tung_tung_tung-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/un_din_din_dun-removebg-preview.png", scale: 0.3 },
+        { name: "images/italian/Working_on_it-removebg-preview.png", scale: 0.3 }
     ];
 
     let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
