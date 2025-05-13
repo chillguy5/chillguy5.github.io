@@ -25,13 +25,6 @@
       overflow: hidden;
     }
 
-    .title {
-      align-items: center;
-      height: 300px;
-      width: 600px;
-      margin-bottom: 5px;
-    }
-
     .loadingScreen {
       position: absolute;
       z-index: 100;
@@ -73,7 +66,7 @@
       background-color: #f0aa5e;
       padding: 30px 40px;
       border-radius: 20px;
-      margin-top: 130px; /* ruimte voor slinger */
+      margin-top: 130px;
       color: #900d27;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
       max-width: 600px;
@@ -95,7 +88,6 @@
       font-weight: bold;
     }
 
-    /* 🎉 Slingers bovenaan (origineel formaat) */
     .slinger {
       position: absolute;
       top: 0;
@@ -105,20 +97,17 @@
       z-index: 1;
     }
 
-    /* 🖼️ Decoratiebeelden */
-    .decoration {
+    /* Grote confetti-achtergrond */
+    .confetti-bg {
       position: absolute;
-      height: auto;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
       pointer-events: none;
-      z-index: 2; /* achter info */
-    }
-
-    .confetti {
-      width: 200px;
-    }
-
-    .hundred {
-      width: 120px;
+      opacity: 0.8;
     }
   </style>
 </head>
@@ -128,14 +117,17 @@
   <a href="main.html" class="top-right-button">Ga naar Main</a>
 
   <!-- 🎈 Slinger bovenaan -->
-  <img src="slinger.webp" alt="Slinger" class="slinger" />
+  <img src="images/overig/slinger.webp" alt="Slinger" class="slinger" />
+
+  <!-- 🎉 Confetti over hele pagina -->
+  <img src="images/overig/confetti.png" alt="Confetti" class="confetti-bg" />
 
   <!-- ⏳ Laadscherm -->
   <div class="loadingScreen">
     <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
   </div>
 
-  <!-- ℹ️ Informatie -->
+  <!-- ℹ️ Info sectie -->
   <div class="info-section">
     <ul class="bullet-list">
       <li><span>Vanwege ons 100 dagen bestaan is er een gloednieuwe update.</span></li>
@@ -146,41 +138,9 @@
     </ul>
   </div>
 
-  <!-- 🧠 Verspreid decoraties -->
   <script>
-    const TOTAL_100 = 15;
-    const TOTAL_CONFETTI = 15;
-
-    function randomPosition(imgWidth = 100, imgHeight = 100) {
-      const x = Math.random() * (window.innerWidth - imgWidth);
-      const y = Math.random() * (window.innerHeight - imgHeight);
-      return { x, y };
-    }
-
-    function createDecoration(src, className, width) {
-      const img = document.createElement('img');
-      img.src = src;
-      img.classList.add('decoration', className);
-
-      const { x, y } = randomPosition(width, width);
-      img.style.left = `${x}px`;
-      img.style.top = `${y}px`;
-
-      document.body.appendChild(img);
-    }
-
+    // Verberg laadscherm na 2.5 seconden
     window.addEventListener('load', () => {
-      // 15x 100.png
-      for (let i = 0; i < TOTAL_100; i++) {
-        createDecoration('100.png', 'hundred', 120);
-      }
-
-      // 15x confetti.png
-      for (let i = 0; i < TOTAL_CONFETTI; i++) {
-        createDecoration('confetti.png', 'confetti', 200);
-      }
-
-      // Verberg laadscherm na 2.5s
       setTimeout(() => {
         document.querySelector(".loadingScreen").style.display = 'none';
       }, 2500);
