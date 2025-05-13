@@ -1,68 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
-    <title>Chill Guy Games</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #000000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            position: relative;
-            background-image: url('images/overig/achtergrond.png'); /* Vervang dit met jouw afbeelding */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="images/overig/icon.png" />
+  <title>Chill Guy Games</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+      background-image: url('images/overig/achtergrond.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
 
-        .title {
-            align-items: center;
-            height: 300px;
-            width: 600px;
-            margin-bottom: 5px;
-        }
+    .title {
+      align-items: center;
+      height: 300px;
+      width: 600px;
+      margin-bottom: 5px;
+    }
 
     .loadingScreen {
-  position: absolute;
-  z-index: 5;
-  width: 100%;
-  height: 100vh;
-  background-color: #4a1015;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      position: absolute;
+      z-index: 5;
+      width: 100%;
+      height: 100vh;
+      background-color: #4a1015;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.loadingScreen img {
-    width: 600px;  /* Pas dit aan naar gewenste breedte */
-    height: 200px; /* Pas dit aan naar gewenste hoogte */
-}
-    </style>
+    .loadingScreen img {
+      width: 600px;
+      height: 200px;
+    }
+
+    /* ➕ Knop styling */
+    .top-right-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff4a4a;
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+
+    .top-right-button:hover {
+      background-color: #ff2a2a;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="loadingScreen">
-              <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
-            </div>
+  <!-- 🔘 Navigatieknop -->
+  <a href="main.html" class="top-right-button">Ga naar Main</a>
 
-    <script>
+  <div class="loadingScreen">
+    <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
+  </div>
+
+  <script>
     var loadingScreen = document.querySelector(".loadingScreen");
 
-    window.addEventListener('load', function() {
-    setTimeout(function() {
+    window.addEventListener('load', function () {
+      setTimeout(function () {
         loadingScreen.style.display = 'none';
-    }, 2500); // 2500 milliseconden = 2.5 seconden
-});
-    </script>
-    
+      }, 2500);
+    });
+  </script>
+
 </body>
 </html>
