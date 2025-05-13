@@ -112,9 +112,34 @@
       pointer-events: none;
       opacity: 0.8;
     }
+
+    #bonus-button {
+  background-color: #f0aa5e;
+  color: #900d27;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 40px; /* ruimte boven de knop */
+  z-index: 15;
+  transition: transform 0.2s ease;
+}
+
+#bonus-button:hover {
+  transform: scale(1.05);
+}
+
   </style>
 </head>
 <body>
+    <!-- 🔘 Navigatieknop -->
+  <a href="main.html" class="top-right-button">Ga naar Main</a>
+
+  <button id="bonus-button">🎉 Ontvang 100 miljoen coins!</button>
+
 
   <!-- 🎈 Slinger bovenaan -->
   <img src="images/overig/slinger.webp" alt="Slinger" class="slinger" />
@@ -139,6 +164,24 @@
   </div>
 
   <script>
+  const bonusButton = document.getElementById('bonus-button');
+
+  // Controleer of bonus al ontvangen is
+  const bonusClaimed = localStorage.getItem("bonusClaimed");
+
+  if (bonusClaimed === "true") {
+    bonusButton.style.display = "none"; // Verberg knop als eerder ontvangen
+  }
+
+  bonusButton.addEventListener('click', function () {
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    coins += 100000000;
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("bonusClaimed", "true");
+    bonusButton.style.display = "none"; // Verberg knop na claimen
+  });
+
+
     // Verberg laadscherm na 2.5 seconden
     window.addEventListener('load', () => {
       setTimeout(() => {
