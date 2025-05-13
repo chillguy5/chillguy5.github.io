@@ -92,7 +92,7 @@ scene("game", () => {
         { name: "images/characters/johnporkgame1.png", x: 80, y: 40, scale: 0.15 },
         { name: "images/characters/pessigame1.png", x: 80, y: 40, scale: 0.20 },
         { name: "images/characters/goldgame.png", x: 80, y: 40, scale: 0.2 },
-        { name: "images/italian/bever-removebg-preview.png", x: 80, y: 40, scale: 1.0 },
+        { name: "images/italian/bever-removebg-preview.png", x: 80, y: 40, scale: 0.2 },
         { name: "images/italian/boneca-removebg-preview.png", x: 80, y: 40, scale: 1.0 },
         { name: "images/italian/brr_brr-removebg-preview.png", x: 80, y: 40, scale: 1.0 },
         { name: "images/italian/cappacuno-removebg-preview.png", x: 80, y: 40, scale: 1.0 },
