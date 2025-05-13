@@ -97,6 +97,11 @@ scene("game", () => {
         { name: "images/italian/brr_brr-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
         { name: "images/italian/cappacuno-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
         { name: "images/italian/chimpanzini-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
+        { name: "images/italian/frulli-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
+        { name: "images/italian/koe-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
+        { name: "images/italian/krokodil-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
+        { name: "images/italian/liri_lara-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
+        { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.4 },
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
