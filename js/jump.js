@@ -102,11 +102,11 @@ scene("game", () => {
         { name: "images/italian/krokodil-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
         { name: "images/italian/liri_lara-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
         { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
-        { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
-        { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
-        { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
-        { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
-        { name: "images/italian/tralaleo-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
+        { name: "images/italian/trippi-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
+        { name: "images/italian/trulimero-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
+        { name: "images/italian/tung_tung_tung-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
+        { name: "images/italian/un_din_din_dun-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
+        { name: "images/italian/Working_on_it-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
