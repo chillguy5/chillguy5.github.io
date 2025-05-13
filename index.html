@@ -307,46 +307,11 @@
   height: 540px;
   transform: translate(-60%,-30%);
 }
-
-.loadingScreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #222;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.loadingContent {
-  text-align: center;
-}
-
-button#enterButton {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
     </style>
 </head>
 <body>
 
-            <div class="loadingScreen">
-  <div class="loadingContent">
-    <h1>Welkom op mijn site!</h1>
-    <button id="enterButton">Ga verder</button>
-  </div>
-</div>
-
-<div class="mainContent" style="display: none;">
-
-<div class="loadingScreen">
+    <div class="loadingScreen">
               <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
             </div>
             
@@ -404,15 +369,13 @@ button#enterButton {
 
     <div class="credit">Deze website is gemaakt door Chill Guy Productions en bestaat al</div>
 
-</div>
-
-    
     <script>
-var mainContent = document.querySelector(".mainContent");
-var enterButton = document.getElementById("enterButton");
+    var loadingScreen = document.querySelector(".loadingScreen");
 
-enterButton.addEventListener("click", function() {
-    mainContent.style.display = "block"; // Laat de rest van de site zien
+    window.addEventListener('load', function() {
+    setTimeout(function() {
+        loadingScreen.style.display = 'none';
+    }, 2500); // 2500 milliseconden = 2.5 seconden
 });
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
