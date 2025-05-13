@@ -291,30 +291,9 @@
   height: 540px;
   transform: translate(-60%,-30%);
 }
-
-#coin-button {
-  background-color: #f0aa5e;
-  color: #900d27;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-}
-
-#coin-button:hover {
-  transform: scale(1.05);
-}
     </style>
 </head>
 <body>
-
-    <div id="coin-container">
-  <button id="coin-button">Ontvang 50 miljoen coins</button>
-</div>
             
     <div id="timedate">
         <div id="date"></div>
@@ -374,17 +353,6 @@
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
-
-  // Elementen ophalen
-  const coinButton = document.getElementById('coin-button');
-
-  // Voeg 50 miljoen toe bij klikken
-  coinButton.addEventListener('click', function () {
-    coins += 50000000;
-    localStorage.setItem("coins", coins); // Sla nieuwe waarde op
-  });
-
-
 
 function countup() {
     var now = new Date();
