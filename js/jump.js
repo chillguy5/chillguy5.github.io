@@ -187,7 +187,7 @@ function jump() {
         loadSound("gameover", "sound/Voicy_bomboclart.mp3");
         play("gameover");
     
-        let earnedCoins = score * 100; // Score x 10 voor coins
+        let earnedCoins = score * 10; // Score x 10 voor coins
         coins += earnedCoins; // Voeg de verdiende coins toe
         localStorage.setItem("coins", coins);
     
@@ -203,7 +203,7 @@ function jump() {
 });
 
 scene("lose", (score) => {
-    let earnedCoins = score * 100; // Bereken de verdiende coins opnieuw
+    let earnedCoins = score * 10; // Bereken de verdiende coins opnieuw
     add([text("Score: " + score, { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
     add([text("Highscore: " + highscore, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
     add([text("Coins Earned: " + earnedCoins, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);

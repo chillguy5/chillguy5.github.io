@@ -173,7 +173,7 @@ function candyCrushGame() {
                 )
             ) {
                 score += 4;
-                coins += 40; // Bijvoorbeeld, 2 coins per match van 4
+                coins += 4; // Bijvoorbeeld, 2 coins per match van 4
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
                 localStorage.setItem("coins", coins);
@@ -208,7 +208,7 @@ function candyCrushGame() {
                 )
             ) {
                 score += 4;
-                coins += 40;
+                coins += 4;
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
                 localStorage.setItem("coins", coins);
@@ -261,7 +261,7 @@ function candyCrushGame() {
                 )
             ) {
                 score += 3;
-                coins += 30; // Bijvoorbeeld, 1 coin per match van 3
+                coins += 3; // Bijvoorbeeld, 1 coin per match van 3
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
                 localStorage.setItem("coins", coins);
@@ -296,7 +296,7 @@ function candyCrushGame() {
                 )
             ) {
                 score += 3;
-                coins += 30; // Bijvoorbeeld, 1 coin per match van 3
+                coins += 3; // Bijvoorbeeld, 1 coin per match van 3
                 scoreDisplay.innerHTML = score;
                 coinsDisplay.innerHTML = coins;
                 localStorage.setItem("coins", coins);
