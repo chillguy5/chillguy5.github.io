@@ -518,7 +518,7 @@ function claimDailyReward() {
     var month = now.toLocaleString('default', { month: 'long' }); // Get month name
   
     var time = hours + ':' + addZeroPadding(minutes) + ':' + addZeroPadding(seconds) + '.' + addZeroPaddingMilliseconds(milliseconds);
-    var date = month + ' ' + now.getDate() + ', ' + now.getFullYear();
+    var date = now.getDate() + ' ' + month + ', ' + now.getFullYear();
   
     document.getElementById('date').innerHTML = date;
     document.getElementById('time').innerHTML = time;
