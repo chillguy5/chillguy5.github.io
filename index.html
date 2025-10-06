@@ -33,24 +33,23 @@
       background:rgba(248,248,215,0.1);
       backdrop-filter:blur(8px);
       box-shadow:0 8px 30px rgba(0,0,0,0.4);
-      border:4px solid transparent;
       position: relative;
       z-index: 0;
-      overflow: hidden;
     }
-    /* RGB led strip effect rondom de card */
+
+    /* Dunne regenboogrand rond de card */
     .card::before{
       content: '';
       position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
-      z-index: -1;
-      border-radius: 22px;
-      padding: 4px;
+      top: -3px;
+      left: -3px;
+      width: calc(100% + 6px);
+      height: calc(100% + 6px);
+      border-radius: 21px;
+      padding: 3px;
       background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);
-      animation: rotateBorder 5s linear infinite;
+      z-index: -1;
+      animation: rotateBorder 6s linear infinite;
     }
 
     @keyframes rotateBorder {
