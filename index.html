@@ -16,8 +16,17 @@
       margin:0;
       font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: linear-gradient(135deg, var(--kleur2), var(--kleur1));
+      background-size: 200% 200%;
+      animation: gradientShift 12s ease-in-out infinite;
       color: var(--kleur3);
     }
+
+    @keyframes gradientShift {
+      0% { background-position: right bottom; }
+      50% { background-position: left top; }
+      100% { background-position: right bottom; }
+    }
+
     .container{
       min-height:100vh;
       display:flex;
