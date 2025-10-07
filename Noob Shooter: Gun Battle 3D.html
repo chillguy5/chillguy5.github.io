@@ -281,7 +281,7 @@
   function addCoins() {
       let coins = localStorage.getItem("coins");
       coins = coins ? parseInt(coins) : 0;
-      coins += 10;
+      coins += 100;
       localStorage.setItem("coins", coins);
       updateCoinDisplay(); // Update de weergave
   }
