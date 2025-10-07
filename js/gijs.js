@@ -384,7 +384,7 @@ onCollide("bullet", "boss", (b, e) => {
 		addExplode(b.pos, 1, 24, 1);
 		if (e.hp() <= 0) {
 			addExplode2(center(), 12, 120, 30)
-			coins += 100000; // Voeg 100 coins toe
+			coins += 10000000; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
 			wait(0.5, () => go("win"));
@@ -473,7 +473,7 @@ scene("win", ({ score }) => {
         localStorage.setItem("highscores", highscores);
     }
 
-    add([text("YOU WIN! You get 100000 coins.", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
+    add([text("YOU WIN! You get 10000000 coins.", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
     add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
     add([text(`Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
     add([text(`Score: ${score} seconds`, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);

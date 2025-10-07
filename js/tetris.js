@@ -302,7 +302,7 @@
       }
       },
       incCoins: function (amount) {
-        this.coins += amount * 1;
+        this.coins += amount * 10;
         this.setInfo('coins');
         localStorage.setItem("coins", this.coins);
     },
