@@ -601,7 +601,7 @@ function animate(timestamp) {
           counterDOM.innerHTML = currentLane;
     
           // Voeg de coins toe afhankelijk van het aantal lanes
-          coins += 10;
+          coins += 100;
           coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
           // Sla de bijgewerkte coins op in localStorage
           localStorage.setItem("coins", coins);
@@ -619,7 +619,7 @@ function animate(timestamp) {
           counterDOM.innerHTML = currentLane;
     
           // Verwijder coins afhankelijk van het aantal lanes
-          coins -= 10;
+          coins -= 100;
           coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
           // Sla de bijgewerkte coins op in localStorage
           localStorage.setItem("coins", coins);
