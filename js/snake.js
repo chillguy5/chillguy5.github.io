@@ -53,7 +53,7 @@ const initGame = () => {
         updateFoodPosition();
         snakeBody.push([foodY, foodX]); // Pushing food position to snake body array
         score++; // increment score by 1
-        coins += 10;
+        coins++10;
         localStorage.setItem("coins", coins);
         highScore = score >= highScore ? score : highScore;
         localStorage.setItem("highscorea", highScore);
