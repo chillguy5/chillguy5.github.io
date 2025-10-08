@@ -562,21 +562,23 @@ setInterval(() => {
     }
 }, 5000);
 
+
   const searchInput = document.getElementById('searchInput');
   const games = document.querySelectorAll('.game-container .game-link');
 
   searchInput.addEventListener('input', () => {
-    const filter = searchInput.value.toLowerCase();
+    const filter = searchInput.value.toLowerCase().trim();
 
     games.forEach(game => {
       const name = game.querySelector('.game-name').textContent.toLowerCase();
-      if (name.includes(filter)) {
-        game.style.display = '';
+      if (name.includes(filter) || filter === "") {
+        game.style.display = "inline-block"; // toon game
       } else {
-        game.style.display = 'none';
+        game.style.display = "none"; // verberg game volledig (titel + afbeelding)
       }
     });
   });
+
 
 
 window.onload = initializeSound;
