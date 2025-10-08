@@ -1,599 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
-    <title>Chill Guy Games</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #000000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: auto;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-            background-image: url('images/overig/achtergrond.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            padding-bottom: 60px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chill Guy Games</title>
+<link rel="icon" type="image/x-icon" href="images/overig/icon.png">
+<style>
+/* === BASIS === */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('images/overig/achtergrond.png') center/cover fixed no-repeat;
+    text-align: center;
+    color: #900d27;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
 
-        .title {
-            align-items: center;
-            height: 300px;
-            width: 600px;
-            margin-top: 50px; /* Meer ruimte aan de bovenkant */
-        }
+/* === TITEL ICON === */
+.title {
+    align-items: center;
+    height: 300px;
+    width: 600px;
+    margin-top: 50px;
+}
 
-        h1 {
-            width: 600px;
-            color: #900d27;
-            background-color: #f0aa5e;
-            padding: 10px 20px;
-            border-radius: 50px;
-            margin-top: 75px;
-        }
-
-        .game-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 0px; /* Extra marge om games verder naar beneden te zetten */
-        }
-
-        .game-link {
-            text-decoration: none;
-        }
-
-        .game-image {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 0px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .game-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .stats-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-        .score-button:hover {
-            background-color: #f0aa5e;
-            transform: scale(1.1);
-        }
-
-        .cart-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-        .coin-counter {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 30px;
-            color: #900d27;
-            background-color: #f0aa5e;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .coin-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-
-        .home-icon{
-            width: 40px; /* Pas de grootte aan */
-            height: 40px;
-            margin-left: 0px;
-            vertical-align: middle;
-        }
-
-/* Credit naar linksonder */
-.credit {
+/* === COIN COUNTER === */
+.coin-counter {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-size: 18px;
-    color: #f8f8d7;
-    font-weight: bold;
-}
-
-.stats-icon {
-            width: 30px; /* Pas de grootte aan */
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-
-        #menu {
-  z-index: 2;
-}
-
-#menu-bar {
-  width: 45px;
-  height: 40px;
-  margin: 30px 0 20px 20px;
-  cursor: pointer;
-}
-
-.bar {
-  height: 5px;
-  width: 100%;
-  background-color: #f8f8d7;
-  display: block;
-  border-radius: 5px;
-  transition: 0.3s ease;
-}
-
-#bar1 {
-  transform: translateY(-4px);
-}
-
-#bar3 {
-  transform: translateY(4px);
-}
-
-.nav {
-  transition: 0.3s ease;
-  display: none;
-}
-
-.nav ul {
-  padding: 0 22px;
-}
-
-.nav li {
-  list-style: none;
-  padding: 12px 0;
-}
-
-.nav li a {
-  color: #cd3f2b;
-  font-size: 20px;
-  text-decoration: none;
-}
-
-.nav li a:hover {
-  font-weight: bold;
-}
-
-.menu-bg, #menu {
-  top: 0;
-  left: 0;
-  position: absolute;
-}
-
-.menu-bg {
-  z-index: 1;
-  width: 0;
-  height: 0;
-  margin: 30px 0 20px 20px;
-  background: radial-gradient(circle, #f8f8d7, #f8f8d7);
-  border-radius: 50%;
-  transition: 0.3s ease;
-}
-
-.change {
-  display: block;
-}
-
-.change .bar {
-  background-color: #cd3f2b;
-}
-
-.change #bar1 {
-  transform: translateY(4px) rotateZ(-45deg);
-}
-
-.change #bar2 {
-  opacity: 0;
-}
-
-.change #bar3 {
-  transform: translateY(-6px) rotateZ(45deg);
-}
-
-.change-bg {
-  width: 600px;
-  height: 540px;
-  transform: translate(-60%,-30%);
-}
-
-.game-name {
-    margin-top: 5px;
-    margin-bottom: 15px;
-    font-size: 16px;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
     color: #900d27;
     background-color: #f0aa5e;
     padding: 10px 20px;
-    border-radius: 50px;
+    border-radius: 5px;
     font-weight: bold;
+}
+.coin-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* === HAMBURGER MENU === */
+#menu {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#menu-bar {
+    width: 45px;
+    height: 40px;
+    margin: 30px 0 20px 20px;
+    cursor: pointer;
+}
+.bar {
+    height: 5px;
+    width: 100%;
+    background-color: #f8f8d7;
+    display: block;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+#bar1 { transform: translateY(-4px); }
+#bar3 { transform: translateY(4px); }
+
+.nav {
+    transition: 0.3s ease;
+    display: none;
+}
+.nav ul { padding: 0 22px; }
+.nav li { list-style: none; padding: 12px 0; }
+.nav li a {
+    color: #cd3f2b;
+    font-size: 20px;
+    text-decoration: none;
+}
+.nav li a:hover { font-weight: bold; }
+
+.menu-bg, #menu { top: 0; left: 0; position: absolute; }
+.menu-bg {
+    z-index: 1;
+    width: 0;
+    height: 0;
+    margin: 30px 0 20px 20px;
+    background: radial-gradient(circle, #f8f8d7, #f8f8d7);
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.change { display: block; }
+.change .bar { background-color: #cd3f2b; }
+.change #bar1 { transform: translateY(4px) rotateZ(-45deg); }
+.change #bar2 { opacity: 0; }
+.change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
+.change-bg {
+    width: 600px;
+    height: 540px;
+    transform: translate(-60%,-30%);
+}
+
+/* === SEARCH + CATEGORIES === */
+#searchBar {
+    padding: 10px;
+    width: 60%;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 30px 0 20px 0;
     text-align: center;
 }
 
+#categoryBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.category-btn {
+    background: #900d27;
+    color: #f8f8d7;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.category-btn:hover {
+    background: #b31a36;
+    transform: scale(1.05);
+}
 
+/* === GAME GRID === */
+.game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    max-width: 1200px;
+}
+.game-card {
+    text-align: center;
+    background: #f0aa5e;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    transition: 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.game-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.game-name {
+    margin-top: 10px;
+    font-weight: bold;
+    background: #900d27;
+    color: #f8f8d7;
+    border-radius: 50px;
+    padding: 8px;
+}
 
-
-
-        .tekst {
-            align-items: center;
-            font: small-caps lighter 30px/0.9 "Segoe UI", sans-serif;
-            text-align: center;
-            width: 50%;
-            margin-top: 80px; /* Extra ruimte tussen title en tekst */
-            color: #900d27;
-            padding: 10px;
-            border-radius: 50px;
-            background-color: #f0aa5e;
-        }
-
-    </style>
+/* === CREDIT === */
+.credit {
+    margin-top: 40px;
+    font-weight: bold;
+    color: #f8f8d7;
+}
+</style>
 </head>
+
 <body>
-    <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
-    
-    <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></span></div>
 
-    <div id="menu">
-        <div id="menu-bar" onclick="menuOnClick()">
-          <div id="bar1" class="bar"></div>
-          <div id="bar2" class="bar"></div>
-          <div id="bar3" class="bar"></div>
-        </div>
-        <nav class="nav" id="nav">
-          <ul>
-            <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
-            <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
-            <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+<!-- === TITEL === -->
+<div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+
+<!-- === COIN COUNTER === -->
+<div class="coin-counter">
+    <img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span>
+</div>
+
+<!-- === HAMBURGER MENU === -->
+<div id="menu">
+    <div id="menu-bar" onclick="menuOnClick()">
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+        <div id="bar3" class="bar"></div>
+    </div>
+    <nav class="nav" id="nav">
+        <ul>
+            <li><a href="index.html">Main menu<img src="images/overig/homeicon.png" class="home-icon" style="width:40px;height:40px;vertical-align:middle;"></a></li>
+            <li><a href="store.html">Store<img src="images/overig/storeicon.png" class="cart-icon" style="width:30px;height:30px;vertical-align:middle;"></a></li>
+            <li><a href="stats.html">Stats<img src="images/overig/statsicon.png" class="stats-icon" style="width:30px;height:30px;vertical-align:middle;"></a></li>
         </ul>
-        </nav> 
-      </div>
-      
-      <div class="menu-bg" id="menu-bg"></div>
+    </nav> 
+</div>
+<div class="menu-bg" id="menu-bg"></div>
 
-<!-- Zoekbalk -->
-<div style="text-align:center; margin: 20px 0;">
-    <input type="text" id="searchBar" placeholder="Zoek een game of categorie..." 
-           style="padding:10px; width:50%; font-size:16px; border-radius:5px; border:1px solid #ccc;">
+<!-- === SEARCH === -->
+<input type="text" id="searchBar" placeholder="Zoek op game of categorie...">
+
+<!-- === CATEGORIES (boven de games) === -->
+<div id="categoryBar">
+    <button class="category-btn" onclick="filterCategory('all')">Alle Games</button>
+    <button class="category-btn" onclick="filterCategory('Chill Guy Games')">Chill Guy Games</button>
+    <button class="category-btn" onclick="filterCategory('Multiplayer Games')">Multiplayer</button>
+    <button class="category-btn" onclick="filterCategory('Snake Games')">Snake</button>
+    <button class="category-btn" onclick="filterCategory('Shooting Games')">Shooting</button>
+    <button class="category-btn" onclick="filterCategory('Racing Games')">Racing</button>
+    <button class="category-btn" onclick="filterCategory('Idle Games')">Idle</button>
+    <button class="category-btn" onclick="filterCategory('Football Games')">Football</button>
+    <button class="category-btn" onclick="filterCategory('Parkour Games')">Parkour</button>
+    <button class="category-btn" onclick="filterCategory('Doodle Jump Games')">Doodle Jump</button>
+    <button class="category-btn" onclick="filterCategory('Different Games')">Different</button>
 </div>
 
-      <div class="tekst">!!!!! Van de ander games (niet chill guy games) worden er weinig gespeeld. Dit komt omdat je hier geen coins krijgt. Om mensen te stimuleren ook de andere games te spelen hebben wij gedaan dat per seconden dat je een van deze game speelt je 10 coins krijgt. !!!!!</div>
+<!-- === GAME GRID === -->
+<div id="gameGrid" class="game-grid"></div>
 
-<!-- Chill Guy Games -->
- <div><h1 id="vex" class="text-center">Chill Guy Games</h1></div>
-<div class="game-container">
-    <a href="jumper.html" class="game-link">
-        <img src="images/gameicons/timicon.png" alt="Jump Game" class="game-image">
-        <div class="game-name">Chill Guy Jumper</div>
-    </a>
-    <a href="gijs.html" class="game-link">
-        <img src="images/gameicons/gijsicon.png" alt="Shooter" class="game-image">
-        <div class="game-name">Chill Guy Shooter</div>
-    </a>
-    <a href="flappy.html" class="game-link">
-        <img src="images/gameicons/flappyicon.png" alt="Flappy" class="game-image">
-        <div class="game-name">Chill Guy Flappy</div>
-    </a>
-    <a href="tetris.html" class="game-link">
-        <img src="images/gameicons/tetrisicon.png" alt="Tetris" class="game-image">
-        <div class="game-name">Chill Guy Tetris</div>
-    </a>
-    <a href="candycrush.html" class="game-link">
-        <img src="images/gameicons/candycrushicon.png" alt="Candy Crush" class="game-image">
-        <div class="game-name">Chill Guy Candy Crush</div>
-    </a>
-</div>
+<div class="credit">Made by Chill Guy Productions</div>
 
-<div class="game-container">
-    <a href="snake.html" class="game-link">
-        <img src="images/gameicons/snakeicon.png" alt="Snake" class="game-image">
-        <div class="game-name">Chill Guy Snake</div>
-    </a>
-    <a href="crossy.html" class="game-link">
-        <img src="images/gameicons/crossyicon.png" alt="Crossy Road" class="game-image">
-        <div class="game-name">Chill Guy Crossy Road</div>
-    </a>
-</div>
-
-<!-- multiplayer Games -->
-<div><h1 id="vex" class="text-center">Multiplayer Games</h1></div>
-<div class="game-container">
-    <a href="gorilla multiplayer.html" class="game-link">
-        <img src="images/gameicons/gorilla multiplayer.jpg" alt="gorilla multiplayer" class="game-image">
-        <div class="game-name">gorilla multiplayer</div>
-    </a>
-</div>
-
-<!-- Snake Games -->
-<div><h1 id="vex" class="text-center">Snake Games</h1></div>
-<div class="game-container">
-    <a href="Worms Zone a Slithery Snake.html" class="game-link">
-        <img src="images/gameicons/Worms Zone a Slithery Snake.jpg" alt="Worms Zone a Slithery Snake" class="game-image">
-        <div class="game-name">Worms Zone a Slithery Snake</div>
-    </a>
-</div>
-
-<!-- Shooting Games -->
-<div><h1 id="vex" class="text-center">Shooting Games</h1></div>
-<div class="game-container">
-    <a href="Grand Vegas Crime.html" class="game-link">
-        <img src="images/gameicons/Grand Vegas Crime.jpg" alt="Grand Vegas Crime" class="game-image">
-        <div class="game-name">Grand Vegas Crime</div>
-    </a>
-    <a href="Granny GTA Vegas.html" class="game-link">
-        <img src="images/gameicons/Granny GTA Vegas.jpg" alt="Granny GTA Vegas" class="game-image">
-        <div class="game-name">Granny GTA Vegas</div>
-    </a>
-    <a href="Strike Force: Action Platformer.html" class="game-link">
-        <img src="images/gameicons/Strike Force: Action Platformer.jpg" alt="Strike Force: Action Platformer" class="game-image">
-        <div class="game-name">Strike Force: Action Platformer</div>
-    </a>
-    <a href="Hitman Sniper.html" class="game-link">
-        <img src="images/gameicons/Hitman Sniper.jpg" alt="Hitman Sniper" class="game-image">
-        <div class="game-name">Hitman Sniper</div>
-    </a>
-    <a href="Noob Shooter: Gun Battle 3D.html" class="game-link">
-        <img src="images/gameicons/Noob Shooter: Gun Battle 3D.jpg" alt="Noob Shooter: Gun Battle 3D" class="game-image">
-        <div class="game-name">Noob Shooter: Gun Battle 3D</div>
-    </a>
-</div>
-
-<!-- Racing Games -->
-<div><h1 id="vex" class="text-center">Racing Games</h1></div>
-<div class="game-container">
-    <a href="Police Chase Drifter.html" class="game-link">
-        <img src="images/gameicons/Police Chase Drifter.jpg" alt="Police Chase Drifter" class="game-image">
-        <div class="game-name">Police Chase Drifter</div>
-    </a>
-    <a href="GT Formula Championship.html" class="game-link">
-        <img src="images/gameicons/GT Formula Championship.jpg" alt="GT Formula Championship" class="game-image">
-        <div class="game-name">GT Formula Championship</div>
-    </a>
-    <a href="Moto Road Rash 3D 2.html" class="game-link">
-        <img src="images/gameicons/Moto Road Rash 3D 2.jpg" alt="Moto Road Rash 3D 2" class="game-image">
-        <div class="game-name">Moto Road Rash 3D 2</div>
-    </a>
-    <a href="Motocross Racing.html" class="game-link">
-        <img src="images/gameicons/Motocross Racing.jpg" alt="Motocross Racing" class="game-image">
-        <div class="game-name">Motocross Racing</div>
-    </a>
-    <a href="Turbo Race 3D.html" class="game-link">
-        <img src="images/gameicons/Turbo Race 3D.jpg" alt="Turbo Race 3D" class="game-image">
-        <div class="game-name">Turbo Race 3D</div>
-    </a>
-</div>
-
-<!-- Idle Games -->
-<div><h1 id="vex" class="text-center">Idle Games</h1></div>
-<div class="game-container">
-    <a href="monkey.html" class="game-link">
-        <img src="images/gameicons/monkey-mart.jpg" alt="Monkey Mart" class="game-image">
-        <div class="game-name">Monkey Mart</div>
-    </a>
-    <a href="Idle Firefighter 3D.html" class="game-link">
-        <img src="images/gameicons/Idle Firefighter 3D.jpeg" alt="Idle Firefighter 3D" class="game-image">
-        <div class="game-name">Idle Firefighter 3D</div>
-    </a>
-    <a href="Elemental Monsters: Merge & Evolution.html" class="game-link">
-        <img src="images/gameicons/Elemental Monsters: Merge & Evolution.jpg" alt="Elemental Monsters: Merge & Evolution" class="game-image">
-        <div class="game-name">Elemental Monsters: Merge & Evolution</div>
-    </a>
-    <a href="Army Commander Craft.html" class="game-link">
-        <img src="images/gameicons/Army Commander Craft.jpg" alt="Army Commander Craft" class="game-image">
-        <div class="game-name">Army Commander Craft</div>
-    </a>
-    <a href="Italian Brainrot.html" class="game-link">
-        <img src="images/gameicons/Italian Brainrot.jpg" alt="Italian Brainrot" class="game-image">
-        <div class="game-name">Italian Brainrot</div>
-    </a>
-</div>
-
-<!-- Football Games -->
-<div><h1 id="vex" class="text-center">Football Games</h1></div>
-<div class="game-container">
-    <a href="Football Heads 2025.html" class="game-link">
-        <img src="images/gameicons/Football Heads 2025.jpg" alt="Football Heads 2025" class="game-image">
-        <div class="game-name">Football Heads 2025</div>
-    </a>
-    <a href="Goal Rush.html" class="game-link">
-        <img src="images/gameicons/Goal Rush.jpg" alt="Goal Rush" class="game-image">
-        <div class="game-name">Goal Rush</div>
-    </a>
-    <a href="soccerrandom.html" class="game-link">
-        <img src="images/gameicons/soccerrandom.jpg" alt="Soccer Random" class="game-image">
-        <div class="game-name">Soccer Random</div>
-    </a>
-</div>
-
-<!-- Parkour Games -->
-<div><h1 id="vex" class="text-center">Parkour Games</h1></div>
-<div class="game-container">
-    <a href="Parkour Block 7.html" class="game-link">
-        <img src="images/gameicons/Parkour Block 7.png" alt="Parkour Block 7" class="game-image">
-        <div class="game-name">Parkour Block 7</div>
-    </a>
-    <a href="Obby On a Bike.html" class="game-link">
-        <img src="images/gameicons/Obby On a Bike.jpg" alt="Obby On a Bike" class="game-image">
-        <div class="game-name">Obby On a Bike</div>
-    </a>
-</div>
-
-<!-- Doodle Jump Games -->
-<div><h1 id="vex" class="text-center">Doodle Jump Games</h1></div>
-<div class="game-container">
-    <a href="doodle1.html" class="game-link">
-        <img src="images/gameicons/doodle-jump.jpg" alt="Doodle Jump" class="game-image">
-        <div class="game-name">Doodle Jump</div>
-    </a>
-    <a href="doodle2.html" class="game-link">
-        <img src="images/gameicons/doodle-jump-2.jpg" alt="Doodle Jump 2" class="game-image">
-        <div class="game-name">Doodle Jump 2</div>
-    </a>
-</div>
-
-<!-- Different Games -->
-<div><h1 id="vex" class="text-center">Different Games</h1></div>
-<div class="game-container">
-    <a href="slope.html" class="game-link">
-        <img src="images/gameicons/slope-game.jpg" alt="Slope" class="game-image">
-        <div class="game-name">Slope</div>
-    </a>
-    <a href="geometry.html" class="game-link">
-        <img src="images/gameicons/geometry-dash.jpg" alt="Geometry Dash" class="game-image">
-        <div class="game-name">Geometry Dash</div>
-    </a>
-    <a href="retro.html" class="game-link">
-        <img src="images/gameicons/retro-bowl.jpg" alt="Retro Bowl" class="game-image">
-        <div class="game-name">Retro Bowl</div>
-    </a>
-    <a href="donkey-kong.html" class="game-link">
-        <img src="images/gameicons/donkey-kong.jpg" alt="Donkey Kong" class="game-image">
-        <div class="game-name">Donkey Kong</div>
-    </a>
-    <a href="dinosaur.html" class="game-link">
-        <img src="images/gameicons/dinosaur-game.jpg" alt="Dinosaur" class="game-image">
-        <div class="game-name">Dinosaur</div>
-    </a>
-</div>
-
-<div class="game-container">
-    <a href="flappybird.html" class="game-link">
-        <img src="images/gameicons/flappy-bird.jpg1.jpeg" alt="Flappy Bird" class="game-image">
-        <div class="game-name">Flappy Bird</div>
-    </a>
-    <a href="island.html" class="game-link">
-        <img src="images/gameicons/doodle-champion-island.jpg" alt="Doodle Champion Island" class="game-image">
-        <div class="game-name">Doodle Champion Island</div>
-    </a>
-    <a href="pacman.html" class="game-link">
-        <img src="images/gameicons/pacman.png" alt="Pacman" class="game-image">
-        <div class="game-name">Pacman</div>
-    </a>
-    <a href="projects/fruit-ninja/index.html" class="game-link">
-        <img src="images/gameicons/fruit.png" alt="Fruit Ninja" class="game-image">
-        <div class="game-name">Fruit Ninja</div>
-    </a>
-</div>
-
-    <div class="game-container">
-  </div>
-
-    <div class="credit">Made by Chill Guy Productions</div>
-
-    <script>
-
+<script>
+/* === MENU TOGGLE === */
 function menuOnClick() {
-  document.getElementById("menu-bar").classList.toggle("change");
-  document.getElementById("nav").classList.toggle("change");
-  document.getElementById("menu-bg").classList.toggle("change-bg");
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
-        let coins = parseInt(localStorage.getItem("coins")) || 0;
-        document.getElementById("coins").textContent = coins;
+/* === COINS === */
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+document.getElementById("coins").textContent = coins;
 
-    
-        // Controleer of geluid is ingeschakeld in localStorage
-    // Controleer of geluid is ingeschakeld in localStorage
-    function initializeSound() {
-let soundOn = localStorage.getItem("soundOn");
-if (soundOn === "true") {
-    playSound();
-}
-}
+/* === GAMES DATA === */
+const games = [
+    { name:"Chill Guy Jumper", category:"Chill Guy Games", image:"images/gameicons/timicon.png", link:"jumper.html"},
+    { name:"Chill Guy Shooter", category:"Chill Guy Games", image:"images/gameicons/gijsicon.png", link:"gijs.html"},
+    { name:"Chill Guy Flappy", category:"Chill Guy Games", image:"images/gameicons/flappyicon.png", link:"flappy.html"},
+    { name:"Chill Guy Tetris", category:"Chill Guy Games", image:"images/gameicons/tetrisicon.png", link:"tetris.html"},
+    { name:"Chill Guy Candy Crush", category:"Chill Guy Games", image:"images/gameicons/candycrushicon.png", link:"candycrush.html"},
+    { name:"Chill Guy Snake", category:"Chill Guy Games", image:"images/gameicons/snakeicon.png", link:"snake.html"},
+    { name:"Chill Guy Crossy Road", category:"Chill Guy Games", image:"images/gameicons/crossyicon.png", link:"crossy.html"},
+    { name:"gorilla multiplayer", category:"Multiplayer Games", image:"images/gameicons/gorilla multiplayer.jpg", link:"gorilla multiplayer.html"},
+    { name:"Worms Zone a Slithery Snake", category:"Snake Games", image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
+    { name:"Grand Vegas Crime", category:"Shooting Games", image:"images/gameicons/Grand Vegas Crime.jpg", link:"Grand Vegas Crime.html"},
+    { name:"Granny GTA Vegas", category:"Shooting Games", image:"images/gameicons/Granny GTA Vegas.jpg", link:"Granny GTA Vegas.html"},
+    { name:"Strike Force: Action Platformer", category:"Shooting Games", image:"images/gameicons/Strike Force: Action Platformer.jpg", link:"Strike Force: Action Platformer.html"},
+    { name:"Hitman Sniper", category:"Shooting Games", image:"images/gameicons/Hitman Sniper.jpg", link:"Hitman Sniper.html"},
+    { name:"Noob Shooter: Gun Battle 3D", category:"Shooting Games", image:"images/gameicons/Noob Shooter: Gun Battle 3D.jpg", link:"Noob Shooter: Gun Battle 3D.html"},
+    { name:"Police Chase Drifter", category:"Racing Games", image:"images/gameicons/Police Chase Drifter.jpg", link:"Police Chase Drifter.html"},
+    { name:"GT Formula Championship", category:"Racing Games", image:"images/gameicons/GT Formula Championship.jpg", link:"GT Formula Championship.html"},
+    { name:"Moto Road Rash 3D 2", category:"Racing Games", image:"images/gameicons/Moto Road Rash 3D 2.jpg", link:"Moto Road Rash 3D 2.html"},
+    { name:"Motocross Racing", category:"Racing Games", image:"images/gameicons/Motocross Racing.jpg", link:"Motocross Racing.html"},
+    { name:"Turbo Race 3D", category:"Racing Games", image:"images/gameicons/Turbo Race 3D.jpg", link:"Turbo Race 3D.html"},
+    { name:"Monkey Mart", category:"Idle Games", image:"images/gameicons/monkey-mart.jpg", link:"monkey.html"},
+    { name:"Idle Firefighter 3D", category:"Idle Games", image:"images/gameicons/Idle Firefighter 3D.jpeg", link:"Idle Firefighter 3D.html"},
+    { name:"Elemental Monsters: Merge & Evolution", category:"Idle Games", image:"images/gameicons/Elemental Monsters: Merge & Evolution.jpg", link:"Elemental Monsters: Merge & Evolution.html"},
+    { name:"Army Commander Craft", category:"Idle Games", image:"images/gameicons/Army Commander Craft.jpg", link:"Army Commander Craft.html"},
+    { name:"Italian Brainrot", category:"Idle Games", image:"images/gameicons/Italian Brainrot.jpg", link:"Italian Brainrot.html"},
+    { name:"Football Heads 2025", category:"Football Games", image:"images/gameicons/Football Heads 2025.jpg", link:"Football Heads 2025.html"},
+    { name:"Goal Rush", category:"Football Games", image:"images/gameicons/Goal Rush.jpg", link:"Goal Rush.html"},
+    { name:"Soccer Random", category:"Football Games", image:"images/gameicons/soccerrandom.jpg", link:"soccerrandom.html"},
+    { name:"Parkour Block 7", category:"Parkour Games", image:"images/gameicons/Parkour Block 7.png", link:"Parkour Block 7.html"},
+    { name:"Obby On a Bike", category:"Parkour Games", image:"images/gameicons/Obby On a Bike.jpg", link:"Obby On a Bike.html"},
+    { name:"Doodle Jump", category:"Doodle Jump Games", image:"images/gameicons/doodle-jump.jpg", link:"doodle1.html"},
+    { name:"Doodle Jump 2", category:"Doodle Jump Games", image:"images/gameicons/doodle-jump-2.jpg", link:"doodle2.html"},
+    { name:"Slope", category:"Different Games", image:"images/gameicons/slope-game.jpg", link:"slope.html"},
+    { name:"Geometry Dash", category:"Different Games", image:"images/gameicons/geometry-dash.jpg", link:"geometry.html"},
+    { name:"Retro Bowl", category:"Different Games", image:"images/gameicons/retro-bowl.jpg", link:"retro.html"},
+    { name:"Donkey Kong", category:"Different Games", image:"images/gameicons/donkey-kong.jpg", link:"donkey-kong.html"},
+    { name:"Dinosaur", category:"Different Games", image:"images/gameicons/dinosaur-game.jpg", link:"dinosaur.html"},
+    { name:"Flappy Bird", category:"Different Games", image:"images/gameicons/flappy-bird.jpg1.jpeg", link:"flappybird.html"},
+    { name:"Doodle Champion Island", category:"Different Games", image:"images/gameicons/doodle-champion-island.jpg", link:"island.html"},
+    { name:"Pacman", category:"Different Games", image:"images/gameicons/pacman.png", link:"pacman.html"},
+    { name:"Fruit Ninja", category:"Different Games", image:"images/gameicons/fruit.png", link:"projects/fruit-ninja/index.html"},
+];
 
-function playSound() {
-let audio = document.getElementById("background-audio");
-if (!audio) {
-    let audioElement = document.createElement('audio');
-    audioElement.id = "background-audio";
-    audioElement.autoplay = true;
-    audioElement.loop = true;
-    audioElement.innerHTML = '<source src="sound/Youre just a chill guy listening to chill music.mp3" type="audio/mpeg">';
-    document.body.appendChild(audioElement);
-}
-}
-let startTime = Date.now();
-let activeTime = parseInt(localStorage.getItem("activeTime")) || 0;
-let lastActiveTime = startTime;
-
-function updateActiveTime() {
-    if (document.visibilityState === "visible") {
-        lastActiveTime = Date.now();
-    } else {
-        activeTime += Math.floor((Date.now() - lastActiveTime) / 1000);
-        localStorage.setItem("activeTime", activeTime); // Tijd opslaan
-    }
-}
-
-// Luister naar wanneer de pagina actief/inactief wordt
-document.addEventListener("visibilitychange", updateActiveTime);
-
-// Sla de tijd om de paar seconden op (voor het geval de gebruiker de pagina sluit)
-setInterval(() => {
-    if (document.visibilityState === "visible") {
-        let currentTime = activeTime + Math.floor((Date.now() - lastActiveTime) / 1000);
-        localStorage.setItem("activeTime", currentTime);
-    }
-}, 5000);
-
-
- const searchBar = document.getElementById('searchBar');
-    const gameContainers = document.querySelectorAll('.game-container');
-    
-    searchBar.addEventListener('input', function() {
-        const query = this.value.toLowerCase();
-
-        // Loop door elke container (categorie)
-        gameContainers.forEach(container => {
-            const games = container.querySelectorAll('.game-link');
-            let containerMatches = false;
-
-            games.forEach(game => {
-                const gameName = game.querySelector('.game-name').textContent.toLowerCase();
-                const category = container.previousElementSibling.textContent.toLowerCase();
-
-                // Check of gamenaam of categorie de query bevat
-                if (gameName.includes(query) || category.includes(query)) {
-                    game.style.display = 'inline-block'; // toon game
-                    containerMatches = true;
-                } else {
-                    game.style.display = 'none'; // verberg game
-                }
-            });
-
-            // Toon of verberg hele categorie-header op basis van matches
-            container.previousElementSibling.style.display = containerMatches ? 'block' : 'none';
-        });
+/* === RENDER === */
+const gameGrid = document.getElementById("gameGrid");
+function renderGames(filtered = games) {
+    gameGrid.innerHTML = "";
+    filtered.forEach(g => {
+        const card = document.createElement("a");
+        card.href = g.link;
+        card.className = "game-card";
+        card.innerHTML = `<img src="${g.image}" alt="${g.name}">
+                          <div class="game-name">${g.name}</div>`;
+        gameGrid.appendChild(card);
     });
+}
 
+/* === FILTERS === */
+function filterCategory(cat) {
+    if (cat === "all") renderGames(games);
+    else renderGames(games.filter(g => g.category === cat));
+}
 
+const searchBar = document.getElementById("searchBar");
+searchBar.addEventListener("input", () => {
+    const q = searchBar.value.toLowerCase();
+    const filtered = games.filter(g => g.name.toLowerCase().includes(q) || g.category.toLowerCase().includes(q));
+    renderGames(filtered);
+});
 
-window.onload = initializeSound;
-    </script>
-    
+/* === INIT === */
+renderGames();
+</script>
 </body>
 </html>
