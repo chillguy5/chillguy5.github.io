@@ -242,8 +242,8 @@
 
 #searchInput {
   width: 80%;
-  max-width: 400px;
-  padding: 10px 14px;
+  max-width: 450px;
+  padding: 10px 15px;
   border-radius: 12px;
   border: 2px solid #f0aa5e;
   background-color: rgba(0, 0, 0, 0.6);
@@ -255,11 +255,8 @@
 
 #searchInput:focus {
   border-color: #900d27;
-  box-shadow: 0 0 10px #f0aa5e;
+  box-shadow: 0 0 12px #f0aa5e;
 }
-
-
-
 
 
         .tekst {
@@ -299,7 +296,7 @@
       <div class="menu-bg" id="menu-bg"></div>
 
 <div class="search-container">
-  <input type="text" id="searchInput" placeholder="Zoek een game..." />
+  <input type="text" id="searchInput" placeholder="Zoek op game of categorie...">
 </div>
 
 
@@ -565,18 +562,30 @@ setInterval(() => {
     }
 }, 5000);
 
-  const searchInput = document.getElementById('searchInput');
-  const gameContainer = document.querySelector('.game-container');
-  const games = document.querySelectorAll('.game-link');
-  const title = document.getElementById('vex');
 
-  searchInput.addEventListener('input', () => {
-    const filter = searchInput.value.toLowerCase().trim();
+const searchInput = document.getElementById('searchInput');
+
+// Zoek alle categorieblokken (titel + container)
+const categories = [];
+document.querySelectorAll('h1.text-center').forEach((title) => {
+  const nextContainer = title.nextElementSibling;
+  if (nextContainer && nextContainer.classList.contains('game-container')) {
+    categories.push({ title, container: nextContainer });
+  }
+});
+
+searchInput.addEventListener('input', () => {
+  const filter = searchInput.value.toLowerCase().trim();
+
+  categories.forEach(({ title, container }) => {
+    const categoryName = title.textContent.toLowerCase();
+    const games = container.querySelectorAll('.game-link');
+
     let visibleCount = 0;
 
     games.forEach(game => {
-      const name = game.querySelector('.game-name').textContent.toLowerCase();
-      if (name.includes(filter) || filter === "") {
+      const gameName = game.querySelector('.game-name').textContent.toLowerCase();
+      if (gameName.includes(filter) || categoryName.includes(filter) || filter === "") {
         game.style.display = "inline-block";
         visibleCount++;
       } else {
@@ -584,15 +593,17 @@ setInterval(() => {
       }
     });
 
-    // Toon of verberg de titel en container
-    if (visibleCount > 0 || filter === "") {
+    // Toon/verberg categorie en titel op basis van resultaten
+    if (visibleCount > 0 || categoryName.includes(filter) || filter === "") {
       title.style.display = "";
-      gameContainer.style.display = "";
+      container.style.display = "flex";
     } else {
       title.style.display = "none";
-      gameContainer.style.display = "none";
+      container.style.display = "none";
     }
   });
+});
+
 
 
 window.onload = initializeSound;
