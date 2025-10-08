@@ -235,7 +235,6 @@
     text-align: center;
 }
 
-/* Zoekbalk-styling */
 .search-container {
   margin-top: 40px;
   text-align: center;
@@ -258,6 +257,9 @@
   border-color: #900d27;
   box-shadow: 0 0 10px #f0aa5e;
 }
+
+
+
 
 
         .tekst {
@@ -296,9 +298,10 @@
       
       <div class="menu-bg" id="menu-bg"></div>
 
-      <div class="search-container">
+<div class="search-container">
   <input type="text" id="searchInput" placeholder="Zoek een game..." />
 </div>
+
 
 
       <div class="tekst">!!!!! Van de ander games (niet chill guy games) worden er weinig gespeeld. Dit komt omdat je hier geen coins krijgt. Om mensen te stimuleren ook de andere games te spelen hebben wij gedaan dat per seconden dat je een van deze game speelt je 10 coins krijgt. !!!!!</div>
@@ -562,23 +565,34 @@ setInterval(() => {
     }
 }, 5000);
 
-
   const searchInput = document.getElementById('searchInput');
-  const games = document.querySelectorAll('.game-container .game-link');
+  const gameContainer = document.querySelector('.game-container');
+  const games = document.querySelectorAll('.game-link');
+  const title = document.getElementById('vex');
 
   searchInput.addEventListener('input', () => {
     const filter = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
 
     games.forEach(game => {
       const name = game.querySelector('.game-name').textContent.toLowerCase();
       if (name.includes(filter) || filter === "") {
-        game.style.display = "inline-block"; // toon game
+        game.style.display = "inline-block";
+        visibleCount++;
       } else {
-        game.style.display = "none"; // verberg game volledig (titel + afbeelding)
+        game.style.display = "none";
       }
     });
-  });
 
+    // Toon of verberg de titel en container
+    if (visibleCount > 0 || filter === "") {
+      title.style.display = "";
+      gameContainer.style.display = "";
+    } else {
+      title.style.display = "none";
+      gameContainer.style.display = "none";
+    }
+  });
 
 
 window.onload = initializeSound;
