@@ -462,6 +462,7 @@
     </a>
 </div>
 
+<div><h1 id="vex" class="text-center">Different Games</h1></div>
 <div class="game-container">
     <a href="flappybird.html" class="game-link">
         <img src="images/gameicons/flappy-bird.jpg1.jpeg" alt="Flappy Bird" class="game-image">
@@ -543,34 +544,41 @@ setInterval(() => {
 }, 5000);
 
 
- const searchBar = document.getElementById('searchBar');
-    const gameContainers = document.querySelectorAll('.game-container');
-    
+    const searchBar = document.getElementById('searchBar');
+    const allGames = document.querySelectorAll('.game-link');
+    const allHeaders = document.querySelectorAll('h1');
+
     searchBar.addEventListener('input', function() {
         const query = this.value.toLowerCase();
 
-        // Loop door elke container (categorie)
-        gameContainers.forEach(container => {
-            const games = container.querySelectorAll('.game-link');
-            let containerMatches = false;
+        // Eerst alle games verbergen of tonen
+        allGames.forEach(game => {
+            const gameName = game.querySelector('.game-name').textContent.toLowerCase();
+            
+            // Vind de bijbehorende categorie-header
+            let header = game.closest('.game-container').previousElementSibling;
+            const category = header.textContent.toLowerCase();
 
-            games.forEach(game => {
-                const gameName = game.querySelector('.game-name').textContent.toLowerCase();
-                const category = container.previousElementSibling.textContent.toLowerCase();
+            if (gameName.includes(query) || category.includes(query)) {
+                game.style.display = 'inline-block';
+            } else {
+                game.style.display = 'none';
+            }
+        });
 
-                // Check of gamenaam of categorie de query bevat
-                if (gameName.includes(query) || category.includes(query)) {
-                    game.style.display = 'inline-block'; // toon game
-                    containerMatches = true;
-                } else {
-                    game.style.display = 'none'; // verberg game
-                }
-            });
+        // Toon of verberg headers afhankelijk of ze games hebben die zichtbaar zijn
+        allHeaders.forEach(header => {
+            const container = header.nextElementSibling; // de game-container(s)
+            const visibleGames = container.querySelectorAll('.game-link:not([style*="display: none"])');
 
-            // Toon of verberg hele categorie-header op basis van matches
-            container.previousElementSibling.style.display = containerMatches ? 'block' : 'none';
+            if (visibleGames.length > 0) {
+                header.style.display = 'block';
+            } else {
+                header.style.display = 'none';
+            }
         });
     });
+
 
 
 
