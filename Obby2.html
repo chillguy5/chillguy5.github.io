@@ -235,28 +235,8 @@
     text-align: center;
 }
 
-.search-container {
-  margin-top: 40px;
-  text-align: center;
-}
 
-#searchInput {
-  width: 80%;
-  max-width: 450px;
-  padding: 10px 15px;
-  border-radius: 12px;
-  border: 2px solid #f0aa5e;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #f8f8d7;
-  font-size: 16px;
-  outline: none;
-  transition: 0.3s ease;
-}
 
-#searchInput:focus {
-  border-color: #900d27;
-  box-shadow: 0 0 12px #f0aa5e;
-}
 
 
         .tekst {
@@ -295,16 +275,12 @@
       
       <div class="menu-bg" id="menu-bg"></div>
 
-<div class="search-container">
-  <input type="text" id="searchInput" placeholder="Zoek op game of categorie...">
-</div>
-
 
 
       <div class="tekst">!!!!! Van de ander games (niet chill guy games) worden er weinig gespeeld. Dit komt omdat je hier geen coins krijgt. Om mensen te stimuleren ook de andere games te spelen hebben wij gedaan dat per seconden dat je een van deze game speelt je 10 coins krijgt. !!!!!</div>
 
 <!-- Chill Guy Games -->
-<h1 class="category-title text-center">Chill Guy Games</h1>
+ <div><h1 id="vex" class="text-center">Chill Guy Games</h1></div>
 <div class="game-container">
     <a href="jumper.html" class="game-link">
         <img src="images/gameicons/timicon.png" alt="Jump Game" class="game-image">
@@ -340,7 +316,7 @@
 </div>
 
 <!-- Shooting Games -->
-<h1 class="category-title text-center">Shooting Games</h1>
+<div><h1 id="vex" class="text-center">Shooting Games</h1></div>
 <div class="game-container">
     <a href="Grand Vegas Crime.html" class="game-link">
         <img src="images/gameicons/Grand Vegas Crime.jpg" alt="Grand Vegas Crime" class="game-image">
@@ -365,7 +341,7 @@
 </div>
 
 <!-- Racing Games -->
-<h1 class="category-title text-center">Racing Games</h1>
+<div><h1 id="vex" class="text-center">Racing Games</h1></div>
 <div class="game-container">
     <a href="Police Chase Drifter.html" class="game-link">
         <img src="images/gameicons/Police Chase Drifter.jpg" alt="Police Chase Drifter" class="game-image">
@@ -564,47 +540,6 @@ setInterval(() => {
 
 
 
-
-const searchInput = document.getElementById('searchInput');
-
-// Alle categorie-titels selecteren
-const categories = [];
-document.querySelectorAll('h1.category-title').forEach(title => {
-    const container = title.nextElementSibling;
-    if (container && container.classList.contains('game-container')) {
-        categories.push({ title, container });
-    }
-});
-
-searchInput.addEventListener('input', () => {
-    const filter = searchInput.value.toLowerCase().trim();
-
-    categories.forEach(({ title, container }) => {
-        const categoryName = title.textContent.toLowerCase();
-        const games = container.querySelectorAll('.game-link');
-
-        let visibleCount = 0;
-
-        games.forEach(game => {
-            const gameName = game.querySelector('.game-name').textContent.toLowerCase();
-            if (gameName.includes(filter) || categoryName.includes(filter) || filter === "") {
-                game.style.display = "inline-block";
-                visibleCount++;
-            } else {
-                game.style.display = "none";
-            }
-        });
-
-        // Toon of verberg categorie en container op basis van resultaten
-        if (visibleCount > 0 || categoryName.includes(filter) || filter === "") {
-            title.style.display = "";
-            container.style.display = "flex"; // of "block", afhankelijk van jouw CSS
-        } else {
-            title.style.display = "none";
-            container.style.display = "none";
-        }
-    });
-});
 
 
 
