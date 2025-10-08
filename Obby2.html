@@ -304,7 +304,7 @@
       <div class="tekst">!!!!! Van de ander games (niet chill guy games) worden er weinig gespeeld. Dit komt omdat je hier geen coins krijgt. Om mensen te stimuleren ook de andere games te spelen hebben wij gedaan dat per seconden dat je een van deze game speelt je 10 coins krijgt. !!!!!</div>
 
 <!-- Chill Guy Games -->
- <div><h1 id="vex" class="text-center">Chill Guy Games</h1></div>
+<h1 class="category-title text-center">Chill Guy Games</h1>
 <div class="game-container">
     <a href="jumper.html" class="game-link">
         <img src="images/gameicons/timicon.png" alt="Jump Game" class="game-image">
@@ -340,7 +340,7 @@
 </div>
 
 <!-- Shooting Games -->
-<div><h1 id="vex" class="text-center">Shooting Games</h1></div>
+<h1 class="category-title text-center">Shooting Games</h1>
 <div class="game-container">
     <a href="Grand Vegas Crime.html" class="game-link">
         <img src="images/gameicons/Grand Vegas Crime.jpg" alt="Grand Vegas Crime" class="game-image">
@@ -365,7 +365,7 @@
 </div>
 
 <!-- Racing Games -->
-<div><h1 id="vex" class="text-center">Racing Games</h1></div>
+<h1 class="category-title text-center">Racing Games</h1>
 <div class="game-container">
     <a href="Police Chase Drifter.html" class="game-link">
         <img src="images/gameicons/Police Chase Drifter.jpg" alt="Police Chase Drifter" class="game-image">
@@ -563,46 +563,7 @@ setInterval(() => {
 }, 5000);
 
 
-const searchInput = document.getElementById('searchInput');
 
-// Zoek alle categorieblokken (titel + container)
-const categories = [];
-document.querySelectorAll('h1.text-center').forEach((title) => {
-  const nextContainer = title.nextElementSibling;
-  if (nextContainer && nextContainer.classList.contains('game-container')) {
-    categories.push({ title, container: nextContainer });
-  }
-});
-
-searchInput.addEventListener('input', () => {
-  const filter = searchInput.value.toLowerCase().trim();
-
-  categories.forEach(({ title, container }) => {
-    const categoryName = title.textContent.toLowerCase();
-    const games = container.querySelectorAll('.game-link');
-
-    let visibleCount = 0;
-
-    games.forEach(game => {
-      const gameName = game.querySelector('.game-name').textContent.toLowerCase();
-      if (gameName.includes(filter) || categoryName.includes(filter) || filter === "") {
-        game.style.display = "inline-block";
-        visibleCount++;
-      } else {
-        game.style.display = "none";
-      }
-    });
-
-    // Toon/verberg categorie en titel op basis van resultaten
-    if (visibleCount > 0 || categoryName.includes(filter) || filter === "") {
-      title.style.display = "";
-      container.style.display = "flex";
-    } else {
-      title.style.display = "none";
-      container.style.display = "none";
-    }
-  });
-});
 
 
 
