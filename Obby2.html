@@ -235,6 +235,31 @@
     text-align: center;
 }
 
+/* Zoekbalk-styling */
+.search-container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#searchInput {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid #f0aa5e;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #f8f8d7;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+#searchInput:focus {
+  border-color: #900d27;
+  box-shadow: 0 0 10px #f0aa5e;
+}
+
+
         .tekst {
             align-items: center;
             font: small-caps lighter 30px/0.9 "Segoe UI", sans-serif;
@@ -270,6 +295,11 @@
       </div>
       
       <div class="menu-bg" id="menu-bg"></div>
+
+      <div class="search-container">
+  <input type="text" id="searchInput" placeholder="Zoek een game..." />
+</div>
+
 
       <div class="tekst">!!!!! Van de ander games (niet chill guy games) worden er weinig gespeeld. Dit komt omdat je hier geen coins krijgt. Om mensen te stimuleren ook de andere games te spelen hebben wij gedaan dat per seconden dat je een van deze game speelt je 10 coins krijgt. !!!!!</div>
 
@@ -531,6 +561,23 @@ setInterval(() => {
         localStorage.setItem("activeTime", currentTime);
     }
 }, 5000);
+
+  const searchInput = document.getElementById('searchInput');
+  const games = document.querySelectorAll('.game-container .game-link');
+
+  searchInput.addEventListener('input', () => {
+    const filter = searchInput.value.toLowerCase();
+
+    games.forEach(game => {
+      const name = game.querySelector('.game-name').textContent.toLowerCase();
+      if (name.includes(filter)) {
+        game.style.display = '';
+      } else {
+        game.style.display = 'none';
+      }
+    });
+  });
+
 
 window.onload = initializeSound;
     </script>
