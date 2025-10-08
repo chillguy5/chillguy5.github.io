@@ -565,6 +565,47 @@ setInterval(() => {
 
 
 
+const searchInput = document.getElementById('searchInput');
+
+// Alle categorie-titels selecteren
+const categories = [];
+document.querySelectorAll('h1.category-title').forEach(title => {
+    const container = title.nextElementSibling;
+    if (container && container.classList.contains('game-container')) {
+        categories.push({ title, container });
+    }
+});
+
+searchInput.addEventListener('input', () => {
+    const filter = searchInput.value.toLowerCase().trim();
+
+    categories.forEach(({ title, container }) => {
+        const categoryName = title.textContent.toLowerCase();
+        const games = container.querySelectorAll('.game-link');
+
+        let visibleCount = 0;
+
+        games.forEach(game => {
+            const gameName = game.querySelector('.game-name').textContent.toLowerCase();
+            if (gameName.includes(filter) || categoryName.includes(filter) || filter === "") {
+                game.style.display = "inline-block";
+                visibleCount++;
+            } else {
+                game.style.display = "none";
+            }
+        });
+
+        // Toon of verberg categorie en container op basis van resultaten
+        if (visibleCount > 0 || categoryName.includes(filter) || filter === "") {
+            title.style.display = "";
+            container.style.display = "flex"; // of "block", afhankelijk van jouw CSS
+        } else {
+            title.style.display = "none";
+            container.style.display = "none";
+        }
+    });
+});
+
 
 
 window.onload = initializeSound;
