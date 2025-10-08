@@ -275,7 +275,11 @@
       
       <div class="menu-bg" id="menu-bg"></div>
 
-
+<!-- Zoekbalk -->
+<div style="text-align:center; margin: 20px 0;">
+    <input type="text" id="searchBar" placeholder="Zoek een game of categorie..." 
+           style="padding:10px; width:50%; font-size:16px; border-radius:5px; border:1px solid #ccc;">
+</div>
 
       <div class="tekst">!!!!! Van de ander games (niet chill guy games) worden er weinig gespeeld. Dit komt omdat je hier geen coins krijgt. Om mensen te stimuleren ook de andere games te spelen hebben wij gedaan dat per seconden dat je een van deze game speelt je 10 coins krijgt. !!!!!</div>
 
@@ -539,7 +543,34 @@ setInterval(() => {
 }, 5000);
 
 
+ const searchBar = document.getElementById('searchBar');
+    const gameContainers = document.querySelectorAll('.game-container');
+    
+    searchBar.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
 
+        // Loop door elke container (categorie)
+        gameContainers.forEach(container => {
+            const games = container.querySelectorAll('.game-link');
+            let containerMatches = false;
+
+            games.forEach(game => {
+                const gameName = game.querySelector('.game-name').textContent.toLowerCase();
+                const category = container.previousElementSibling.textContent.toLowerCase();
+
+                // Check of gamenaam of categorie de query bevat
+                if (gameName.includes(query) || category.includes(query)) {
+                    game.style.display = 'inline-block'; // toon game
+                    containerMatches = true;
+                } else {
+                    game.style.display = 'none'; // verberg game
+                }
+            });
+
+            // Toon of verberg hele categorie-header op basis van matches
+            container.previousElementSibling.style.display = containerMatches ? 'block' : 'none';
+        });
+    });
 
 
 
