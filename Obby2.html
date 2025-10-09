@@ -336,12 +336,15 @@ function filterCategory(cat) {
     }
 }
 
-const searchBar = document.getElementById("searchBar");
 searchBar.addEventListener("input", () => {
     const q = searchBar.value.toLowerCase();
-    const filtered = games.filter(g => g.name.toLowerCase().includes(q) || g.category.toLowerCase().includes(q));
+    const filtered = games.filter(g => 
+        g.name.toLowerCase().includes(q) ||
+        g.category.some(c => c.toLowerCase().includes(q))
+    );
     renderGames(filtered);
 });
+
 
 /* === INIT === */
 renderGames();
