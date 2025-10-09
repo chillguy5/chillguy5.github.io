@@ -125,7 +125,15 @@ body {
     justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
+
+    /* ✅ Voeg altijd ruimte aan de zijkanten toe */
+    padding: 0 20px; /* 20px aan links en rechts */
+    box-sizing: border-box; /* zodat padding niet extra ruimte toevoegt */
+    max-width: 1200px; /* optioneel: beperk de breedte van de hele rij */
+    margin-left: auto;
+    margin-right: auto; /* centreert de container op de pagina */
 }
+
 .category-btn {
     background: #900d27;
     color: #f8f8d7;
@@ -136,6 +144,7 @@ body {
     font-weight: bold;
     transition: 0.2s;
 }
+
 .category-btn:hover {
     background: #b31a36;
     transform: scale(1.05);
