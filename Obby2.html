@@ -126,6 +126,7 @@ body {
     gap: 10px;
     margin-bottom: 30px;
 }
+
 .category-btn {
     background: #900d27;
     color: #f8f8d7;
@@ -136,9 +137,15 @@ body {
     font-weight: bold;
     transition: 0.2s;
 }
+
 .category-btn:hover {
     background: #b31a36;
     transform: scale(1.05);
+}
+
+/* ✅ Dwing een nieuwe regel af na elke 10 knoppen */
+#categoryBar .category-btn:nth-child(10n + 1) {
+    clear: both; /* nieuwe regel forceren */
 }
 
 /* === GAME GRID === */
