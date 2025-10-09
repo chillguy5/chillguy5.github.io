@@ -145,10 +145,11 @@ body {
     transform: scale(1.05);
 }
 
-/* ✅ Forceer dat elke 10e knop een nieuwe regel start */
-#categoryBar .category-btn:nth-child(10n + 1) {
+/* Voeg een flex-breker na elke 10 knoppen */
+#categoryBar .category-btn:nth-child(10n)::after {
+    content: "";
     flex-basis: 100%;
-    margin-left: 0; /* reset eventueel gap */
+    height: 0; /* neemt geen ruimte in */
 }
 
 /* === GAME GRID === */
