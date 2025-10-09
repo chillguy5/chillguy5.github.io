@@ -328,10 +328,12 @@ function renderGames(filtered = games) {
     });
 }
 
-/* === FILTERS === */
 function filterCategory(cat) {
-    if (cat === "all") renderGames(games);
-    else renderGames(games.filter(g => g.category === cat));
+    if (cat === "all") {
+        renderGames(games);
+    } else {
+        renderGames(games.filter(g => g.category.includes(cat)));
+    }
 }
 
 const searchBar = document.getElementById("searchBar");
