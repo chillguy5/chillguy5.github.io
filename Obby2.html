@@ -126,8 +126,6 @@ body {
     gap: 10px;
     margin-bottom: 30px;
 }
-
-/* Houd alle knoppen zoals ze zijn */
 .category-btn {
     background: #900d27;
     color: #f8f8d7;
@@ -138,18 +136,9 @@ body {
     font-weight: bold;
     transition: 0.2s;
 }
-
-/* Hover effect blijft hetzelfde */
 .category-btn:hover {
     background: #b31a36;
     transform: scale(1.05);
-}
-
-/* Voeg een flex-breker na elke 10 knoppen */
-#categoryBar .category-btn:nth-child(10n)::after {
-    content: "";
-    flex-basis: 100%;
-    height: 0; /* neemt geen ruimte in */
 }
 
 /* === GAME GRID === */
