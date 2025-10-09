@@ -226,7 +226,7 @@ body {
     <button class="category-btn" onclick="filterCategory('Sport')">Sport</button>
     <button class="category-btn" onclick="filterCategory('Shooting Games')">Shooting</button>
     <button class="category-btn" onclick="filterCategory('Racing Games')">Racing</button>
-    <button class="category-btn" onclick="filterCategory('Idle Games')">Idle</button>
+    <button class="category-btn" onclick="filterCategory('Idle Games')">Idle Games</button>
     <button class="category-btn" onclick="filterCategory('Football Games')">Football</button>
     <button class="category-btn" onclick="filterCategory('Basketball Games')">Basketball</button>
     <button class="category-btn" onclick="filterCategory('Volley Games')">Vollyball</button>
@@ -236,6 +236,9 @@ body {
     <button class="category-btn" onclick="filterCategory('Monkey Games')">Monkey</button>
     <button class="category-btn" onclick="filterCategory('Action Games')">Action</button>
     <button class="category-btn" onclick="filterCategory('Horror')">Horror</button>
+    <button class="category-btn" onclick="filterCategory('Minecraft')">Minecraft</button>
+    <button class="category-btn" onclick="filterCategory('io games')">io Games</button>
+    <button class="category-btn" onclick="filterCategory('Board Games')">Board Games</button>
     <button class="category-btn" onclick="filterCategory('Sport Random')">Sport Random</button>
 </div>
 
@@ -266,7 +269,7 @@ const games = [
     { name:"Chill Guy Snake", category:["Chill Guy Games", "Snake Games"], image:"images/gameicons/snakeicon.png", link:"snake.html"},
     { name:"Chill Guy Crossy Road", category:["Chill Guy Games"], image:"images/gameicons/crossyicon.png", link:"crossy.html"},
     { name:"Gorilla Multiplayer", category:["Multiplayer Games", "Monkey Games"], image:"images/gameicons/gorilla multiplayer.jpg", link:"gorilla multiplayer.html"},
-    { name:"Worms Zone a Slithery Snake", category:["Snake Games"], image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
+    { name:"Worms Zone a Slithery Snake", category:["Snake Games", "io games"], image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
     { name:"Grand Vegas Crime", category:["Shooting Games", "Action Games"], image:"images/gameicons/Grand Vegas Crime.jpg", link:"Grand Vegas Crime.html"},
     { name:"Granny GTA Vegas", category:["Shooting Games", "Action Games"], image:"images/gameicons/Granny GTA Vegas.jpg", link:"Granny GTA Vegas.html"},
     { name:"Strike Force: Action Platformer", category:["Shooting Games", "Action Games"], image:"images/gameicons/Strike Force: Action Platformer.jpg", link:"Strike Force: Action Platformer.html"},
@@ -288,7 +291,7 @@ const games = [
     { name:"Basket Random", category:["Sport", "Multiplayer Games", "Sport Random", "Basketball Games"], image:"images/gameicons/basketrandom.jpeg", link:"basketrandom.html"},
     { name:"Boxing Random", category:["Sport", "Multiplayer Games", "Sport Random", "Boxing Games"], image:"images/gameicons/boxingrandom.jpeg", link:"boxingrandom.html"},
     { name:"Volley Random", category:["Sport", "Multiplayer Games", "Sport Random", "Volley Games"], image:"images/gameicons/volleyrandom.jpeg", link:"volleyrandom.html"},
-    { name:"Parkour Block 7", category:["Parkour Games"], image:"images/gameicons/Parkour Block 7.png", link:"Parkour Block 7.html"},
+    { name:"Parkour Block 7", category:["Parkour Games", "Minecraft"], image:"images/gameicons/Parkour Block 7.png", link:"Parkour Block 7.html"},
     { name:"Obby On a Bike", category:["Parkour Games", "Multiplayer Games"], image:"images/gameicons/Obby On a Bike.jpg", link:"Obby On a Bike.html"},
     { name:"Slope", category:["."], image:"images/gameicons/slope-game.jpg", link:"slope.html"},
     { name:"Basket Allstars", category:["Sport", "Basketball Games", "Multiplayer Games"], image:"images/gameicons/basketball allstars.jpg", link:"basketball allstars.html"},
@@ -302,6 +305,11 @@ const games = [
     { name:"Doodle Champion Island", category:["Sport"], image:"images/gameicons/doodle-champion-island.jpg", link:"island.html"},
     { name:"Pacman", category:["."], image:"images/gameicons/pacman.png", link:"pacman.html"},
     { name:"Fruit Ninja", category:["."], image:"images/gameicons/fruit.png", link:"projects/fruit-ninja/index.html"},
+    { name:"paper io", category:["io games"], image:"images/gameicons/paper io.png", link:"paper io.html"}, 
+    { name:"noob vs pro lava", category:["Multiplayer Games", "Parkour Games", "Minecraft"], image:"images/gameicons/noob vs pro lava.png", link:"noob vs pro lava.html"},
+    { name:"fireboy and watergirl", category:["Multiplayer Games"], image:"images/gameicons/fireboy and watergirl.png", link:"fireboy and watergirl.html"},
+    { name:"goal io", category:["Football Games", "Sport", "io games"], image:"images/gameicons/goal io.png", link:"goal io.html"},
+    { name:"chess multiplayer", category:["Multiplayer Games", "Board Games", "Strategy Games"], image:"images/gameicons/chess multiplayer.png", link:"chess multiplayer.html"},
 ];
 
 // Controleer of geluid is ingeschakeld in localStorage
