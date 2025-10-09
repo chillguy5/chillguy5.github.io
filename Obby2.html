@@ -219,27 +219,27 @@ body {
 
 <!-- === CATEGORIES (boven de games) === -->
 <div id="categoryBar">
-    <button class="category-btn" onclick="filterCategory('all')">Alle Games</button>
-    <button class="category-btn" onclick="filterCategory('Chill Guy Games')">Chill Guy</button>
-    <button class="category-btn" onclick="filterCategory('Multiplayer Games')">Multiplayer</button>
-    <button class="category-btn" onclick="filterCategory('Snake Games')">Snake</button>
-    <button class="category-btn" onclick="filterCategory('Sport')">Sport</button>
-    <button class="category-btn" onclick="filterCategory('Shooting Games')">Shooting</button>
-    <button class="category-btn" onclick="filterCategory('Racing Games')">Racing</button>
-    <button class="category-btn" onclick="filterCategory('Idle Games')">Idle Games</button>
-    <button class="category-btn" onclick="filterCategory('Football Games')">Football</button>
-    <button class="category-btn" onclick="filterCategory('Basketball Games')">Basketball</button>
-    <button class="category-btn" onclick="filterCategory('Volley Games')">Vollyball</button>
-    <button class="category-btn" onclick="filterCategory('Boxing Games')">Boxing</button>
-    <button class="category-btn" onclick="filterCategory('Strategy Games')">Strategy</button>
-    <button class="category-btn" onclick="filterCategory('Parkour Games')">Parkour</button>
-    <button class="category-btn" onclick="filterCategory('Monkey Games')">Monkey</button>
-    <button class="category-btn" onclick="filterCategory('Action Games')">Action</button>
-    <button class="category-btn" onclick="filterCategory('Horror')">Horror</button>
-    <button class="category-btn" onclick="filterCategory('Minecraft')">Minecraft</button>
-    <button class="category-btn" onclick="filterCategory('io games')">io Games</button>
-    <button class="category-btn" onclick="filterCategory('Board Games')">Board Games</button>
-    <button class="category-btn" onclick="filterCategory('Sport Random')">Sport Random</button>
+<button class="category-btn" onclick="filterCategory('Action Games')">Action</button>
+<button class="category-btn" onclick="filterCategory('all')">Alle Games</button>
+<button class="category-btn" onclick="filterCategory('Basketball Games')">Basketball</button>
+<button class="category-btn" onclick="filterCategory('Board Games')">Board Games</button>
+<button class="category-btn" onclick="filterCategory('Boxing Games')">Boxing</button>
+<button class="category-btn" onclick="filterCategory('Chill Guy Games')">Chill Guy</button>
+<button class="category-btn" onclick="filterCategory('Football Games')">Football</button>
+<button class="category-btn" onclick="filterCategory('Horror')">Horror</button>
+<button class="category-btn" onclick="filterCategory('Idle Games')">Idle Games</button>
+<button class="category-btn" onclick="filterCategory('io games')">io Games</button>
+<button class="category-btn" onclick="filterCategory('Minecraft')">Minecraft</button>
+<button class="category-btn" onclick="filterCategory('Monkey Games')">Monkey</button>
+<button class="category-btn" onclick="filterCategory('Multiplayer Games')">Multiplayer</button>
+<button class="category-btn" onclick="filterCategory('Parkour Games')">Parkour</button>
+<button class="category-btn" onclick="filterCategory('Racing Games')">Racing</button>
+<button class="category-btn" onclick="filterCategory('Shooting Games')">Shooting</button>
+<button class="category-btn" onclick="filterCategory('Snake Games')">Snake</button>
+<button class="category-btn" onclick="filterCategory('Sport')">Sport</button>
+<button class="category-btn" onclick="filterCategory('Sport Random')">Sport Random</button>
+<button class="category-btn" onclick="filterCategory('Strategy Games')">Strategy</button>
+<button class="category-btn" onclick="filterCategory('Volley Games')">Vollyball</button>
 </div>
 
 <!-- === GAME GRID === -->
@@ -261,55 +261,55 @@ document.getElementById("coins").textContent = coins;
 
 /* === GAMES DATA === */
 const games = [
-    { name:"Chill Guy Jumper", category:["Chill Guy Games"], image:"images/gameicons/timicon.png", link:"jumper.html"},
-    { name:"Chill Guy Shooter", category:["Chill Guy Games", "Shooting Games"], image:"images/gameicons/gijsicon.png", link:"gijs.html"},
-    { name:"Chill Guy Flappy", category:["Chill Guy Games"], image:"images/gameicons/flappyicon.png", link:"flappy.html"},
-    { name:"Chill Guy Tetris", category:["Chill Guy Games"], image:"images/gameicons/tetrisicon.png", link:"tetris.html"},
-    { name:"Chill Guy Candy Crush", category:["Chill Guy Games"], image:"images/gameicons/candycrushicon.png", link:"candycrush.html"},
-    { name:"Chill Guy Snake", category:["Chill Guy Games", "Snake Games"], image:"images/gameicons/snakeicon.png", link:"snake.html"},
-    { name:"Chill Guy Crossy Road", category:["Chill Guy Games"], image:"images/gameicons/crossyicon.png", link:"crossy.html"},
-    { name:"Gorilla Multiplayer", category:["Multiplayer Games", "Monkey Games"], image:"images/gameicons/gorilla multiplayer.jpg", link:"gorilla multiplayer.html"},
-    { name:"Worms Zone a Slithery Snake", category:["Snake Games", "io games"], image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
-    { name:"Grand Vegas Crime", category:["Shooting Games", "Action Games"], image:"images/gameicons/Grand Vegas Crime.jpg", link:"Grand Vegas Crime.html"},
-    { name:"Granny GTA Vegas", category:["Shooting Games", "Action Games"], image:"images/gameicons/Granny GTA Vegas.jpg", link:"Granny GTA Vegas.html"},
-    { name:"Strike Force: Action Platformer", category:["Shooting Games", "Action Games"], image:"images/gameicons/Strike Force: Action Platformer.jpg", link:"Strike Force: Action Platformer.html"},
-    { name:"Hitman Sniper", category:["Shooting Games", "Action Games"], image:"images/gameicons/Hitman Sniper.jpg", link:"Hitman Sniper.html"},
-    { name:"Noob Shooter: Gun Battle 3D", category:["Shooting Games", "Action Games"], image:"images/gameicons/Noob Shooter: Gun Battle 3D.jpg", link:"Noob Shooter: Gun Battle 3D.html"},
-    { name:"Police Chase Drifter", category:["Racing Games", "Action Games"], image:"images/gameicons/Police Chase Drifter.jpg", link:"Police Chase Drifter.html"},
-    { name:"GT Formula Championship", category:["Racing Games", "Action Games"], image:"images/gameicons/GT Formula Championship.jpg", link:"GT Formula Championship.html"},
-    { name:"Moto Road Rash 3D 2", category:["Racing Games", "Action Games"], image:"images/gameicons/Moto Road Rash 3D 2.jpg", link:"Moto Road Rash 3D 2.html"},
-    { name:"Motocross Racing", category:["Racing Games", "Action Games"], image:"images/gameicons/Motocross Racing.jpg", link:"Motocross Racing.html"},
-    { name:"Turbo Race 3D", category:["Racing Games", "Action Games"], image:"images/gameicons/Turbo Race 3D.jpg", link:"Turbo Race 3D.html"},
-    { name:"Monkey Mart", category:["Idle Games", "Monkey Games"], image:"images/gameicons/monkey-mart.jpg", link:"monkey.html"},
-    { name:"Idle Firefighter 3D", category:["Idle Games", "Action Games",], image:"images/gameicons/Idle Firefighter 3D.jpeg", link:"Idle Firefighter 3D.html"},
-    { name:"Elemental Monsters: Merge & Evolution", category:["Idle Games", "Action Games", "Strategy Games"], image:"images/gameicons/Elemental Monsters: Merge & Evolution.jpg", link:"Elemental Monsters: Merge & Evolution.html"},
-    { name:"Army Commander Craft", category:["Idle Games", "Shooting Games", "Action Games", "Strategy Games"], image:"images/gameicons/Army Commander Craft.jpg", link:"Army Commander Craft.html"},
-    { name:"Italian Brainrot", category:["Idle Games"], image:"images/gameicons/Italian Brainrot.jpg", link:"Italian Brainrot.html"},
-    { name:"Football Heads 2025", category:["Football Games", "Sport"], image:"images/gameicons/Football Heads 2025.jpg", link:"Football Heads 2025.html"},
-    { name:"Goal Rush", category:["Football Games", "Sport", "Multiplayer Games"], image:"images/gameicons/Goal Rush.jpg", link:"Goal Rush.html"},
-    { name:"Soccer Random", category:["Football Games", "Sport", "Multiplayer Games", "Sport Random"], image:"images/gameicons/soccerrandom.jpg", link:"soccerrandom.html"},
-    { name:"Basket Random", category:["Sport", "Multiplayer Games", "Sport Random", "Basketball Games"], image:"images/gameicons/basketrandom.jpeg", link:"basketrandom.html"},
-    { name:"Boxing Random", category:["Sport", "Multiplayer Games", "Sport Random", "Boxing Games"], image:"images/gameicons/boxingrandom.jpeg", link:"boxingrandom.html"},
-    { name:"Volley Random", category:["Sport", "Multiplayer Games", "Sport Random", "Volley Games"], image:"images/gameicons/volleyrandom.jpeg", link:"volleyrandom.html"},
-    { name:"Parkour Block 7", category:["Parkour Games", "Minecraft"], image:"images/gameicons/Parkour Block 7.png", link:"Parkour Block 7.html"},
-    { name:"Obby On a Bike", category:["Parkour Games", "Multiplayer Games"], image:"images/gameicons/Obby On a Bike.jpg", link:"Obby On a Bike.html"},
-    { name:"Slope", category:["."], image:"images/gameicons/slope-game.jpg", link:"slope.html"},
-    { name:"Basket Allstars", category:["Sport", "Basketball Games", "Multiplayer Games"], image:"images/gameicons/basketball allstars.jpg", link:"basketball allstars.html"},
-    { name:"Drunken Boxing", category:["Sport", "Boxing Games", "Multiplayer Games"], image:"images/gameicons/drunken boxing.jpg", link:"drunken boxing.html"},
-    { name:"Geometry Dash", category:["."], image:"images/gameicons/geometry-dash.jpg", link:"geometry.html"},
-    { name:"Retro Bowl", category:["Sport"], image:"images/gameicons/retro-bowl.jpg", link:"retro.html"},
-    { name:"Donkey Kong", category:["Monkey Games", "Action Games"], image:"images/gameicons/donkey-kong.jpg", link:"donkey-kong.html"},
-    { name:"Dinosaur", category:["."], image:"images/gameicons/dinosaur-game.jpg", link:"dinosaur.html"},
-    { name:"Scary Granny", category:["Horror"], image:"images/gameicons/scary granny.jpg", link:"scary granny.html"},
-    { name:"Flappy Bird", category:["."], image:"images/gameicons/flappy-bird.jpg1.jpeg", link:"flappybird.html"},
-    { name:"Doodle Champion Island", category:["Sport"], image:"images/gameicons/doodle-champion-island.jpg", link:"island.html"},
-    { name:"Pacman", category:["."], image:"images/gameicons/pacman.png", link:"pacman.html"},
-    { name:"Fruit Ninja", category:["."], image:"images/gameicons/fruit.png", link:"projects/fruit-ninja/index.html"},
-    { name:"paper io", category:["io games"], image:"images/gameicons/paper io.jpg", link:"paper io.html"}, 
-    { name:"noob vs pro lava", category:["Multiplayer Games", "Parkour Games", "Minecraft"], image:"images/gameicons/noob vs pro lava.jpg", link:"noob vs pro lava.html"},
-    { name:"fireboy and watergirl", category:["Multiplayer Games"], image:"images/gameicons/fireboy and watergirl.jpg", link:"fireboy and watergirl.html"},
-    { name:"goal io", category:["Football Games", "Sport", "io games"], image:"images/gameicons/goal io.jpg", link:"goal io.html"},
-    { name:"chess multiplayer", category:["Multiplayer Games", "Board Games", "Strategy Games"], image:"images/gameicons/chess multiplayer.jpg", link:"chess multiplayer.html"},
+{ name:"Army Commander Craft", category:["Idle Games", "Shooting Games", "Action Games", "Strategy Games"], image:"images/gameicons/Army Commander Craft.jpg", link:"Army Commander Craft.html"},
+{ name:"Basket Allstars", category:["Sport", "Basketball Games", "Multiplayer Games"], image:"images/gameicons/basketball allstars.jpg", link:"basketball allstars.html"},
+{ name:"Basket Random", category:["Sport", "Multiplayer Games", "Sport Random", "Basketball Games"], image:"images/gameicons/basketrandom.jpeg", link:"basketrandom.html"},
+{ name:"Boxing Random", category:["Sport", "Multiplayer Games", "Sport Random", "Boxing Games"], image:"images/gameicons/boxingrandom.jpeg", link:"boxingrandom.html"},
+{ name:"chess multiplayer", category:["Multiplayer Games", "Board Games", "Strategy Games"], image:"images/gameicons/chess multiplayer.jpg", link:"chess multiplayer.html"},
+{ name:"Chill Guy Candy Crush", category:["Chill Guy Games"], image:"images/gameicons/candycrushicon.png", link:"candycrush.html"},
+{ name:"Chill Guy Crossy Road", category:["Chill Guy Games"], image:"images/gameicons/crossyicon.png", link:"crossy.html"},
+{ name:"Chill Guy Flappy", category:["Chill Guy Games"], image:"images/gameicons/flappyicon.png", link:"flappy.html"},
+{ name:"Chill Guy Jumper", category:["Chill Guy Games"], image:"images/gameicons/timicon.png", link:"jumper.html"},
+{ name:"Chill Guy Shooter", category:["Chill Guy Games", "Shooting Games"], image:"images/gameicons/gijsicon.png", link:"gijs.html"},
+{ name:"Chill Guy Snake", category:["Chill Guy Games", "Snake Games"], image:"images/gameicons/snakeicon.png", link:"snake.html"},
+{ name:"Chill Guy Tetris", category:["Chill Guy Games"], image:"images/gameicons/tetrisicon.png", link:"tetris.html"},
+{ name:"Dinosaur", category:["."], image:"images/gameicons/dinosaur-game.jpg", link:"dinosaur.html"},
+{ name:"Donkey Kong", category:["Monkey Games", "Action Games"], image:"images/gameicons/donkey-kong.jpg", link:"donkey-kong.html"},
+{ name:"Doodle Champion Island", category:["Sport"], image:"images/gameicons/doodle-champion-island.jpg", link:"island.html"},
+{ name:"Drunken Boxing", category:["Sport", "Boxing Games", "Multiplayer Games"], image:"images/gameicons/drunken boxing.jpg", link:"drunken boxing.html"},
+{ name:"Elemental Monsters: Merge & Evolution", category:["Idle Games", "Action Games", "Strategy Games"], image:"images/gameicons/Elemental Monsters: Merge & Evolution.jpg", link:"Elemental Monsters: Merge & Evolution.html"},
+{ name:"fireboy and watergirl", category:["Multiplayer Games"], image:"images/gameicons/fireboy and watergirl.jpg", link:"fireboy and watergirl.html"},
+{ name:"Flappy Bird", category:["."], image:"images/gameicons/flappy-bird.jpg1.jpeg", link:"flappybird.html"},
+{ name:"Football Heads 2025", category:["Football Games", "Sport"], image:"images/gameicons/Football Heads 2025.jpg", link:"Football Heads 2025.html"},
+{ name:"Fruit Ninja", category:["."], image:"images/gameicons/fruit.png", link:"projects/fruit-ninja/index.html"},
+{ name:"Geometry Dash", category:["."], image:"images/gameicons/geometry-dash.jpg", link:"geometry.html"},
+{ name:"Goal Rush", category:["Football Games", "Sport", "Multiplayer Games"], image:"images/gameicons/Goal Rush.jpg", link:"Goal Rush.html"},
+{ name:"goal io", category:["Football Games", "Sport", "io games"], image:"images/gameicons/goal io.jpg", link:"goal io.html"},
+{ name:"Gorilla Multiplayer", category:["Multiplayer Games", "Monkey Games"], image:"images/gameicons/gorilla multiplayer.jpg", link:"gorilla multiplayer.html"},
+{ name:"Grand Vegas Crime", category:["Shooting Games", "Action Games"], image:"images/gameicons/Grand Vegas Crime.jpg", link:"Grand Vegas Crime.html"},
+{ name:"Granny GTA Vegas", category:["Shooting Games", "Action Games"], image:"images/gameicons/Granny GTA Vegas.jpg", link:"Granny GTA Vegas.html"},
+{ name:"GT Formula Championship", category:["Racing Games", "Action Games"], image:"images/gameicons/GT Formula Championship.jpg", link:"GT Formula Championship.html"},
+{ name:"Hitman Sniper", category:["Shooting Games", "Action Games"], image:"images/gameicons/Hitman Sniper.jpg", link:"Hitman Sniper.html"},
+{ name:"Idle Firefighter 3D", category:["Idle Games", "Action Games"], image:"images/gameicons/Idle Firefighter 3D.jpeg", link:"Idle Firefighter 3D.html"},
+{ name:"Italian Brainrot", category:["Idle Games"], image:"images/gameicons/Italian Brainrot.jpg", link:"Italian Brainrot.html"},
+{ name:"Monkey Mart", category:["Idle Games", "Monkey Games"], image:"images/gameicons/monkey-mart.jpg", link:"monkey.html"},
+{ name:"Moto Road Rash 3D 2", category:["Racing Games", "Action Games"], image:"images/gameicons/Moto Road Rash 3D 2.jpg", link:"Moto Road Rash 3D 2.html"},
+{ name:"Motocross Racing", category:["Racing Games", "Action Games"], image:"images/gameicons/Motocross Racing.jpg", link:"Motocross Racing.html"},
+{ name:"noob vs pro lava", category:["Multiplayer Games", "Parkour Games", "Minecraft"], image:"images/gameicons/noob vs pro lava.jpg", link:"noob vs pro lava.html"},
+{ name:"Noob Shooter: Gun Battle 3D", category:["Shooting Games", "Action Games"], image:"images/gameicons/Noob Shooter: Gun Battle 3D.jpg", link:"Noob Shooter: Gun Battle 3D.html"},
+{ name:"Obby On a Bike", category:["Parkour Games", "Multiplayer Games"], image:"images/gameicons/Obby On a Bike.jpg", link:"Obby On a Bike.html"},
+{ name:"Pacman", category:["."], image:"images/gameicons/pacman.png", link:"pacman.html"},
+{ name:"paper io", category:["io games"], image:"images/gameicons/paper io.jpg", link:"paper io.html"},
+{ name:"Parkour Block 7", category:["Parkour Games", "Minecraft"], image:"images/gameicons/Parkour Block 7.png", link:"Parkour Block 7.html"},
+{ name:"Police Chase Drifter", category:["Racing Games", "Action Games"], image:"images/gameicons/Police Chase Drifter.jpg", link:"Police Chase Drifter.html"},
+{ name:"Retro Bowl", category:["Sport"], image:"images/gameicons/retro-bowl.jpg", link:"retro.html"},
+{ name:"Scary Granny", category:["Horror"], image:"images/gameicons/scary granny.jpg", link:"scary granny.html"},
+{ name:"Slope", category:["."], image:"images/gameicons/slope-game.jpg", link:"slope.html"},
+{ name:"Soccer Random", category:["Football Games", "Sport", "Multiplayer Games", "Sport Random"], image:"images/gameicons/soccerrandom.jpg", link:"soccerrandom.html"},
+{ name:"Strike Force: Action Platformer", category:["Shooting Games", "Action Games"], image:"images/gameicons/Strike Force: Action Platformer.jpg", link:"Strike Force: Action Platformer.html"},
+{ name:"Turbo Race 3D", category:["Racing Games", "Action Games"], image:"images/gameicons/Turbo Race 3D.jpg", link:"Turbo Race 3D.html"},
+{ name:"Volley Random", category:["Sport", "Multiplayer Games", "Sport Random", "Volley Games"], image:"images/gameicons/volleyrandom.jpeg", link:"volleyrandom.html"},
+{ name:"Worms Zone a Slithery Snake", category:["Snake Games", "io games"], image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
 ];
 
 // Controleer of geluid is ingeschakeld in localStorage
