@@ -127,6 +127,7 @@ body {
     margin-bottom: 30px;
 }
 
+/* Houd alle knoppen zoals ze zijn */
 .category-btn {
     background: #900d27;
     color: #f8f8d7;
@@ -138,14 +139,16 @@ body {
     transition: 0.2s;
 }
 
+/* Hover effect blijft hetzelfde */
 .category-btn:hover {
     background: #b31a36;
     transform: scale(1.05);
 }
 
-/* ✅ Dwing een nieuwe regel af na elke 10 knoppen */
+/* ✅ Forceer dat elke 10e knop een nieuwe regel start */
 #categoryBar .category-btn:nth-child(10n + 1) {
-    clear: both; /* nieuwe regel forceren */
+    flex-basis: 100%;
+    margin-left: 0; /* reset eventueel gap */
 }
 
 /* === GAME GRID === */
