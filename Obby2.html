@@ -120,12 +120,13 @@ body {
 }
 
 #categoryBar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* Altijd 10 knoppen per rij */
     gap: 10px;
     margin-bottom: 30px;
+    justify-items: center; /* Centreert de knoppen binnen elk gridvakje */
 }
+
 .category-btn {
     background: #900d27;
     color: #f8f8d7;
@@ -135,7 +136,10 @@ body {
     cursor: pointer;
     font-weight: bold;
     transition: 0.2s;
+    text-align: center;
+    width: 100%; /* Knop vult het gridvakje volledig */
 }
+
 .category-btn:hover {
     background: #b31a36;
     transform: scale(1.05);
