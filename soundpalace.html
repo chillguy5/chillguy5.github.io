@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
     <title>I Will Sacrifice My Life For Pakistan</title>
-
     <style>
         body {
             text-align: center;
@@ -85,7 +84,6 @@
             vertical-align: middle;
         }
 
-        /* Menu en animaties */
         #menu {
             z-index: 2;
         }
@@ -109,13 +107,36 @@
         #bar1 { transform: translateY(-4px); }
         #bar3 { transform: translateY(4px); }
 
-        .nav { transition: 0.3s ease; display: none; }
-        .nav ul { padding: 0 22px; }
-        .nav li { list-style: none; padding: 12px 0; }
-        .nav li a { color: #cd3f2b; font-size: 20px; text-decoration: none; }
-        .nav li a:hover { font-weight: bold; }
+        .nav {
+            transition: 0.3s ease;
+            display: none;
+        }
 
-        .menu-bg, #menu { top: 0; left: 0; position: absolute; }
+        .nav ul {
+            padding: 0 22px;
+        }
+
+        .nav li {
+            list-style: none;
+            padding: 12px 0;
+        }
+
+        .nav li a {
+            color: #cd3f2b;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .nav li a:hover {
+            font-weight: bold;
+        }
+
+        .menu-bg, #menu {
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
+
         .menu-bg {
             z-index: 1;
             width: 0;
@@ -126,17 +147,36 @@
             transition: 0.3s ease;
         }
 
-        .change { display: block; }
-        .change .bar { background-color: #cd3f2b; }
-        .change #bar1 { transform: translateY(4px) rotateZ(-45deg); }
-        .change #bar2 { opacity: 0; }
-        .change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
-        .change-bg { width: 600px; height: 540px; transform: translate(-60%, -30%); }
+        .change {
+            display: block;
+        }
 
-        /* klein blokje achter iframe */
+        .change .bar {
+            background-color: #cd3f2b;
+        }
+
+        .change #bar1 {
+            transform: translateY(4px) rotateZ(-45deg);
+        }
+
+        .change #bar2 {
+            opacity: 0;
+        }
+
+        .change #bar3 {
+            transform: translateY(-6px) rotateZ(45deg);
+        }
+
+        .change-bg {
+            width: 600px;
+            height: 540px;
+            transform: translate(-60%,-30%);
+        }
+
+        /* iframe container */
         .meme-container {
             margin-top: 100px;
-            background-color: rgba(240, 170, 94, 0.85); /* subtiel oranje-goud */
+            background-color: rgba(240, 170, 94, 0.85);
             padding: 10px 15px;
             border-radius: 15px;
             display: inline-block;
@@ -145,11 +185,10 @@
 
         iframe {
             border-radius: 12px;
-            border: 2px solid #900d27;
+            border: none; /* rode lijntje verwijderd */
         }
     </style>
 </head>
-
 <body>
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
 
@@ -175,9 +214,9 @@
 
     <div class="menu-bg" id="menu-bg"></div>
 
-    <!-- iframe op klein blokje -->
+    <!-- meme iframe -->
     <div class="meme-container">
-        <iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" frameborder="0" scrolling="no"></iframe>
+        <iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" scrolling="no"></iframe>
     </div>
 
     <div class="credit">Made by Chill Guy Productions</div>
@@ -189,7 +228,6 @@
             document.getElementById("menu-bg").classList.toggle("change-bg");
         }
 
-        // Coinsysteem behouden
         let coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
 
