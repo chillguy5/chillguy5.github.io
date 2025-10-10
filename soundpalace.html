@@ -13,7 +13,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
             margin: 0;
             position: relative;
@@ -22,6 +22,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            overflow-y: auto;
         }
 
         .title {
@@ -66,17 +67,6 @@
             vertical-align: middle;
         }
 
-        #secret-button {
-            position: absolute;
-            bottom: 5px;
-            left: 500px;
-            width: 10px;
-            height: 10px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-        }
-
         .stats-icon {
             width: 30px;
             height: 30px;
@@ -85,7 +75,7 @@
         }
 
         .cart-icon {
-            width: 30px; /* Pas de grootte aan */
+            width: 30px;
             height: 30px;
             margin-left: 5px;
             vertical-align: middle;
@@ -119,30 +109,12 @@
             display: none;
         }
 
-        .nav ul {
-            padding: 0 22px;
-        }
+        .nav ul { padding: 0 22px; }
+        .nav li { list-style: none; padding: 12px 0; }
+        .nav li a { color: #cd3f2b; font-size: 20px; text-decoration: none; }
+        .nav li a:hover { font-weight: bold; }
 
-        .nav li {
-            list-style: none;
-            padding: 12px 0;
-        }
-
-        .nav li a {
-            color: #cd3f2b;
-            font-size: 20px;
-            text-decoration: none;
-        }
-
-        .nav li a:hover {
-            font-weight: bold;
-        }
-
-        .menu-bg, #menu {
-            top: 0;
-            left: 0;
-            position: absolute;
-        }
+        .menu-bg, #menu { top: 0; left: 0; position: absolute; }
 
         .menu-bg {
             z-index: 1;
@@ -154,45 +126,34 @@
             transition: 0.3s ease;
         }
 
-        .change {
-            display: block;
+        .change { display: block; }
+        .change .bar { background-color: #cd3f2b; }
+        .change #bar1 { transform: translateY(4px) rotateZ(-45deg); }
+        .change #bar2 { opacity: 0; }
+        .change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
+        .change-bg { width: 600px; height: 540px; transform: translate(-60%,-30%); }
+
+        /* meme grid */
+        .meme-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 80px;
+            padding-bottom: 100px;
         }
 
-        .change .bar {
-            background-color: #cd3f2b;
-        }
-
-        .change #bar1 {
-            transform: translateY(4px) rotateZ(-45deg);
-        }
-
-        .change #bar2 {
-            opacity: 0;
-        }
-
-        .change #bar3 {
-            transform: translateY(-6px) rotateZ(45deg);
-        }
-
-        .change-bg {
-            width: 600px;
-            height: 540px;
-            transform: translate(-60%,-30%);
-        }
-
-        /* iframe container */
         .meme-container {
-            margin-top: 100px;
             background-color: rgba(240, 170, 94, 0.85);
             padding: 10px 15px;
             border-radius: 15px;
-            display: inline-block;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: inline-block;
         }
 
         iframe {
             border-radius: 12px;
-            border: none; /* rode lijntje verwijderd */
+            border: none;
         }
     </style>
 </head>
@@ -221,9 +182,33 @@
 
     <div class="menu-bg" id="menu-bg"></div>
 
-    <!-- meme iframe -->
-    <div class="meme-container">
-        <iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" scrolling="no"></iframe>
+    <div class="meme-grid">
+        <!-- Alle meme iframes -->
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yo-phone-lining-56973/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/67-71609/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/clash-royale-hog-rida-57556/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/among-us-role-reveal-sound-34956/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/frank-bij-de-paarse-52723/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/allahu-akbar-92894/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/fbi-open-up-with-explosion-491/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sad-violin-the-meme-one/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-want-to-be-ninja-9536/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dexter-song-2-46283/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/long-brain-fart-60967/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-my-god-bro-oh-hell-nah-man-42939/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/snore-mimimimimimi-76562/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/lego-breaking-57805/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/jayden-waar-is-mijn-kip-1722/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-spaghetti-58020/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-mini-16793/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-spaghetti-kort-31781/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-no-no-no-laugh-56694/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hema-loud-af-82528/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ik-ben-turk-60624/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ahhh-ik-krijg-een-stijve-79428/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spongebob-fail-11236/embed/" scrolling="no"></iframe></div>
+        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/tu-tu-tu-du-max-verstappen-18834/embed/" scrolling="no"></iframe></div>
     </div>
 
     <div class="credit">Made by Chill Guy Productions</div>
