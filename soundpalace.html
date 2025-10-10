@@ -218,19 +218,18 @@ document.addEventListener("visibilitychange", function() {
     }
 });
 
-// Zoekfunctie
 const searchBar = document.getElementById("searchBar");
 const memeGrid = document.getElementById("memeGrid");
 const memes = Array.from(memeGrid.getElementsByClassName("meme-container"));
 
 searchBar.addEventListener("input", () => {
-    const query = searchBar.value.toLowerCase();
+    const query = searchBar.value.toLowerCase().replace(/-/g, ' ').trim(); // vervang streepjes in query ook
     memes.forEach(meme => {
         const iframe = meme.querySelector("iframe");
         const src = iframe.src;
-        // Haal naam uit src
+        // Haal naam uit src en vervang streepjes door spaties
         const nameMatch = src.match(/instant\/(.+)-\d+\/embed/);
-        const name = nameMatch ? nameMatch[1].toLowerCase() : "";
+        const name = nameMatch ? nameMatch[1].toLowerCase().replace(/-/g, ' ') : "";
         meme.style.display = name.includes(query) ? "inline-block" : "none";
     });
 });
