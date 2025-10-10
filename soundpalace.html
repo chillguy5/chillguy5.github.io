@@ -133,9 +133,19 @@
         .change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
         .change-bg { width: 600px; height: 540px; transform: translate(-60%, -30%); }
 
-        /* iframe centraal */
-        .meme-iframe {
+        /* klein blokje achter iframe */
+        .meme-container {
             margin-top: 100px;
+            background-color: rgba(240, 170, 94, 0.85); /* subtiel oranje-goud */
+            padding: 10px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        iframe {
+            border-radius: 12px;
+            border: 2px solid #900d27;
         }
     </style>
 </head>
@@ -165,8 +175,8 @@
 
     <div class="menu-bg" id="menu-bg"></div>
 
-    <!-- Alleen het iframe knopje -->
-    <div class="meme-iframe">
+    <!-- iframe op klein blokje -->
+    <div class="meme-container">
         <iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" frameborder="0" scrolling="no"></iframe>
     </div>
 
