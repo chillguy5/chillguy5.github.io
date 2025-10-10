@@ -1,232 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
-    <title>I Will Sacrifice My Life For Pakistan</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #000000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: 100vh;
-            margin: 0;
-            position: relative;
-            background-image: url('images/overig/achtergrond.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            overflow-y: auto;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/overig/icon.png">
+<title>I Will Sacrifice My Life For Pakistan</title>
+<style>
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    background-image: url('images/overig/achtergrond.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-y: auto;
+}
 
-        .title {
-            align-items: center;
-            height: 300px;
-            width: 600px;
-            margin-bottom: 5px;
-        }
+.title {
+    align-items: center;
+    height: 300px;
+    width: 600px;
+    margin-bottom: 5px;
+}
 
-        .coin-counter {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 30px;
-            color: #900d27;
-            background-color: #f0aa5e;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+.coin-counter {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
+    color: #900d27;
+    background-color: #f0aa5e;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
-        .coin-icon {
-            width: 30px;
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
+.coin-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
 
-/* === CREDIT === */
 .credit {
     margin-top: 40px;
     font-weight: bold;
     color: #f8f8d7;
 }
 
-        .home-icon {
-            width: 40px;
-            height: 40px;
-            margin-left: 0px;
-            vertical-align: middle;
-        }
+.home-icon, .stats-icon, .cart-icon {
+    vertical-align: middle;
+}
 
-        .stats-icon {
-            width: 30px;
-            height: 30px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
+#menu { z-index: 2; }
 
-        .cart-icon {
-            width: 30px;
-            height: 30px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
+#menu-bar {
+    width: 45px;
+    height: 40px;
+    margin: 30px 0 20px 20px;
+    cursor: pointer;
+}
 
-        #menu {
-            z-index: 2;
-        }
+.bar {
+    height: 5px;
+    width: 100%;
+    background-color: #f8f8d7;
+    display: block;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+#bar1 { transform: translateY(-4px); }
+#bar3 { transform: translateY(4px); }
 
-        #menu-bar {
-            width: 45px;
-            height: 40px;
-            margin: 30px 0 20px 20px;
-            cursor: pointer;
-        }
+.nav { transition: 0.3s ease; display: none; }
+.nav ul { padding: 0 22px; }
+.nav li { list-style: none; padding: 12px 0; }
+.nav li a { color: #cd3f2b; font-size: 20px; text-decoration: none; }
+.nav li a:hover { font-weight: bold; }
 
-        .bar {
-            height: 5px;
-            width: 100%;
-            background-color: #f8f8d7;
-            display: block;
-            border-radius: 5px;
-            transition: 0.3s ease;
-        }
+.menu-bg, #menu { top: 0; left: 0; position: absolute; }
+.menu-bg {
+    z-index: 1;
+    width: 0;
+    height: 0;
+    margin: 30px 0 20px 20px;
+    background: radial-gradient(circle, #f8f8d7, #f8f8d7);
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
 
-        #bar1 { transform: translateY(-4px); }
-        #bar3 { transform: translateY(4px); }
+.change { display: block; }
+.change .bar { background-color: #cd3f2b; }
+.change #bar1 { transform: translateY(4px) rotateZ(-45deg); }
+.change #bar2 { opacity: 0; }
+.change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
+.change-bg { width: 600px; height: 540px; transform: translate(-60%,-30%); }
 
-        .nav {
-            transition: 0.3s ease;
-            display: none;
-        }
+/* Search Bar */
+#searchBar {
+    padding: 10px;
+    width: 60%;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+    text-align: center;
+}
 
-        .nav ul { padding: 0 22px; }
-        .nav li { list-style: none; padding: 12px 0; }
-        .nav li a { color: #cd3f2b; font-size: 20px; text-decoration: none; }
-        .nav li a:hover { font-weight: bold; }
+/* meme grid */
+.meme-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-bottom: 100px;
+}
 
-        .menu-bg, #menu { top: 0; left: 0; position: absolute; }
+.meme-container {
+    background-color: rgba(240, 170, 94, 0.85);
+    padding: 10px 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: inline-block;
+}
 
-        .menu-bg {
-            z-index: 1;
-            width: 0;
-            height: 0;
-            margin: 30px 0 20px 20px;
-            background: radial-gradient(circle, #f8f8d7, #f8f8d7);
-            border-radius: 50%;
-            transition: 0.3s ease;
-        }
-
-        .change { display: block; }
-        .change .bar { background-color: #cd3f2b; }
-        .change #bar1 { transform: translateY(4px) rotateZ(-45deg); }
-        .change #bar2 { opacity: 0; }
-        .change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
-        .change-bg { width: 600px; height: 540px; transform: translate(-60%,-30%); }
-
-        /* meme grid */
-        .meme-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 80px;
-            padding-bottom: 100px;
-        }
-
-        .meme-container {
-            background-color: rgba(240, 170, 94, 0.85);
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: inline-block;
-        }
-
-        iframe {
-            border-radius: 12px;
-            border: none;
-        }
-    </style>
+iframe {
+    border-radius: 12px;
+    border: none;
+}
+</style>
 </head>
 <body>
-    <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
 
-    <div class="coin-counter">
-        <img src="images/overig/coin.png" alt="coin" class="coin-icon">
-        Coins: <span id="coins">0</span>
+<div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+
+<div class="coin-counter">
+    <img src="images/overig/coin.png" alt="coin" class="coin-icon">
+    Coins: <span id="coins">0</span>
+</div>
+
+<div id="menu">
+    <div id="menu-bar" onclick="menuOnClick()">
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+        <div id="bar3" class="bar"></div>
     </div>
+    <nav class="nav" id="nav">
+        <ul>
+            <li><a href="index.html">Main menu <img src="images/overig/homeicon.png" class="home-icon"></a></li>
+            <li><a href="store.html">Store <img src="images/overig/storeicon.png" class="cart-icon"></a></li>
+            <li><a href="stats.html">Stats <img src="images/overig/statsicon.png" class="stats-icon"></a></li>
+        </ul>
+    </nav>
+</div>
 
-    <div id="menu">
-        <div id="menu-bar" onclick="menuOnClick()">
-            <div id="bar1" class="bar"></div>
-            <div id="bar2" class="bar"></div>
-            <div id="bar3" class="bar"></div>
-        </div>
-        <nav class="nav" id="nav">
-            <ul>
-                <li><a href="index.html">Main menu <img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
-                <li><a href="store.html">Store <img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
-                <li><a href="stats.html">Stats <img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
-            </ul>
-        </nav>
-    </div>
+<div class="menu-bg" id="menu-bg"></div>
 
-    <div class="menu-bg" id="menu-bg"></div>
+<!-- Search Bar -->
+<input type="text" id="searchBar" placeholder="Zoek op naam...">
 
-    <div class="meme-grid">
-        <!-- Alle meme iframes -->
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yo-phone-lining-56973/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/67-71609/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/among-us-role-reveal-sound-34956/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/frank-bij-de-paarse-52723/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/allahu-akbar-92894/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/fbi-open-up-with-explosion-491/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sad-violin-the-meme-one/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-want-to-be-ninja-9536/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dexter-song-2-46283/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/long-brain-fart-60967/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-my-god-bro-oh-hell-nah-man-42939/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/snore-mimimimimimi-76562/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/lego-breaking-57805/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/jayden-waar-is-mijn-kip-1722/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-spaghetti-58020/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-mini-16793/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-spaghetti-kort-31781/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-no-no-no-laugh-56694/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hema-loud-af-82528/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ik-ben-turk-60624/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ahhh-ik-krijg-een-stijve-79428/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spongebob-fail-11236/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/tu-tu-tu-du-max-verstappen-18834/embed/" scrolling="no"></iframe></div>
-        <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hog-rider-loud-1585/embed/" scrolling="no"></iframe></div>
-    </div>
+<div class="meme-grid" id="memeGrid">
+    <!-- Alle meme iframes met src -->
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yo-phone-lining-56973/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/67-71609/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/among-us-role-reveal-sound-34956/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/frank-bij-de-paarse-52723/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/allahu-akbar-92894/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/fbi-open-up-with-explosion-491/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sad-violin-the-meme-one/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-want-to-be-ninja-9536/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dexter-song-2-46283/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/long-brain-fart-60967/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-my-god-bro-oh-hell-nah-man-42939/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/snore-mimimimimimi-76562/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/lego-breaking-57805/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/jayden-waar-is-mijn-kip-1722/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-spaghetti-58020/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-mini-16793/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/regilio-spaghetti-kort-31781/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-no-no-no-laugh-56694/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hema-loud-af-82528/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ik-ben-turk-60624/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ahhh-ik-krijg-een-stijve-79428/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spongebob-fail-11236/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/tu-tu-tu-du-max-verstappen-18834/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hog-rider-loud-1585/embed/" scrolling="no"></iframe></div>
+</div>
 
-    <div class="credit">Made by Chill Guy Productions</div>
+<div class="credit">Made by Chill Guy Productions</div>
 
-    <script>
-        function menuOnClick() {
-            document.getElementById("menu-bar").classList.toggle("change");
-            document.getElementById("nav").classList.toggle("change");
-            document.getElementById("menu-bg").classList.toggle("change-bg");
-        }
+<script>
+// Menu toggle
+function menuOnClick() {
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
+}
 
-        let coins = parseInt(localStorage.getItem("coins")) || 0;
+// Coins
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+document.getElementById("coins").textContent = coins;
+document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === "visible") {
+        coins = parseInt(localStorage.getItem("coins")) || 0;
         document.getElementById("coins").textContent = coins;
+    }
+});
 
-        document.addEventListener("visibilitychange", function() {
-            if (document.visibilityState === "visible") {
-                let coins = parseInt(localStorage.getItem("coins")) || 0;
-                document.getElementById("coins").textContent = coins;
-            }
-        });
-    </script>
+// Zoekfunctie
+const searchBar = document.getElementById("searchBar");
+const memeGrid = document.getElementById("memeGrid");
+const memes = Array.from(memeGrid.getElementsByClassName("meme-container"));
+
+searchBar.addEventListener("input", () => {
+    const query = searchBar.value.toLowerCase();
+    memes.forEach(meme => {
+        const iframe = meme.querySelector("iframe");
+        const src = iframe.src;
+        // Haal naam uit src
+        const nameMatch = src.match(/instant\/(.+)-\d+\/embed/);
+        const name = nameMatch ? nameMatch[1].toLowerCase() : "";
+        meme.style.display = name.includes(query) ? "inline-block" : "none";
+    });
+});
+</script>
 </body>
 </html>
