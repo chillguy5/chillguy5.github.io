@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chill Guy Games</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+/* Je bestaande CSS hier (kan je gewoon plakken) */
+.coin-counter {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
+    color: #900d27;
+    background-color: #f0aa5e;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+#leaderboard {
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    background-color: #f0aa5e;
+    padding: 10px;
+    border-radius: 5px;
+    color: #900d27;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="coin-counter">Coins: <span id="coins">0</span></div>
+<div id="leaderboard"><h3>Leaderboard</h3></div>
+
+<script>
+// --- Supabase setup ---
+const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
+const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// --- Coin logic ---
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+document.getElementById("coins").textContent = coins;
+
+// Vragen om username
+let username = localStorage.getItem("username");
+if(!username){
+    username = prompt("Voer je naam in voor leaderboard:") || "Speler";
+    localStorage.setItem("username", username);
+}
+
+// Coins uploaden naar Supabase
+async function updateCoinsOnSupabase(){
+    const { data, error } = await supabase
+        .from('leaderboard')
+        .upsert({ username: username, coins: coins }, { onConflict: 'username' });
+    if(error) console.error("Supabase update error:", error);
+    else console.log("Coins geüpdatet:", data);
+    fetchLeaderboard(); // Update leaderboard direct
+}
+
+// Leaderboard ophalen
+async function fetchLeaderboard(){
+    const { data, error } = await supabase
+        .from('leaderboard')
+        .select('*')
+        .order('coins', { ascending: false })
+        .limit(10);
+    if(error) console.error("Supabase fetch error:", error);
+    else displayLeaderboard(data);
+}
+
+// Leaderboard tonen
+function displayLeaderboard(data){
+    const lbDiv = document.getElementById("leaderboard");
+    lbDiv.innerHTML = "<h3>Leaderboard</h3>" + data.map((user,index) => 
+        `${index+1}. ${user.username}: ${user.coins} coins`
+    ).join("<br>");
+}
+
+// --- Daily reward voorbeeld ---
+function claimDailyReward(){
+    coins += 20000;
+    localStorage.setItem("coins", coins);
+    document.getElementById("coins").textContent = coins;
+    updateCoinsOnSupabase();
+    alert("Je hebt 20.000 coins ontvangen!");
+}
+
+// --- Init ---
+window.addEventListener("load", () => {
+    fetchLeaderboard();
+});
+
+// Voor demo: elke 10 seconden leaderboard refreshen
+setInterval(fetchLeaderboard, 10000);
+</script>
+
+<!-- Voorbeeld knop -->
+<button onclick="claimDailyReward()">Daily Reward +20k coins</button>
+
+</body>
+</html>
