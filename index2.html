@@ -426,13 +426,6 @@
     <div class="credit">Deze website is gemaakt door Chill Guy Productions en bestaat al</div>
 
     <script>
-    var loadingScreen = document.querySelector(".loadingScreen");
-
-    window.addEventListener('load', function() {
-    setTimeout(function() {
-        loadingScreen.style.display = 'none';
-    }, 2500); // 2500 milliseconden = 2.5 seconden
-});
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
