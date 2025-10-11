@@ -3,37 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/overig/icon.png">
 <title>Chill Guy Games</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-/* Je bestaande CSS hier (kan je gewoon plakken) */
-.coin-counter {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    font-size: 30px;
-    color: #900d27;
-    background-color: #f0aa5e;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-}
-#leaderboard {
-    position: absolute;
-    top: 100px;
-    right: 30px;
-    background-color: #f0aa5e;
-    padding: 10px;
-    border-radius: 5px;
-    color: #900d27;
-    font-weight: bold;
-}
+/* --- Jouw bestaande CSS behouden --- */
+body { text-align:center; font-family:Arial,sans-serif; background-color:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; margin:0; position:relative; background-image:url('images/overig/achtergrond.png'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed; }
+.coin-counter { position:absolute; top:30px; right:30px; font-size:30px; color:#900d27; background-color:#f0aa5e; padding:10px 20px; border-radius:5px; font-weight:bold; }
+#leaderboard { position:absolute; top:150px; right:30px; background-color:#f0aa5e; padding:10px; border-radius:5px; color:#900d27; font-weight:bold; max-height:400px; overflow-y:auto; text-align:left; }
+/* --- overige CSS van jou kopiëren --- */
 </style>
 </head>
 <body>
 
-<div class="coin-counter">Coins: <span id="coins">0</span></div>
+<div class="loadingScreen">
+  <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
+</div>
+
+<div id="timedate">
+  <div id="date"></div>
+  <div id="time"></div>
+</div>
+
+<p id="countup-site-age"></p>
+
+<div id="menu">
+  <div id="menu-bar" onclick="menuOnClick()">
+    <div id="bar1" class="bar"></div>
+    <div id="bar2" class="bar"></div>
+    <div id="bar3" class="bar"></div>
+  </div>
+  <nav class="nav" id="nav">
+    <ul>
+      <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
+      <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
+      <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+    </ul>
+  </nav> 
+</div>
+<div class="menu-bg" id="menu-bg"></div>
+
+<a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()" id="daily-login-button">
+  daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon">
+</a>
+<div id="daily-timer" style="display:none; position: absolute; top: 100px; right: 30px; font-size: 25px; color: #900d27; background-color: #f0aa5e; padding: 10px 20px; border-radius: 5px; font-weight: bold;"></div>
+
+<a href="javascript:void(0);" class="sound-button" onclick="toggleSound()">
+    <img id="sound-icon" src="images/overig/soundicon.png" alt="Sound" class="sound-icon">
+</a>
+
+<div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+
+<div class="coin-counter">
+  <img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span>
+</div>
+
+<div class="game-container">
+    <a href="gamepalace.html" class="game-link">
+        <img src="images/gameicons/gameicon.png" alt="games" class="game-image">
+    </a>
+    <a href="gamblerpalace.html" class="game-link">
+        <img src="images/gameicons/gamblericon.png" alt="gambler" class="game-image">
+    </a>
+    <a href="soundpalace.html" class="game-link">
+        <img src="images/gameicons/soundpalace.png" alt="sound" class="game-image">
+    </a>
+</div>
+
 <div id="leaderboard"><h3>Leaderboard</h3></div>
+<div class="credit">Deze website is gemaakt door Chill Guy Productions en bestaat al</div>
 
 <script>
 // --- Supabase setup ---
@@ -41,11 +79,11 @@ const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
 const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// --- Coin logic ---
+// --- Coins & Username ---
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
 
-// Vragen om username
+// Username vragen als nog niet ingevuld
 let username = localStorage.getItem("username");
 if(!username){
     username = prompt("Voer je naam in voor leaderboard:") || "Speler";
@@ -58,8 +96,7 @@ async function updateCoinsOnSupabase(){
         .from('leaderboard')
         .upsert({ username: username, coins: coins }, { onConflict: 'username' });
     if(error) console.error("Supabase update error:", error);
-    else console.log("Coins geüpdatet:", data);
-    fetchLeaderboard(); // Update leaderboard direct
+    fetchLeaderboard();
 }
 
 // Leaderboard ophalen
@@ -81,26 +118,78 @@ function displayLeaderboard(data){
     ).join("<br>");
 }
 
-// --- Daily reward voorbeeld ---
+// Daily Reward
 function claimDailyReward(){
+    let dailyButton = document.getElementById("daily-login-button");
+    let dailyTimer = document.getElementById("daily-timer");
+
+    dailyButton.style.display = "none";
+    dailyTimer.style.display = "block";
+
+    localStorage.setItem("lastClaimTime", Date.now());
+
     coins += 20000;
     localStorage.setItem("coins", coins);
     document.getElementById("coins").textContent = coins;
+
     updateCoinsOnSupabase();
-    alert("Je hebt 20.000 coins ontvangen!");
+
+    alert("Gefeliciteerd! Je hebt 20.000 extra coins ontvangen vanwege je daily login!");
+
+    updateDailyTimer();
 }
+
+// --- Daily login timer (jouw bestaande code behouden) ---
+function updateDailyTimer() {
+    let lastClaimTime = localStorage.getItem("lastClaimTime");
+    let now = Date.now();
+    let dailyButton = document.getElementById("daily-login-button");
+    let dailyTimer = document.getElementById("daily-timer");
+
+    if (lastClaimTime) {
+        let timeDiff = now - parseInt(lastClaimTime);
+        let timeLeft = 24 * 60 * 60 * 1000 - timeDiff;
+
+        if (timeLeft > 0) {
+            let hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            dailyButton.style.display = "none";
+            dailyTimer.style.display = "block";
+            dailyTimer.textContent = `Volgende claim: ${hours}u ${minutes}m ${seconds}s`;
+        } else {
+            dailyButton.style.display = "block";
+            dailyTimer.style.display = "none";
+        }
+    } else {
+        dailyButton.style.display = "block";
+        dailyTimer.style.display = "none";
+    }
+}
+document.addEventListener("DOMContentLoaded", function () {
+    updateDailyTimer();
+    setInterval(updateDailyTimer, 1000);
+});
 
 // --- Init ---
 window.addEventListener("load", () => {
     fetchLeaderboard();
+    updateCoinsOnSupabase();
 });
 
-// Voor demo: elke 10 seconden leaderboard refreshen
-setInterval(fetchLeaderboard, 10000);
-</script>
+// Coins lokaal updaten + Supabase
+function addCoins(amount){
+    coins += amount;
+    localStorage.setItem("coins", coins);
+    document.getElementById("coins").textContent = coins;
+    updateCoinsOnSupabase();
+}
 
-<!-- Voorbeeld knop -->
-<button onclick="claimDailyReward()">Daily Reward +20k coins</button>
+// --- Geluid, klok, menu etc behouden zoals in jouw originele code ---
+// Kopieer hier jouw bestaande functies voor geluid, klok, menu, activeTime etc.
+
+</script>
 
 </body>
 </html>
