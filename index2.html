@@ -437,61 +437,6 @@
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
 
-const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
-const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-let username = localStorage.getItem("username");
-if(!username){
-    username = prompt("Voer je naam in voor leaderboard:") || "Speler";
-    localStorage.setItem("username", username);
-}
-
-async function updateCoinsOnSupabase() {
-    let coins = parseInt(localStorage.getItem("coins")) || 0;
-    await supabase
-        .from('leaderboard')
-        .upsert({ username: username, coins: coins }, { onConflict: 'username' });
-    fetchLeaderboard();
-}
-
-async function fetchLeaderboard() {
-    const { data, error } = await supabase
-        .from('leaderboard')
-        .select('*')
-        .order('coins', { ascending: false })
-        .limit(10);
-    if(error){ console.error(error); return; }
-    const lbDiv = document.getElementById("leaderboard");
-    lbDiv.innerHTML = "<h3>Leaderboard</h3>" + data.map((user,i) => 
-        `${i+1}. ${user.username}: ${user.coins} coins`
-    ).join("<br>");
-}
-
-window.addEventListener("load", () => {
-    fetchLeaderboard();
-});
-
-let username = localStorage.getItem("username");
-
-// Als username al bestaat, verberg het inputveld
-if (username) {
-    document.getElementById("username-container").style.display = "none";
-} 
-
-document.getElementById("username-submit").addEventListener("click", () => {
-    const input = document.getElementById("username-input").value.trim();
-    if(input) {
-        username = input;
-        localStorage.setItem("username", username);
-        document.getElementById("username-container").style.display = "none";
-        updateCoinsOnSupabase(); // stuur meteen naar Supabase
-    } else {
-        alert("Voer een geldige naam in!");
-    }
-});
-
-
 function countup() {
     var now = new Date();
     var startDate = new Date(2025, 1, 2, 17, 26, 37); // 2 februari 2025 om 17:26:37
@@ -672,6 +617,63 @@ setInterval(() => {
         localStorage.setItem("activeTime", currentTime);
     }
 }, 5000);
+
+const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
+const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let username = localStorage.getItem("username");
+if(!username){
+    username = prompt("Voer je naam in voor leaderboard:") || "Speler";
+    localStorage.setItem("username", username);
+}
+
+async function updateCoinsOnSupabase() {
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    await supabase
+        .from('leaderboard')
+        .upsert({ username: username, coins: coins }, { onConflict: 'username' });
+    fetchLeaderboard();
+}
+
+async function fetchLeaderboard() {
+    const { data, error } = await supabase
+        .from('leaderboard')
+        .select('*')
+        .order('coins', { ascending: false })
+        .limit(10);
+    if(error){ console.error(error); return; }
+    const lbDiv = document.getElementById("leaderboard");
+    lbDiv.innerHTML = "<h3>Leaderboard</h3>" + data.map((user,i) => 
+        `${i+1}. ${user.username}: ${user.coins} coins`
+    ).join("<br>");
+}
+
+window.addEventListener("load", () => {
+    fetchLeaderboard();
+});
+
+let username = localStorage.getItem("username");
+
+// Als username al bestaat, verberg het inputveld
+if (username) {
+    document.getElementById("username-container").style.display = "none";
+} 
+
+document.getElementById("username-submit").addEventListener("click", () => {
+    const input = document.getElementById("username-input").value.trim();
+    if(input) {
+        username = input;
+        localStorage.setItem("username", username);
+        document.getElementById("username-container").style.display = "none";
+        updateCoinsOnSupabase(); // stuur meteen naar Supabase
+    } else {
+        alert("Voer een geldige naam in!");
+    }
+});
+
+
+
     
         window.onload = initializeSound;
     </script>
