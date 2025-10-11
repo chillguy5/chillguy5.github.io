@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
@@ -309,51 +310,47 @@
   transform: translate(-60%,-30%);
 }
 
-/* Leaderboard styling */
-#leaderboard {
+/* LEADERBOARD STIJL */
+.leaderboard {
     position: absolute;
-    top: 150px; 
-    right: 30px;
-    width: 250px;
-    background-color: rgba(240, 170, 94, 0.9); /* licht oranje semi-transparant */
-    padding: 15px;
-    border-radius: 10px;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(240, 170, 94, 0.95);
+    border-radius: 15px;
+    padding: 15px 30px;
     color: #900d27;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    text-align: left;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-#leaderboard h3 {
-    margin-top: 0;
+.leaderboard h2 {
     margin-bottom: 10px;
-    text-align: center;
-    font-size: 20px;
-}
-
-#leaderboard br {
-    margin: 2px 0;
-}
-
-#leaderboard p {
-    margin: 2px 0;
-}
-
-#username-container input {
-    width: 150px;
+    font-size: 24px;
     font-weight: bold;
-    text-align: center;
 }
 
-#username-container button:hover {
-    transform: scale(1.05);
-    cursor: pointer;
+.leaderboard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.leaderboard li {
+    font-size: 18px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(144, 13, 39, 0.2);
 }
 
     </style>
 </head>
 <body>
+
+    <div class="loadingScreen">
+              <h1><img src="images/overig/loading.gif" alt="disc" /></h1>
+            </div>
             
     <div id="timedate">
         <div id="date"></div>
@@ -396,17 +393,25 @@
     </a>
 
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+
+    <!-- === USERNAME EN LEADERBOARD === -->
+<div id="username-section" style="margin-top: 20px;">
+    <input type="text" id="username-input" placeholder="Voer je username in" 
+           style="padding:10px; border-radius:10px; border:none; font-size:20px;">
+    <button onclick="saveUsername()" 
+            style="padding:10px 20px; background-color:#f0aa5e; color:#900d27; 
+                   border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
+        Opslaan
+    </button>
+</div>
+
+<div id="leaderboard" class="leaderboard">
+    <h2>🏆 Leaderboard 🏆</h2>
+    <ul id="leaderboard-list"></ul>
+</div>
+
     
     <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <div id="leaderboard" style="position:absolute; top:150px; right:30px; background-color:#f0aa5e; padding:10px; border-radius:5px; color:#900d27; font-weight:bold;"></div>
-
-    <div id="username-container" style="position:absolute; top:100px; right:30px; text-align:center;">
-    <input type="text" id="username-input" placeholder="Voer je naam in" style="padding:5px; border-radius:5px; border:1px solid #900d27;">
-    <button id="username-submit" style="padding:5px 10px; border-radius:5px; border:none; background-color:#900d27; color:#f0aa5e; font-weight:bold;">OK</button>
-</div>
 
     <div class="game-container">
         <a href="gamepalace.html" class="game-link">
@@ -422,6 +427,13 @@
     <div class="credit">Deze website is gemaakt door Chill Guy Productions en bestaat al</div>
 
     <script>
+    var loadingScreen = document.querySelector(".loadingScreen");
+
+    window.addEventListener('load', function() {
+    setTimeout(function() {
+        loadingScreen.style.display = 'none';
+    }, 2500); // 2500 milliseconden = 2.5 seconden
+});
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
@@ -606,65 +618,76 @@ setInterval(() => {
         localStorage.setItem("activeTime", currentTime);
     }
 }, 5000);
-
-const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
-const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-let username = localStorage.getItem("username");
-if(!username){
-    username = prompt("Voer je naam in voor leaderboard:") || "Speler";
-    localStorage.setItem("username", username);
-}
-
-async function updateCoinsOnSupabase() {
-    let coins = parseInt(localStorage.getItem("coins")) || 0;
-    await supabase
-        .from('leaderboard')
-        .upsert({ username: username, coins: coins }, { onConflict: 'username' });
-    fetchLeaderboard();
-}
-
-async function fetchLeaderboard() {
-    const { data, error } = await supabase
-        .from('leaderboard')
-        .select('*')
-        .order('coins', { ascending: false })
-        .limit(10);
-    if(error){ console.error(error); return; }
-    const lbDiv = document.getElementById("leaderboard");
-    lbDiv.innerHTML = "<h3>Leaderboard</h3>" + data.map((user,i) => 
-        `${i+1}. ${user.username}: ${user.coins} coins`
-    ).join("<br>");
-}
-
-window.addEventListener("load", () => {
-    fetchLeaderboard();
-});
-
-let username = localStorage.getItem("username");
-
-// Als username al bestaat, verberg het inputveld
-if (username) {
-    document.getElementById("username-container").style.display = "none";
-} 
-
-document.getElementById("username-submit").addEventListener("click", () => {
-    const input = document.getElementById("username-input").value.trim();
-    if(input) {
-        username = input;
-        localStorage.setItem("username", username);
-        document.getElementById("username-container").style.display = "none";
-        updateCoinsOnSupabase(); // stuur meteen naar Supabase
-    } else {
-        alert("Voer een geldige naam in!");
-    }
-});
-
-
-
     
         window.onload = initializeSound;
+
+        // === SUPABASE INSTELLINGEN ===
+const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
+
+const { createClient } = window.supabase;
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// === USERNAME OPSLAAN ===
+function saveUsername() {
+    const usernameInput = document.getElementById("username-input");
+    const username = usernameInput.value.trim();
+
+    if (!username) {
+        alert("Vul een geldige username in!");
+        return;
+    }
+
+    localStorage.setItem("username", username);
+    document.getElementById("username-section").style.display = "none";
+
+    uploadUserData(username);
+    loadLeaderboard();
+}
+
+// === GEBRUIKER UPLOADEN ===
+async function uploadUserData(username) {
+    const coins = parseInt(localStorage.getItem("coins")) || 0;
+    const { data, error } = await supabase
+        .from("players")
+        .upsert([{ username, coins }]);
+
+    if (error) console.error("Upload fout:", error);
+    else console.log("Gebruiker opgeslagen!");
+}
+
+// === LEADERBOARD LADEN ===
+async function loadLeaderboard() {
+    const { data, error } = await supabase
+        .from("players")
+        .select("*")
+        .order("coins", { ascending: false })
+        .limit(10);
+
+    if (error) {
+        console.error("Fout bij laden leaderboard:", error);
+        return;
+    }
+
+    const list = document.getElementById("leaderboard-list");
+    list.innerHTML = "";
+    data.forEach((player, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${index + 1}. ${player.username} — 💰 ${player.coins}`;
+        list.appendChild(li);
+    });
+}
+
+// === BIJ LADEN ===
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    if (username) {
+        document.getElementById("username-section").style.display = "none";
+        uploadUserData(username);
+    }
+    loadLeaderboard();
+});
+
     </script>
     
 </body>
