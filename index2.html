@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
@@ -394,20 +394,16 @@
 
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
 
-    <!-- === USERNAME EN LEADERBOARD === -->
-<div id="username-section" style="margin-top: 20px;">
-    <input type="text" id="username-input" placeholder="Voer je username in" 
-           style="padding:10px; border-radius:10px; border:none; font-size:20px;">
-    <button onclick="saveUsername()" 
-            style="padding:10px 20px; background-color:#f0aa5e; color:#900d27; 
-                   border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
-        Opslaan
-    </button>
+      <!-- Leaderboard container -->
+<div id="leaderboard">
+    <h3>Leaderboard</h3>
+    <ul id="leaderboard-list"></ul>
 </div>
 
-<div id="leaderboard" class="leaderboard">
-    <h2>🏆 Leaderboard 🏆</h2>
-    <ul id="leaderboard-list"></ul>
+<!-- Username input -->
+<div id="username-container">
+    <input type="text" id="username-input" placeholder="Voer je naam in">
+    <button id="username-submit">OK</button>
 </div>
 
     
@@ -621,77 +617,76 @@ setInterval(() => {
     
         window.onload = initializeSound;
 
-       // === SUPABASE INSTELLINGEN ===
-const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
+    // === SUPABASE INSTELLINGEN ===
+    const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
 
-const { createClient } = window.supabase;
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// === USERNAME OPSLAAN ===
-function saveUsername() {
-    const usernameInput = document.getElementById("username-input");
-    const username = usernameInput.value.trim();
+    // === Coins ophalen uit localStorage ===
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    document.getElementById("coins").textContent = coins;
 
-    if (!username) {
-        alert("Vul een geldige username in!");
-        return;
-    }
+    // === Gebruiker opslaan / updaten ===
+    async function saveUsername() {
+        const usernameInput = document.getElementById("username-input").value.trim();
+        if (!usernameInput) {
+            alert("Voer een geldige naam in!");
+            return;
+        }
 
-    localStorage.setItem("username", username);
-    document.getElementById("username-container").style.display = "none";
-
-    updateUserCoins(username);
-}
-
-// === GEBRUIKER UPDATEN ===
-async function updateUserCoins(username) {
-    const coins = parseInt(localStorage.getItem("coins")) || 0;
-    const { error } = await supabase
-        .from("players")
-        .upsert([{ username, coins }], { onConflict: "username" });
-
-    if (error) console.error("Fout bij opslaan:", error);
-    loadLeaderboard();
-}
-
-// === LEADERBOARD LADEN ===
-async function loadLeaderboard() {
-    const { data, error } = await supabase
-        .from("players")
-        .select("*")
-        .order("coins", { ascending: false })
-        .limit(10);
-
-    if (error) {
-        console.error("Fout bij laden leaderboard:", error);
-        return;
-    }
-
-    const list = document.getElementById("leaderboard-list");
-    list.innerHTML = "";
-
-    data.forEach((player, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${player.username} — 💰 ${player.coins}`;
-        list.appendChild(li);
-    });
-}
-
-// === BIJ LADEN ===
-document.addEventListener("DOMContentLoaded", () => {
-    const username = localStorage.getItem("username");
-    if (username) {
+        localStorage.setItem("username", usernameInput);
         document.getElementById("username-container").style.display = "none";
-        updateUserCoins(username); // Coins direct syncen
+
+        await updateUserCoins(usernameInput);
+        loadLeaderboard();
     }
 
-    loadLeaderboard();
+    async function updateUserCoins(username) {
+        const coins = parseInt(localStorage.getItem("coins")) || 0;
 
-    // Event listener voor username knop
-    document.getElementById("username-submit").addEventListener("click", saveUsername);
-});
+        const { error } = await supabase
+            .from("players") // Zorg dat dit je tabelnaam is
+            .upsert([{ username: username, coins: coins }], { onConflict: "username" });
 
+        if (error) console.error("Fout bij opslaan:", error);
+    }
+
+    // === Leaderboard laden ===
+    async function loadLeaderboard() {
+        const { data, error } = await supabase
+            .from("players")
+            .select("*")
+            .order("coins", { ascending: false })
+            .limit(10);
+
+        if (error) {
+            console.error("Fout bij laden leaderboard:", error);
+            return;
+        }
+
+        const list = document.getElementById("leaderboard-list");
+        list.innerHTML = "";
+
+        data.forEach((player, index) => {
+            const li = document.createElement("li");
+            li.textContent = `${index + 1}. ${player.username} — 💰 ${player.coins}`;
+            list.appendChild(li);
+        });
+    }
+
+    // === Pagina geladen ===
+    document.addEventListener("DOMContentLoaded", () => {
+        const username = localStorage.getItem("username");
+        if (username) {
+            document.getElementById("username-container").style.display = "none";
+            updateUserCoins(username); // Sync coins
+        }
+
+        loadLeaderboard();
+
+        document.getElementById("username-submit").addEventListener("click", saveUsername);
+    });
 
     </script>
     
