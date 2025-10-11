@@ -621,7 +621,7 @@ setInterval(() => {
     
         window.onload = initializeSound;
 
-        // === SUPABASE INSTELLINGEN ===
+       // === SUPABASE INSTELLINGEN ===
 const SUPABASE_URL = "https://iidfbkyehjlqzwlasevt.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGZia3llaGpscXp3bGFzZXZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxNzcyMTksImV4cCI6MjA3NTc1MzIxOX0.JnU1rDg4WCMD4y0XOmPZ-GVqNaf1fOJA1EwTXTr6mtU";
 
@@ -639,21 +639,20 @@ function saveUsername() {
     }
 
     localStorage.setItem("username", username);
-    document.getElementById("username-section").style.display = "none";
+    document.getElementById("username-container").style.display = "none";
 
-    uploadUserData(username);
-    loadLeaderboard();
+    updateUserCoins(username);
 }
 
-// === GEBRUIKER UPLOADEN ===
-async function uploadUserData(username) {
+// === GEBRUIKER UPDATEN ===
+async function updateUserCoins(username) {
     const coins = parseInt(localStorage.getItem("coins")) || 0;
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("players")
-        .upsert([{ username, coins }]);
+        .upsert([{ username, coins }], { onConflict: "username" });
 
-    if (error) console.error("Upload fout:", error);
-    else console.log("Gebruiker opgeslagen!");
+    if (error) console.error("Fout bij opslaan:", error);
+    loadLeaderboard();
 }
 
 // === LEADERBOARD LADEN ===
@@ -671,6 +670,7 @@ async function loadLeaderboard() {
 
     const list = document.getElementById("leaderboard-list");
     list.innerHTML = "";
+
     data.forEach((player, index) => {
         const li = document.createElement("li");
         li.textContent = `${index + 1}. ${player.username} — 💰 ${player.coins}`;
@@ -682,11 +682,16 @@ async function loadLeaderboard() {
 document.addEventListener("DOMContentLoaded", () => {
     const username = localStorage.getItem("username");
     if (username) {
-        document.getElementById("username-section").style.display = "none";
-        uploadUserData(username);
+        document.getElementById("username-container").style.display = "none";
+        updateUserCoins(username); // Coins direct syncen
     }
+
     loadLeaderboard();
+
+    // Event listener voor username knop
+    document.getElementById("username-submit").addEventListener("click", saveUsername);
 });
+
 
     </script>
     
