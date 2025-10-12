@@ -332,64 +332,6 @@
     transform: translateX(-50%) scale(1.1); /* Hover-schaal behouden */
 }
 
-/* --- Username sectie --- */
-#username-container {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #f0aa5e;
-  padding: 20px 30px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-#username-input {
-  font-size: 24px;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  width: 250px;
-  text-align: center;
-}
-
-#username-button {
-  font-size: 24px;
-  color: #900d27;
-  background-color: #f8f8d7;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  font-weight: bold;
-}
-
-#username-button:hover {
-  transform: scale(1.1);
-}
-
-#welcome-message {
-    position: absolute;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    top: 45%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30px;
-    color: #900d27;
-    background-color: #f0aa5e;
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-weight: bold;
-    display: inline-block;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
     </style>
 </head>
 <body>
@@ -444,17 +386,6 @@
 
 
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
-
-    <!-- Username-invoer -->
-<div id="username-container">
-  <input type="text" id="username-input" placeholder="Voer je naam in..." maxlength="20">
-  <button id="username-button" onclick="saveUsername()">OK</button>
-</div>
-
-<!-- Welkomstbericht -->
-<div id="welcome-message" class="welcome-message">
-  <h1>Welcome, <span id="username-display"></span>!</h1>
-</div>
 
     
     <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></div>
@@ -687,38 +618,6 @@ function clickOneTimeButton() {
     document.getElementById("coins").textContent = coins;
 
     alert("Gefeliciteerd! Je hebt 100.000.000 extra coins ontvangen!");
-}
-
-// ---- Gebruikersnaam-systeem ----
-document.addEventListener("DOMContentLoaded", function () {
-  let savedName = localStorage.getItem("username");
-  let usernameContainer = document.getElementById("username-container");
-  let welcomeMessage = document.getElementById("welcome-message");
-  let usernameDisplay = document.getElementById("username-display");
-
-  if (savedName) {
-    // Als er al een naam is opgeslagen
-    usernameContainer.style.display = "none";
-    welcomeMessage.style.display = "block";
-    usernameDisplay.textContent = savedName;
-  } else {
-    // Als er nog geen naam is
-    usernameContainer.style.display = "block";
-    welcomeMessage.style.display = "none";
-  }
-});
-
-function saveUsername() {
-  let input = document.getElementById("username-input");
-  let name = input.value.trim();
-  if (name.length > 0) {
-    localStorage.setItem("username", name);
-    document.getElementById("username-container").style.display = "none";
-    document.getElementById("welcome-message").style.display = "block";
-    document.getElementById("username-display").textContent = name;
-  } else {
-    alert("Voer eerst een naam in!");
-  }
 }
 
     </script>
