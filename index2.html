@@ -332,35 +332,42 @@
     transform: translateX(-50%) scale(1.1); /* Hover-schaal behouden */
 }
 
-/* Welkom-sectie (compact) */
+/* Welkom-sectie (compact en strakker) */
 #welcome-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: rgba(240, 170, 94, 0.9);
-  padding: 20px 30px;
-  border-radius: 15px;
+  background-color: rgba(240, 170, 94, 0.95);
+  padding: 10px 20px;       /* veel minder padding */
+  border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.25);
   color: #900d27;
   font-family: 'Segoe UI', Arial, sans-serif;
   z-index: 10;
 }
 
+/* H3 en H2 margin resetten */
+#name-form h3, 
+#welcome-message {
+  margin: 0;               /* geen extra ruimte */
+  padding: 0;
+}
+
 #name-form h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-bottom: 5px;      /* kleine ruimte onder titel */
 }
 
 #username-input {
   font-size: 16px;
-  padding: 6px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
   border: none;
-  width: 160px;
+  width: 150px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 #name-form button {
@@ -369,7 +376,7 @@
   color: #f8f8d7;
   border: none;
   border-radius: 6px;
-  padding: 6px 14px;
+  padding: 4px 12px;
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -380,11 +387,12 @@
 }
 
 #welcome-message {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  margin-top: 5px;          /* kleine ruimte boven tekst */
+  margin-bottom: 5px;       /* kleine ruimte onder tekst */
 }
-
 
     </style>
 </head>
