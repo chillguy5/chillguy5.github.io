@@ -309,76 +309,88 @@
   transform: translate(-60%,-30%);
 }
 
-h2 {
-  margin-bottom: 20px;
-}
+  /* ---- styling van het popup-wiel ---- */
+    #wheel-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
 
-.wheel-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto 20px;
-}
+    #wheel {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 6px solid #f8f8d7;
+      overflow: hidden;
+      transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      position: relative;
+      background: #222;
+    }
 
-#wheel {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 5px solid #333;
-  position: relative;
-  transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
-  overflow: hidden;
-}
+    .segment {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 50%;
+      left: 50%;
+      transform-origin: 0% 0%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-.segment {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  top: 50%;
-  left: 50%;
-  transform-origin: 0% 0%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+    .pointer {
+      position: absolute;
+      top: calc(50% - 170px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 25px solid red;
+      z-index: 2;
+    }
 
-.pointer {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 25px solid red;
-}
+    #spin-btn {
+      background: #f0aa5e;
+      color: #900d27;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+    }
 
-button {
-  background: #4caf50;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
+    #result {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #f8f8d7;
+    }
 
-button:disabled {
-  background: gray;
-  cursor: not-allowed;
-}
-
-#result {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
+    #close-wheel {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: #f0aa5e;
+      color: #900d27;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: bold;
+    }
     </style>
 </head>
 <body>
@@ -411,10 +423,11 @@ button:disabled {
           
           <div class="menu-bg" id="menu-bg"></div>
 
-          <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()" id="daily-login-button">
-            daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon">
-        </a>
-        <div id="daily-timer" style="display:none; position: absolute; top: 100px; right: 30px; font-size: 25px; color: #900d27; background-color: #f0aa5e; padding: 10px 20px; border-radius: 5px; font-weight: bold;"></div>
+          <a href="javascript:void(0);" class="daily-login-button" onclick="openWheelPopup()" id="daily-login-button">
+    daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon" />
+  </a>
+  <div id="daily-timer" style="display:none; position:absolute; top:100px; right:30px; font-size:25px; color:#900d27; background-color:#f0aa5e; padding:10px 20px; border-radius:5px; font-weight:bold;"></div>
+
 
 
     <!-- Geluidspeler -->
@@ -430,17 +443,6 @@ button:disabled {
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
     
     <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></div>
-
-
-    <h2>🎡 Draai het Gokwiel!</h2>
-
-    <div class="wheel-container">
-      <div id="wheel"></div>
-      <div class="pointer"></div>
-    </div>
-
-    <button id="spin-btn">Draai het wiel</button>
-    <div id="result"></div>
 
     <div class="game-container">
         <a href="gamepalace.html" class="game-link">
@@ -650,71 +652,79 @@ setInterval(() => {
     
         window.onload = initializeSound;
 
-const wheel = document.getElementById("wheel");
-const spinBtn = document.getElementById("spin-btn");
-const resultEl = document.getElementById("result");
+        // --- gokwiel setup ---
+    const wheel = document.getElementById("wheel");
+    const spinBtn = document.getElementById("spin-btn");
+    const resultEl = document.getElementById("result");
 
-const prizes = [
-  { label: "0€", amount: 0, size: 80 },
-  { label: "1€", amount: 1, size: 60 },
-  { label: "5€", amount: 5, size: 40 },
-  { label: "10€", amount: 10, size: 25 },
-  { label: "25€", amount: 25, size: 15 },
-  { label: "100€", amount: 100, size: 5 }
-];
+    const prizes = [
+      { label: "0", amount: 0, size: 80 },
+      { label: "100", amount: 100, size: 60 },
+      { label: "500", amount: 500, size: 40 },
+      { label: "1000", amount: 1000, size: 25 },
+      { label: "2500", amount: 2500, size: 15 },
+      { label: "10000", amount: 10000, size: 5 },
+    ];
 
-const totalSize = prizes.reduce((a, p) => a + p.size, 0);
-const segmentAngle = 360 / prizes.length;
+    const totalSize = prizes.reduce((a, p) => a + p.size, 0);
+    const segmentAngle = 360 / prizes.length;
 
-// Maak visuele segmenten
-prizes.forEach((p, i) => {
-  const segment = document.createElement("div");
-  segment.classList.add("segment");
-  segment.style.backgroundColor = i % 2 === 0 ? "#f59e0b" : "#10b981";
-  segment.style.transform = `rotate(${i * segmentAngle}deg) skewY(-60deg)`;
-  segment.innerHTML = `<span style="transform: rotate(90deg);">${p.label}</span>`;
-  wheel.appendChild(segment);
-});
+    prizes.forEach((p, i) => {
+      const segment = document.createElement("div");
+      segment.classList.add("segment");
+      segment.style.backgroundColor = i % 2 === 0 ? "#f59e0b" : "#10b981";
+      segment.style.transform = `rotate(${i * segmentAngle}deg) skewY(-60deg)`;
+      segment.innerHTML = `<span style="transform: rotate(90deg);">${p.label}€</span>`;
+      wheel.appendChild(segment);
+    });
 
-let spinning = false;
-let rotation = 0;
+    let spinning = false;
+    let rotation = 0;
 
-spinBtn.addEventListener("click", () => {
-  if (spinning) return;
-  spinning = true;
-  resultEl.textContent = "";
+    spinBtn.addEventListener("click", () => {
+      if (spinning) return;
+      spinning = true;
+      resultEl.textContent = "";
 
-  // Kies prijs op basis van gewogen kans
-  const rand = Math.random() * totalSize;
-  let cumulative = 0;
-  let chosen = prizes[0];
+      const rand = Math.random() * totalSize;
+      let cumulative = 0;
+      let chosen = prizes[0];
 
-  for (const prize of prizes) {
-    cumulative += prize.size;
-    if (rand <= cumulative) {
-      chosen = prize;
-      break;
-    }
-  }
+      for (const prize of prizes) {
+        cumulative += prize.size;
+        if (rand <= cumulative) {
+          chosen = prize;
+          break;
+        }
+      }
 
-  const targetIndex = prizes.indexOf(chosen);
-  const extraSpins = 5; // aantal rondjes
-  const finalRotation =
-    rotation + 360 * extraSpins + (360 - targetIndex * segmentAngle - segmentAngle / 2);
+      const targetIndex = prizes.indexOf(chosen);
+      const extraSpins = 5;
+      const finalRotation =
+        rotation +
+        360 * extraSpins +
+        (360 - targetIndex * segmentAngle - segmentAngle / 2);
 
-  rotation = finalRotation % 360;
+      rotation = finalRotation % 360;
+      wheel.style.transform = `rotate(${finalRotation}deg)`;
 
-  wheel.style.transform = `rotate(${finalRotation}deg)`;
+      setTimeout(() => {
+        spinning = false;
+        localStorage.setItem("lastClaimTime", Date.now());
 
-  setTimeout(() => {
-    spinning = false;
-    if (chosen.amount === 0) {
-      resultEl.textContent = "😅 Helaas, je hebt niks gewonnen!";
-    } else {
-      resultEl.textContent = `🎉 Je hebt ${chosen.label} gewonnen! 🎉`;
-    }
-  }, 5000);
-});
+        coins += chosen.amount;
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").textContent = coins;
+
+        if (chosen.amount === 0) {
+          resultEl.textContent = "😅 Helaas, niks gewonnen!";
+        } else {
+          resultEl.textContent = `🎉 Je hebt ${chosen.amount} coins gewonnen! 🎉`;
+        }
+
+        setTimeout(closeWheelPopup, 4000);
+      }, 5000);
+    });
     </script>
     
 </body>
