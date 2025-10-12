@@ -311,13 +311,12 @@
 
 .one-time-button {
     position: absolute;
-    top: 50%;
+    top: 350px; /* Pas dit aan zodat het net onder je titelafbeelding staat */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     font-size: 30px;
     color: #900d27;
     background-color: #f0aa5e;
-    text-decoration: underline transparent;
     padding: 15px 30px;
     border-radius: 10px;
     font-weight: bold;
@@ -327,7 +326,7 @@
 }
 
 .one-time-button:hover {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translateX(-50%) scale(1.1); /* Hover-schaal behouden */
 }
 
     </style>
@@ -596,8 +595,8 @@ setInterval(() => {
 
         // Controleer bij laden of de knop al is geklikt
 document.addEventListener("DOMContentLoaded", function () {
-    let oneTimeClicked1 = localStorage.getItem("oneTimeClicked1");
-    if (oneTimeClicked1 === "true") {
+    let oneTimeClicked2 = localStorage.getItem("oneTimeClicked2");
+    if (oneTimeClicked2 === "true") {
         document.getElementById("one-time-button").style.display = "none";
     }
 });
@@ -605,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Functie die de knop permanent verbergt
 function clickOneTimeButton() {
     document.getElementById("one-time-button").style.display = "none";
-    localStorage.setItem("oneTimeClicked1", "true");
+    localStorage.setItem("oneTimeClicked2", "true");
 
     // Eventueel iets doen bij klikken, zoals coins toevoegen:
     let coins = parseInt(localStorage.getItem("coins")) || 0;
