@@ -486,6 +486,8 @@
     }, 2500); // 2500 milliseconden = 2.5 seconden
 });
 
+localStorage.removeItem("username");
+
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
 
