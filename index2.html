@@ -311,21 +311,23 @@
 
 .one-time-button {
     position: absolute;
-    top: 160px; /* Iets lager dan daily-login-button */
-    right: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 30px;
     color: #900d27;
     background-color: #f0aa5e;
     text-decoration: underline transparent;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 15px 30px;
+    border-radius: 10px;
     font-weight: bold;
     display: inline-block;
     transition: transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .one-time-button:hover {
-    transform: scale(1.1);
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
     </style>
@@ -594,8 +596,8 @@ setInterval(() => {
 
         // Controleer bij laden of de knop al is geklikt
 document.addEventListener("DOMContentLoaded", function () {
-    let oneTimeClicked = localStorage.getItem("oneTimeClicked");
-    if (oneTimeClicked === "true") {
+    let oneTimeClicked1 = localStorage.getItem("oneTimeClicked1");
+    if (oneTimeClicked1 === "true") {
         document.getElementById("one-time-button").style.display = "none";
     }
 });
@@ -603,7 +605,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Functie die de knop permanent verbergt
 function clickOneTimeButton() {
     document.getElementById("one-time-button").style.display = "none";
-    localStorage.setItem("oneTimeClicked", "true");
+    localStorage.setItem("oneTimeClicked1", "true");
 
     // Eventueel iets doen bij klikken, zoals coins toevoegen:
     let coins = parseInt(localStorage.getItem("coins")) || 0;
