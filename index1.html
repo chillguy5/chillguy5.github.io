@@ -415,8 +415,6 @@ function menuOnClick() {
   document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
-localStorage.removeItem("lastClaimTime");
-
 document.addEventListener("DOMContentLoaded", function () {
     updateDailyTimer(); // Timer updaten bij het laden van de pagina
     setInterval(updateDailyTimer, 1000); // Elke seconde updaten
