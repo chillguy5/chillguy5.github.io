@@ -332,6 +332,60 @@
     transform: translateX(-50%) scale(1.1); /* Hover-schaal behouden */
 }
 
+/* Welkom-sectie */
+#welcome-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(240, 170, 94, 0.9);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  color: #900d27;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  z-index: 10;
+}
+
+#name-form h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+#username-input {
+  font-size: 20px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  width: 200px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#name-form button {
+  font-size: 20px;
+  background-color: #900d27;
+  color: #f8f8d7;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#name-form button:hover {
+  transform: scale(1.1);
+  background-color: #b01e3a;
+}
+
+#welcome-message {
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+
     </style>
 </head>
 <body>
@@ -386,6 +440,16 @@
 
 
     <div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+
+    <div id="welcome-container">
+  <div id="name-form">
+    <h2>Vul je naam in:</h2>
+    <input type="text" id="username-input" placeholder="Jouw naam..." maxlength="20">
+    <button onclick="saveName()">Opslaan</button>
+  </div>
+
+  <h1 id="welcome-message"></h1>
+</div>
 
     
     <div class="coin-counter"><img src="images/overig/coin.png" alt="coin" class="coin-icon">Coins: <span id="coins">0</span></div>
@@ -619,6 +683,38 @@ function clickOneTimeButton() {
 
     alert("Gefeliciteerd! Je hebt 100.000.000 extra coins ontvangen!");
 }
+
+// Naam invoer en weergave
+document.addEventListener("DOMContentLoaded", function () {
+  let storedName = localStorage.getItem("username");
+  const form = document.getElementById("name-form");
+  const welcomeMessage = document.getElementById("welcome-message");
+
+  if (storedName) {
+    // Als naam al is ingevuld → toon welkom-bericht
+    form.style.display = "none";
+    welcomeMessage.textContent = "Welkom, " + storedName + "!";
+  } else {
+    // Nog geen naam → toon het invoerveld
+    form.style.display = "block";
+  }
+});
+
+function saveName() {
+  const input = document.getElementById("username-input");
+  const name = input.value.trim();
+
+  if (name === "") {
+    alert("Vul alsjeblieft een geldige naam in!");
+    return;
+  }
+
+  localStorage.setItem("username", name);
+
+  document.getElementById("name-form").style.display = "none";
+  document.getElementById("welcome-message").textContent = "Welkom, " + name + "!";
+}
+
 
     </script>
     
