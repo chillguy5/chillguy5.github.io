@@ -138,7 +138,7 @@
     transform-origin: center;
 }
 
-.daily1-login-button {
+.daily-login-button {
             position: absolute;
             top: 100px;
             right: 30px;
@@ -151,7 +151,7 @@
             font-weight: bold;
 }
 
-    .daily1-login-button:hover {
+    .daily-login-button:hover {
         background-color: #f0aa5e;
         transform: scale(1.1);
     }
@@ -423,10 +423,10 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-          <a href="javascript:void(0);" class="daily1-login-button" onclick="openWheelPopup()" id="daily1-login-button">
+          <a href="javascript:void(0);" class="daily-login-button" onclick="openWheelPopup()" id="daily-login-button">
     daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon" />
   </a>
-  <div id="daily1-timer" style="display:none; position:absolute; top:100px; right:30px; font-size:25px; color:#900d27; background-color:#f0aa5e; padding:10px 20px; border-radius:5px; font-weight:bold;"></div>
+  <div id="daily-timer" style="display:none; position:absolute; top:100px; right:30px; font-size:25px; color:#900d27; background-color:#f0aa5e; padding:10px 20px; border-radius:5px; font-weight:bold;"></div>
 
 
 
@@ -499,16 +499,18 @@ function menuOnClick() {
   document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
+localStorage.removeItem("lastClaimTime");
+
 document.addEventListener("DOMContentLoaded", function () {
-    updateDaily1Timer(); // Timer updaten bij het laden van de pagina
-    setInterval(updateDaily1Timer, 1000); // Elke seconde updaten
+    updateDailyTimer(); // Timer updaten bij het laden van de pagina
+    setInterval(updateDailyTimer, 1000); // Elke seconde updaten
 });
 
-function updateDaily1Timer() {
+function updateDailyTimer() {
     let lastClaimTime = localStorage.getItem("lastClaimTime");
     let now = Date.now();
-    let daily1Button = document.getElementById("daily1-login-button");
-    let daily1Timer = document.getElementById("daily1-timer");
+    let dailyButton = document.getElementById("daily-login-button");
+    let dailyTimer = document.getElementById("daily-timer");
 
     if (lastClaimTime) {
         let timeDiff = now - parseInt(lastClaimTime);
@@ -519,25 +521,25 @@ function updateDaily1Timer() {
             let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
             
-            daily1Button.style.display = "none"; // Verberg de knop
-            daily1Timer.style.display = "block"; // Toon de timer
-            daily1Timer.textContent = `Volgende claim: ${hours}u ${minutes}m ${seconds}s`;
+            dailyButton.style.display = "none"; // Verberg de knop
+            dailyTimer.style.display = "block"; // Toon de timer
+            dailyTimer.textContent = `Volgende claim: ${hours}u ${minutes}m ${seconds}s`;
         } else {
-            daily1Button.style.display = "block"; // Toon de knop
-            daily1Timer.style.display = "none"; // Verberg de timer
+            dailyButton.style.display = "block"; // Toon de knop
+            dailyTimer.style.display = "none"; // Verberg de timer
         }
     } else {
-        daily1Button.style.display = "block"; // Als er nog geen claim is, toon de knop
-        daily1Timer.style.display = "none"; // Verberg de timer
+        dailyButton.style.display = "block"; // Als er nog geen claim is, toon de knop
+        dailyTimer.style.display = "none"; // Verberg de timer
     }
 }
 
-function claimDaily1Reward() {
-    let daily1Button = document.getElementById("daily1-login-button");
-    let daily1Timer = document.getElementById("daily1-timer");
+function claimDailyReward() {
+    let dailyButton = document.getElementById("daily-login-button");
+    let dailyTimer = document.getElementById("daily-timer");
     
-    daily1Button.style.display = "none"; // Verberg de knop
-    daily1Timer.style.display = "block"; // Toon de timer
+    dailyButton.style.display = "none"; // Verberg de knop
+    dailyTimer.style.display = "block"; // Toon de timer
 
     localStorage.setItem("lastClaimTime", Date.now()); // Sla de tijd van de claim op
 
@@ -548,7 +550,7 @@ function claimDaily1Reward() {
     
     alert("Gefeliciteerd! Je hebt 20.000 extra coins ontvangen vanwege je daily login!");
 
-    updateDaily1Timer(); // Start de timer meteen na claimen
+    updateDailyTimer(); // Start de timer meteen na claimen
 }
 
 
