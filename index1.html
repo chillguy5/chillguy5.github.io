@@ -415,6 +415,8 @@ function menuOnClick() {
   document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
+localStorage.removeItem("lastClaimTime");
+
 document.addEventListener("DOMContentLoaded", function () {
     updateDailyTimer(); // Timer updaten bij het laden van de pagina
     setInterval(updateDailyTimer, 1000); // Elke seconde updaten
@@ -458,11 +460,11 @@ function claimDailyReward() {
     localStorage.setItem("lastClaimTime", Date.now()); // Sla de tijd van de claim op
 
     let coins = parseInt(localStorage.getItem("coins")) || 0;
-    coins += 20000; // Voeg 20.000 coins toe als dagelijkse beloning
+    coins += 100000; // Voeg 20.000 coins toe als dagelijkse beloning
     localStorage.setItem("coins", coins);
     document.getElementById("coins").textContent = coins;
     
-    alert("Gefeliciteerd! Je hebt 20.000 extra coins ontvangen vanwege je daily login!");
+    alert("Gefeliciteerd! Je hebt 100.000 extra coins ontvangen vanwege je daily login!");
 
     updateDailyTimer(); // Start de timer meteen na claimen
 }
