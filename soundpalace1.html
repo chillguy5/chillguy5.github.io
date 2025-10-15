@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/overig/icon.png">
+<title>Chill Guy Games</title>
+<style>
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    background-image: url('images/overig/achtergrond.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-y: auto;
+}
+
+        .title {
+            align-items: center;
+            margin-top: 10px;
+            height: 200px;
+            width: 400px;
+            margin-bottom: 5px;
+        }
+
+.coin-counter {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
+    color: #900d27;
+    background-color: #f0aa5e;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.coin-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.credit {
+    margin-top: 40px;
+    font-weight: bold;
+    color: #f8f8d7;
+}
+
+.stats-icon {
+            width: 30px; /* Pas de grootte aan */
+            height: 30px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+                .cart-icon {
+            width: 30px; /* Pas de grootte aan */
+            height: 30px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+
+        .home-icon{
+            width: 40px; /* Pas de grootte aan */
+            height: 40px;
+            margin-left: 0px;
+            vertical-align: middle;
+        }
+
+
+
+#menu { z-index: 2; }
+
+#menu-bar {
+    width: 45px;
+    height: 40px;
+    margin: 30px 0 20px 20px;
+    cursor: pointer;
+}
+
+.bar {
+    height: 5px;
+    width: 100%;
+    background-color: #f8f8d7;
+    display: block;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+#bar1 { transform: translateY(-4px); }
+#bar3 { transform: translateY(4px); }
+
+.nav { transition: 0.3s ease; display: none; }
+.nav ul { padding: 0 22px; }
+.nav li { list-style: none; padding: 12px 0; }
+.nav li a { color: #cd3f2b; font-size: 20px; text-decoration: none; }
+.nav li a:hover { font-weight: bold; }
+
+.menu-bg, #menu { top: 0; left: 0; position: absolute; }
+.menu-bg {
+    z-index: 1;
+    width: 0;
+    height: 0;
+    margin: 30px 0 20px 20px;
+    background: radial-gradient(circle, #f8f8d7, #f8f8d7);
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.change { display: block; }
+.change .bar { background-color: #cd3f2b; }
+.change #bar1 { transform: translateY(4px) rotateZ(-45deg); }
+.change #bar2 { opacity: 0; }
+.change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
+.change-bg { width: 600px; height: 540px; transform: translate(-60%,-30%); }
+
+/* meme grid */
+.meme-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-bottom: 100px;
+}
+
+.meme-container {
+    background-color: rgba(240, 170, 94);
+    padding: 10px 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0);
+    display: inline-block;
+}
+
+.info-box {
+    background: rgba(240, 170, 94);
+    color: #900d27;
+    padding: 20px 30px;
+    border-radius: 15px;
+    max-width: 800px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0);
+    margin: 30px auto;
+    line-height: 1.5;
+}
+
+iframe {
+    border-radius: 12px;
+    border: none;
+}
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: #333;
+  }
+
+  .navigation a {
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+    transition: transform 0.2s;
+  }
+
+  .navigation a:hover {
+    transform: scale(1.2);
+  }
+
+  .arrow-left::before {
+    content: "⬅"; /* grote linker pijl */
+  }
+
+  .arrow-right::before {
+    content: "➡"; /* grote rechter pijl */
+  }
+</style>
+</head>
+<body>
+
+<div><img src="images/overig/naam.png" alt="icon" class="title"></div>
+
+<div class="coin-counter">
+    <img src="images/overig/coin.png" alt="coin" class="coin-icon">
+    Coins: <span id="coins">0</span>
+</div>
+
+<div id="menu">
+    <div id="menu-bar" onclick="menuOnClick()">
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+        <div id="bar3" class="bar"></div>
+    </div>
+    <nav class="nav" id="nav">
+        <ul>
+            <li><a href="index.html">Main menu <img src="images/overig/homeicon.png" class="home-icon"></a></li>
+            <li><a href="store.html">Store <img src="images/overig/storeicon.png" class="cart-icon"></a></li>
+            <li><a href="stats.html">Stats <img src="images/overig/statsicon.png" class="stats-icon"></a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="menu-bg" id="menu-bg"></div>
+
+<div class="meme-grid" id="memeGrid">
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-no-no-no-laugh-56694/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hema-loud-af-82528/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ik-ben-turk-60624/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ahhh-ik-krijg-een-stijve-79428/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spongebob-fail-11236/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/tu-tu-tu-du-max-verstappen-18834/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hog-rider-loud-1585/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-bought-a-property-in-egypt-27252/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/meer-of-minder-marrokanen-26997/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ahh-je-moeder-68498/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/fart/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spiderman-meme-song-37638/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kut-kabouter-80274/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/galaxy-meme-18643/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/godverdomme-albert-53463/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/je-dikke-moeder-10762/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/nederlands-luchtalarm-63711/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hoppatee-eerste-win-55260/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hoenkie-plankie-lang-4328/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/boef-x-eminem-29647/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/frans-bouer-74922/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/royalistiq-intro-earrape-49432/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/100-euro-bol-kadom-63276/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hallo-wat-kost-die-watiermiloen-hier-18267/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/plopper-de-plop-kkr-straal-op-20640/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/water-wil-je-me-vergiften-36340/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kk-luijer-35720/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/pure-winst-joel-beukers-26048/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/homofobic-42723/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/potjandosie-53010/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/pan-bami-39133/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/pieter-post-53629/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/gewoon-boef-27358/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/alaaf-58462/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dutch-anthem-f1-podium-83702/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/new-kids-paul-turbo-dutch-2575/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ok-lets-go-turbopoliep-3946/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dikke-bmw-jongens-klootzak-42593/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/poahhh-63992/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ciao-tutti-58266/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/zes-limburgse-wilco-aan-de-leugendetector-81336/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/alte-dessauer-18780/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dutch-disorder3-65725/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/gratis-rookvrouw-90969/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dutchtuber-omg-44959/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/wil-je-roken-je-mag-niet-roken-32581/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kijk-een-john-deere-trekker-69496/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hoe-laat-ben-je-begonnen-66284/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/helemaal-para-brada-93624/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dyscalculie-53945/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dootch-32375/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dutchnl51-nee-frieda-70512/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/joehoe-bankzitters-kort-36507/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mario-jump/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/formula-1-box-box-27468/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/emotional-damage-meme-74555/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kut-met-peren-62763/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/technoloyia-technologia-tecnologia-84060/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/a-few-moments-later-sponge-bob-sfx-fun-80331/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/asian-meme-huh-49043/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sahur-song-32965/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/he-he-he-ha-clash-royale-deep-fried-59551/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yaaaaaaaay/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/subway-surfers-bass-boosted-43944/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/999-social-credit-siren-82729/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/snickers-52600/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/roblox-oof/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/death-sound-fortnite-13941/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ns-ding-dong/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/alweer-een-winnaar-71428/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/buurman-en-buurman-deuntje-35583/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/running-sound-50715/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/rick-rolled-bwhahahahahaha/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/tik-tok-india-5164/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-am-stupid-leclarc-18268/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/must-be-the-water-f1-44701/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/my-seat-is-full-of-water-92013/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/toto-mad-9476/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/aw-shit-here-go-again-cj-from-gta-sa-97151/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/good-boyyy-70039/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/efteling-carnaval-festival-57047/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/royalistiq-rage-2-yanex-23168/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-my-god-meme-88573/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/indian-under-the-water-68782/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/what-da-dog-doin-35890/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/the-undertaker-bell-30938/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/womp-womp-womp-55094/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/asian-gong-music-80094/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/man-screaming-aaaah-32768/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/romig-74102/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/rehehehe-76246/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kermis-attention-17631/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/crying-goblin-clash-royale-50072/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/whip/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/evolution-mega-knight-36288/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/evo-wizard-83041/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/goblins-clash-royale-14476/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mini-peka-80620/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/golden-knight-clash-royale-73762/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/bowler-clash-royal-13333/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/john-pork-is-calling-moooort-39009/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/please-speed-i-need-this-17200/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/michael-jackson-hee-hee-40277/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kanker-homo-89771/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kk-anker-76088/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/awkward-cricket-74642/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yes-king-you-digging-in-81956/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/biertje-royalistiq-97289/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/royalistiq-intro-69931/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/wide-putin-meme-6467/embed/" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/lumberjack-20774/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/gta-zvuk-97806/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/outro-song-77850/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/instagram-thud-55328/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/error-soundss-25534/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dun-dun-dunnnnnnnn-68584/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/haha-funny-laugh-93061/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/bing-chilling-44511/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/rat-dance-music-93451/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/lightskin-rizz-sin-city-77350/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/windows-xp21-12725/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hello-there-obi-wan-93047/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/bye-bye-lumi-athena-sfx-89756/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/belligol-belligol-belligham-e-ele-93288/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/no-no-wait-wait-15822/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ultra-gay/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hold-up-tiktok-78592/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/joker-shitpost-beatbox-94172/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/awkward-moment-64361/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mission-failed-we-get-em-next-time-6737/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mister-bombastic-bomba-fantastic-5200/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/was-that-the-bite-of-87-91516/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/im-bout-to-end-this-man-caree-/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oooh-shit-a-rat-77090/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-have-the-power-of-god-and-anime-61345/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/dog-laughing-meme-form-tiktok-40641/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/danger-siren-alarm-69457/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/glass-breaking-sound-effect-51129/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/old-church-bell-meme-49205/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/freddy-beatbox-35109/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/kid-screaming-meme-meme-91350/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/crying-black-dude-meme-16477/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/who-invited-this-kid-89795/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/still-dre-dr-dre-63442/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/something-in-my-ass-11495/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ehhhh-eh-eh-eh-29834/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/memes-end-40463/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/plants-vs-zombies-theme-bass-boosted-11755/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/disappear-scream-37255/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/smoke-weeed-everyday-99419/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/oh-hell-nononoo-14389/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/1738-song-25210/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/scary-sound-from-void-memes-56919/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/police-i-swear-to-god-54495/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/bla-bla-ble-ble-blu-blu-24132/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/can-you-revive-me-now-15215/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spongebob-bubble-transition-59932/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/doofenshmirtz-evil-incorporated-jingle-38811/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/pakistan-68999/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/300-black-men-for-only-two-pounds-35125/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/henk-de-foking-potvis-75883/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/big-time-rush-intro-96490/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/stardust-music-sounds-better-with-you-5444/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/chicken-jockey-4768/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/spongebob-bald-89938/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/italian-93775/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/what-what-the-f-16296/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/correct-answer-gameshow/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/metal-gear-solid-alert/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/skibidi-toilet-69886/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/wah-wah-wah-waaaaaaaahhh-39305/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/cooked-dog-meme-74900/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/everyday-im-shuffling-57673/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/lmfao-sorry/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/big-shoe-lmfao-56501/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/english-or-spanish-song-36522/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/pedro-song-85902/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/helicopter-helicopter-parakofer-parakofer-37107/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/jeopardy-theme-song-88152/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/jojo-song-11895/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/crab-rave-34272/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/happy-happy-happy-song-980/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/you-are-my-sunshine-lebron-james-16735/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/nokia-arabic-ringstone-97490/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/battotai-drip-remix-85128/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mr-beast-phonk-meme-95378/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/gigachad-phonk-house-23098/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/labubu-5970/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/labubuuuuuu-25045/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/peppa-pig-haram-85706/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/paardenlullen-96127/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sexen-69-50742/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sexen-v3-90108/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sigma-voice-erm-49979/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sexy-back-22438/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/sexy-and-i-know-it-48272/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/aint-no-party-like-a-diddy-party-94806/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/can-i-put-my-balls-in-your-jaws-42384/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/hitting-that-spot-30934/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yes-king-whos-is-this-25564/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/ah-ah-ah-yes-king-60340/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/yes-king-1000-76647/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/i-put-a-new-forgis-on-the-jeep-81040/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/aldi-32930/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/eerste-piemel-in-mijn-kont-61904/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/doe-gwn-die-priken-weg-66552/embed/" frameborder="0" scrolling="no"></iframe></div>
+    <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mi-bomboclaut-58468/embed/" frameborder="0" scrolling="no"></iframe></div>
+</div>
+
+<div class="navigation">
+  <a href="soundpalace.html" class="arrow-left"></a>
+  <a href="soundpalace2.html" class="arrow-right"></a>
+</div>
+
+<div class="credit">Made by Chill Guy Productions</div>
+
+<script>
+// Menu toggle
+function menuOnClick() {
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
+}
+
+// Coins
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+document.getElementById("coins").textContent = coins;
+document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === "visible") {
+        coins = parseInt(localStorage.getItem("coins")) || 0;
+        document.getElementById("coins").textContent = coins;
+    }
+});
+
+</script>
+</body>
+</html>
