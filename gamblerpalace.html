@@ -225,6 +225,27 @@
             background-color: #f0aa5e;
         }
 
+
+    /* === GEHEIME CODE KNOP === */
+    #secret-button {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        background-color: transparent;
+        border: none;
+        color: transparent;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    #secret-button:hover {
+        background-color: rgba(240, 170, 94, 0.6);
+        color: #900d27;
+    }
+
     </style>
 </head>
 <body>
@@ -268,6 +289,9 @@
     </div>
 
     <div class="credit">Made by Chill Guy Productions</div>
+
+        <button id="secret-button" title="???"></button>
+
 
     <script>
         function menuOnClick() {
@@ -334,6 +358,27 @@ setInterval(() => {
         localStorage.setItem("activeTime", currentTime);
     }
 }, 5000);
+
+        // === GEHEIME CODE FUNCTIE ===
+        document.getElementById("secret-button").addEventListener("click", function() {
+            let code = prompt("Voer geheime code in:");
+            if (!code) return;
+
+            const secretCodes = {
+                "CHILLGUY100": 100,
+                "BONUS500": 500,
+                "MANGOS999": 999
+            };
+
+            if (secretCodes[code]) {
+                coins += secretCodes[code];
+                localStorage.setItem("coins", coins);
+                document.getElementById("coins").textContent = coins;
+                alert(`✅ Code geaccepteerd! Je kreeg ${secretCodes[code]} coins.`);
+            } else {
+                alert("❌ Ongeldige code!");
+            }
+        });
     </script>
     
 </body>
