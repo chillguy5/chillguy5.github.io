@@ -25,12 +25,13 @@ body {
     overflow-y: auto;
 }
 
-.title {
-    align-items: center;
-    height: 300px;
-    width: 600px;
-    margin-bottom: 5px;
-}
+        .title {
+            align-items: center;
+            margin-top: 10px;
+            height: 200px;
+            width: 400px;
+            margin-bottom: 5px;
+        }
 
 .coin-counter {
     position: absolute;
@@ -125,17 +126,6 @@ body {
 .change #bar3 { transform: translateY(-6px) rotateZ(45deg); }
 .change-bg { width: 600px; height: 540px; transform: translate(-60%,-30%); }
 
-/* Search Bar */
-#searchBar {
-    padding: 10px;
-    width: 60%;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin: 20px 0;
-    text-align: center;
-}
-
 /* meme grid */
 .meme-grid {
     display: flex;
@@ -172,6 +162,32 @@ iframe {
     border-radius: 12px;
     border: none;
 }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: #333;
+  }
+
+  .navigation a {
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+    transition: transform 0.2s;
+  }
+
+  .navigation a:hover {
+    transform: scale(1.2);
+  }
+
+  .arrow-left::before {
+    content: "⬅"; /* grote linker pijl */
+  }
+
+  .arrow-right::before {
+    content: "➡"; /* grote rechter pijl */
+  }
 </style>
 </head>
 <body>
@@ -199,19 +215,6 @@ iframe {
 </div>
 
 <div class="menu-bg" id="menu-bg"></div>
-
-<!-- === INFO TEKST === -->
-<div class="info-box">
-    <p>
-Sommige geluiden op de website kunnen er vreemd uitzien of als een zwart vlak verschijnen.  
-Dit komt doordat bepaalde geluiden van de originele bron zijn verwijderd <strong>nadat</strong> ik ze had toegevoegd, 
-omdat ze <strong>ongepast, aanstootgevend of racistisch</strong> bleken te zijn.  
-Helaas zijn deze geluiden <strong>verwijderd</strong>, en kan ik ze tot mijn spijt niet meer terughalen.
-    </p>
-</div>
-
-<!-- Search Bar -->
-<input type="text" id="searchBar" placeholder="Zoek op naam...">
 
 <div class="meme-grid" id="memeGrid">
     <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/to-sacrifice-my-own-life-for-pakistan-78532/embed/" scrolling="no"></iframe></div>
@@ -441,6 +444,11 @@ Helaas zijn deze geluiden <strong>verwijderd</strong>, en kan ik ze tot mijn spi
     <div class="meme-container"><iframe width="110" height="200" src="https://www.myinstants.com/instant/mi-bomboclaut-58468/embed/" frameborder="0" scrolling="no"></iframe></div>
 </div>
 
+<div class="navigation">
+  <a href="soundpalace.html" class="arrow-left"></a>
+  <a href="soundpalace1.html" class="arrow-right"></a>
+</div>
+
 <div class="credit">Made by Chill Guy Productions</div>
 
 <script>
@@ -461,21 +469,6 @@ document.addEventListener("visibilitychange", function() {
     }
 });
 
-const searchBar = document.getElementById("searchBar");
-const memeGrid = document.getElementById("memeGrid");
-const memes = Array.from(memeGrid.getElementsByClassName("meme-container"));
-
-searchBar.addEventListener("input", () => {
-    const query = searchBar.value.toLowerCase().replace(/-/g, ' ').trim(); // vervang streepjes in query ook
-    memes.forEach(meme => {
-        const iframe = meme.querySelector("iframe");
-        const src = iframe.src;
-        // Haal naam uit src en vervang streepjes door spaties
-        const nameMatch = src.match(/instant\/(.+)-\d+\/embed/);
-        const name = nameMatch ? nameMatch[1].toLowerCase().replace(/-/g, ' ') : "";
-        meme.style.display = name.includes(query) ? "inline-block" : "none";
-    });
-});
 </script>
 </body>
 </html>
