@@ -181,7 +181,8 @@ scene("battle", () => {
         { name: "images/italian/trulimero-removebg-preview.png", scale: 0.3 },
         { name: "images/italian/tung_tung_tung-removebg-preview.png", scale: 0.3 },
         { name: "images/italian/un_din_din_dun-removebg-preview.png", scale: 0.3 },
-        { name: "images/italian/Working_on_it-removebg-preview.png", scale: 0.3 }
+        { name: "images/italian/Working_on_it-removebg-preview.png", scale: 0.3 },
+        { name: "images/characters/kelly.png", scale: 0.3 }
     ];
 
     let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";
