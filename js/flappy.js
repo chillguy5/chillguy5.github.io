@@ -85,7 +85,7 @@ scene("game", () => {
         { name: "images/italian/tung_tung_tung-removebg-preview.png", scale: 0.15 },
         { name: "images/italian/un_din_din_dun-removebg-preview.png", scale: 0.15 },
         { name: "images/italian/Working_on_it-removebg-preview.png", scale: 0.15 },
-		{ name: "images/characters/kelly.png", scale: 1.0 }
+		{ name: "images/characters/kelly.png", scale: 0.5 }
     ];
 
 	// Verkrijg de naam van het geselecteerde karakter uit localStorage
