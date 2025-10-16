@@ -210,7 +210,7 @@ loadSprite("player", selectedCharacterName);
 		}
 	
 		// Coins exact gelijkstellen aan score * 10 en optellen bij bestaande coins
-		coins += score * 1000;
+		coins += score * 25000;
 		localStorage.setItem("coins", coins);
 	
 		go("lose", score);
