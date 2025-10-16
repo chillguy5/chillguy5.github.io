@@ -280,12 +280,12 @@
   function addCoins() {
       let coins = localStorage.getItem("coins");
       coins = coins ? parseInt(coins) : 0;
-      coins += 1000;
+      coins += 50000;
       localStorage.setItem("coins", coins);
       updateCoinDisplay(); // Update de weergave
   }
 
-  setInterval(addCoins, 1000);
+  setInterval(addCoins, 50000);
   updateCoinDisplay(); // Update direct bij paginalaad
 
   function menuOnClick() {
