@@ -619,7 +619,7 @@ function animate(timestamp) {
           counterDOM.innerHTML = currentLane;
     
           // Verwijder coins afhankelijk van het aantal lanes
-          coins -= 100;
+          coins -= 20000;
           coinsDOM.innerHTML = "Coins: " + coins; // Update de coins weergave
           // Sla de bijgewerkte coins op in localStorage
           localStorage.setItem("coins", coins);
