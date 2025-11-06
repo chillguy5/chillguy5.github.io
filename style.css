@@ -1,0 +1,690 @@
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --cylinder-scale: 1;
+}
+
+body {
+    background-color: #1a1814;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url("img/dust.png");
+    color: #d4b483;
+    font-family: "Rye", cursive;
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    transform-origin: top;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Beer stain effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(212, 180, 131, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(212, 180, 131, 0.08) 0%, transparent 25%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Game Container */
+#game-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+}
+
+#message {
+    font-size: 32px;
+    color: #d4b483;
+    text-align: center;
+    min-height: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+#counter {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    color: #d4b483;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Cylinder Styles */
+.cylinder-wrapper {
+    position: relative;
+    transform-origin: center center;
+    transform: scale(var(--cylinder-scale)) rotate(0deg);
+    transition: transform 0.5s cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+#cylinder {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+/* New - Separate background element */
+#cylinder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/cylinder.svg') center center no-repeat;
+    background-size: 100% 100%;
+    filter: brightness(0) saturate(100%) invert(80%) sepia(32%) saturate(1000%) hue-rotate(360deg) brightness(103%) contrast(103%);
+    z-index: -1;  /* Place behind chambers */
+}
+
+/* Center Pin - place above background but below chambers */
+#cylinder::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: #1a1814;;
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 5px rgba(0, 0, 0, 0.5),
+        0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+/* Chamber Styles */
+.chamber {
+    position: relative;
+    overflow: hidden;
+    background-color: #1a1814;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.chamber::after {
+    content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: #1a1814;;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.chamber:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
+
+.chamber.unknown::after {
+    opacity: 1;
+}
+
+.chamber.final-bullet::after {
+    transition: all 0.1s ease;
+    content: "💀";
+    color: #ff0000;
+}
+
+.chamber.final-bullet {
+    background-color: rgba(139, 0, 0, 0.2);
+    box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.chamber.final-bullet:hover {
+    background-color: rgba(139, 0, 0, 0.3);
+}
+
+/* Chamber Positions */
+.chamber.one { top: 46px; left: 79px; }
+.chamber.two { top: 75px; left: 79px; }
+.chamber.three { top: 54px; left: 165px; }
+.chamber.four { top: -136px; left: 250px; }
+.chamber.five { top: -165px; left: 250px; }
+.chamber.six { top: 67px; left: 165px; }
+
+/* Bullet Styles */
+.bullet {
+    background: #d4b483;
+    opacity: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.bullet.loaded {
+    opacity: 1;
+    transform: scale(0.8);
+}
+
+.bullet.unknown {
+    opacity: 1;
+}
+
+.bullet .ring {
+    background-color: #b39363;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+/* Button Styles */
+.game-button {
+    padding: 15px 40px;
+    font-size: 24px;
+    font-family: "Rye", cursive;
+    background: linear-gradient(45deg, #2c1810, #3c2820);
+    color: #d4b483;
+    border: 2px solid #d4b483;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    position: absolute;
+    bottom: -10%;
+    z-index: 5;
+    box-shadow: 0 0 15px rgba(212, 180, 131, 0.3);
+    overflow: hidden;
+}
+
+.game-button:hover {
+    background-color: #3c2820;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.game-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+#spin-button {
+    animation: pulse 2s infinite;
+}
+
+#fire-button {
+    background: linear-gradient(45deg, #4a1810, #3c2820);
+    animation: danger-pulse 2s infinite;
+}
+
+/* Game Over Styles */
+.game-over-text {
+    font-size: 64px;
+    color: #e7e3db;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 1s ease-in;
+    visibility: hidden;
+}
+
+.reset-button {
+    padding: 20px 50px;
+    font-size: 28px;
+    font-family: "Rye", cursive;
+    background: linear-gradient(45deg, #1a1814, #2c1810);
+    color: #d4b483;
+    border: 2px solid #d4b483;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    visibility: hidden;
+}
+
+.reset-button:hover {
+    background: linear-gradient(45deg, #2c1810, #3c2820);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.reset-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Overlay Styles */
+#red-overlay {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#red-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(139, 0, 0, 0.8) 0%,
+            rgba(139, 0, 0, 0.6) 40%,
+            rgba(139, 0, 0, 0.4) 60%,
+            rgba(139, 0, 0, 0.2) 80%,
+            rgba(139, 0, 0, 0) 100%);
+    transform: translateY(-100%);
+}
+
+#red-overlay.show {
+    top: 0;
+    pointer-events: all;
+    transition: top 0.3s ease-in;
+}
+
+#red-overlay.show::before {
+    transform: translateY(0);
+    transition: transform 1s ease-in;
+}
+
+#red-overlay.show::after {
+    transform: translateY(0);
+    transition: transform 1.5s ease-in;
+}
+
+#red-overlay.show .game-over-text {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+#red-overlay.show .reset-button {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+#blood-splatter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;  /* Below the reset button but above other elements */
+}
+
+#blood-splatter-container img {
+    position: fixed;
+    z-index: 999;
+}
+
+/* Heartbeat Effect */
+.heartbeat-container {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.heartbeat-pulse {
+    position: fixed;
+    top: 0;
+    width: 180px;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.heartbeat-pulse.active {
+    opacity: 1;
+    animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+.heartbeat-pulse.left {
+    left: 0;
+    transform-origin: left center;
+    background: 
+        radial-gradient(circle at left, rgba(139, 0, 0, 0.08) 0%, rgba(139, 0, 0, 0.06) 20%, rgba(139, 0, 0, 0.04) 40%, rgba(139, 0, 0, 0.02) 60%, rgba(139, 0, 0, 0) 100%),
+        linear-gradient(to right, rgba(139, 0, 0, 0.08) 0%, rgba(139, 0, 0, 0.06) 40%, rgba(139, 0, 0, 0.03) 70%, rgba(139, 0, 0, 0) 100%),
+        radial-gradient(circle farthest-side at left, rgba(139, 0, 0, 0.04) 0%, transparent 100%);
+    mask-image: linear-gradient(to right, black 0%, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 60%, transparent 100%);
+}
+
+.heartbeat-pulse.right {
+    right: 0;
+    transform-origin: right center;
+    background: 
+        radial-gradient(circle at right, rgba(139, 0, 0, 0.08) 0%, rgba(139, 0, 0, 0.06) 20%, rgba(139, 0, 0, 0.04) 40%, rgba(139, 0, 0, 0.02) 60%, rgba(139, 0, 0, 0) 100%),
+        linear-gradient(to left, rgba(139, 0, 0, 0.08) 0%, rgba(139, 0, 0, 0.06) 40%, rgba(139, 0, 0, 0.03) 70%, rgba(139, 0, 0, 0) 100%),
+        radial-gradient(circle farthest-side at right, rgba(139, 0, 0, 0.04) 0%, transparent 100%);
+    mask-image: linear-gradient(to left, black 0%, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 0%, black 60%, transparent 100%);
+}
+
+/* Goose Button Styles */
+.goose-button {
+    padding: 8px 20px;
+    font-size: 18px;
+    font-family: "Rye", cursive;
+    background: #ffc107;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+    margin-top: 15px;
+    min-width: 200px;
+}
+
+.goose-button .goose-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.goose-button .goose-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.goose-button .arrow-icon {
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    border-right: 2px solid #000;
+    border-top: 2px solid #000;
+    transform: rotate(45deg);
+}
+
+.goose-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #ffcd38;
+}
+
+.goose-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Show the button when reset button is visible */
+#red-overlay.show .goose-button {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition: all 0.3s ease 0.5s;
+}
+
+
+
+
+/* Animation Keyframes */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(212, 180, 131, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(212, 180, 131, 0.5);
+    }
+}
+
+@keyframes danger-pulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(212, 180, 131, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+        transform: scale(1.02);
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes spin {
+    from { transform: scale(var(--cylinder-scale)) rotate(0deg); }
+    to { transform: scale(var(--cylinder-scale)) rotate(1440deg); }
+}
+
+@keyframes rotate-chamber {
+    from { transform: scale(var(--cylinder-scale)) rotate(0deg); }
+    to { transform: scale(var(--cylinder-scale)) rotate(60deg); }
+}
+
+@keyframes bang {
+    0% {
+        transform: scale(var(--cylinder-scale)) rotate(0deg);
+        filter: brightness(1);
+    }
+    25% {
+        transform: scale(var(--cylinder-scale)) rotate(-5deg);
+        filter: brightness(2);
+    }
+    50% {
+        transform: scale(var(--cylinder-scale)) rotate(5deg);
+        filter: brightness(1.5);
+    }
+    75% {
+        transform: scale(var(--cylinder-scale)) rotate(-2deg);
+        filter: brightness(1.2);
+    }
+    100% {
+        transform: scale(var(--cylinder-scale)) rotate(0deg);
+        filter: brightness(1);
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scaleX(1);
+        filter: brightness(1);
+    }
+    15% {
+        transform: scaleX(1.15);
+        filter: brightness(1.05) blur(1px);
+    }
+    30% {
+        transform: scaleX(1);
+        filter: brightness(1);
+    }
+    45% {
+        transform: scaleX(1.1);
+        filter: brightness(1.03) blur(0.5px);
+    }
+    60% {
+        transform: scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Animation Classes */
+.spinning {
+    animation: spin 1.68s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+}
+
+.rotating {
+    animation: rotate-chamber 0.5s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+}
+
+.game-over {
+    animation: bang 0.3s ease-out;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    #game-container {
+        margin-top: 40px;
+    }
+
+    body {
+        transform: scale(1);
+        justify-content: flex-start;
+    }
+
+    .goose-button {
+        font-size: 16px;
+        padding: 6px 16px;
+        min-width: 180px;
+    }
+    
+    .goose-button .goose-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .goose-button .arrow-icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    #game-container {
+        margin-top: 60px;
+    }
+    body {
+        transform: scale(1);
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    :root {
+        --cylinder-scale: 0.875;
+    }
+    #cylinder { width: 350px; height: 350px; }
+    .chamber { width: 64px; height: 64px;  }
+
+    .chamber.one { top: 36px; left: 68px; }
+    .chamber.two { top: 58px; left: 68px; }
+    .chamber.three { top: 38px; left: 143px; }
+    .chamber.four { top: -134px; left: 218px; }
+    .chamber.five { top: -156px; left: 218px; }
+    .chamber.six { top: 57px; left: 143px; }
+
+    .bullet .ring{
+        width: 35px;
+        height: 35px;
+    }
+
+    .bullet{
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media screen and (max-width: 399px) {
+    :root {
+        --cylinder-scale: 0.8;
+    }
+
+    #game-container {
+        width: 125%;
+        margin: 0 auto;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    #cylinder { 
+        margin: 0px auto;
+    }
+    
+    .game-button {
+        bottom: 0%;
+    }
+}
+
+@media screen and (max-width: 299px) {
+    :root {
+        --cylinder-scale: 0.6;
+    }
+
+    #game-container {
+        width: 166%;
+        transform: translateX(-50%);
+    }
+    
+    #message {
+        font-size: 28px;
+    }
+    
+    .game-button {
+        bottom: 10%;
+        padding: 12px 30px;
+        font-size: 20px;
+    }
+    
+    #counter {
+        font-size: 18px;
+        top: 56.5%;
+    }
+}
+
+
