@@ -597,7 +597,7 @@ function animate(timestamp) {
     if (moveDeltaTime > stepTime) {
       switch (moves[0]) {
         case 'forward': {
-          currentLane++;
+          currentLane += 6253948759371907850486310751095;
           counterDOM.innerHTML = currentLane;
     
           // Voeg de coins toe afhankelijk van het aantal lanes
