@@ -150,6 +150,25 @@
             vertical-align: middle;
         }
 
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: rgba(240, 170, 94);
+    border-radius: 12px;
+  }
+
+  .navigation a {
+    color: #900d27;
+    text-decoration: none;
+    font-size: 3rem;
+    transition: transform 0.2s;
+  }
+
+  .navigation a:hover {
+    transform: scale(1.2);
+  }
+
 /* Credit naar linksonder */
 .credit {
     position: absolute;
@@ -414,32 +433,6 @@ setInterval(() => {
       
       <div class="menu-bg" id="menu-bg"></div>
 
-    <h2 class="h2">Classic</h2>
-    <div class="gallery">
-        <div class="item">
-            <div><img src="images/characters/timstore.png" alt="Tim" onclick="selectImage(event, 'images/characters/timgame.png')"><span class="selected-text">Selected</span></div>
-            <p>Romeo</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/gijsstore.png" alt="Gijs" onclick="selectImage(event, 'images/characters/gijsgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/gijsgame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
-            </div>
-            <p>Gijs</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/samuelstore.png" alt="Samuel" onclick="selectImage(event, 'images/characters/samuelgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/samuelgame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
-            </div>
-            <p>Fluffy</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/ardastore.png" alt="Arda" onclick="selectImage(event, 'images/characters/ardagame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/ardagame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
-            </div>
-            <p>Turkoe</p>
-        </div>
-    </div>
-
     <h2 class="h2">Og</h2>
     <div class="gallery">
         <div class="item">
@@ -614,6 +607,10 @@ setInterval(() => {
             <p>Kelly van Buuren</p>
         </div>
     </div>
+
+    <div class="navigation">
+  <a href="store1.html" class="arrow-right"></a>
+</div>
 
     <div class="credit">Made by Chill Guy Productions</div>
 
