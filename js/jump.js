@@ -107,7 +107,9 @@ scene("game", () => {
         { name: "images/italian/tung_tung_tung-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
         { name: "images/italian/un_din_din_dun-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
         { name: "images/italian/Working_on_it-removebg-preview.png", x: 80, y: 40, scale: 0.3 },
-        { name: "images/characters/kelly.png", x: 80, y: 40, scale: 0.65 }
+        { name: "images/characters/kelly.png", x: 80, y: 40, scale: 0.65 },
+        {name: "images/characters/roelgame.png", x: 80, y: 40, scale: 0.65 },
+        {name: "images/characters/ricgame.png", x: 80, y: 40, scale: 0.65 }
     ];
     
 // Verkrijg de naam van het geselecteerde karakter uit localStorage
