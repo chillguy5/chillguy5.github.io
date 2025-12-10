@@ -179,6 +179,31 @@
     content: "➡"; /* grote rechter pijl */
   }
 
+        .game-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 5px;
+        }
+
+        .game-link {
+            text-decoration: none;
+        }
+
+        .game-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .game-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
 /* Credit naar linksonder */
 .credit {
     position: absolute;
@@ -444,206 +469,20 @@ setInterval(() => {
       <div class="menu-bg" id="menu-bg"></div>
 
 
-        <h2 class="h2">Classic</h2>
-    <div class="gallery">
-        <div class="item">
-            <div><img src="images/characters/timstore.png" alt="Tim" onclick="selectImage(event, 'images/characters/timgame.png')"><span class="selected-text">Selected</span></div>
-            <p>Romeo</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/gijsstore.png" alt="Gijs" onclick="selectImage(event, 'images/characters/gijsgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/gijsgame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
-            </div>
-            <p>Gijs</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/samuelstore.png" alt="Samuel" onclick="selectImage(event, 'images/characters/samuelgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/samuelgame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
-            </div>
-            <p>Fluffy</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/ardastore.png" alt="Arda" onclick="selectImage(event, 'images/characters/ardagame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/ardagame.png', 50)"><h3 class="unlock-tekst">50</h3></span></div>
-            </div>
-            <p>Turkoe</p>
-        </div>
-    </div>
-
-    <h2 class="h2">Og</h2>
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/amirstore.png" alt="Amir" onclick="selectImage(event, 'images/characters/amirgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/amirgame.png', 200)"><h3 class="unlock-tekst">200</h3></span></div>
-            </div>
-            <p>Go Sleep</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/basharstore.png" alt="Bashar" onclick="selectImage(event, 'images/characters/bashargame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/bashargame.png', 200)"><h3 class="unlock-tekst">200</h3></span></div>
-            </div>
-            <p>Bashar</p>
-        </div>
-    </div>
-
-    <h2 class="h2">Werk Week</h2>
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/69store.png" alt="69" onclick="selectImage(event, 'images/characters/69game.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/69game.png', 500)"><h3 class="unlock-tekst">500</h3></span></div>
-            </div>
-            <p>69</p>
-        </div>
-    </div>
-
-    <h2 class="h2">Limited Edition</h2>
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/chillguystore1.png" alt="Chill Guy1" onclick="selectImage(event, 'images/characters/chillguygame1.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/chillguygame1.png', 5000)"><h3 class="unlock-tekst">5.000</h3></span></div>
-            </div>
-            <p>Chill Guy</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/mangostore1.png" alt="Mango1" onclick="selectImage(event, 'images/characters/mangogame1.webp')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/mangogame1.webp', 5000)"><h3 class="unlock-tekst">5.000</h3></span></div>
-            </div>
-            <p>Mango</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/johnporkstore1.png" alt="John Pork1" onclick="selectImage(event, 'images/characters/johnporkgame1.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/johnporkgame1.png', 5000)"><h3 class="unlock-tekst">5.000</h3></span></div>
-            </div>
-            <p>John Pork</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/pessistore1.png" alt="Pessi1" onclick="selectImage(event, 'images/characters/pessigame1.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/pessigame1.png', 5000)"><h3 class="unlock-tekst">5.000</h3></span></div>
-            </div>
-            <p>Pessi</p>
-        </div>
-    </div>
-
-        <h2 class="h2">Italian brainrot</h2>
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/bever.png" alt="bever" onclick="selectImage(event, 'images/italian/bever-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/bever-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Bobrito Bandito</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/boneca.png" alt="boneca" onclick="selectImage(event, 'images/italian/boneca-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/boneca-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Boneca Ambalabu</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/brr brr.png" alt="brr" onclick="selectImage(event, 'images/italian/brr_brr-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/brr_brr-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Brr Brr Patapim</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/cappacuno.png" alt="cappacuno" onclick="selectImage(event, 'images/italian/cappacuno-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/cappacuno-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Capuchino assassino</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/chimpanzini.png" alt="chimpanzini" onclick="selectImage(event, 'images/italian/chimpanzini-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/chimpanzini-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Chimpanzini Bananini</p>
-        </div>
-    </div>
-
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/frulli.png" alt="frulli" onclick="selectImage(event, 'images/italian/frulli-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/frulli-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Frulli Frulla</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/koe.png" alt="koe" onclick="selectImage(event, 'images/italian/koe-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/koe-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>La Vaca Saturno Saturnita</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/krokodil.png" alt="krokodil" onclick="selectImage(event, 'images/italian/krokodil-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/krokodil-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Glorbo Fruttodril</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/liri lara.png" alt="liri" onclick="selectImage(event, 'images/italian/liri_lara-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/liri_lara-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Lirili Larila</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/tralaleo.png" alt="tralaleo" onclick="selectImage(event, 'images/italian/tralaleo-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/tralaleo-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Tralalero Tralala</p>
-        </div>
-    </div>
-
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/trippi.png" alt="trippi" onclick="selectImage(event, 'images/italian/trippi-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/trippi-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Trippi Troppi</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/trulimero.png" alt="trulimero" onclick="selectImage(event, 'images/italian/trulimero-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/trulimero-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Trulimero Trulicina</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/tung tung tung.png" alt="tung" onclick="selectImage(event, 'images/italian/tung_tung_tung-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/tung_tung_tung-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Tung Tung Tung Sahur</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/un din din dun.png" alt="un" onclick="selectImage(event, 'images/italian/un_din_din_dun-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/un_din_din_dun-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>U Din Din Din Dun</p>
-        </div>
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/italian/Working on it.png" alt="bombar" onclick="selectImage(event, 'images/italian/Working_on_it-removebg-preview.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/italian/Working_on_it-removebg-preview.png', 50000000)"><h3 class="unlock-tekst">50 mil</h3></span></div>
-            </div>
-            <p>Bombardiro Crocodilo</p>
-        </div>
-    </div>
-
-    <h2 class="h2">Ultra Limited Edition</h2>
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/goldstore.png" alt="gold" onclick="selectImage(event, 'images/characters/goldgame.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/goldgame.png', 100000000)"><h3 class="unlock-tekst">100 mil</h3></span></div>
-            </div>
-            <p>Gold Chill Guy</p>
-        </div>
-    </div>
-
-
-        <h2 class="h2">Extra Ultra Mega Special Limited Character</h2>
-    <div class="gallery">
-        <div class="item">
-            <div class="image-container">
-                <div><img src="images/characters/kelly.jpeg" alt="gold" onclick="selectImage(event, 'images/characters/kelly.png')"><span class="selected-text">Selected</span><span class="unlock-block" onclick="unlockCharacter(event, 'images/characters/kelly.png', 1000000000)"><h3 class="unlock-tekst">1 miljard</h3></span></div>
-            </div>
-            <p>Kelly van Buuren</p>
-        </div>
-    </div>
+          <div class="game-container">
+        <a href="store1.html" class="game-link">
+            <img src="images/gameicons/OG.png" alt="OG" class="game-image">
+        </a>
+        <a href="store2.html" class="game-link">
+            <img src="images/gameicons/it.png" alt="Italian Brainrot" class="game-image">
+        </a>
+        <a href="store3.html" class="game-link">
+            <img src="images/gameicons/Special.png" alt="Special" class="game-image">
+        </a>
+        <a href="store4.html" class="game-link">
+            <img src="images/gameicons/family.png" alt="Family" class="game-image">
+        </a>
+    </div> 
 
 </body>
 </html>
