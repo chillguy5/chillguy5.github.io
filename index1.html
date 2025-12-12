@@ -379,10 +379,10 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-          <img id="selectedCharacterDisplay" 
-     src="" 
-     alt="selected character" 
-     style="position:absolute; top:110px; left:30px; width:120px; height:auto; z-index:5;">
+<img id="selectedCharacterDisplay"
+     src=""
+     style="display:none; position:absolute; top:110px; left:30px; width:120px;">
+
 
 
           <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()" id="daily-login-button">
@@ -438,10 +438,11 @@ window.addEventListener('load', function() {
     setTimeout(function() {
         loadingScreen.style.display = 'none';
 
-        // Personage pas nu instellen
-        showSelectedCharacter();
+        // Laat het character nu pas zien
+        document.getElementById("selectedCharacterDisplay").style.display = "block";
     }, 2500);
 });
+
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
