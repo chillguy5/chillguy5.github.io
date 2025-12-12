@@ -347,6 +347,31 @@
     line-height: 1.5;
 }
 
+#character-wrapper {
+    position: absolute;
+    top: 170px;          /* net onder daily login */
+    right: 30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle at top left, #fff6c7, #d4af37, #9c7c19);
+    padding: 8px;
+    box-shadow:
+        0 0 15px rgba(212, 175, 55, 0.8),
+        inset 0 0 10px rgba(255, 255, 255, 0.6);
+    display: none;       /* blijft verborgen tijdens loading */
+    z-index: 5;
+}
+
+#selectedCharacterDisplay {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ELK character past */
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.15);
+}
+
+
     </style>
 </head>
 <body>
@@ -379,9 +404,9 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-<img id="selectedCharacterDisplay"
-     src=""
-     style="display:none; position:absolute; top:110px; left:30px; width:120px;">
+<div id="character-wrapper">
+    <img id="selectedCharacterDisplay" src="" alt="selected character">
+</div>
 
 
 
@@ -439,7 +464,7 @@ window.addEventListener('load', function() {
         loadingScreen.style.display = 'none';
 
         // Laat het character nu pas zien
-        document.getElementById("selectedCharacterDisplay").style.display = "block";
+        document.getElementById("character-wrapper").style.display = "block";
     }, 2500);
 });
 
