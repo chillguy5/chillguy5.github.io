@@ -184,7 +184,8 @@ scene("battle", () => {
         { name: "images/italian/Working_on_it-removebg-preview.png", scale: 0.3 },
         { name: "images/characters/kelly.png", scale: 0.5 },
         { name: "images/characters/roelgame.png", scale: 0.5 },
-        { name: "images/characters/ricgame.png", scale: 0.5 }
+        { name: "images/characters/ricgame.png", scale: 0.5 },
+        { name: "images/characters/basgame.png", scale: 0.5 }
     ];
 
     let selectedCharacterName = localStorage.getItem("selectedCharacter") || "images/characters/timgame.png";

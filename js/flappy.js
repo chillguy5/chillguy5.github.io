@@ -87,7 +87,8 @@ scene("game", () => {
         { name: "images/italian/Working_on_it-removebg-preview.png", scale: 0.15 },
 		{ name: "images/characters/kelly.png", scale: 0.4 },
 		{ name: "images/characters/roelgame.png", scale: 0.4 },
-		{ name: "images/characters/ricgame.png", scale: 0.4 }
+		{ name: "images/characters/ricgame.png", scale: 0.4 },
+		{ name: "images/characters/basgame.png", scale: 0.4 }
     ];
 
 	// Verkrijg de naam van het geselecteerde karakter uit localStorage
