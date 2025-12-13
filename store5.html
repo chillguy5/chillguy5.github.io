@@ -513,7 +513,7 @@ function initializeBorders() {
       
       <div class="menu-bg" id="menu-bg"></div>
 
-<!-- Eerste groep van 5 kleuren -->
+<!-- GALLERY 1 -->
 <div class="gallery">
   <!-- WIT (standaard, gratis) -->
   <div class="item">
@@ -523,6 +523,22 @@ function initializeBorders() {
       <span class="selected-text">Selected</span>
     </div>
     <p>White</p>
+  </div>
+
+  <!-- ZWART -->
+  <div class="item">
+    <div class="image-container">
+      <div>
+        <img src="images/borders/black.png"
+             onclick="selectBorder(event, 'black')">
+        <span class="selected-text">Selected</span>
+        <span class="unlock-block"
+              onclick="unlockBorder(event, 'black', 75000000)">
+          <h3>75 mil</h3>
+        </span>
+      </div>
+    </div>
+    <p>Black</p>
   </div>
 
   <!-- ROOD -->
@@ -541,20 +557,20 @@ function initializeBorders() {
     <p>Red</p>
   </div>
 
-  <!-- GROEN -->
+  <!-- GEEL -->
   <div class="item">
     <div class="image-container">
       <div>
-        <img src="images/borders/groen.png"
-             onclick="selectBorder(event, 'green')">
+        <img src="images/borders/yellow.png"
+             onclick="selectBorder(event, 'yellow')">
         <span class="selected-text">Selected</span>
         <span class="unlock-block"
-              onclick="unlockBorder(event, 'green', 10000000)">
-          <h3>10 mil</h3>
+              onclick="unlockBorder(event, 'yellow', 50000000)">
+          <h3>50 mil</h3>
         </span>
       </div>
     </div>
-    <p>Green</p>
+    <p>Yellow</p>
   </div>
 
   <!-- BLUE -->
@@ -572,25 +588,9 @@ function initializeBorders() {
     </div>
     <p>Blue</p>
   </div>
-
-  <!-- PURPLE -->
-  <div class="item">
-    <div class="image-container">
-      <div>
-        <img src="images/borders/purple.png"
-             onclick="selectBorder(event, 'purple')">
-        <span class="selected-text">Selected</span>
-        <span class="unlock-block"
-              onclick="unlockBorder(event, 'purple', 50000000)">
-          <h3>50 mil</h3>
-        </span>
-      </div>
-    </div>
-    <p>Purple</p>
-  </div>
 </div>
 
-<!-- Tweede groep van 5 kleuren -->
+<!-- GALLERY 2 -->
 <div class="gallery">
   <!-- ORANGE -->
   <div class="item">
@@ -606,6 +606,38 @@ function initializeBorders() {
       </div>
     </div>
     <p>Orange</p>
+  </div>
+
+  <!-- GREEN -->
+  <div class="item">
+    <div class="image-container">
+      <div>
+        <img src="images/borders/groen.png"
+             onclick="selectBorder(event, 'green')">
+        <span class="selected-text">Selected</span>
+        <span class="unlock-block"
+              onclick="unlockBorder(event, 'green', 10000000)">
+          <h3>10 mil</h3>
+        </span>
+      </div>
+    </div>
+    <p>Green</p>
+  </div>
+
+  <!-- PURPLE -->
+  <div class="item">
+    <div class="image-container">
+      <div>
+        <img src="images/borders/purple.png"
+             onclick="selectBorder(event, 'purple')">
+        <span class="selected-text">Selected</span>
+        <span class="unlock-block"
+              onclick="unlockBorder(event, 'purple', 50000000)">
+          <h3>50 mil</h3>
+        </span>
+      </div>
+    </div>
+    <p>Purple</p>
   </div>
 
   <!-- PINK -->
@@ -624,6 +656,25 @@ function initializeBorders() {
     <p>Pink</p>
   </div>
 
+  <!-- TAN -->
+  <div class="item">
+    <div class="image-container">
+      <div>
+        <img src="images/borders/tan.png"
+             onclick="selectBorder(event, 'tan')">
+        <span class="selected-text">Selected</span>
+        <span class="unlock-block"
+              onclick="unlockBorder(event, 'tan', 75000000)">
+          <h3>75 mil</h3>
+        </span>
+      </div>
+    </div>
+    <p>Tan</p>
+  </div>
+</div>
+
+<!-- GALLERY 3 -->
+<div class="gallery">
   <!-- CYAN -->
   <div class="item">
     <div class="image-container">
@@ -671,10 +722,7 @@ function initializeBorders() {
     </div>
     <p>Lime</p>
   </div>
-</div>
 
-<!-- Derde groep van 5 kleuren -->
-<div class="gallery">
   <!-- TEAL -->
   <div class="item">
     <div class="image-container">
@@ -706,7 +754,10 @@ function initializeBorders() {
     </div>
     <p>Indigo</p>
   </div>
+</div>
 
+<!-- GALLERY 4 -->
+<div class="gallery">
   <!-- RAINBOW -->
   <div class="item">
     <div class="image-container">
@@ -739,7 +790,7 @@ function initializeBorders() {
     <p>Bronze</p>
   </div>
 
-  <!-- ZILVER -->
+  <!-- SILVER -->
   <div class="item">
     <div class="image-container">
       <div>
@@ -754,10 +805,7 @@ function initializeBorders() {
     </div>
     <p>Silver</p>
   </div>
-</div>
 
-<!-- Vierde groep van 1 kleur -->
-<div class="gallery">
   <!-- GOUD -->
   <div class="item">
     <div class="image-container">
@@ -774,7 +822,6 @@ function initializeBorders() {
     <p>Gold</p>
   </div>
 </div>
-
 
 
 </body>
