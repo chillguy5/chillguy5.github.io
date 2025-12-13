@@ -347,69 +347,6 @@
     line-height: 1.5;
 }
 
-#character-wrapper {
-    position: absolute;
-    top: 170px;
-    right: 30px;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    padding: 8px;
-    display: none;       /* blijft verborgen tijdens loading */
-    z-index: 5;
-}
-
-/* ===== AVATAR BORDER KLEUREN ===== */
-
-/* WIT (standaard) */
-.border-white {
-    background: radial-gradient(circle, #ffffff, #e0e0e0);
-    box-shadow:
-        0 0 10px rgba(255,255,255,0.8),
-        inset 0 0 8px rgba(255,255,255,0.6);
-}
-
-/* ZILVER */
-.border-silver {
-    background: radial-gradient(circle, #f0f0f0, #b5b5b5);
-    box-shadow:
-        0 0 12px rgba(200,200,200,0.9),
-        inset 0 0 8px rgba(255,255,255,0.5);
-}
-
-/* GOUD */
-.border-gold {
-    background: radial-gradient(circle at top left, #fff6c7, #d4af37, #9c7c19);
-    box-shadow:
-        0 0 15px rgba(212, 175, 55, 0.8),
-        inset 0 0 10px rgba(255, 255, 255, 0.6);
-}
-
-/* ROOD */
-.border-red {
-    background: radial-gradient(circle, #ffb3b3, #b30000);
-    box-shadow:
-        0 0 15px rgba(255, 0, 0, 0.7),
-        inset 0 0 8px rgba(255,255,255,0.4);
-}
-
-/* GROEN */
-.border-green {
-    background: radial-gradient(circle, #b3ffcc, #006633);
-    box-shadow:
-        0 0 15px rgba(0, 200, 100, 0.7),
-        inset 0 0 8px rgba(255,255,255,0.4);
-}
-
-#selectedCharacterDisplay {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.15);
-}
-
-
     </style>
 </head>
 <body>
@@ -441,12 +378,6 @@
           </div>
           
           <div class="menu-bg" id="menu-bg"></div>
-
-<div id="character-wrapper">
-    <img id="selectedCharacterDisplay" src="" alt="selected character">
-</div>
-
-
 
           <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()" id="daily-login-button">
             daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon">
@@ -497,15 +428,11 @@
     <script>
     var loadingScreen = document.querySelector(".loadingScreen");
 
-window.addEventListener('load', function() {
+    window.addEventListener('load', function() {
     setTimeout(function() {
         loadingScreen.style.display = 'none';
-
-        // Laat het character nu pas zien
-        document.getElementById("character-wrapper").style.display = "block";
-    }, 2500);
+    }, 2500); // 2500 milliseconden = 2.5 seconden
 });
-
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
 document.getElementById("coins").textContent = coins;
@@ -691,40 +618,7 @@ setInterval(() => {
     }
 }, 5000);
     
-function showSelectedCharacter() {
-    let selected = localStorage.getItem("selectedCharacter");
-
-    // standaard als er niets is opgeslagen
-    if (!selected) {
-        selected = "images/characters/timgame.png";
-        localStorage.setItem("selectedCharacter", selected);
-    }
-
-    document.getElementById("selectedCharacterDisplay").src = selected;
-}
-
-function applyBorderColor() {
-    const wrapper = document.getElementById("character-wrapper");
-    let color = localStorage.getItem("selectedBorder") || "white";
-
-    wrapper.classList.remove(
-        "border-white",
-        "border-silver",
-        "border-gold",
-        "border-red",
-        "border-green"
-    );
-
-    wrapper.classList.add("border-" + color);
-}
-
-
-window.onload = function () {
-    initializeSound();
-    showSelectedCharacter();
-    applyBorderColor();
-};
-
+        window.onload = initializeSound;
         
 
         // Controleer bij laden of de knop al is geklikt
