@@ -409,6 +409,26 @@
     background-color: rgba(0,0,0,0.15);
 }
 
+#avatar-container {
+    position: absolute;
+    top: 130px; /* net boven de avatar */
+    right: 30px;
+    text-align: center;
+    z-index: 5;
+}
+
+#avatar-label {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f0aa5e; /* dezelfde oranje als coins/daily */
+    color: #900d27;             /* dezelfde rode tekst */
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+
 
     </style>
 </head>
@@ -442,9 +462,13 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-<div id="character-wrapper">
-    <img id="selectedCharacterDisplay" src="" alt="selected character">
+<div id="avatar-container">
+    <div id="avatar-label">AVATAR</div>
+    <div id="character-wrapper">
+        <img id="selectedCharacterDisplay" src="" alt="selected character">
+    </div>
 </div>
+
 
 
 
