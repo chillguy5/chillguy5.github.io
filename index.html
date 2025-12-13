@@ -572,10 +572,12 @@
 </div>
 
 <!-- Input veld voor username -->
-<div id="username-input-container">
+<div id="username-container">
     <input type="text" id="username-input" placeholder="Voer je username in">
-    <button onclick="saveUsername()">Opslaan</button>
+    <button id="username-save">Opslaan</button>
 </div>
+<div id="username-display"></div>
+
 
 
 
@@ -894,12 +896,40 @@ function updateUsernameDisplay() {
     usernameDisplay.style.color = borderColor;
 }
 
+const usernameInput = document.getElementById("username-input");
+const usernameSave = document.getElementById("username-save");
+const usernameDisplay = document.getElementById("username-display");
+const usernameContainer = document.getElementById("username-container");
+
+// Functie om username te tonen
+function showUsername() {
+    const username = localStorage.getItem("username");
+    if (username) {
+        usernameDisplay.textContent = username;
+        usernameDisplay.style.color = localStorage.getItem("selectedBorder") || "white";
+        usernameContainer.style.display = "none"; // verberg het invoerveld
+    } else {
+        usernameContainer.style.display = "block"; // laat het invoerveld zien
+        usernameDisplay.textContent = "";
+    }
+}
+
+// Opslaan van username
+usernameSave.addEventListener("click", () => {
+    const username = usernameInput.value.trim();
+    if (username) {
+        localStorage.setItem("username", username);
+        showUsername();
+    }
+});
+
 // Update bij laden
 window.onload = function() {
     initializeSound();
     showSelectedCharacter();
     applyBorderColor();
-    updateUsernameDisplay(); // username tonen bij laden
+    updateUsernameDisplay();
+    showUsername(); // username tonen bij laden
 };
 
 
