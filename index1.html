@@ -24,6 +24,28 @@
             background-attachment: fixed;
         }
 
+        .border-white {
+    background: white;
+    box-shadow: 0 0 10px white;
+}
+
+.border-silver {
+    background: radial-gradient(circle, #eee, #aaa);
+}
+
+.border-gold {
+    background: radial-gradient(circle, #fff6c7, #d4af37, #9c7c19);
+}
+
+.border-red {
+    background: radial-gradient(circle, #ffb3b3, #b30000);
+}
+
+.border-green {
+    background: radial-gradient(circle, #b3ffcc, #006633);
+}
+
+
         .title {
             align-items: center;
             margin-top: 10px;
@@ -665,10 +687,19 @@ function showSelectedCharacter() {
     document.getElementById("selectedCharacterDisplay").src = selected;
 }
 
+function applyBorderColor() {
+    let wrapper = document.getElementById("character-wrapper");
+    let color = localStorage.getItem("selectedBorder") || "white";
+
+    wrapper.className = ""; // reset
+    wrapper.classList.add("border-" + color);
+}
+
 
         window.onload = function () {
     initializeSound();
     showSelectedCharacter();
+    applyBorderColor();
 };
 
         
