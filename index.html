@@ -532,6 +532,21 @@
     border-color: #f0aa5e;
 }
 
+.rainbow-text {
+    background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 
     </style>
 </head>
@@ -869,6 +884,8 @@ function updateUsernameDisplay() {
 
     usernameDisplay.textContent = username;
 
+    usernameDisplay.classList.remove("rainbow-text");
+
     // Haal de huidige borderkleur op
     const wrapper = document.getElementById("character-wrapper");
     let borderColor = "white"; // standaard
@@ -887,7 +904,10 @@ function updateUsernameDisplay() {
     else if (wrapper.classList.contains("border-lime")) borderColor = "lime";
     else if (wrapper.classList.contains("border-teal")) borderColor = "teal";
     else if (wrapper.classList.contains("border-indigo")) borderColor = "indigo";
-    else if (wrapper.classList.contains("border-rainbow")) borderColor = "#ff00ff"; // voor rainbow gewoon fuchsia
+    else if (wrapper.classList.contains("border-rainbow")) {
+    usernameDisplay.style.color = "";
+    usernameDisplay.classList.add("rainbow-text");
+    }
     else if (wrapper.classList.contains("border-bronze")) borderColor = "#cd7f32";
     else if (wrapper.classList.contains("border-silver")) borderColor = "#c0c0c0";
     else if (wrapper.classList.contains("border-gold")) borderColor = "#ffd700";
