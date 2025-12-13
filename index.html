@@ -509,6 +509,30 @@
     background-color: rgba(0,0,0,0.15);
 }
 
+#username-display {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff; /* standaard kleur, wordt overschreven door JS */
+    word-break: break-word;
+    max-width: 200px; /* past bij avatar */
+}
+
+#username-input-container {
+    margin-top: 20px;
+}
+#username-input {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #900d27;
+    outline: none;
+}
+#username-input:focus {
+    border-color: #f0aa5e;
+}
+
 
     </style>
 </head>
@@ -544,7 +568,15 @@
 
 <div id="character-wrapper">
     <img id="selectedCharacterDisplay" src="" alt="selected character">
+    <div id="username-display"></div> <!-- Hier komt de username -->
 </div>
+
+<!-- Input veld voor username -->
+<div id="username-input-container">
+    <input type="text" id="username-input" placeholder="Voer je username in">
+    <button onclick="saveUsername()">Opslaan</button>
+</div>
+
 
 
 
@@ -819,11 +851,57 @@ function applyBorderColor() {
 }
 
 
-window.onload = function () {
+function saveUsername() {
+    const input = document.getElementById("username-input");
+    const username = input.value.trim();
+    if (username === "") {
+        alert("Voer eerst een username in!");
+        return;
+    }
+    localStorage.setItem("username", username);
+    updateUsernameDisplay();
+}
+
+function updateUsernameDisplay() {
+    const usernameDisplay = document.getElementById("username-display");
+    const username = localStorage.getItem("username") || "Jouw Naam";
+
+    usernameDisplay.textContent = username;
+
+    // Haal de huidige borderkleur op
+    const wrapper = document.getElementById("character-wrapper");
+    let borderColor = "white"; // standaard
+    if (wrapper.classList.contains("border-white")) borderColor = "white";
+    else if (wrapper.classList.contains("border-black")) borderColor = "black";
+    else if (wrapper.classList.contains("border-red")) borderColor = "red";
+    else if (wrapper.classList.contains("border-yellow")) borderColor = "yellow";
+    else if (wrapper.classList.contains("border-blue")) borderColor = "blue";
+    else if (wrapper.classList.contains("border-orange")) borderColor = "orange";
+    else if (wrapper.classList.contains("border-green")) borderColor = "green";
+    else if (wrapper.classList.contains("border-purple")) borderColor = "purple";
+    else if (wrapper.classList.contains("border-pink")) borderColor = "pink";
+    else if (wrapper.classList.contains("border-tan")) borderColor = "tan";
+    else if (wrapper.classList.contains("border-cyan")) borderColor = "cyan";
+    else if (wrapper.classList.contains("border-magenta")) borderColor = "magenta";
+    else if (wrapper.classList.contains("border-lime")) borderColor = "lime";
+    else if (wrapper.classList.contains("border-teal")) borderColor = "teal";
+    else if (wrapper.classList.contains("border-indigo")) borderColor = "indigo";
+    else if (wrapper.classList.contains("border-rainbow")) borderColor = "#ff00ff"; // voor rainbow gewoon fuchsia
+    else if (wrapper.classList.contains("border-bronze")) borderColor = "#cd7f32";
+    else if (wrapper.classList.contains("border-silver")) borderColor = "#c0c0c0";
+    else if (wrapper.classList.contains("border-gold")) borderColor = "#ffd700";
+
+    usernameDisplay.style.color = borderColor;
+}
+
+// Update bij laden
+window.onload = function() {
     initializeSound();
     showSelectedCharacter();
     applyBorderColor();
+    updateUsernameDisplay(); // username tonen bij laden
 };
+
 
         
 
