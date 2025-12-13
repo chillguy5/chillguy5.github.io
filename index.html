@@ -347,18 +347,6 @@
     line-height: 1.5;
 }
 
-#character-wrapper {
-    position: absolute;
-    top: 170px;
-    right: 30px;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    padding: 8px;
-    display: none;       /* blijft verborgen tijdens loading */
-    z-index: 5;
-}
-
 /* ===== AVATAR BORDER KLEUREN ===== */
 
 /* WIT (standaard) */
@@ -401,6 +389,25 @@
         inset 0 0 8px rgba(255,255,255,0.4);
 }
 
+#avatar-container {
+    position: absolute;
+    top: 170px;
+    right: 30px;
+    width: 160px; /* zelfde als avatar */
+    text-align: center; /* label gecentreerd boven avatar */
+    display: none; /* blijft verborgen tijdens loading */
+    z-index: 5;
+}
+
+#character-wrapper {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    padding: 8px;
+    display: inline-block; /* belangrijk voor rondje */
+    box-sizing: border-box;
+}
+
 #selectedCharacterDisplay {
     width: 100%;
     height: 100%;
@@ -409,29 +416,17 @@
     background-color: rgba(0,0,0,0.15);
 }
 
-#character-wrapper {
-    position: absolute;
-    top: 170px;
-    right: 30px;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    padding: 8px;
-    display: none; /* blijft verborgen tijdens loading */
-    z-index: 5;
-    text-align: center; /* label gecentreerd boven avatar */
-}
-
 #avatar-label {
     font-size: 16px;
     font-weight: bold;
-    background-color: #f0aa5e; /* oranje achtergrond */
-    color: #900d27;             /* rode tekst */
+    background-color: #f0aa5e; /* oranje */
+    color: #900d27;             /* rood */
     padding: 3px 8px;
     border-radius: 5px;
     margin-bottom: 5px;
     display: block;
 }
+
 
 
 
@@ -468,10 +463,13 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-<div id="character-wrapper">
+<div id="avatar-container">
     <div id="avatar-label">AVATAR</div>
-    <img id="selectedCharacterDisplay" src="" alt="selected character">
+    <div id="character-wrapper">
+        <img id="selectedCharacterDisplay" src="" alt="selected character">
+    </div>
 </div>
+
 
           <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()" id="daily-login-button">
             daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon">
