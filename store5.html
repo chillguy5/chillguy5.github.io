@@ -428,6 +428,8 @@ setInterval(() => {
 }
 
 function unlockBorder(event, color, cost) {
+    event.stopPropagation(); // voorkomt dubbel klikken
+
     let coins = parseInt(localStorage.getItem("coins") || 0);
 
     if (coins < cost) {
@@ -441,12 +443,17 @@ function unlockBorder(event, color, cost) {
     localStorage.setItem("coins", coins);
     localStorage.setItem("border_unlocked_" + color, "true");
 
-    event.target.style.display = "none";
-    selectBorder(
-      { target: event.target.parentElement.querySelector("img") },
-      color
-    );
     updateCoinDisplay();
+
+    // 🔥 ALTIJD de hele overlay verwijderen
+    let unlockBlock = event.target.closest(".unlock-block");
+    if (unlockBlock) {
+        unlockBlock.style.display = "none";
+    }
+
+    // 🔥 DIRECT selecteren
+    let img = event.target.closest(".item").querySelector("img");
+    selectBorder({ target: img }, color);
 }
 
 function isBorderUnlocked(color) {
