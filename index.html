@@ -409,49 +409,6 @@
     background-color: rgba(0,0,0,0.15);
 }
 
-#avatar-container {
-    position: absolute;
-    top: 130px;
-    right: 30px;
-    text-align: center;
-    z-index: 5;
-}
-
-#avatar-label {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 6px;
-    letter-spacing: 2px;
-}
-
-/* === AVATAR LABEL KLEUREN === */
-
-.avatar-white {
-    color: #ffffff;
-    text-shadow: 0 0 6px rgba(255,255,255,0.8);
-}
-
-.avatar-silver {
-    color: #e0e0e0;
-    text-shadow: 0 0 6px rgba(200,200,200,0.9);
-}
-
-.avatar-gold {
-    color: #ffd966;
-    text-shadow: 0 0 8px rgba(212,175,55,0.9);
-}
-
-.avatar-red {
-    color: #ff4d4d;
-    text-shadow: 0 0 8px rgba(255,0,0,0.8);
-}
-
-.avatar-green {
-    color: #4dff99;
-    text-shadow: 0 0 8px rgba(0,200,100,0.8);
-}
-
-
 
     </style>
 </head>
@@ -485,14 +442,9 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-<div id="avatar-container">
-    <div id="avatar-label">AVATAR</div>
-
-    <div id="character-wrapper">
-        <img id="selectedCharacterDisplay" src="" alt="selected character">
-    </div>
+<div id="character-wrapper">
+    <img id="selectedCharacterDisplay" src="" alt="selected character">
 </div>
-
 
 
 
@@ -753,10 +705,8 @@ function showSelectedCharacter() {
 
 function applyBorderColor() {
     const wrapper = document.getElementById("character-wrapper");
-    const label = document.getElementById("avatar-label");
     let color = localStorage.getItem("selectedBorder") || "white";
 
-    // Borders resetten
     wrapper.classList.remove(
         "border-white",
         "border-silver",
@@ -765,18 +715,7 @@ function applyBorderColor() {
         "border-green"
     );
 
-    // Label resetten
-    label.classList.remove(
-        "avatar-white",
-        "avatar-silver",
-        "avatar-gold",
-        "avatar-red",
-        "avatar-green"
-    );
-
-    // Nieuwe kleur toepassen
     wrapper.classList.add("border-" + color);
-    label.classList.add("avatar-" + color);
 }
 
 
