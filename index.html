@@ -409,24 +409,30 @@
     background-color: rgba(0,0,0,0.15);
 }
 
-#avatar-container {
+#character-wrapper {
     position: absolute;
-    top: 130px; /* net boven de avatar */
+    top: 170px;
     right: 30px;
-    text-align: center;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    padding: 8px;
+    display: none; /* blijft verborgen tijdens loading */
     z-index: 5;
+    text-align: center; /* label gecentreerd boven avatar */
 }
 
 #avatar-label {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
-    background-color: #f0aa5e; /* dezelfde oranje als coins/daily */
-    color: #900d27;             /* dezelfde rode tekst */
-    padding: 5px 10px;
+    background-color: #f0aa5e; /* oranje achtergrond */
+    color: #900d27;             /* rode tekst */
+    padding: 3px 8px;
     border-radius: 5px;
     margin-bottom: 5px;
-    display: inline-block;
+    display: block;
 }
+
 
 
 
@@ -462,15 +468,10 @@
           
           <div class="menu-bg" id="menu-bg"></div>
 
-<div id="avatar-container">
+<div id="character-wrapper">
     <div id="avatar-label">AVATAR</div>
-    <div id="character-wrapper">
-        <img id="selectedCharacterDisplay" src="" alt="selected character">
-    </div>
+    <img id="selectedCharacterDisplay" src="" alt="selected character">
 </div>
-
-
-
 
           <a href="javascript:void(0);" class="daily-login-button" onclick="claimDailyReward()" id="daily-login-button">
             daily login<img src="images/overig/daily.png" alt="coin" class="coin-icon">
