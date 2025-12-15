@@ -33,7 +33,15 @@ function addButton(txt, p, f) {
 }
 
 let coins = parseInt(localStorage.getItem("coins")) || 0;
-let highscores = localStorage.getItem("highscores") ? parseFloat(localStorage.getItem("highscores")) : 0;
+function getHighscore() {
+    const hs = localStorage.getItem("highscores");
+    return hs ? parseFloat(hs) : Infinity;
+}
+
+function setHighscore(score) {
+    localStorage.setItem("highscores", score);
+}
+
 
 scene("start", () => {
     add([text("Jump Game"), pos(width() / 2, height() / 4), anchor("center"), scale(2)]);
@@ -391,7 +399,7 @@ onCollide("bullet", "boss", (b, e) => {
 			coins += 10000000; // Voeg 100 coins toe
 			localStorage.setItem("coins", coins); // Sla de coins op in localStorage
 			play("explode");
-			wait(0.5, () => go("win"));
+			wait(0.5, () => go("win", { score: timer.time }))
 			play("explode");
 		}
 	});
@@ -471,28 +479,84 @@ spawnTrash()
 })
 
 scene("win", ({ score }) => {
-    // Check of de huidige score beter is dan de highscore
+    let highscores = getHighscore();
+
     if (score < highscores) {
         highscores = score;
-        localStorage.setItem("highscores", highscores);
+        setHighscore(highscores);
     }
 
-    add([text("YOU WIN! You get 10000000 coins.", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
-    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-    add([text(`Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 100), scale(2), anchor("center")]);
-    add([text(`Score: ${score} seconds`, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-    add([text(`Highscore: ${highscores} seconds`, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
+    add([
+        text("YOU WIN! You get 10000000 coins.", { size: 30 }),
+        pos(width() / 2, height() / 2 - 250),
+        scale(2),
+        anchor("center"),
+    ]);
 
-    addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
+    add([
+        sprite("player"),
+        pos(width() / 2, height() / 2 - 128),
+        scale(0.3),
+        anchor("center"),
+    ]);
+
+    add([
+        text(`Coins: ${coins}`, { size: 20 }),
+        pos(width() / 2, height() / 2 + 100),
+        scale(2),
+        anchor("center"),
+    ]);
+
+    add([
+        text(`Score: ${score.toFixed(2)} seconds`, { size: 20 }),
+        pos(width() / 2, height() / 2),
+        scale(2),
+        anchor("center"),
+    ]);
+
+    add([
+        text(`Highscore: ${highscores.toFixed(2)} seconds`, { size: 20 }),
+        pos(width() / 2, height() / 2 + 50),
+        scale(2),
+        anchor("center"),
+    ]);
+
+    addButton(
+        "Restart",
+        vec2(width() / 2, height() / 2 + 200),
+        () => go("battle")
+    );
 });
 
 scene("lose", () => {
-    add([text("YOU LOSE!", { size: 30 }), pos(width() / 2, height() / 2 - 250), scale(2), anchor("center")]);
-    add([sprite("player"), pos(width() / 2, height() / 2 - 128), scale(0.3), anchor("center")]);
-    add([text(`Highscore: ${highscores} seconds`, { size: 20 }), pos(width() / 2, height() / 2), scale(2), anchor("center")]);
-    add([text(`Total Coins: ${coins}`, { size: 20 }), pos(width() / 2, height() / 2 + 50), scale(2), anchor("center")]);
+    const highscores = getHighscore();
 
-    addButton("Restart", vec2(width() / 2, height() / 2 + 200), () => go("battle"));
+    add([
+        text("YOU LOSE!", { size: 30 }),
+        pos(width() / 2, height() / 2 - 250),
+        scale(2),
+        anchor("center"),
+    ]);
+
+    add([
+        sprite("player"),
+        pos(width() / 2, height() / 2 - 128),
+        scale(0.3),
+        anchor("center"),
+    ]);
+
+    add([
+        text(`Highscore: ${highscores.toFixed(2)} seconds`, { size: 20 }),
+        pos(width() / 2, height() / 2),
+        scale(2),
+        anchor("center"),
+    ]);
+
+    addButton(
+        "Restart",
+        vec2(width() / 2, height() / 2 + 200),
+        () => go("battle")
+    );
 });
 
 scene("mainMenu", () => {
