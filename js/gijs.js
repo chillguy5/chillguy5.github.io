@@ -273,17 +273,17 @@ onKeyRelease("w", () => {
 });
 
 player.onCollide("enemy", (e) => {
-    destroy(e)
-    destroy(player)
-    shake(120)
-    play("explode")
-    music.detune = -1200
-    addExplode(center(), 12, 120, 30)
+    destroy(e);
+    destroy(player);
+    shake(120);
+    play("explode");
+    music.detune = -1200;
+    addExplode(center(), 12, 120, 30);
     wait(1, () => {
-        music.paused = true
-        go("lose")
-    })
-})
+        music.paused = true;
+        go("lose", { score: parseFloat(timer.time.toFixed(2)) });
+    });
+});
 
 function addExplode(p, n, rad, size) {
     for (let i = 0; i < n; i++) {
@@ -550,7 +550,7 @@ add([
     );
 });
 
-scene("lose", () => {
+scene("lose", ({ score }) => {
     const highscores = getHighscore();
 
     add([
@@ -567,12 +567,12 @@ scene("lose", () => {
         anchor("center"),
     ]);
 
-add([
-    text(`Score: ${score !== undefined ? parseFloat(score).toFixed(2) : 0} seconds`, { size: 20 }),
-    pos(width() / 2, height() / 2),
-    scale(2),
-    anchor("center"),
-]);
+    add([
+        text(`Score: ${score !== undefined ? parseFloat(score).toFixed(2) : 0} seconds`, { size: 20 }),
+        pos(width() / 2, height() / 2),
+        scale(2),
+        anchor("center"),
+    ]);
 
     addButton(
         "Restart",
