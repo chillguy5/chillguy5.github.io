@@ -561,7 +561,16 @@ scene("lose", () => {
 
 scene("mainMenu", () => {
     add([text("Welcome to Chill Guy Shooter."), pos(width() / 2, height() / 4), anchor("center"), scale(2), color(248, 248, 215)]);
-    add([text(`Highscore: ${highscores} seconds`), pos(width() / 2, height() / 2 - 95), scale(2), anchor("center"), color(248, 248, 215)]);
+    const highscores = getHighscore(); // voeg dit toe boven de add() regel
+
+add([
+    text(`Highscore: ${highscores === Infinity ? 0 : highscores.toFixed(2)} seconds`), 
+    pos(width() / 2, height() / 2 - 95), 
+    scale(2), 
+    anchor("center"), 
+    color(248, 248, 215)
+]);
+
     addButton("Start Game", vec2(width() / 2, height() / 2), () => go("battle"));
 });
 
