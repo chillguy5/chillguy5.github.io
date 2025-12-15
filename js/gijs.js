@@ -49,17 +49,39 @@ scene("start", () => {
 });
 
 const objs = {
-	"Samuel": "images/characters/samuelgame.png",
-	"Arda": "images/characters/ardagame.png",
-	"Gijs": "images/characters/gijsgame.png",
-	"Tim": "images/characters/timgame.png",
-}
+  "Samuel": "images/characters/samuelgame.png",
+  "Arda": "images/characters/ardagame.png",
+  "Gijs": "images/characters/gijsgame.png",
+  "Tim": "images/characters/timgame.png",
+  "Amir": "images/characters/amirgame.png",
+  "69": "images/characters/69game.png",
+  "Bas": "images/characters/basgame.png",
+  "Bashar": "images/characters/bashargame.png",
+  "Chillguy": "images/characters/chillguygame1.png",
+  "Gold": "images/characters/goldgame.png",
+  "John Pork": "images/characters/johnporkgame1.png",
+  "Mango": "images/characters/mangogame1.webp",
+  "Pessi": "images/characters/pessigame1.png",
+  "Ric": "images/characters/ricgame.png",
+  "Roel": "images/characters/roelgame.png"
+};
 
 const scales = {
-    "Samuel": 0.45,
-    "Arda": 0.45,
-    "Gijs": 0.45,
-    "Tim": 0.45,
+  "Samuel": 0.45,
+  "Arda": 0.45,
+  "Gijs": 0.45,
+  "Tim": 0.45,
+  "Amir": 0.45,
+  "69": 0.45,
+  "Bas": 0.45,
+  "Bashar": 0.45,
+  "Chillguy": 0.45,
+  "Gold": 0.75,
+  "John Pork": 0.3,
+  "Mango": 0.3,
+  "Pessi": 0.45,
+  "Ric": 0.45,
+  "Roel": 0.45
 };
 
 for (const [key, file] of Object.entries(objs)) {
