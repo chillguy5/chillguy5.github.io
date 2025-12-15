@@ -442,7 +442,7 @@ boss.onHurt(() => {
 
 boss.onDeath(() => {
     music.stop()
-        go("win", { score: timer.time.toFixed(2) });
+        go("win", { score: parseFloat(timer.time.toFixed(2)) });
     })
 
 const healthbar = add([
@@ -514,12 +514,12 @@ scene("win", ({ score }) => {
         anchor("center"),
     ]);
 
-    add([
-        text(`Highscore: ${highscores.toFixed(2)} seconds`, { size: 20 }),
-        pos(width() / 2, height() / 2 + 50),
-        scale(2),
-        anchor("center"),
-    ]);
+add([
+    text(`Highscore: ${highscores !== undefined && highscores !== Infinity ? parseFloat(highscores).toFixed(2) : 0} seconds`, { size: 20 }),
+    pos(width() / 2, height() / 2 + 50),
+    scale(2),
+    anchor("center"),
+]);
 
     addButton(
         "Restart",
@@ -545,12 +545,12 @@ scene("lose", () => {
         anchor("center"),
     ]);
 
-    add([
-        text(`Highscore: ${highscores.toFixed(2)} seconds`, { size: 20 }),
-        pos(width() / 2, height() / 2),
-        scale(2),
-        anchor("center"),
-    ]);
+add([
+    text(`Score: ${score !== undefined ? parseFloat(score).toFixed(2) : 0} seconds`, { size: 20 }),
+    pos(width() / 2, height() / 2),
+    scale(2),
+    anchor("center"),
+]);
 
     addButton(
         "Restart",
@@ -564,7 +564,7 @@ scene("mainMenu", () => {
     const highscores = getHighscore(); // voeg dit toe boven de add() regel
 
 add([
-    text(`Highscore: ${highscores === Infinity ? 0 : highscores.toFixed(2)} seconds`), 
+   text(`Highscore: ${highscores !== undefined && highscores !== Infinity ? parseFloat(highscores).toFixed(2) : 0} seconds`),
     pos(width() / 2, height() / 2 - 95), 
     scale(2), 
     anchor("center"), 
