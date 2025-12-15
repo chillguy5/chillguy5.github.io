@@ -59,9 +59,6 @@ const objs = {
   "Bashar": "images/characters/bashargame.png",
   "Chillguy": "images/characters/chillguygame1.png",
   "Gold": "images/characters/goldgame.png",
-  "John Pork": "images/characters/johnporkgame1.png",
-  "Mango": "images/characters/mangogame1.webp",
-  "Pessi": "images/characters/pessigame1.png",
   "Ric": "images/characters/ricgame.png",
   "Roel": "images/characters/roelgame.png"
 };
@@ -77,9 +74,6 @@ const scales = {
   "Bashar": 0.45,
   "Chillguy": 0.45,
   "Gold": 0.75,
-  "John Pork": 0.01,
-  "Mango": 0.01,
-  "Pessi": 0.45,
   "Ric": 0.45,
   "Roel": 0.45
 };
