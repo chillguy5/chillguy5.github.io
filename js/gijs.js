@@ -139,21 +139,20 @@ scene("battle", () => {
 		fixed(),
 	])
 
-    const bossScales = {
-    "Mango": 0.1,
-    "Chillguy": 0.15,
-    "John Pork": 0.15,
-};
-
-const trashScales = {
-    "Mango": 0.15,
-    "Chillguy": 0.2,
-    "John Pork": 0.2,
-};
-
-function getScale(name, type="trash") {
-    if(type === "boss") return bossScales[name] || 0.45;
-    return trashScales[name] || 0.25;
+function getScale(name, type = "trash") {
+    // Zoek het player-object dat overeenkomt met de sprite name
+    const playerData = players.find(p => p.name.includes(name));
+    if (playerData) {
+        // Voor trash kunnen we eventueel iets extra’s doen
+        if (type === "trash") {
+            // Maak trash iets kleiner dan boss (optioneel)
+            return playerData.scale * 0.6; 
+        } else if (type === "boss") {
+            return playerData.scale; // boss gebruikt de originele schaal
+        }
+    }
+    // Fallback waardes als het karakter niet in de lijst staat
+    return type === "boss" ? 0.45 : 0.25;
 }
 
 
@@ -353,12 +352,13 @@ onKeyPress("space", () => {
 
 function spawnTrash() {
     const name = choose(Object.keys(objs).filter(n => n !== bossName));
+// Trash spawn
 add([
     sprite(name),
     area(),
     pos(rand(0, width()), 0),
     health(OBJ_HEALTH),
-    scale(getScale(name, "trash")), // schaal op maat
+    scale(getScale(name, "trash")),
     anchor("bot"),
     "trash",
     "enemy",
@@ -367,12 +367,13 @@ add([
     wait(insaneMode ? 0.1 : 0.3, spawnTrash)
  }
 
+// Boss spawn
 const boss = add([
     sprite(bossName),
     area(),
     pos(width() / 2, 40),
     health(BOSS_HEALTH),
-    scale(getScale(bossName, "boss")), // schaal op maat
+    scale(getScale(bossName, "boss")),
     anchor("top"),
     "boss",
     { dir: 1 },
