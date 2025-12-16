@@ -66,23 +66,6 @@ const objs = {
   "Roel": "images/characters/roelgame.png"
 };
 
-const scales = {
-  "Samuel": 0.45,
-  "Arda": 0.45,
-  "Gijs": 0.45,
-  "Tim": 0.45,
-  "Amir": 0.45,
-  "69": 0.45,
-  "Bas": 0.45,
-  "Bashar": 0.45,
-  "Chillguy": 0.45,
-  "Gold": 0.75,
-  "John Pork": 0.01,
-  "Mango": 0.01,
-  "Pessi": 0.45,
-  "Ric": 0.45,
-  "Roel": 0.45
-};
 
 for (const [key, file] of Object.entries(objs)) {
 	loadSprite(key, file)
@@ -157,15 +140,15 @@ scene("battle", () => {
 	])
 
     const bossScales = {
-    "Mango": 0.25,
-    "Chillguy": 0.3,
-    "John Pork": 0.3,
+    "Mango": 0.1,
+    "Chillguy": 0.15,
+    "John Pork": 0.15,
 };
 
 const trashScales = {
-    "Mango": 0.2,
-    "Chillguy": 0.25,
-    "John Pork": 0.25,
+    "Mango": 0.15,
+    "Chillguy": 0.2,
+    "John Pork": 0.2,
 };
 
 function getScale(name, type="trash") {
