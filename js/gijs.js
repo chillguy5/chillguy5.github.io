@@ -156,6 +156,24 @@ scene("battle", () => {
 		fixed(),
 	])
 
+    const bossScales = {
+    "Mango": 0.25,
+    "Chillguy": 0.3,
+    "John Pork": 0.3,
+};
+
+const trashScales = {
+    "Mango": 0.2,
+    "Chillguy": 0.25,
+    "John Pork": 0.25,
+};
+
+function getScale(name, type="trash") {
+    if(type === "boss") return bossScales[name] || 0.45;
+    return trashScales[name] || 0.25;
+}
+
+
 	add([
 		text(bossName.toUpperCase(), { size: 120 }),
 		pos(width() / 2, height() / 2),
@@ -352,31 +370,29 @@ onKeyPress("space", () => {
 
 function spawnTrash() {
     const name = choose(Object.keys(objs).filter(n => n !== bossName));
-    add([
-        sprite(name),
-        area(),
-        pos(rand(0, width()), 0),
-        health(OBJ_HEALTH),
-        scale(0.25),
-        anchor("bot"),
-        "trash",
-        "enemy",
-        { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) },
-    ])
+add([
+    sprite(name),
+    area(),
+    pos(rand(0, width()), 0),
+    health(OBJ_HEALTH),
+    scale(getScale(name, "trash")), // schaal op maat
+    anchor("bot"),
+    "trash",
+    "enemy",
+    { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) },
+])
     wait(insaneMode ? 0.1 : 0.3, spawnTrash)
  }
 
- const boss = add([
+const boss = add([
     sprite(bossName),
     area(),
     pos(width() / 2, 40),
     health(BOSS_HEALTH),
-    scale(0.45),
+    scale(getScale(bossName, "boss")), // schaal op maat
     anchor("top"),
     "boss",
-    {
-        dir: 1,
-    },
+    { dir: 1 },
 ])
 
 on("death", "enemy", (e) => {
