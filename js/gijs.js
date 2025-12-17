@@ -139,21 +139,29 @@ scene("battle", () => {
 		fixed(),
 	])
 
-function getScale(name, type = "trash") {
-    // Zoek het player-object dat overeenkomt met de sprite name
-    const playerData = players.find(p => p.name.includes(name));
-    if (playerData) {
-        // Voor trash kunnen we eventueel iets extra’s doen
-        if (type === "trash") {
-            // Maak trash iets kleiner dan boss (optioneel)
-            return playerData.scale * 0.6; 
-        } else if (type === "boss") {
-            return playerData.scale; // boss gebruikt de originele schaal
-        }
-    }
-    // Fallback waardes als het karakter niet in de lijst staat
-    return type === "boss" ? 0.45 : 0.25;
+const scales = {
+    Samuel: 0.45,
+    Arda: 0.45,
+    Gijs: 0.45,
+    Tim: 0.45,
+    Amir: 0.5,
+    Bashar: 0.45,
+    "69": 0.45,
+    Chillguy: 0.15,
+    Mango: 0.1,
+    "John Pork": 0.15,
+    Pessi: 0.15,
+    Gold: 0.2,
+    Ric: 0.5,
+    Roel: 0.5,
+    Bas: 0.5,
+};
+
+function getScale(name, type) {
+    const base = scales[name] ?? 0.4;
+    return type === "trash" ? base * 0.75 : base;
 }
+
 
 
 	add([
@@ -352,32 +360,35 @@ onKeyPress("space", () => {
 
 function spawnTrash() {
     const name = choose(Object.keys(objs).filter(n => n !== bossName));
-// Trash spawn
-add([
-    sprite(name),
-    area(),
-    pos(rand(0, width()), 0),
-    health(OBJ_HEALTH),
-    scale(getScale(name, "trash")),
-    anchor("bot"),
-    "trash",
-    "enemy",
-    { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) },
-])
-    wait(insaneMode ? 0.1 : 0.3, spawnTrash)
- }
+
+    add([
+        sprite(name),
+        area(),
+        pos(rand(0, width()), 0),
+        health(OBJ_HEALTH),
+        scale(getScale(name, "trash")),
+        anchor("center"),
+        "trash",
+        "enemy",
+        { speed: rand(TRASH_SPEED * 0.5, TRASH_SPEED * 1.5) },
+    ]);
+
+    wait(insaneMode ? 0.1 : 0.3, spawnTrash);
+}
+
 
 // Boss spawn
 const boss = add([
     sprite(bossName),
     area(),
-    pos(width() / 2, 40),
+    pos(width() / 2, 80),
     health(BOSS_HEALTH),
     scale(getScale(bossName, "boss")),
-    anchor("top"),
+    anchor("center"),
     "boss",
     { dir: 1 },
-])
+]);
+
 
 on("death", "enemy", (e) => {
     destroy(e)
