@@ -1,44 +1,47 @@
-/* === IMPORT FONT === */
+/* Importing the font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-/* === APPLY FONT === */
+/* Applying the imported font to all elements */
 * {
-    font-family: "DM Sans", sans-serif;
+    font-family: "DM Sans";
 }
 
-/* === BODY & BACKGROUND === */
+/* Styling for the body */
 body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    /* Setting the background image */
     background: url('https://4kwallpapers.com/images/wallpapers/gradient-background-2880x1800-11027.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
 
-/* === TITLE === */
+/* Styling for the title */
 h1 {
     text-align: center;
-    margin-top: 50px;
+    top: 0;
+    margin-top: 100px; 
     font-size: 50px;
     color: #ffffff;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.34);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.342);
+    position: absolute;
 }
 
-/* === BUTTON CONTAINER === */
+/* Container for the buttons */
 .button-container {
     display: grid;
     grid-template-columns: repeat(5, 100px);
     grid-template-rows: repeat(5, 100px);
     gap: 10px;
-    margin-top: 20px;
+    height: 550px;
+    width: 550px;
 }
 
-/* === CELLS / BUTTONS === */
+/* Styling for each button cell */
 .cell {
     width: 100px;
     height: 100px;
@@ -49,22 +52,15 @@ h1 {
     justify-content: center;
     align-items: center;
     font-size: 18px;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
     position: relative;
     perspective: 1000px;
-    border-radius: 10px;
-    transition: transform 0.3s, background-color 0.3s;
 }
 
-.cell:hover {
-    transform: scale(1.05);
-}
-
-.cell.clicked {
-    background-color: #d4edda; /* groen tint bij klik */
-    cursor: default;
-}
-
-/* === IMAGES IN CELLS === */
+/* Styling for the images within the button cells */
 .cell img {
     display: none;
     width: 100%;
@@ -77,48 +73,66 @@ h1 {
     transform: rotateY(180deg);
 }
 
+/* Styling for clicked button cells with revealed images */
 .cell.clicked img {
     display: block;
     transform: rotateY(0deg);
 }
 
-.cell img {
-    object-fit: contain;
-}
-
-/* === RANDOM BUTTON STYLE === */
+/* Your provided button CSS */
 .random-button {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    appearance: none;
     background-color: #FCFCFD;
     border-radius: 4px;
     border: none;
     box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px, rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
     color: #36395A;
-    font-size: 18px;
-    padding: 10px 20px;
     cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
     transition: box-shadow .15s, transform .15s, background-color .15s, color .15s;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
     white-space: nowrap;
+    will-change: box-shadow, transform, background-color, color;
 }
 
+/* Styling for button focus state */
 .random-button:focus {
     outline: none;
 }
 
+/* Styling for button hover state */
 .random-button:hover {
     box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
+/* Styling for button active state */
 .random-button:active {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
 }
 
-/* === VIDEO BACKGROUND === */
+/* Your provided button hover state */
+.cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensure the image covers the entire space */
+}
+
+/* Styling for video backgrounds */
 .video-background {
     height: 100%;
     width: 100%;
@@ -127,7 +141,7 @@ h1 {
     z-index: -1;
 }
 
-/* === RESTART BUTTON === */
+/* Styling for the restart button */
 .restart-button {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -143,55 +157,7 @@ h1 {
     margin-bottom: 150px;
 }
 
+/* Styling for restart button hover state */
 .restart-button:hover {
     background-color: #45a049;
-}
-
-/* === COINS DISPLAY === */
-#coin-display {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-    text-align: center;
-    margin-bottom: 20px;
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* === BET INPUT & BUTTON === */
-#bet-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-#bet-input {
-    width: 100px;
-    padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-#place-bet-button {
-    padding: 5px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    background-color: #ff9800;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#place-bet-button:hover {
-    background-color: #e68900;
 }
