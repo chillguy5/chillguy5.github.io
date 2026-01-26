@@ -4,8 +4,6 @@ const buttonContainer = document.querySelector('.button-container');
 // Define paths for images and videos
 const imageSrc = 'assets/img/icon/8.png'; // Icon image path
 const bombSrc = 'assets/img/icon/9.png'; // Bomb image path
-const winVideoSrc = 'assets/video/win.mp4'; // Video background path for winning
-const loseVideoSrc = 'assets/video/lose.mp4'; // Video background path for losing
 
 // Variables to track the bomb index and game state
 let bombIndex;
