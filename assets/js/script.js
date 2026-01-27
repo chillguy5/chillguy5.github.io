@@ -9,10 +9,46 @@ const bombSrc = 'assets/img/icon/9.png'; // Bomb image path
 let bombIndex;
 let gameEnded = false;
 
-// Function to create buttons with image
-function createButtons() {
-    // Generate random bomb index
-    bombIndex = Math.floor(Math.random() * 25);
+// ===== BETTING SYSTEM =====
+let coins = parseInt(localStorage.getItem('coins')) || 1000;
+let currentBet = 0;
+let gameActive = false;
+
+const coinsEl = document.querySelector('.coins');      // <span class="coins"></span>
+const betEl = document.querySelector('.current-bet'); // <span class="current-bet"></span>
+const betInput = document.querySelector('#betAmount'); // <input id="betAmount">
+const betBtn = document.querySelector('#placeBet');    // <button id="placeBet">
+
+function updateUI() {
+    coinsEl.textContent = coins;
+    betEl.textContent = currentBet;
+    localStorage.setItem('coins', coins);
+}
+
+betBtn.addEventListener('click', () => {
+    const amount = parseInt(betInput.value);
+
+    if (gameActive) return alert('Game already started');
+    if (!amount || amount <= 0) return alert('Invalid bet');
+    if (amount > coins) return alert('Not enough coins');
+
+    currentBet = amount;
+    coins -= amount;
+    gameActive = true;
+    updateUI();
+});
+
+button.addEventListener('click', () => {
+    if (!gameActive || gameEnded) return;
+
+    if (i === bombIndex) {
+        revealBomb(button);
+        loseGame();
+    } else {
+        revealImage(button);
+        checkWin();
+    }
+});
 
     // Loop to create buttons
     for (let i = 0; i < 25; i++) {
@@ -32,7 +68,6 @@ function createButtons() {
         });
         buttonContainer.appendChild(button);
     }
-}
 
 // Function to reveal image on button click
 function revealImage(button) {
@@ -56,59 +91,65 @@ function revealBomb(button) {
     }
 }
 
-// Function to handle game over
-function gameOver() {
+function loseGame() {
     gameEnded = true;
+    gameActive = false;
+    currentBet = 0;
+    updateUI();
+
     const video = document.createElement('video');
     video.src = loseVideoSrc;
     video.autoplay = true;
     video.loop = true;
-    video.muted = false;
     video.classList.add('video-background');
     document.body.appendChild(video);
-    
+
+    createRestart(video);
+}
+
+function createRestart(video) {
     const restartButton = document.createElement('button');
     restartButton.innerText = 'Restart Game';
     restartButton.classList.add('restart-button');
+
     restartButton.addEventListener('click', () => {
         resetGame();
         document.body.removeChild(video);
+        restartButton.remove();
     });
+
     document.body.appendChild(restartButton);
 }
 
-// Function to reset the game
 function resetGame() {
     gameEnded = false;
+    gameActive = false;
+    currentBet = 0;
     buttonContainer.innerHTML = '';
     createButtons();
-    const restartButton = document.querySelector('.restart-button');
-    if (restartButton) {
-        restartButton.parentNode.removeChild(restartButton);
-    }
+    updateUI();
 }
 
-// Function to check if the player has won
 function checkWin() {
     const clickedButtons = document.querySelectorAll('.clicked');
-    if (clickedButtons.length === 24) { // Total cells - bomb
+
+    if (clickedButtons.length === 24) {
         gameEnded = true;
+        gameActive = false;
+
+        const winAmount = currentBet * 2;
+        coins += winAmount;
+        currentBet = 0;
+        updateUI();
+
         const video = document.createElement('video');
         video.src = winVideoSrc;
         video.autoplay = true;
         video.loop = true;
-        video.muted = false;
         video.classList.add('video-background');
         document.body.appendChild(video);
-        
-        const restartButton = document.createElement('button');
-        restartButton.innerText = 'Restart Game';
-        restartButton.classList.add('restart-button');
-        restartButton.addEventListener('click', () => {
-            resetGame();
-            document.body.removeChild(video);
-        });
-        document.body.appendChild(restartButton);
+
+        createRestart(video);
     }
 }
 
