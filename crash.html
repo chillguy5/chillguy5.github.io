@@ -222,7 +222,6 @@ if (wager > coins) {
 canbet = false;
 setWager = wager;
 coins -= wager;
-localStorage.setItem("coins", coins);/
 betting = true;
 document.getElementById("button").style.background = "#55ff55";
 keepgoing = true;
@@ -230,7 +229,6 @@ set();
 					canbet = false;
 					setWager = document.getElementById("wager_value").value;
 					money = coins - document.getElementById("wager_value").value;
-                    localStorage.setItem("coins", coins);
 					betting = true;
 					document.getElementById("button").style.background = "#55ff55";
 					keepgoing = true;
@@ -302,7 +300,6 @@ set();
 				document.getElementById("button").style.background = "#ffffff";
 				betting = false;
 				coins = coins + setWager*multiplier;
-                localStorage.setItem("coins", coins);
 				if(multiplier > 0.5){
 					buttonText = "You profited " + Math.floor(((setWager*multiplier)-setWager)*100)/100 + " coins";
 					document.getElementById("multiplier").style.color = "#55ff55";
