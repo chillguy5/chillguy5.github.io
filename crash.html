@@ -293,6 +293,7 @@ if (wager > coins) {
 				document.getElementById("button").style.background = "#ffffff";
 				betting = false;
 				coins = coins + setWager*multiplier;
+				localStorage.setItem("coins", coins);
 				if(multiplier > 0.5){
 					buttonText = "You profited " + Math.floor(((setWager*multiplier)-setWager)*100)/100 + " coins";
 					document.getElementById("multiplier").style.color = "#55ff55";
@@ -323,7 +324,7 @@ if (wager > coins) {
 			}
 		}
 
-		localStorage.setItem("coins", coins);
+		
 		
 		function fast_forward(){
 			if(keepgoing){
