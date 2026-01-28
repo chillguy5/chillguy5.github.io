@@ -65,7 +65,7 @@
 			font-size:40;
 		}
 		
-		#money{
+		#coins{
 			position:absolute;
 			bottom:0px;
 			height:50px;
@@ -122,9 +122,9 @@
 		<div id="all_time_record">
 		
 		</div>
-		<div id="money">
+		<div id="coins">
 			<center>
-				<span id="money"></span>
+				<span id="coins"></span>
 			</center>
 		</div>
 		<div id="multiplier">
@@ -185,7 +185,7 @@
 			
 		function set(){
 			document.getElementById("button").innerText = buttonText;
-			document.getElementById("money").innerText = Math.floor(100*coins)/100 + " Coins";
+			document.getElementById("coins").innerText = Math.floor(100*coins)/100 + " Coins";
 
 		}
 		
@@ -194,13 +194,13 @@
 				if(canbet){
 					
 					if(document.getElementById("wager_value").value === "Palmer"){
-						alert("This program is dedicated to my friend, Palmer, maybe, with practice, he will not lose all my betting money. - Tyler Hudson");
+						alert("This program is dedicated to my friend, Palmer, maybe, with practice, he will not lose all my betting coins. - Tyler Hudson");
 					}
 					if(document.getElementById("wager_value").value === "Mitchell"){
 						alert("You wish you could program - Tyler Hudson");
 					}
 					if(document.getElementById("wager_value").value === "Jake"){
-					alert("Thanks for the bits, don't murder my money again - Tyler Hudson");
+					alert("Thanks for the bits, don't murder my coins again - Tyler Hudson");
 					}
 					
 					if(document.getElementById("wager_value").value === "Drew"){
@@ -219,7 +219,7 @@ if (wager > coins) {
 }
 					canbet = false;
 					setWager = document.getElementById("wager_value").value;
-					money = coins - document.getElementById("wager_value").value;
+					coins = coins - document.getElementById("wager_value").value;
 					betting = true;
 					document.getElementById("button").style.background = "#55ff55";
 					keepgoing = true;
