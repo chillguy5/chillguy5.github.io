@@ -217,15 +217,6 @@ if (wager > coins) {
 	alert("You don't have enough coins for that wager");
 	return;
 }
-
-// ✅ geldig
-canbet = false;
-setWager = wager;
-coins -= wager;
-betting = true;
-document.getElementById("button").style.background = "#55ff55";
-keepgoing = true;
-set();
 					canbet = false;
 					setWager = document.getElementById("wager_value").value;
 					money = coins - document.getElementById("wager_value").value;
@@ -236,10 +227,11 @@ set();
 						alert("Please wager a valid number of coins");
 						setWager = 0;
 					}
-					
+			
 					set();
 					
 				}
+				localStorage.setItem("coins", coins);
 			}
 		
 		
@@ -328,6 +320,7 @@ set();
 					set();
 				}, 3000)
 			}
+			localStorage.setItem("coins", coins);
 		}
 		
 		function fast_forward(){
