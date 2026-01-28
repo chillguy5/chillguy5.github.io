@@ -206,7 +206,26 @@
 					if(document.getElementById("wager_value").value === "Drew"){
 					alert("You've ruined all my previous versions of this game and you're a grammer Nazi... thanks for that...? - Tyler Hudson");
 					}
-					if(document.getElementById("wager_value").value<=coins && document.getElementById("wager_value").value>=1 ){
+					let wager = Number(document.getElementById("wager_value").value);
+
+if (!Number.isFinite(wager) || wager < 1) {
+	alert("Please wager a valid number of coins");
+	return;
+}
+
+if (wager > coins) {
+	alert("You don't have enough coins for that wager");
+	return;
+}
+
+// ✅ geldig
+canbet = false;
+setWager = wager;
+coins -= wager;
+betting = true;
+document.getElementById("button").style.background = "#55ff55";
+keepgoing = true;
+set();
 					canbet = false;
 					setWager = document.getElementById("wager_value").value;
 					money = coins - document.getElementById("wager_value").value;
@@ -222,7 +241,6 @@
 					
 				}
 			}
-		}
 		
 		
 		setInterval(function(){
