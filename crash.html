@@ -227,11 +227,10 @@ if (wager > coins) {
 						alert("Please wager a valid number of coins");
 						setWager = 0;
 					}
-			
+					localStorage.setItem("coins", coins);
 					set();
 					
 				}
-				localStorage.setItem("coins", coins);
 			}
 		
 		
@@ -320,7 +319,6 @@ if (wager > coins) {
 					set();
 				}, 3000)
 			}
-			localStorage.setItem("coins", coins);
 		}
 		
 		function fast_forward(){
