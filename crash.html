@@ -232,6 +232,8 @@ if (wager > coins) {
 					
 				}
 			}
+
+			localStorage.setItem("coins", coins);
 		
 		
 		setInterval(function(){
@@ -320,6 +322,8 @@ if (wager > coins) {
 				}, 3000)
 			}
 		}
+
+		localStorage.setItem("coins", coins);
 		
 		function fast_forward(){
 			if(keepgoing){
@@ -368,7 +372,7 @@ if (wager > coins) {
 			}
 		}}
 		
-		localStorage.setItem("coins", coins);
+		
 		
 	
 	</script>
