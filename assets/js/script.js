@@ -1,30 +1,32 @@
-// Selecting the button container element
+// ================= ELEMENTS =================
 const buttonContainer = document.querySelector('.button-container');
 
-// Define paths for images and videos
-const imageSrc = 'assets/img/icon/8.png'; // Icon image path
-const bombSrc = 'assets/img/icon/9.png'; // Bomb image path
+const imageSrc = 'assets/img/icon/8.png';
+const bombSrc = 'assets/img/icon/9.png';
 
-// Variables to track the bomb index and game state
+// ================= GAME STATE =================
 let bombIndex;
 let gameEnded = false;
 
-// ===== BETTING SYSTEM =====
+// ================= BETTING SYSTEM =================
 let coins = parseInt(localStorage.getItem('coins')) || 1000;
 let currentBet = 0;
 let gameActive = false;
 
-const coinsEl = document.querySelector('.coins');      // <span class="coins"></span>
-const betEl = document.querySelector('.current-bet'); // <span class="current-bet"></span>
-const betInput = document.querySelector('#betAmount'); // <input id="betAmount">
-const betBtn = document.querySelector('#placeBet');    // <button id="placeBet">
+const coinsEl = document.querySelector('.coins');
+const betEl = document.querySelector('.current-bet');
+const betInput = document.querySelector('#betAmount');
+const betBtn = document.querySelector('#placeBet');
 
+// ================= UI UPDATE =================
 function updateUI() {
-    coinsEl.textContent = coins;
-    betEl.textContent = currentBet;
+    if (coinsEl) coinsEl.textContent = coins;
+    if (betEl) betEl.textContent = currentBet;
     localStorage.setItem('coins', coins);
 }
+updateUI();
 
+// ================= PLACE BET =================
 betBtn.addEventListener('click', () => {
     const amount = parseInt(betInput.value);
 
@@ -38,75 +40,104 @@ betBtn.addEventListener('click', () => {
     updateUI();
 });
 
-button.addEventListener('click', () => {
-    if (!gameActive || gameEnded) return;
+// ================= CREATE BUTTONS =================
+function createButtons() {
+    buttonContainer.innerHTML = '';
+    bombIndex = Math.floor(Math.random() * 25);
+    gameEnded = false;
 
-    if (i === bombIndex) {
-        revealBomb(button);
-        loseGame();
-    } else {
-        revealImage(button);
-        checkWin();
-    }
-});
-
-    // Loop to create buttons
     for (let i = 0; i < 25; i++) {
         const button = document.createElement('div');
-        button.classList.add('cell');
-        button.classList.add('random-button'); // Apply random-button class
-        button.dataset.index = i; // Set data-index attribute
+        button.classList.add('cell', 'random-button');
+        button.dataset.index = i;
+
         button.addEventListener('click', () => {
-            if (gameEnded) return; // Prevent further clicks after game ends
+            if (!gameActive || gameEnded) return;
+
             if (i === bombIndex) {
                 revealBomb(button);
-                gameOver();
+                loseGame();
             } else {
                 revealImage(button);
                 checkWin();
             }
         });
+
         buttonContainer.appendChild(button);
     }
+}
 
-// Function to reveal image on button click
+// ================= REVEAL SAFE =================
 function revealImage(button) {
-    if (!button.classList.contains('clicked')) {
-        const image = document.createElement('img');
-        image.src = imageSrc;
-        button.appendChild(image);
-        setTimeout(() => { // Delay adding 'clicked' class to allow image insertion
-            button.classList.add('clicked'); // Add the 'clicked' class to the button
-        }, 10); // Adjust the delay as needed
-    }
-}
+    if (button.classList.contains('clicked')) return;
 
-// Function to reveal bomb on button click
-function revealBomb(button) {
-    if (!button.classList.contains('clicked')) {
-        const image = document.createElement('img');
-        image.src = bombSrc;
-        button.appendChild(image);
+    const image = document.createElement('img');
+    image.src = imageSrc;
+    button.appendChild(image);
+
+    setTimeout(() => {
         button.classList.add('clicked');
-    }
+    }, 10);
 }
 
+// ================= REVEAL BOMB =================
+function revealBomb(button) {
+    if (button.classList.contains('clicked')) return;
+
+    const image = document.createElement('img');
+    image.src = bombSrc;
+    button.appendChild(image);
+    button.classList.add('clicked');
+}
+
+// ================= LOSE GAME =================
 function loseGame() {
     gameEnded = true;
     gameActive = false;
     currentBet = 0;
     updateUI();
 
-    const video = document.createElement('video');
-    video.src = loseVideoSrc;
-    video.autoplay = true;
-    video.loop = true;
-    video.classList.add('video-background');
-    document.body.appendChild(video);
-
-    createRestart(video);
+    if (typeof loseVideoSrc !== 'undefined') {
+        const video = document.createElement('video');
+        video.src = loseVideoSrc;
+        video.autoplay = true;
+        video.loop = true;
+        video.classList.add('video-background');
+        document.body.appendChild(video);
+        createRestart(video);
+    } else {
+        alert('💣 You lost');
+    }
 }
 
+// ================= WIN CHECK =================
+function checkWin() {
+    const clickedButtons = document.querySelectorAll('.cell.clicked').length;
+
+    if (clickedButtons === 24) {
+        gameEnded = true;
+        gameActive = false;
+
+        const winAmount = currentBet * 2;
+        coins += winAmount;
+        currentBet = 0;
+        updateUI();
+
+        if (typeof winVideoSrc !== 'undefined') {
+            const video = document.createElement('video');
+            video.src = winVideoSrc;
+            video.autoplay = true;
+            video.loop = true;
+            video.classList.add('video-background');
+            document.body.appendChild(video);
+            createRestart(video);
+        } else {
+            alert(`🎉 You won ${winAmount} coins`);
+        }
+    }
+}
+
+// ================= RESTART BUTTON =================
 function createRestart(video) {
     const restartButton = document.createElement('button');
     restartButton.innerText = 'Restart Game';
@@ -114,13 +145,14 @@ function createRestart(video) {
 
     restartButton.addEventListener('click', () => {
         resetGame();
-        document.body.removeChild(video);
+        if (video) video.remove();
         restartButton.remove();
     });
 
     document.body.appendChild(restartButton);
 }
 
+// ================= RESET GAME =================
 function resetGame() {
     gameEnded = false;
     gameActive = false;
@@ -130,28 +162,5 @@ function resetGame() {
     updateUI();
 }
 
-function checkWin() {
-    const clickedButtons = document.querySelectorAll('.clicked');
-
-    if (clickedButtons.length === 24) {
-        gameEnded = true;
-        gameActive = false;
-
-        const winAmount = currentBet * 2;
-        coins += winAmount;
-        currentBet = 0;
-        updateUI();
-
-        const video = document.createElement('video');
-        video.src = winVideoSrc;
-        video.autoplay = true;
-        video.loop = true;
-        video.classList.add('video-background');
-        document.body.appendChild(video);
-
-        createRestart(video);
-    }
-}
-
-// Initialize the game
+// ================= INIT =================
 createButtons();
