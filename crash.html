@@ -151,7 +151,7 @@
 	
 		var buttonText = "Hold To Bet";
 		var multiplier = 1;
-		var coins = 100
+		var coins = Number(localStorage.getItem("coins")) || 0;
 		var betting = false;
 		var setWager = 0;
 		var bustedat = 0;
