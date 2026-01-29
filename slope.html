@@ -199,32 +199,42 @@ body, html {
     left: 0;
     width: 100%;
     height: 100px;
-    background-color: #900d27; /*zelfde als body achtergrond*/
+    background-color: #900d27; /* zelfde als body */
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 500; /* onder hamburger menu (1000) maar boven de content */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* subtiele schaduw voor diepte */
-    border-bottom: 2px solid #cd3f2b; /* accent rand */
+    z-index: 500; /* onder hamburger-menu */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: 2px solid #cd3f2b;
+    padding: 5px 0;
 }
 
 .header-content {
     text-align: center;
-    color: #f8f8d7; /* lichte tekstkleur voor contrast */
+    color: #f8f8d7;
 }
 
 .header-content h1 {
     margin: 0;
-    font-size: 32px;
+    font-size: 28px;
     letter-spacing: 1px;
 }
 
-.header-content p {
-    margin: 5px 0 0 0;
-    font-size: 16px;
-    font-style: italic;
+.header-content h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
     color: #f0e8b7;
+    font-style: italic;
 }
+
+.header-content p {
+    margin: 2px 0 0 0;
+    font-size: 14px;
+    color: #f8f8d7;
+}
+
 
 		
 </style>
@@ -255,6 +265,7 @@ body, html {
 <header id="main-header">
     <div class="header-content">
         <h1>Chill Guy Games</h1>
+        <h2>Slope</h2>
         <p>Play. Chill. Repeat.</p>
     </div>
 </header>
