@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Poker</title>
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #0b3d91;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
+}
+h1 { 
+    margin-bottom: 30px;
+	margin-top: 10px;
+    font-family: 'DM Serif Text', serif;
+    font-size: 75px;
+    color: yellow;
+    text-shadow:
+        -2px -2px 0 #39ace7,  /* Top-left */
+         2px -2px 0 #39ace7,  /* Top-right */
+        -2px  2px 0 #39ace7,  /* Bottom-left */
+         2px  2px 0 #39ace7;  /* Bottom-right */
+}
+.card-container {
+    display: flex;
+    justify-content: center;
+    height: 140px; /* Fixed space for cards */
+    margin: 30px 0;
+}
+.card {
+    width: 80px;
+    height: 120px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    user-select: none;
+    transform: scale(0);
+    transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.3s;
+}
+.card.held {
+    background-color: #ffcc00;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #fff;
+}
+.red { color: red; }
+
+button {
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    transition: background 0.3s, opacity 0.3s;
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+input[type=number] {
+    width: 80px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    padding: 4px;
+}
+.paytable {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 20px;
+    background-color: #052663;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: yellow;
+    border: 2px solid yellow;
+}
+.paytable div { margin: 3px 0; }
+#message {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    min-height: 24px; /* Prevent shifting when text appears */
+}
+.button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.button-row .betting {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+.button-row span.credits {
+    margin-left: 15px;
+    font-size: 18px;
+    color: red;
+    text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow, 1px 1px 0 yellow;
+}
+button.disabled-deal {
+    opacity: 0.6;
+    background-color: #0077ff;
+}
+button.disabled-draw {
+    opacity: 0.6;
+    background-color: #0077ff;
+}
+</style>
+</head>
+<body>
+
+<h1>JACKS OR BETTER</h1>
+
+<div class="paytable">
+    <div>Straight Flush: 50×</div>
+    <div>Four of a Kind: 25×</div>
+    <div>Full House: 9×</div>
+    <div>Flush: 6×</div>
+    <div>Straight: 4×</div>
+    <div>Three of a Kind: 3×</div>
+    <div>Two Pair: 2×</div>
+    <div>Jacks or Better: 1×</div>
+</div>
+
+<div id="message"></div>
+
+<div class="card-container" id="cards"></div>
+
+<div class="button-row">
+    <div class="betting">
+        <button id="minus">-</button>
+        <input type="number" id="bet" value="10" min="10" step="10">
+        <button id="plus">+</button>
+    </div>
+    <button id="deal">DEAL</button>
+    <button id="draw" disabled>DRAW</button>
+    <span class="credits">CREDITS: <span id="chips">1000</span></span>
+</div>
+
+<script>
+const suits = ['♠', '♥', '♦', '♣'];
+const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+let deck = [], hand = [], held = [false, false, false, false, false];
+let chips = 1000;
+let playingHand = false;
+
+const chipsEl = document.getElementById('chips');
+const betInput = document.getElementById('bet');
+const dealBtn = document.getElementById('deal');
+const drawBtn = document.getElementById('draw');
+const cardsContainer = document.getElementById('cards');
+const messageEl = document.getElementById('message');
+const plusBtn = document.getElementById('plus');
+const minusBtn = document.getElementById('minus');
+
+function createDeck() {
+    deck = [];
+    for (let suit of suits) {
+        for (let rank of ranks) deck.push({suit, rank});
+    }
+    deck.sort(()=>Math.random()-0.5);
+}
+
+function renderHand(animate=false) {
+    cardsContainer.innerHTML = '';
+    hand.forEach((card,i)=>{
+        const div = document.createElement('div');
+        div.className = 'card' + (held[i]?' held':'') + ((card.suit==='♥'||card.suit==='♦')?' red':'');
+        div.textContent = card.rank + card.suit;
+        div.onclick = () => {
+            if(!playingHand) return;
+            held[i] = !held[i];
+            renderHand();
+        };
+        cardsContainer.appendChild(div);
+        if(animate) setTimeout(()=>div.style.transform='scale(1)', i*100);
+        else div.style.transform='scale(1)';
+    });
+}
+
+function setBettingEnabled(enabled) {
+    betInput.disabled = !enabled;
+    plusBtn.disabled = !enabled;
+    minusBtn.disabled = !enabled;
+}
+
+function dealHand() {
+    const bet = parseInt(betInput.value);
+    if(isNaN(bet)||bet<=0){ alert("Enter a valid bet"); return; }
+    if(bet>chips){ alert("Not enough credits!"); return; }
+
+    animateChipChange(-bet);
+
+    hand = [];
+    held = [false,false,false,false,false];
+    for(let i=0;i<5;i++) hand.push(deck.pop());
+    renderHand(true);
+
+    dealBtn.classList.add('disabled-deal');
+    drawBtn.disabled = false;
+    drawBtn.classList.remove('disabled-draw');
+    setBettingEnabled(false);
+    messageEl.textContent='';
+    playingHand = true;
+}
+
+function drawCards() {
+    for(let i=0;i<5;i++) if(!held[i]) hand[i] = deck.pop();
+    renderHand(true);
+    const result = evaluateHand(hand);
+    const bet = parseInt(betInput.value);
+    const winnings = calculateWinnings(result,bet);
+    animateChipChange(winnings);
+    messageEl.textContent = result + (winnings>0?` (+${winnings})`:'');
+    drawBtn.classList.add('disabled-draw');
+    drawBtn.disabled = true;
+    dealBtn.classList.remove('disabled-deal');
+    setBettingEnabled(true);
+    playingHand = false;
+}
+
+// Smooth chip animation
+function animateChipChange(amount) {
+    const start = chips;
+    const end = chips + amount;
+    const duration = 500;
+    const startTime = performance.now();
+    function animate(time) {
+        const t = Math.min((time-startTime)/duration,1);
+        chipsEl.textContent = Math.floor(start + (end-start)*t);
+        if(t<1) requestAnimationFrame(animate);
+        else chips = end;
+    }
+    requestAnimationFrame(animate);
+}
+
+function evaluateHand(hand){
+    const ranksCount={}, suitsCount={};
+    const rankValues = hand.map(c=>ranks.indexOf(c.rank));
+    hand.forEach(c=>{
+        ranksCount[c.rank]=(ranksCount[c.rank]||0)+1;
+        suitsCount[c.suit]=(suitsCount[c.suit]||0)+1;
+    });
+    const isFlush = Object.values(suitsCount).some(v=>v===5);
+    const sorted = rankValues.slice().sort((a,b)=>a-b);
+    const isStraight = sorted.every((v,i,a)=>i===0||v===a[i-1]+1)||
+                       sorted.toString()===[0,1,2,3,12].toString();
+    const counts = Object.values(ranksCount).sort((a,b)=>b-a);
+    if(isStraight && isFlush) return "Straight Flush";
+    if(counts[0]===4) return "Four of a Kind";
+    if(counts[0]===3 && counts[1]===2) return "Full House";
+    if(isFlush) return "Flush";
+    if(isStraight) return "Straight";
+    if(counts[0]===3) return "Three of a Kind";
+    if(counts[0]===2 && counts[1]===2) return "Two Pair";
+    if(counts[0]===2){
+        for(let rank in ranksCount){
+            if(ranksCount[rank]===2 && ['J','Q','K','A'].includes(rank)) return "Jacks or Better";
+        }
+        return "No Winning Hand";
+    }
+    return "No Winning Hand";
+}
+
+function calculateWinnings(handName,bet){
+    const payouts = {
+        "Jacks or Better": 1,
+        "Two Pair": 2,
+        "Three of a Kind": 3,
+        "Straight": 4,
+        "Flush": 6,
+        "Full House": 9,
+        "Four of a Kind": 25,
+        "Straight Flush": 50
+    };
+    return payouts[handName]? bet*payouts[handName]:0;
+}
+
+dealBtn.onclick = ()=>{ createDeck(); dealHand(); };
+drawBtn.onclick = drawCards;
+
+plusBtn.onclick = ()=>{
+    let val = parseInt(betInput.value)||0;
+    val+=10;if(val>chips) val=chips; betInput.value=val;
+};
+minusBtn.onclick = ()=>{
+    let val = parseInt(betInput.value)||0;
+    val-=10;if(val<10) val=10; betInput.value=val;
+};
+</script>
+
+</body>
+</html>
