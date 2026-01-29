@@ -192,15 +192,53 @@
 </div>
 
 <script>
-    const banners = document.querySelectorAll('.banner');
-    let current = 0;
+const banners = document.querySelectorAll('.banner');
+let current = 0;
 
-    setInterval(() => {
-        banners[current].classList.remove('active');
-        current = (current + 1) % banners.length;
-        banners[current].classList.add('active');
-    }, 5000); // wissel elke 5 seconden
+function showBanner(index) {
+    banners.forEach((b, i) => {
+        b.classList.remove('active');
+    });
+
+    const banner = banners[index];
+    banner.classList.add('active');
+
+    // trigger pulse/tekst animatie precies bij switch
+    const headline = banner.querySelector('.headline');
+    const cta = banner.querySelector('.cta-button');
+
+    // reset animatie
+    headline.classList.remove('pulse');
+    cta.classList.remove('pulse');
+
+    // trigger opnieuw na 50ms zodat het pulse effect zichtbaar is
+    setTimeout(() => {
+        headline.classList.add('pulse');
+        cta.classList.add('pulse');
+    }, 50);
+}
+
+showBanner(current);
+
+setInterval(() => {
+    current = (current + 1) % banners.length;
+    showBanner(current);
+}, 5000);
 </script>
+
+<style>
+/* pulse animatie */
+.pulse {
+    animation: pulseOnce 1s forwards;
+}
+
+@keyframes pulseOnce {
+    0% { opacity: 0; transform: translateY(-20px); }
+    50% { opacity: 1; transform: translateY(0) scale(1.05); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+</style>
+
 
 </body>
 </html>
