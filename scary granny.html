@@ -139,11 +139,11 @@
 
 /* Standaard voor beide banners */
 .side-banner {
-    position: fixed;        /* Vast positioneren bij scrollen */
-    top: 100px;             /* Begin net onder je header/menu (pas dit aan naar hoogte header) */
-    width: 120px;           /* Breedte van de banner, pas aan naar wens */
-    height: calc(100% - 100px); /* Hoogte van scherm minus header */
-    z-index: 3;             /* Boven de content, maar onder menu als nodig */
+    position: fixed;                
+    top: 100px;                     /* onder header */
+    width: 200px;                   /* breder zodat alles zichtbaar is */
+    height: calc(100% - 100px);     /* vult van onder header tot onderkant scherm */
+    z-index: 5;                     /* boven iframe, onder header */
     border: none;
 }
 
@@ -157,10 +157,32 @@
     right: 0;
 }
 
+/* Zorg dat het iframe tussen de banners blijft */
+.frame-box-game {
+    margin: 0 210px; /* ruimte links en rechts voor banners (200px + beetje padding) */
+}
+
 /* Optioneel: iframe centraal laten staan */
 .frame-box-game {
     margin: 0 130px; /* Zorgt dat iframe ruimte heeft links en rechts voor banners */
 }
+
+/* Header + navigatie altijd vast bovenaan */
+header#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;   /* boven banners en content */
+    background-color: #f8f8d7; /* jouw gele balk kleur */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Zorg dat de rest van de pagina niet achter de header valt */
+#game-page {
+    padding-top: 100px; /* pas aan op hoogte van header */
+}
+
 
 		
 </style>
