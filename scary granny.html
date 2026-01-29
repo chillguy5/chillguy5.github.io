@@ -135,6 +135,33 @@
   height: 540px;
   transform: translate(-60%,-30%);
 }
+
+
+/* Standaard voor beide banners */
+.side-banner {
+    position: fixed;        /* Vast positioneren bij scrollen */
+    top: 100px;             /* Begin net onder je header/menu (pas dit aan naar hoogte header) */
+    width: 120px;           /* Breedte van de banner, pas aan naar wens */
+    height: calc(100% - 100px); /* Hoogte van scherm minus header */
+    z-index: 3;             /* Boven de content, maar onder menu als nodig */
+    border: none;
+}
+
+/* Linker banner */
+.left-banner {
+    left: 0;
+}
+
+/* Rechter banner */
+.right-banner {
+    right: 0;
+}
+
+/* Optioneel: iframe centraal laten staan */
+.frame-box-game {
+    margin: 0 130px; /* Zorgt dat iframe ruimte heeft links en rechts voor banners */
+}
+
 		
 </style>
 
@@ -202,6 +229,12 @@
 </div>
 <!--END Mobile menu--><!--GAME PLAY-->
 <div id="game-page" class="main">
+    <!-- Left Banner -->
+<iframe src="banner.html" class="side-banner left-banner" frameborder="0" scrolling="no"></iframe>
+
+<!-- Right Banner -->
+<iframe src="banner.html" class="side-banner right-banner" frameborder="0" scrolling="no"></iframe>
+
     <div class="container">
 
         <div class="row">
