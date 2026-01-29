@@ -168,23 +168,19 @@ body, html {
 }
 
 
-#game-page .container {
-    display: flex;
-    justify-content: center; /* center horizontaal */
-}
-
 .frame-box-game {
-    flex: 1;                      /* neemt alle beschikbare ruimte */
-    max-width: calc(100% - 600px);
-    margin: 0;                     /* geen auto nodig */
+    position: relative;
+    margin: 0 auto;             /* centrum horizontaal */
+    max-width: calc(100% - 440px); /* 220px banners links + rechts */
+    padding: 0;
 }
 
 .frame-box-game iframe {
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 100px); /* hoogte minus header */
+    display: block;
+    border: none;
 }
-
-
 
 
 
