@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slot Machine</title>
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  h1 {
+    font-family: 'Ultra', serif;
+    font-size: 80px;
+	margin-top: 10px;
+    margin-bottom: 20px;
+    color: red;
+	font-weight: normal;
+    -webkit-text-stroke: 2px white;
+    text-stroke: 2px white;
+  }
+
+  #slot-machine {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .reel {
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    border: 3px solid gold;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white; /* symbol background white */
+    position: relative;
+  }
+
+  .symbols {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+  }
+
+  .symbol {
+    width: 100px;
+    height: 100px;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #333;
+    background: white; /* ensure individual symbols are white */
+    color: black;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background: gold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #222;
+    font-weight: bold;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  #balance {
+    margin-top: 20px;
+    font-size: 1.5em;
+  }
+
+  #message {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: cyan;
+  }
+
+  table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #111;
+  }
+
+  table, th, td {
+    border: 1px solid gold;
+  }
+
+  th, td {
+    padding: 8px 12px;
+    font-size: 1.2em;
+  }
+
+  th {
+    background: gold;
+    color: #222;
+  }
+</style>
+</head>
+<body>
+
+<h1>JACKPOT</h1>
+
+<div id="slot-machine">
+  <div class="reel" id="reel1"><div class="symbols"></div></div>
+  <div class="reel" id="reel2"><div class="symbols"></div></div>
+  <div class="reel" id="reel3"><div class="symbols"></div></div>
+</div>
+
+<button id="spin">SPIN</button>
+<div id="balance">Balance: $100</div>
+<div id="message"></div>
+
+<h2>Payout Table</h2>
+<table>
+  <tr>
+    <th>Symbol</th>
+    <th>Payout (3x)</th>
+  </tr>
+  <tr><td>🍒</td><td>$10</td></tr>
+  <tr><td>🍋</td><td>$15</td></tr>
+  <tr><td>🍊</td><td>$20</td></tr>
+  <tr><td>⭐</td><td>$25</td></tr>
+  <tr><td>🔔</td><td>$40</td></tr>
+  <tr><td>💎</td><td>$50</td></tr>
+</table>
+
+<script>
+const symbols = ["🍒", "🍋", "🍊", "⭐", "🔔", "💎"];
+const payouts = { "🍒": 10, "🍋": 15, "🍊": 20, "⭐": 25, "🔔": 40, "💎": 50 };
+
+let balance = 100;
+const spinButton = document.getElementById("spin");
+const messageDiv = document.getElementById("message");
+
+// Initialize reels
+const reels = [document.querySelector("#reel1 .symbols"),
+               document.querySelector("#reel2 .symbols"),
+               document.querySelector("#reel3 .symbols")];
+
+reels.forEach(reel => {
+  symbols.forEach(sym => {
+    const div = document.createElement("div");
+    div.className = "symbol";
+    div.textContent = sym;
+    reel.appendChild(div);
+  });
+  // Duplicate symbols for looping
+  symbols.forEach(sym => {
+    const div = document.createElement("div");
+    div.className = "symbol";
+    div.textContent = sym;
+    reel.appendChild(div);
+  });
+});
+
+function spinReel(reel, finalIndex) {
+  return new Promise(resolve => {
+    const symbolHeight = 100;
+    const endPos = -(finalIndex + symbols.length) * symbolHeight; 
+
+    reel.style.transition = "top 2.5s ease-out";
+    reel.style.top = endPos + "px";
+
+    setTimeout(() => {
+      reel.style.transition = "none";
+      reel.style.top = -finalIndex * symbolHeight + "px";
+      resolve(finalIndex);
+    }, 2500);
+  });
+}
+
+async function spin() {
+  spinButton.disabled = true;
+  messageDiv.textContent = "";
+  balance -= 5; 
+  updateBalance();
+
+  const finalIndexes = reels.map(() => Math.floor(Math.random() * symbols.length));
+  const spinPromises = reels.map((reel, i) => spinReel(reel, finalIndexes[i]));
+
+  const results = await Promise.all(spinPromises);
+  const symbolsResult = results.map(i => symbols[i]);
+
+  const [s1, s2, s3] = symbolsResult;
+  if (s1 === s2 && s2 === s3) {
+    const winAmount = payouts[s1];
+    balance += winAmount;
+    messageDiv.textContent = `JACKPOT! 3x ${s1} = $${winAmount}`;
+  } else if (s1 === s2 || s2 === s3 || s1 === s3) {
+    const winAmount = Math.floor(payouts[s1] / 2);
+    balance += winAmount;
+    messageDiv.textContent = `WIN! Matching 2 symbols = $${winAmount}`;
+  } else {
+    messageDiv.textContent = "No win, try again!";
+  }
+
+  updateBalance();
+  spinButton.disabled = false;
+}
+
+function updateBalance() {
+  document.getElementById("balance").textContent = `Balance: $${balance}`;
+}
+
+spinButton.addEventListener("click", spin);
+</script>
+
+</body>
+</html>
