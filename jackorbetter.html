@@ -301,6 +301,14 @@ button.disabled-draw {
 </div>
 
 <script>
+
+      function menuOnClick() {
+document.getElementById("menu-bar").classList.toggle("change");
+document.getElementById("nav1").classList.toggle("change");
+document.getElementById("menu-bg").classList.toggle("change-bg");
+}
+
+
 const suits = ['♠', '♥', '♦', '♣'];
 const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 let deck = [], hand = [], held = [false, false, false, false, false];
