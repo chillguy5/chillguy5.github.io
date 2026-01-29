@@ -162,17 +162,18 @@ button.disabled-draw {
     </div>
     <button id="deal">DEAL</button>
     <button id="draw" disabled>DRAW</button>
-    <span class="credits">CREDITS: <span id="chips">1000</span></span>
+    <span class="credits">CREDITS: <span id="coins">0</span></span>
 </div>
 
 <script>
 const suits = ['♠', '♥', '♦', '♣'];
 const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 let deck = [], hand = [], held = [false, false, false, false, false];
-let chips = 1000;
+let coins = parseInt(localStorage.getItem("coins")) || 0; // start met 1000 als er niks is opgeslagen
+coinsEl.textContent = coins; // meteen de display updaten
 let playingHand = false;
 
-const chipsEl = document.getElementById('chips');
+const coinsEl = document.getElementById('coins');
 const betInput = document.getElementById('bet');
 const dealBtn = document.getElementById('deal');
 const drawBtn = document.getElementById('draw');
@@ -215,7 +216,7 @@ function setBettingEnabled(enabled) {
 function dealHand() {
     const bet = parseInt(betInput.value);
     if(isNaN(bet)||bet<=0){ alert("Enter a valid bet"); return; }
-    if(bet>chips){ alert("Not enough credits!"); return; }
+    if(bet>coins){ alert("Not enough credits!"); return; }
 
     animateChipChange(-bet);
 
@@ -247,17 +248,19 @@ function drawCards() {
     playingHand = false;
 }
 
-// Smooth chip animation
 function animateChipChange(amount) {
-    const start = chips;
-    const end = chips + amount;
+    const start = coins;
+    const end = coins + amount;
     const duration = 500;
     const startTime = performance.now();
     function animate(time) {
-        const t = Math.min((time-startTime)/duration,1);
-        chipsEl.textContent = Math.floor(start + (end-start)*t);
-        if(t<1) requestAnimationFrame(animate);
-        else chips = end;
+        const t = Math.min((time - startTime) / duration, 1);
+        coinsEl.textContent = Math.floor(start + (end - start) * t);
+        if (t < 1) requestAnimationFrame(animate);
+        else {
+            coins = end;
+            localStorage.setItem("coins", coins); // ⬅ update localStorage
+        }
     }
     requestAnimationFrame(animate);
 }
@@ -309,7 +312,7 @@ drawBtn.onclick = drawCards;
 
 plusBtn.onclick = ()=>{
     let val = parseInt(betInput.value)||0;
-    val+=10;if(val>chips) val=chips; betInput.value=val;
+    val+=10;if(val>coins) val=coins; betInput.value=val;
 };
 minusBtn.onclick = ()=>{
     let val = parseInt(betInput.value)||0;
