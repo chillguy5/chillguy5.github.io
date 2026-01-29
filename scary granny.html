@@ -195,6 +195,25 @@ header#header {
     z-index: 0; /* onder de banners en header */
 }
 
+
+.click-overlay {
+    position: fixed;
+    top: 100px; /* zelfde top als banner */
+    width: 300px; /* zelfde breedte als banner */
+    height: 620px; /* zelfde hoogte als banner */
+    cursor: pointer;
+    z-index: 10; /* boven de iframe */
+}
+
+/* Zorg dat overlay dezelfde positie krijgt als de banner */
+.click-overlay.left-banner {
+    left: 0;
+}
+
+.click-overlay.right-banner {
+    right: 0;
+}
+
 		
 </style>
 
@@ -247,14 +266,13 @@ header#header {
 
 
 <!-- Left Banner -->
-<a href="gamblerpalace.html" target="_blank">
-    <iframe src="banner.html" class="side-banner left-banner" frameborder="0" scrolling="no"></iframe>
-</a>
+<iframe src="banner.html" class="side-banner left-banner" frameborder="0" scrolling="no"></iframe>
+<div class="click-overlay left-banner" onclick="window.location.href='gamblerpalace.html'"></div>
 
 <!-- Right Banner -->
-<a href="gamblerpalace.html" target="_blank">
-    <iframe src="banner.html" class="side-banner right-banner" frameborder="0" scrolling="no"></iframe>
-</a>
+<iframe src="banner.html" class="side-banner right-banner" frameborder="0" scrolling="no"></iframe>
+<div class="click-overlay right-banner" onclick="window.location.href='gamblerpalace.html'"></div>
+
 
 
 </body>
