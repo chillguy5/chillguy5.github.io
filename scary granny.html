@@ -168,19 +168,28 @@ body, html {
 }
 
 
-.frame-box-game {
-    position: relative;
-    margin: 0 auto;
-    width: calc(100% - 600px); /* 300px + 300px */
-    padding: 0;
+/* Zorg dat container full width is */
+#game-page .container {
+    display: flex;
+    justify-content: center; /* horizontaal centreren */
 }
 
+/* Game frame exact tussen banners */
+.frame-box-game {
+    width: calc(100% - 600px); /* rekening houden met 300px banners links en rechts */
+    max-width: calc(100% - 600px);
+    padding: 0;
+    box-sizing: border-box; /* belangrijk */
+}
+
+/* iframe volledig vullen */
 .frame-box-game iframe {
     width: 100%;
-    height: calc(100vh - 100px); /* hoogte minus header */
+    height: calc(100vh - 100px);
     display: block;
     border: none;
 }
+
 
 
 
