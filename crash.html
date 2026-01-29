@@ -320,7 +320,7 @@ document.getElementById("menu-bg").classList.toggle("change-bg");
 			}
 			alltimegraph.getContext('2d').fillStyle = 'rgba(230, 230, 230, 1)'
 			alltimegraph.getContext('2d').fillRect(0, 150, 600, 1)
-			alltimegraph.getContext('2d').fillStyle = 'rgba(0, 0, 0, 1)'
+			alltimegraph.getContext('2d').fillStyle = '#f8f8d7'
 
 		}
 			
@@ -414,7 +414,7 @@ if (wager > coins) {
 					
 						if(betting){}else{
 							
-							document.getElementById("button").style.background = "#ffffff";
+							document.getElementById("button").style.background = "#900d27";
 						}
 						
 						buttonText = "Hold To Bet";
@@ -432,7 +432,7 @@ if (wager > coins) {
 		function out(){
 			if(betting){
 				
-				document.getElementById("button").style.background = "#ffffff";
+				document.getElementById("button").style.background = "#900d27";
 				betting = false;
 				coins = coins + setWager*multiplier;
 				localStorage.setItem("coins", coins);
@@ -502,7 +502,7 @@ if (wager > coins) {
 							if(betting){
 								
 							}else{
-								document.getElementById("button").style.background = "#ffffff";
+								document.getElementById("button").style.background = "#900d27";
 							}
 							document.getElementById("multiplier").style.color = "black";
 							document.getElementById("multiplier_text").innerText = "";
