@@ -1,225 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot Machine</title>
-<!-- Google Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet">
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #222;
-    color: #fff;
-    text-align: center;
-    padding-top: 50px;
-  }
-
-  h1 {
-    font-family: 'Ultra', serif;
-    font-size: 80px;
-	margin-top: 10px;
-    margin-bottom: 20px;
-    color: red;
-	font-weight: normal;
-    -webkit-text-stroke: 2px white;
-    text-stroke: 2px white;
-  }
-
-  #slot-machine {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .reel {
-    width: 100px;
-    height: 100px;
-    margin: 0 10px;
-    border: 3px solid gold;
-    border-radius: 10px;
-    overflow: hidden;
-    background: white; /* symbol background white */
-    position: relative;
-  }
-
-  .symbols {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-  }
-
-  .symbol {
-    width: 100px;
-    height: 100px;
-    font-size: 3em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #333;
-    background: white; /* ensure individual symbols are white */
-    color: black;
-  }
-
-  button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background: gold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #222;
-    font-weight: bold;
-  }
-
-  button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  #balance {
-    margin-top: 20px;
-    font-size: 1.5em;
-  }
-
-  #message {
-    margin-top: 10px;
-    font-size: 1.2em;
-    color: cyan;
-  }
-
-  table {
-    margin: 20px auto;
-    border-collapse: collapse;
-    background: #111;
-  }
-
-  table, th, td {
-    border: 1px solid gold;
-  }
-
-  th, td {
-    padding: 8px 12px;
-    font-size: 1.2em;
-  }
-
-  th {
-    background: gold;
-    color: #222;
-  }
-</style>
+    <title>Slot Machine</title>
+    <link rel="stylesheet" type="text/css" href="css/browser_reset.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
+<html>
 <body>
-
-<h1>JACKPOT</h1>
-
-<div id="slot-machine">
-  <div class="reel" id="reel1"><div class="symbols"></div></div>
-  <div class="reel" id="reel2"><div class="symbols"></div></div>
-  <div class="reel" id="reel3"><div class="symbols"></div></div>
+<main>
+	<div class="status" id="status">SPIN TO WIN!</div>
+	<div class="slots">
+		<div id="slot1" class="a1"></div>
+		<div id="slot2" class="a1"></div>
+		<div id="slot3" class="a1"></div>
+    </div>
+	<button type="submit" value="Submit" class="button"  onclick="return gamble(y)" style="vertical-align:middle"><span>SPIN</span></button>
+   
+<div>
+	<input type="image" src="images/20pokerchip.png" onCLick="addbet(20)" class="pokerchip" alt="20 poker chip" width="150" height=auto>
+	<input type="image" src="images/50pokerchip.png" onCLick="addbet(50)" class="pokerchip" alt="50 poker chip" width="150" height=auto>
+	<input type="image" src="images/100pokerchip.png" onCLick="addbet(100)" class="pokerchip" alt="100 poker chip" width="150" height=auto>
+	
 </div>
 
-<button id="spin">SPIN</button>
-<div id="balance">Balance: $100</div>
-<div id="message"></div>
-
-<h2>Payout Table</h2>
+<div class="status">
 <table>
-  <tr>
-    <th>Symbol</th>
-    <th>Payout (3x)</th>
-  </tr>
-  <tr><td>🍒</td><td>$10</td></tr>
-  <tr><td>🍋</td><td>$15</td></tr>
-  <tr><td>🍊</td><td>$20</td></tr>
-  <tr><td>⭐</td><td>$25</td></tr>
-  <tr><td>🔔</td><td>$40</td></tr>
-  <tr><td>💎</td><td>$50</td></tr>
-</table>
+	<tr>
+		<td id="message1">Money: $1000</td>
+		<td id="message2">Now Betting: $0</td>
+    </tr>
+	</table>
+</div>
+</main>
 
 <script>
-const symbols = ["🍒", "🍋", "🍊", "⭐", "🔔", "💎"];
-const payouts = { "🍒": 10, "🍋": 15, "🍊": 20, "⭐": 25, "🔔": 40, "💎": 50 };
+var action = false;
+let status = document.getElementById("status")
+var x = 1000;
+var y = 0;
 
-let balance = 100;
-const spinButton = document.getElementById("spin");
-const messageDiv = document.getElementById("message");
+function addbet(amount){
 
-// Initialize reels
-const reels = [document.querySelector("#reel1 .symbols"),
-               document.querySelector("#reel2 .symbols"),
-               document.querySelector("#reel3 .symbols")];
+	if (y > x) {
+		y = 0;
+		document.getElementById("status").innerHTML = "Not enough funds."
+	} else {
+		
+		if (amount == "20") { 
+			y = y + 20;
+		} else if (amount == "50"){
+			y = y + 50;
+		} else if (amount == "100"){
+			y = y + 100;
+		}
+	}
+		document.getElementById("message2").innerHTML = "Now Betting: $" + y
+		return y
+	}
 
-reels.forEach(reel => {
-  symbols.forEach(sym => {
-    const div = document.createElement("div");
-    div.className = "symbol";
-    div.textContent = sym;
-    reel.appendChild(div);
-  });
-  // Duplicate symbols for looping
-  symbols.forEach(sym => {
-    const div = document.createElement("div");
-    div.className = "symbol";
-    div.textContent = sym;
-    reel.appendChild(div);
-  });
-});
+function gamble(y){
+	if (action){return null;}
+	action = true;
 
-function spinReel(reel, finalIndex) {
-  return new Promise(resolve => {
-    const symbolHeight = 100;
-    const endPos = -(finalIndex + symbols.length) * symbolHeight; 
+	if (y > x) {
+		document.getElementById("status").innerHTML = "Not enough funds."
+		y = 0;
+		document.getElementById("message2").innerHTML =  "Now Betting: $" + y
+		action = false;
+		return y
+	}else{
+		var numChanges = randomInt(1,4)*7
+		var numberSlot1 = numChanges+randomInt(1,7)
+		var numberSlot2 = numChanges+2*7+randomInt(1,7)
+		var numberSlot3 = numChanges+4*7+randomInt(1,7)
 
-    reel.style.transition = "top 2.5s ease-out";
-    reel.style.top = endPos + "px";
+		var i1 = 0;
+		var i2 = 0;
+		var i3 = 0;
+		status.innerHTML = "SPINNING"
+		slot1 = setInterval(spin1, 50);
+		slot2 = setInterval(spin2, 50);
+		slot3 = setInterval(spin3, 50);
+	}
 
-    setTimeout(() => {
-      reel.style.transition = "none";
-      reel.style.top = -finalIndex * symbolHeight + "px";
-      resolve(finalIndex);
-    }, 2500);
-  });
+	function spin1(){
+		i1++;
+		if (i1>=numberSlot1){
+			clearInterval(slot1);
+			return null;
+		}
+		slotTile = document.getElementById("slot1");
+		if (slotTile.className=="a7"){
+			slotTile.className = "a0";
+		}
+		slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+	}
+	function spin2(){
+		i2++;
+		if (i2>=numberSlot2){
+			
+			clearInterval(slot2);
+			return null;
+		}
+		slotTile = document.getElementById("slot2");
+		if (slotTile.className=="a7"){
+			slotTile.className = "a0";
+		}
+		slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+	}
+	function spin3(){
+		i3++;
+		if (i3>=numberSlot3){
+			
+			clearInterval(slot3);
+			testWin();
+			return null;
+		}
+		slotTile = document.getElementById("slot3");
+		if (slotTile.className=="a7"){
+			slotTile.className = "a0";
+		}
+
+		slotTile.className = "a"+(parseInt(slotTile.className.substring(1))+1)
+	}
 }
 
-async function spin() {
-  spinButton.disabled = true;
-  messageDiv.textContent = "";
-  balance -= 5; 
-  updateBalance();
+function testWin(){
+	var slot1 = document.getElementById("slot1").className
+	var slot2 = document.getElementById("slot2").className
+	var slot3 = document.getElementById("slot3").className
 
-  const finalIndexes = reels.map(() => Math.floor(Math.random() * symbols.length));
-  const spinPromises = reels.map((reel, i) => spinReel(reel, finalIndexes[i]));
-
-  const results = await Promise.all(spinPromises);
-  const symbolsResult = results.map(i => symbols[i]);
-
-  const [s1, s2, s3] = symbolsResult;
-  if (s1 === s2 && s2 === s3) {
-    const winAmount = payouts[s1];
-    balance += winAmount;
-    messageDiv.textContent = `JACKPOT! 3x ${s1} = $${winAmount}`;
-  } else if (s1 === s2 || s2 === s3 || s1 === s3) {
-    const winAmount = Math.floor(payouts[s1] / 2);
-    balance += winAmount;
-    messageDiv.textContent = `WIN! Matching 2 symbols = $${winAmount}`;
-  } else {
-    messageDiv.textContent = "No win, try again!";
-  }
-
-  updateBalance();
-  spinButton.disabled = false;
+	if (((slot1 == slot2 && slot2 == slot3) ||
+		(slot1 == slot2 && slot3 == "a7") ||
+		(slot1 == slot3 && slot2 == "a7") ||
+		(slot2 == slot3 && slot1 == "a7") ||
+		(slot1 == slot2 && slot1 == "a7") ||
+		(slot1 == slot3 && slot1 == "a7") ||
+		(slot2 == slot3 && slot2 == "a7") ) && !(slot1 == slot2 && slot2 == slot3 && slot1=="a7")){
+		status.innerHTML = "YOU WIN!";
+		var result = ~y + 1; //negative value
+		
+	}else{
+		status.innerHTML = "YOU LOSE!"
+		var result = y; //positive value
+	}
+	x = x - result;
+	if (x <= 0) { 
+			x = 0;
+	}
+	document.getElementById("message1").innerHTML = "Money: $" + x	
+	action = false;
 }
 
-function updateBalance() {
-  document.getElementById("balance").textContent = `Balance: $${balance}`;
+function randomInt(min, max){
+	return Math.floor((Math.random() * (max-min+1)) + min);
 }
-
-spinButton.addEventListener("click", spin);
 </script>
-
 </body>
 </html>
