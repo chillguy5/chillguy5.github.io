@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/overig/icon.png">
-    <title>Chill Guy Games</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="content-language" content="en">
+    <meta name="external" content="true">
+    <meta name="distribution" content="Global">
+    <meta http-equiv="audience" content="General">
+    <link rel="icon" href="rs/imgs/doodle-jump.jpg1.JPG">
+    <title>Flappy Bird - chill guy games</title>
+    <meta name="keywords" content="Flappy Bird">
+    <meta name="news_keywords" content="Flappy Bird">
+    <meta name="description" content="Flappy Bird - chill guy games">
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <style>
@@ -13,7 +25,6 @@ body, html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #900d27; /* donkerrood */
 }
 
 .container, .row {
@@ -45,7 +56,7 @@ body, html {
 
 
 #menu {
-  z-index: 1000;
+  z-index: 2;
 }
 
 #menu-bar {
@@ -103,7 +114,7 @@ body, html {
 }
 
 .menu-bg {
-  z-index: 999;
+  z-index: 1;
   width: 0;
   height: 0;
   margin: 30px 0 20px 20px;
@@ -156,6 +167,18 @@ body, html {
     right: 0;
 }
 
+
+header#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;   /* precies 100px hoog */
+    z-index: 999;           
+    background-color: #f8f8d7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 #game-page {
     padding-top: 100px; /* gelijk aan header hoogte */
 }
@@ -191,54 +214,14 @@ body, html {
     right: 0;
 }
 
-
-/* HEADER */
-#main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background-color: #900d27; /* zelfde als body */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 500; /* onder hamburger-menu */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border-bottom: 2px solid #cd3f2b;
-    padding: 5px 0;
-}
-
-.header-content {
-    text-align: center;
-    color: #f8f8d7;
-}
-
-.header-content h1 {
-    margin: 0;
-    font-size: 28px;
-    letter-spacing: 1px;
-}
-
-.header-content h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: normal;
-    color: #f0e8b7;
-    font-style: italic;
-}
-
-.header-content p {
-    margin: 2px 0 0 0;
-    font-size: 14px;
-    color: #f8f8d7;
-}
-
 		
 </style>
 
 <body><!--MENU-->
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="p-r d-flex sp al header-bar">
 
                 <nav class="navigation">
                     <div id="menu">
@@ -258,17 +241,20 @@ body, html {
                       
                       <div class="menu-bg" id="menu-bg"></div>
                 </nav>
-
-
-<!-- HEADER -->
-<header id="main-header">
-    <div class="header-content">
-        <h1>Chill Guy Games</h1>
-        <h2>Flappy Bird</h2>
-        <p>Play. Chill. Repeat.</p>
+                <div class="center-box merge_icon icon-menu-mobile">
+                    <svg fill="#555" height="24" viewBox="0 -21 384 384" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m362.667969 0h-341.335938c-11.753906 0-21.332031 9.578125-21.332031 21.332031v42.667969c0 11.753906 9.578125 21.332031 21.332031 21.332031h341.335938c11.753906 0 21.332031-9.578125 21.332031-21.332031v-42.667969c0-11.753906-9.578125-21.332031-21.332031-21.332031zm0 0">
+                        </path>
+                        <path d="m362.667969 128h-341.335938c-11.753906 0-21.332031 9.578125-21.332031 21.332031v42.667969c0 11.753906 9.578125 21.332031 21.332031 21.332031h341.335938c11.753906 0 21.332031-9.578125 21.332031-21.332031v-42.667969c0-11.753906-9.578125-21.332031-21.332031-21.332031zm0 0">
+                        </path>
+                        <path d="m362.667969 256h-341.335938c-11.753906 0-21.332031 9.578125-21.332031 21.332031v42.667969c0 11.753906 9.578125 21.332031 21.332031 21.332031h341.335938c11.753906 0 21.332031-9.578125 21.332031-21.332031v-42.667969c0-11.753906-9.578125-21.332031-21.332031-21.332031zm0 0">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
-
 
 <!-- Game iframe -->
 <iframe 
