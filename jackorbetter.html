@@ -169,9 +169,6 @@ button.disabled-draw {
 const suits = ['♠', '♥', '♦', '♣'];
 const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 let deck = [], hand = [], held = [false, false, false, false, false];
-let coins = parseInt(localStorage.getItem("coins")) || 0; // start met 1000 als er niks is opgeslagen
-coinsEl.textContent = coins; // meteen de display updaten
-let playingHand = false;
 
 const coinsEl = document.getElementById('coins');
 const betInput = document.getElementById('bet');
@@ -181,6 +178,15 @@ const cardsContainer = document.getElementById('cards');
 const messageEl = document.getElementById('message');
 const plusBtn = document.getElementById('plus');
 const minusBtn = document.getElementById('minus');
+
+// Coins ophalen uit localStorage (of starten met 0)
+let coins = parseInt(localStorage.getItem("coins")) || 0;
+
+// Direct de display updaten
+coinsEl.textContent = coins;
+
+let playingHand = false;
+
 
 function createDeck() {
     deck = [];
