@@ -135,64 +135,10 @@
   height: 540px;
   transform: translate(-60%,-30%);
 }
-
-.side-banner {
-    width: 300px;
-    height: 600px;
-    border: none;
-    position: sticky;
-    top: 20px;
-}
-
-.page-layout {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.main-content {
-    flex: 1;
-    min-width: 0; /* SUPER belangrijk voor iframes */
-}
-
-.left-banner {
-    position: fixed;
-    left: 20px;
-    top: 100px;
-}
-
-.right-banner {
-    position: fixed;
-    right: 20px;
-    top: 100px;
-}
-
-#header,
-#menu,
-.menu-bg {
-    position: relative;
-    z-index: 9999;
-}
-
-@media (max-width: 1200px) {
-    .side-banner {
-        display: none;
-    }
-}
-
 		
 </style>
 
 <body><!--MENU-->
-
-<div class="page-layout">
-    <iframe class="side-banner left-banner" src="banner.html"></iframe>
-
-    <div class="main-content">
-        
 <header id="header">
     <div class="container">
         <div class="row">
@@ -324,14 +270,6 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/footer.js"></script>
 </footer>
-
-    </div>
-
-    <iframe class="side-banner right-banner" src="banner.html"></iframe>
-</div>
-
-
-
 </body>
 
 <script>
