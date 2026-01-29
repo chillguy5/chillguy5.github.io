@@ -170,17 +170,19 @@ body, html {
 
 .frame-box-game {
     position: relative;
-    margin: 0 auto;             /* centrum horizontaal */
-    max-width: calc(100% - 440px); /* 220px banners links + rechts */
+    margin: 0 auto;                     /* horizontaal centreren */
+    max-width: calc(100% - 600px);      /* 2 banners van 300px */
+    width: 100%;                         /* neemt max-width op bij grotere schermen */
     padding: 0;
 }
 
 .frame-box-game iframe {
-    width: 100%;
-    height: calc(100vh - 100px); /* hoogte minus header */
+    width: 100%;                         /* vult de container volledig */
+    height: calc(100vh - 100px);         /* hoogte minus header */
     display: block;
     border: none;
 }
+
 
 
 
