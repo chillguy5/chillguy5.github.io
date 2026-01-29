@@ -48,7 +48,7 @@ body, html {
         }
 
         .stats-icon {
-            width: 30px; /* Pas de grootte aan src="https://html5.gamemonetize.co/i35ipo13fha7y40orjryy7ylg8drtfmb/" */
+            width: 30px; /* Pas de grootte aan */
             height: 30px;
             margin-right: 5px;
             vertical-align: middle;
@@ -182,6 +182,19 @@ header#header {
 #game-page {
     padding-top: 100px; /* gelijk aan header hoogte */
 }
+
+#game-frame {
+    position: fixed;
+    top: 100px; /* hoogte van je header */
+    left: 300px; /* breedte van je linker banner */
+    right: 300px; /* breedte van je rechter banner */
+    bottom: 0; /* tot aan de onderkant van het scherm */
+    width: auto;
+    height: auto;
+    border: none;
+    z-index: 0; /* onder de banners en header */
+}
+
 		
 </style>
 
@@ -223,6 +236,15 @@ header#header {
         </div>
     </div>
 </header>
+
+<!-- Game iframe -->
+<iframe 
+    src="https://html5.gamemonetize.co/i35ipo13fha7y40orjryy7ylg8drtfmb/" 
+    id="game-frame" 
+    frameborder="0" 
+    scrolling="no">
+</iframe>
+
 
     <!-- Left Banner -->
 <iframe src="banner.html" class="side-banner left-banner" frameborder="0" scrolling="no"></iframe>
