@@ -144,3 +144,24 @@ main{
 .a7{
 	background-image: url("../images/slots/crown.png");
 }
+
+.chip-container {
+	display: flex;
+	flex-wrap: wrap;      /* naar volgende regel als het te vol is */
+	justify-content: center; /* centeren horizontaal */
+	gap: 10px;            /* ruimte tussen de chips */
+	margin-bottom: 20px;  /* wat ruimte onder chips */
+}
+
+.pokerchip {
+	width: 100px;   /* iets kleiner, zodat er meer naast elkaar passen */
+	height: auto;
+	cursor: pointer;
+	outline: none;
+	transition: transform 0.1s;
+}
+
+.pokerchip:active {
+	transform: translateY(4px);
+}
+
