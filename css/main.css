@@ -34,17 +34,18 @@ td {
 	vertical-align: top;
 }
 
-main{
-	align-items: center;
+main {
+	display: flex;
+	flex-direction: column; /* inhoud onder elkaar */
+	align-items: center;    /* horizontaal centreren van inhoud */
 	border-radius: 12px;
 	background-color: rgb(45, 78, 226);
-	margin-top: 30px;
-	padding-top: 20px;
-	padding-bottom: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
-	width: 1000px;
+	margin: 30px auto;      /* 30px van boven en onder, auto voor horizontaal centreren */
+	padding: 20px;
+	width: 1000px;          /* breedte container */
+	box-sizing: border-box; /* padding telt mee in breedte */
 }
+
 
 .slots{
 	border-radius: 12px;
