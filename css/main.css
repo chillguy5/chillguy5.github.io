@@ -42,7 +42,7 @@ main {
 	background-color: rgb(45, 78, 226);
 	margin: 30px auto;      /* 30px van boven en onder, auto voor horizontaal centreren */
 	padding: 20px;
-	width: 1000px;          /* breedte container */
+	width: 1500px;          /* breedte container */
 	box-sizing: border-box; /* padding telt mee in breedte */
 }
 
