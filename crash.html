@@ -438,7 +438,7 @@ if (wager > coins) {
 				
 				document.getElementById("button").style.background = "#900d27";
 				betting = false;
-				coins = coins + setWager*multiplier;
+				coins = Math.floor(coins + setWager * multiplier);
 				localStorage.setItem("coins", coins);
 				if(multiplier > 0.5){
 					buttonText = "You profited " + Math.floor(((setWager*multiplier)-setWager)*100)/100 + " coins";
