@@ -45,10 +45,11 @@
 
 
 <script>
-var action = false;
+
+	var action = false;
 let status = document.getElementById("status");
 
-// coins uit localStorage laden of start op 1000
+// coins uit localStorage laden of start op 0
 var coins = Number(localStorage.getItem("coins")) || 0;
 var y = 0; // huidige inzet
 
@@ -58,136 +59,174 @@ document.getElementById("message2").innerHTML = "Now Betting: $0";
 
 // functie om chips toe te voegen
 function addbet(amount){
-	// check of het de all-in chip is
-	if(amount === "allin"){
-		if(coins <= 0){
-			status.innerHTML = "You have no coins!";
-			return;
-		}
-		y = coins; // alles inzetten
-		document.getElementById("message2").innerHTML = "Now Betting: $" + y;
-		status.innerHTML = "All in!";
-		return;
-	}
+    // check of het de all-in chip is
+    if(amount === "allin"){
+        if(coins <= 0){
+            status.innerHTML = "You have no coins!";
+            return;
+        }
+        y = coins; // alles inzetten
+        document.getElementById("message2").innerHTML = "Now Betting: $" + y;
+        status.innerHTML = "All in!";
+        return;
+    }
 
-	// normale chips
-	if (y + amount > coins) {
-		status.innerHTML = "Not enough funds.";
-		return;
-	}
+    // normale chips
+    if (y + amount > coins) {
+        status.innerHTML = "Not enough funds.";
+        return;
+    }
 
-	y += amount;
-	document.getElementById("message2").innerHTML = "Now Betting: $" + y;
-	status.innerHTML = "Bet placed.";
+    y += amount;
+    document.getElementById("message2").innerHTML = "Now Betting: $" + y;
+    status.innerHTML = "Bet placed.";
 }
 
 // spin functie (oude logica behouden)
 function gamble(y){
-	if (action) return;
+    if (action) return;
 
-	if (y <= 0) {
-		status.innerHTML = "Place a bet first!";
-		return;
-	}
+    if (y <= 0) {
+        status.innerHTML = "Place a bet first!";
+        return;
+    }
 
-	if (y > coins) {
-		status.innerHTML = "Not enough funds.";
-		y = 0;
-		document.getElementById("message2").innerHTML = "Now Betting: $0";
-		return;
-	}
+    if (y > coins) {
+        status.innerHTML = "Not enough funds.";
+        y = 0;
+        document.getElementById("message2").innerHTML = "Now Betting: $0";
+        return;
+    }
 
-	action = true;
+    action = true;
 
-	var numChanges = randomInt(1,4)*7;
-	var numberSlot1 = numChanges + randomInt(1,7);
-	var numberSlot2 = numChanges + 2*7 + randomInt(1,7);
-	var numberSlot3 = numChanges + 4*7 + randomInt(1,7);
+    var numChanges = randomInt(1,4)*7;
+    var numberSlot1 = numChanges + randomInt(1,7);
+    var numberSlot2 = numChanges + 2*7 + randomInt(1,7);
+    var numberSlot3 = numChanges + 4*7 + randomInt(1,7);
 
-	var i1 = 0;
-	var i2 = 0;
-	var i3 = 0;
+    var i1 = 0;
+    var i2 = 0;
+    var i3 = 0;
 
-	status.innerHTML = "SPINNING";
+    status.innerHTML = "SPINNING";
 
-	slot1 = setInterval(spin1, 50);
-	slot2 = setInterval(spin2, 50);
-	slot3 = setInterval(spin3, 50);
+    slot1 = setInterval(spin1, 50);
+    slot2 = setInterval(spin2, 50);
+    slot3 = setInterval(spin3, 50);
 
-	function spin1(){
-		i1++;
-		if (i1 >= numberSlot1){
-			clearInterval(slot1);
-			return null;
-		}
-		let slotTile = document.getElementById("slot1");
-		if (slotTile.className == "a7") slotTile.className = "a0";
-		slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
-	}
+    function spin1(){
+        i1++;
+        if (i1 >= numberSlot1){
+            clearInterval(slot1);
+            return null;
+        }
+        let slotTile = document.getElementById("slot1");
+        if (slotTile.className == "a7") slotTile.className = "a0";
+        slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
+    }
 
-	function spin2(){
-		i2++;
-		if (i2 >= numberSlot2){
-			clearInterval(slot2);
-			return null;
-		}
-		let slotTile = document.getElementById("slot2");
-		if (slotTile.className == "a7") slotTile.className = "a0";
-		slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
-	}
+    function spin2(){
+        i2++;
+        if (i2 >= numberSlot2){
+            clearInterval(slot2);
+            return null;
+        }
+        let slotTile = document.getElementById("slot2");
+        if (slotTile.className == "a7") slotTile.className = "a0";
+        slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
+    }
 
-	function spin3(){
-		i3++;
-		if (i3 >= numberSlot3){
-			clearInterval(slot3);
-			testWin();
-			return null;
-		}
-		let slotTile = document.getElementById("slot3");
-		if (slotTile.className == "a7") slotTile.className = "a0";
-		slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
-	}
+    function spin3(){
+        i3++;
+        if (i3 >= numberSlot3){
+            clearInterval(slot3);
+            testWin();
+            return null;
+        }
+        let slotTile = document.getElementById("slot3");
+        if (slotTile.className == "a7") slotTile.className = "a0";
+        slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
+    }
 }
 
-// win / lose logica
+// win / lose logica met nieuwe uitbetalingen
 function testWin(){
-	var slot1 = document.getElementById("slot1").className;
-	var slot2 = document.getElementById("slot2").className;
-	var slot3 = document.getElementById("slot3").className;
+    var slot1 = document.getElementById("slot1").className;
+    var slot2 = document.getElementById("slot2").className;
+    var slot3 = document.getElementById("slot3").className;
 
-	let win =
-		((slot1 == slot2 && slot2 == slot3) ||
-		(slot1 == slot2 && slot3 == "a7") ||
-		(slot1 == slot3 && slot2 == "a7") ||
-		(slot2 == slot3 && slot1 == "a7") ||
-		(slot1 == slot2 && slot1 == "a7") ||
-		(slot1 == slot3 && slot1 == "a7") ||
-		(slot2 == slot3 && slot2 == "a7"))
-		&& !(slot1 == slot2 && slot2 == slot3 && slot1 == "a7");
+    let payout = 0; // hoeveel je wint
 
-	if (win){
-		status.innerHTML = "YOU WIN!";
-		coins += y;
-	} else {
-		status.innerHTML = "YOU LOSE!";
-		coins -= y;
-		if (coins < 0) coins = 0;
-	}
+    // mapping van symbool naar multiplier
+    const multipliers2 = {
+        "a3": 2, // strawberry
+        "a6": 2, // star
+        "a2": 3, // cherry
+        "a5": 3, // clover
+        "a4": 4, // diamond
+        "a7": 4, // crown
+        "a1": 5  // seven
+    };
 
-	y = 0; // inzet reset
-	document.getElementById("message1").innerHTML = "Money: $" + coins;
-	document.getElementById("message2").innerHTML = "Now Betting: $0";
+    const multipliers3 = {
+        "a3": 6,
+        "a6": 6,
+        "a2": 7,
+        "a5": 7,
+        "a4": 8,
+        "a7": 8,
+        "a1": 10
+    };
 
-	// localStorage bijwerken
-	localStorage.setItem("coins", coins);
+    // teller van hoeveel dezelfde symbolen
+    const symbols = [slot1, slot2, slot3];
+    const counts = {};
+    symbols.forEach(s => counts[s] = (counts[s] || 0) + 1);
 
-	action = false;
+    // check voor 3 dezelfde
+    for(let sym in counts){
+        if(counts[sym] === 3){
+            payout = y * (multipliers3[sym] || 0);
+            break;
+        }
+    }
+
+    // check voor 2 dezelfde (als 3 dezelfde al was, wordt dit niet meer uitgevoerd)
+    if(payout === 0){
+        for(let sym in counts){
+            if(counts[sym] === 2){
+                payout = y * (multipliers2[sym] || 0);
+                break;
+            }
+        }
+    }
+
+    // win of verlies
+    if(payout > 0){
+        status.innerHTML = "YOU WIN! +" + payout + " coins";
+        coins += payout;
+    } else {
+        status.innerHTML = "YOU LOSE!";
+        coins -= y;
+        if(coins < 0) coins = 0;
+    }
+
+    y = 0; // inzet reset
+    document.getElementById("message1").innerHTML = "Money: $" + coins;
+    document.getElementById("message2").innerHTML = "Now Betting: $0";
+
+    // localStorage bijwerken
+    localStorage.setItem("coins", coins);
+
+    action = false;
 }
 
 // helper functie
 function randomInt(min, max){
-	return Math.floor((Math.random() * (max-min+1)) + min);
+    return Math.floor((Math.random() * (max-min+1)) + min);
 }
+
 </script>
 
 
