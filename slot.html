@@ -36,7 +36,7 @@
 <div class="status">
 <table>
 	<tr>
-		<td id="message1">Money: $1000</td>
+		<td id="message1">Money: $0</td>
 		<td id="message2">Now Betting: $0</td>
     </tr>
 	</table>
@@ -49,7 +49,7 @@ var action = false;
 let status = document.getElementById("status");
 
 // coins uit localStorage laden of start op 1000
-var coins = Number(localStorage.getItem("coins")) || 1000;
+var coins = Number(localStorage.getItem("coins")) || 0;
 var y = 0; // huidige inzet
 
 // initial display
