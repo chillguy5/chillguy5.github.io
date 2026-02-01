@@ -154,7 +154,7 @@ main{
 }
 
 .pokerchip {
-	width: 100px;   /* iets kleiner, zodat er meer naast elkaar passen */
+	width: 75px;   /* iets kleiner, zodat er meer naast elkaar passen */
 	height: auto;
 	cursor: pointer;
 	outline: none;
