@@ -7,6 +7,26 @@
 <html>
 <body>
 <main>
+
+                <nav class="navigation">
+                    <div id="menu">
+                        <div id="menu-bar" onclick="menuOnClick()">
+                          <div id="bar1" class="bar"></div>
+                          <div id="bar2" class="bar"></div>
+                          <div id="bar3" class="bar"></div>
+                        </div>
+                        <nav1 class="nav1" id="nav1">
+                          <ul>
+                            <li> <a href="index.html">Main menu<img src="images/overig/homeicon.png" alt="home" class="home-icon"></a></li>
+                            <li> <a href="store.html">Store<img src="images/overig/storeicon.png" alt="cart" class="cart-icon"></a></li>
+                            <li> <a href="stats.html">Stats<img src="images/overig/statsicon.png" alt="stats" class="stats-icon"></a></li>
+                        </ul>
+                        </nav1> 
+                      </div>
+                      
+                      <div class="menu-bg" id="menu-bg"></div>
+                </nav>
+
 	<div class="status" id="status">SPIN TO WIN!</div>
 	<div class="slots">
 		<div id="slot1" class="a1"></div>
@@ -101,6 +121,12 @@
 
 
 <script>
+
+      function menuOnClick() {
+document.getElementById("menu-bar").classList.toggle("change");
+document.getElementById("nav1").classList.toggle("change");
+document.getElementById("menu-bg").classList.toggle("change-bg");
+}
 
 	var action = false;
 let status = document.getElementById("status");
