@@ -169,8 +169,8 @@
 
   <div class="sidebar">
     <div>
-      <label for="balance">Balance:</label>
-      <div id="balance">500</div>
+      <label for="coins">coins:</label>
+      <div id="coins">500</div>
     </div>
     <div>
       <label for="betAmount">Bet Amount (Coins):</label>
@@ -182,6 +182,7 @@
     </div>
     <button id="startBtn">Start Game</button>
     <button id="cashOutBtn" disabled>Cash Out</button>
+    <button id="resetBalanceBtn">Reset Balance</button>
   </div>
 
   <div class="main">
@@ -198,10 +199,10 @@
     const gridEl = document.getElementById('grid');
     const betInp = document.getElementById('betAmount');
     const bombInp = document.getElementById('bombCount');
-    const balanceEl = document.getElementById('balance');
+    const coinsEl = document.getElementById('coins');
     const startBtn = document.getElementById('startBtn');
     const cashBtn = document.getElementById('cashOutBtn');
-    const resetBtn = document.getElementById('resetBalanceBtn');
+    const resetBtn = document.getElementById('resetcoinsBtn');
     const multEl = document.getElementById('multiplier');
     const winEl = document.getElementById('winnings');
     const message = document.getElementById('message');
@@ -212,13 +213,13 @@
     let currentMult = 1;
     let safeClicks = 0;
     let gameActive = false;
-    let balance = 500;
+    let coins = 500;
     let tilesLeft = 25;
 
     function updateInfo() {
       multEl.textContent = currentMult.toFixed(2) + '×';
       winEl.textContent = (bet * currentMult).toFixed(2);
-      balanceEl.textContent = balance.toFixed(2);
+      coinsEl.textContent = coins.toFixed(2);
     }
 
     function showMessage(text) {
@@ -239,9 +240,9 @@
         return showMessage("❗ Invalid bet or bomb count");
       }
 
-      if (bet > balance) return showMessage("❌ Not enough balance!");
+      if (bet > coins) return showMessage("❌ Not enough coins!");
 
-      balance -= bet;
+      coins -= bet;
       updateInfo();
 
       bombs.clear();
@@ -296,7 +297,7 @@
     function cashOut() {
       if (!gameActive) return;
       const winnings = bet * currentMult;
-      balance += winnings;
+      coins += winnings;
       updateInfo();
       endGame(true);
     }
@@ -321,9 +322,9 @@
 
     resetBtn.addEventListener('click', () => {
       if (gameActive) return showMessage("⚠️ Finish game before resetting!");
-      balance = 500;
+      coins = 500;
       updateInfo();
-      showMessage("🔄 Balance reset to 500");
+      showMessage("🔄 coins reset to 500");
     });
 
     startBtn.addEventListener('click', startGame);
