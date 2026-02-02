@@ -310,7 +310,7 @@
   transform: translate(-60%,-30%);
 }
 
-.one-time-button {
+.one-time-button100 {
     position: absolute;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -328,7 +328,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.one-time-button:hover {
+.one-time-button100:hover {
     transform: translateX(-50%) scale(1.1); /* Hover-schaal behouden */
 }
 
@@ -612,7 +612,7 @@
         <img id="sound-icon" src="images/overig/soundicon.png" alt="Sound" class="sound-icon">
     </a>
 
-        <a href="javascript:void(0);" class="one-time-button" onclick="clickOneTimeButton()" id="one-time-button">
+        <a href="javascript:void(0);" class="one-time-button100" onclick="clickOneTimeButton()" id="one-time-button100">
     1 jaar!!!! Claim nu je coins!!!!
 </a>
 
@@ -958,13 +958,13 @@ window.onload = function() {
 document.addEventListener("DOMContentLoaded", function () {
     let oneTimeClicked100 = localStorage.getItem("oneTimeClicked100");
     if (oneTimeClicked100 === "true") {
-        document.getElementById("one-time-button").style.display = "none";
+        document.getElementById("one-time-button100").style.display = "none";
     }
 });
 
 // Functie die de knop permanent verbergt
 function clickOneTimeButton() {
-    document.getElementById("one-time-button").style.display = "none";
+    document.getElementById("one-time-button100").style.display = "none";
     localStorage.setItem("oneTimeClicked100", "true");
 
     // Eventueel iets doen bij klikken, zoals coins toevoegen:
