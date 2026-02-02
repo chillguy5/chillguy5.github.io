@@ -211,7 +211,7 @@
     let currentMult = 1;
     let safeClicks = 0;
     let gameActive = false;
-    let coins = 500;
+    let coins = localStorage.getItem("coins") || 0;
     let tilesLeft = 25;
 
     function updateInfo() {
