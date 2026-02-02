@@ -10,6 +10,7 @@
 		body{
 			font-family:"arial";
 			overflow:hidden;
+			 background-color: #900d27; /* donkerrood */
 		}
 		
 		#bet{
@@ -26,6 +27,7 @@
 			bottom:210px;
 			width:100%;
 			height:20px;
+			color:#f8f8d7;
 		}
 		
 		#fast_forward{
@@ -34,6 +36,7 @@
 			bottom:70px;
 			width:100%;
 			height:20px;
+			color:#f8f8d7;
 		}
 		
 		#bet_button{
@@ -50,8 +53,8 @@
 			height:65px;
 			width:88px;
 			border-radius:5px;
-			border:1px solid black;
-			color:black;
+			border:1px solid #f8f8d7;
+			color:#f8f8d7;
 			left:calc(125px - 45px);
 			bottom: 0px;
 		}
@@ -63,6 +66,7 @@
 			width:600px;
 			left:50px;
 			font-size:40;
+			color:#f8f8d7;
 		}
 		
 		#coins{
@@ -73,6 +77,7 @@
 			right:50px;
 			font-size:40;
 			text-align:right;
+			color:#f8f8d7;
 		}
 		
 		#graph{
@@ -81,7 +86,7 @@
 			left:50px;
 			height:calc(100% - 100px);
 			width:calc(100% - 100px);
-			border:1px solid black;
+			border:1px solid #f8f8d7;
 		} 
 		
 		#all_time{
@@ -90,7 +95,7 @@
 			left:75px;
 			height:250px;
 			width:600px;
-			border:1px solid lightgray;
+			border:1px solid #900d27;
 		}
 		
 		#all_time_title{
@@ -99,7 +104,7 @@
 			left:90px;
 			height:250px;
 			width:100%;
-			color:lightgray;
+			color:#900d27;
 		}
 		
 		#all_time_record{
@@ -109,7 +114,7 @@
 			left:90px;
 			height:250px;
 			width:575;
-			color:lightgray;
+			color:#900d27;
 		}
 
 			.home-icon{
@@ -248,12 +253,12 @@
 		</div>
 		<div id="bet">
 			<div id="fast_forward">
-			<input type="button" style="text-align:center;border:1px solid black; background:white; height:20px; border-radius:5px; width:90px;" value="Fast Forward" id="ff" onmousedown="fast_forward()" onmouseup="normal_speed()">
+			<input type="button" style="text-align:center; color:#f8f8d7; border:1px solid #f8f8d7; background:#900d27; height:20px; border-radius:5px; width:90px;" value="Fast Forward" id="ff" onmousedown="fast_forward()" onmouseup="normal_speed()">
 			</div>
 			<div id="wager">
 				Wager:
 				<br>
-				<input type="text" style="text-align:center;border:1px solid black; height:20px; border-radius:5px; width:90px;" value="5" id="wager_value">
+				<input type="text" style="text-align:center; color:#f8f8d7; border:1px solid #f8f8d7; background:#900d27; height:20px; border-radius:5px; width:90px;" value="5" id="wager_value">
 			</div>
 			<div id="bet_button">
 				<center>
@@ -319,7 +324,7 @@ document.getElementById("menu-bg").classList.toggle("change-bg");
 			}
 			alltimegraph.getContext('2d').fillStyle = 'rgba(230, 230, 230, 1)'
 			alltimegraph.getContext('2d').fillRect(0, 150, 600, 1)
-			alltimegraph.getContext('2d').fillStyle = 'rgba(0, 0, 0, 1)'
+			alltimegraph.getContext('2d').fillStyle = '#f8f8d7'
 
 		}
 			
@@ -413,13 +418,13 @@ if (wager > coins) {
 					
 						if(betting){}else{
 							
-							document.getElementById("button").style.background = "#ffffff";
+							document.getElementById("button").style.background = "#900d27";
 						}
 						
 						buttonText = "Hold To Bet";
-						document.getElementById("multiplier").style.color = "black";
+						document.getElementById("multiplier").style.color = "#f8f8d7";
 						document.getElementById("multiplier_text").innerText = "";
-						ctx.fillStyle = 'rgba(255, 255, 255, 1 ';
+						ctx.fillStyle = '#900d27';
 						ctx.fillRect(0, 0, 6000, 6000);
 						set();
 					}, 3000)
@@ -431,7 +436,7 @@ if (wager > coins) {
 		function out(){
 			if(betting){
 				
-				document.getElementById("button").style.background = "#ffffff";
+				document.getElementById("button").style.background = "#900d27";
 				betting = false;
 				coins = Math.floor(coins + setWager * multiplier);
 				localStorage.setItem("coins", coins);
@@ -458,8 +463,8 @@ if (wager > coins) {
 				setTimeout(function(){
 					buttonText = "Hold To Bet"
 					canbet = true;
-					document.getElementById("multiplier").style.color = "black";
-					document.getElementById("button").style.background = "white";
+					document.getElementById("multiplier").style.color = "#f8f8d7";
+					document.getElementById("button").style.background = "#900d27";
 					set();
 				}, 3000)
 			}
@@ -501,11 +506,11 @@ if (wager > coins) {
 							if(betting){
 								
 							}else{
-								document.getElementById("button").style.background = "#ffffff";
+								document.getElementById("button").style.background = "#900d27";
 							}
-							document.getElementById("multiplier").style.color = "black";
+							document.getElementById("multiplier").style.color = "#f8f8d7";
 							document.getElementById("multiplier_text").innerText = "";
-							ctx.fillStyle = 'rgba(255, 255, 255, 1 ';
+							ctx.fillStyle = '#900d27';
 							ctx.fillRect(0, 0, 6000, 6000);
 							buttonText = "Hold To Bet";
 							set();
