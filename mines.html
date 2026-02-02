@@ -241,6 +241,7 @@
       if (bet > coins) return showMessage("❌ Not enough coins!");
 
       coins -= bet;
+      localStorage.setItem("coins", coins);
       updateInfo();
 
       bombs.clear();
@@ -295,6 +296,7 @@
       if (!gameActive) return;
       const winnings = bet * currentMult;
       coins += winnings;
+      localStorage.setItem("coins", coins);
       updateInfo();
       endGame(true);
     }
@@ -303,6 +305,8 @@
       gameActive = false;
       cashBtn.disabled = true;
       startBtn.disabled = false;
+
+      localStorage.setItem("coins", coins);
 
       showMessage(cashedOut
         ? `🏆 Cashed out ${(bet * currentMult).toFixed(2)} coins!`
