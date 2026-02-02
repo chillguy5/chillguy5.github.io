@@ -238,24 +238,30 @@
 
 
 <script>
+
+// --- MENU TOGGLE ---
 function menuOnClick() {
     document.getElementById("menu-bar").classList.toggle("change");
     document.getElementById("nav1").classList.toggle("change");
     document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
-var action = false;
+// --- GLOBAL VARIABLES ---
+var action = false; // voorkomt meerdere spins tegelijk
 let status = document.getElementById("status");
 
 // coins uit localStorage laden of start op 0
 var coins = Number(localStorage.getItem("coins")) || 0;
 var y = 0; // huidige inzet
 
+// definitieve slotwaarden
+let final1, final2, final3;
+
 // initial display
 document.getElementById("message1").innerHTML = "Money: $" + coins;
 document.getElementById("message2").innerHTML = "Now Betting: $0";
 
-// functie om chips toe te voegen
+// --- BET FUNCTION ---
 function addbet(amount){
     if(amount === "allin"){
         if(coins <= 0){
@@ -278,7 +284,7 @@ function addbet(amount){
     status.innerHTML = "Bet placed.";
 }
 
-// functie om te spinnen
+// --- SPIN FUNCTION ---
 function gamble(y){
     if(action) return;
 
@@ -297,13 +303,14 @@ function gamble(y){
     action = true;
     status.innerHTML = "SPINNING";
 
-    // randomize eindplaatje voor elk slot (1-7)
-    let final1 = randomInt(1,7);
-    let final2 = randomInt(1,7);
-    let final3 = randomInt(1,7);
+    // Randomize definitieve slotwaarden (1-7)
+    final1 = randomInt(1,7);
+    final2 = randomInt(1,7);
+    final3 = randomInt(1,7);
 
     let i1=0, i2=0, i3=0;
 
+    // Slot 1 animatie
     let slot1Int = setInterval(function(){
         i1++;
         let el = document.getElementById("slot1");
@@ -315,6 +322,7 @@ function gamble(y){
         el.className = "a" + randomInt(1,7);
     }, 50);
 
+    // Slot 2 animatie
     let slot2Int = setInterval(function(){
         i2++;
         let el = document.getElementById("slot2");
@@ -326,6 +334,7 @@ function gamble(y){
         el.className = "a" + randomInt(1,7);
     }, 50);
 
+    // Slot 3 animatie
     let slot3Int = setInterval(function(){
         i3++;
         let el = document.getElementById("slot3");
@@ -339,14 +348,11 @@ function gamble(y){
     }, 50);
 }
 
-// win / lose logica
+// --- WIN / LOSE LOGIC ---
 function testWin(){
-    let slot1 = document.getElementById("slot1").className;
-    let slot2 = document.getElementById("slot2").className;
-    let slot3 = document.getElementById("slot3").className;
-
     let payout = 0;
 
+    // Uitbetalingen voor 2 dezelfde
     const multipliers2 = {
         "a1": 2, // two 7s
         "a2": 0,
@@ -357,6 +363,7 @@ function testWin(){
         "a7": 0
     };
 
+    // Uitbetalingen voor 3 dezelfde
     const multipliers3 = {
         "a1": 5, // three 7s
         "a2": 3,
@@ -367,16 +374,17 @@ function testWin(){
         "a7": 4
     };
 
-    // check voor 3 dezelfde
-    if(slot1 === slot2 && slot2 === slot3){
-        payout = y * (multipliers3[slot1] || 0);
+    // Check voor 3 dezelfde
+    if(final1 === final2 && final2 === final3){
+        payout = y * (multipliers3["a"+final1] || 0);
     }
-    // check voor 2 dezelfde (en dat het niet 3 dezelfde waren)
-    else if(slot1 === slot2 || slot1 === slot3 || slot2 === slot3){
-        let sym = slot1 === slot2 ? slot1 : (slot1 === slot3 ? slot1 : slot2);
-        payout = y * (multipliers2[sym] || 0);
+    // Check voor 2 dezelfde (als het geen 3 dezelfde zijn)
+    else if(final1 === final2 || final1 === final3 || final2 === final3){
+        let sym = final1 === final2 ? final1 : (final1 === final3 ? final1 : final2);
+        payout = y * (multipliers2["a"+sym] || 0);
     }
 
+    // Update status en coins
     if(payout > 0){
         status.innerHTML = "YOU WIN! +" + payout + " coins";
         coins += payout;
@@ -386,19 +394,23 @@ function testWin(){
         if(coins < 0) coins = 0;
     }
 
-    y = 0; // reset inzet
+    // Reset inzet en update display
+    y = 0;
     document.getElementById("message1").innerHTML = "Money: $" + coins;
     document.getElementById("message2").innerHTML = "Now Betting: $0";
 
+    // Opslaan in localStorage
     localStorage.setItem("coins", coins);
 
     action = false;
 }
 
-// helper functie
+// --- HELPER FUNCTIE ---
 function randomInt(min, max){
-    return Math.floor((Math.random() * (max-min+1)) + min);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
 </script>
 
 
