@@ -251,7 +251,6 @@
       gridEl.innerHTML = '';
       cashBtn.disabled = true;
       startBtn.disabled = true;
-      resetBtn.disabled = true;
 
       while (bombs.size < bombCount) bombs.add(Math.floor(Math.random() * 25));
 
@@ -304,7 +303,6 @@
       gameActive = false;
       cashBtn.disabled = true;
       startBtn.disabled = false;
-      resetBtn.disabled = false;
 
       showMessage(cashedOut
         ? `🏆 Cashed out ${(bet * currentMult).toFixed(2)} coins!`
@@ -318,12 +316,6 @@
       });
     }
 
-    resetBtn.addEventListener('click', () => {
-      if (gameActive) return showMessage("⚠️ Finish game before resetting!");
-      coins = 500;
-      updateInfo();
-      showMessage("🔄 coins reset to 500");
-    });
 
     startBtn.addEventListener('click', startGame);
     cashBtn.addEventListener('click', cashOut);
