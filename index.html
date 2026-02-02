@@ -956,8 +956,8 @@ window.onload = function() {
 
         // Controleer bij laden of de knop al is geklikt
 document.addEventListener("DOMContentLoaded", function () {
-    let oneTimeClicked4 = localStorage.getItem("oneTimeClicked4");
-    if (oneTimeClicked4 === "true") {
+    let oneTimeClicked100 = localStorage.getItem("oneTimeClicked100");
+    if (oneTimeClicked100 === "true") {
         document.getElementById("one-time-button").style.display = "none";
     }
 });
@@ -965,7 +965,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Functie die de knop permanent verbergt
 function clickOneTimeButton() {
     document.getElementById("one-time-button").style.display = "none";
-    localStorage.setItem("oneTimeClicked4", "true");
+    localStorage.setItem("oneTimeClicked100", "true");
 
     // Eventueel iets doen bij klikken, zoals coins toevoegen:
     let coins = parseInt(localStorage.getItem("coins")) || 0;
