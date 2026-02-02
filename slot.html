@@ -281,16 +281,15 @@ function addbet(amount){
     status.innerHTML = "Bet placed.";
 }
 
-// spin functie (oude logica behouden)
 function gamble(y){
-    if (action) return;
+    if(action) return;
 
-    if (y <= 0) {
+    if(y <= 0){
         status.innerHTML = "Place a bet first!";
         return;
     }
 
-    if (y > coins) {
+    if(y > coins){
         status.innerHTML = "Not enough funds.";
         y = 0;
         document.getElementById("message2").innerHTML = "Now Betting: $0";
@@ -298,55 +297,49 @@ function gamble(y){
     }
 
     action = true;
-
-    var numChanges = randomInt(1,4)*7;
-    var numberSlot1 = numChanges + randomInt(1,7);
-    var numberSlot2 = numChanges + 2*7 + randomInt(1,7);
-    var numberSlot3 = numChanges + 4*7 + randomInt(1,7);
-
-    var i1 = 0;
-    var i2 = 0;
-    var i3 = 0;
-
     status.innerHTML = "SPINNING";
 
-    slot1 = setInterval(spin1, 50);
-    slot2 = setInterval(spin2, 50);
-    slot3 = setInterval(spin3, 50);
+    // randomize eindplaatje voor elk slot
+    let final1 = randomInt(1,7);
+    let final2 = randomInt(1,7);
+    let final3 = randomInt(1,7);
 
-    function spin1(){
+    // animatie teller
+    let i1=0, i2=0, i3=0;
+
+    let slot1Int = setInterval(function(){
         i1++;
-        if (i1 >= numberSlot1){
-            clearInterval(slot1);
-            return null;
+        let el = document.getElementById("slot1");
+        if(i1 >= 20 + final1){ // gewoon een beetje draaien
+            clearInterval(slot1Int);
+            el.className = "a" + final1;
+            return;
         }
-        let slotTile = document.getElementById("slot1");
-        if (slotTile.className == "a7") slotTile.className = "a0";
-        slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
-    }
+        el.className = "a" + randomInt(1,7);
+    }, 50);
 
-    function spin2(){
+    let slot2Int = setInterval(function(){
         i2++;
-        if (i2 >= numberSlot2){
-            clearInterval(slot2);
-            return null;
+        let el = document.getElementById("slot2");
+        if(i2 >= 20 + final2){
+            clearInterval(slot2Int);
+            el.className = "a" + final2;
+            return;
         }
-        let slotTile = document.getElementById("slot2");
-        if (slotTile.className == "a7") slotTile.className = "a0";
-        slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
-    }
+        el.className = "a" + randomInt(1,7);
+    }, 50);
 
-    function spin3(){
+    let slot3Int = setInterval(function(){
         i3++;
-        if (i3 >= numberSlot3){
-            clearInterval(slot3);
-            testWin();
-            return null;
+        let el = document.getElementById("slot3");
+        if(i3 >= 20 + final3){
+            clearInterval(slot3Int);
+            el.className = "a" + final3;
+            testWin(); // check win als laatste klaar
+            return;
         }
-        let slotTile = document.getElementById("slot3");
-        if (slotTile.className == "a7") slotTile.className = "a0";
-        slotTile.className = "a" + (parseInt(slotTile.className.substring(1)) + 1);
-    }
+        el.className = "a" + randomInt(1,7);
+    }, 50);
 }
 
 // win / lose logica met nieuwe uitbetalingen
