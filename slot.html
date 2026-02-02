@@ -238,14 +238,13 @@
 
 
 <script>
-
-      function menuOnClick() {
-document.getElementById("menu-bar").classList.toggle("change");
-document.getElementById("nav1").classList.toggle("change");
-document.getElementById("menu-bg").classList.toggle("change-bg");
+function menuOnClick() {
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav1").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
 }
 
-	var action = false;
+var action = false;
 let status = document.getElementById("status");
 
 // coins uit localStorage laden of start op 0
@@ -258,7 +257,6 @@ document.getElementById("message2").innerHTML = "Now Betting: $0";
 
 // functie om chips toe te voegen
 function addbet(amount){
-    // check of het de all-in chip is
     if(amount === "allin"){
         if(coins <= 0){
             status.innerHTML = "You have no coins!";
@@ -270,7 +268,6 @@ function addbet(amount){
         return;
     }
 
-    // normale chips
     if (y + amount > coins) {
         status.innerHTML = "Not enough funds.";
         return;
@@ -281,6 +278,7 @@ function addbet(amount){
     status.innerHTML = "Bet placed.";
 }
 
+// functie om te spinnen
 function gamble(y){
     if(action) return;
 
@@ -299,18 +297,17 @@ function gamble(y){
     action = true;
     status.innerHTML = "SPINNING";
 
-    // randomize eindplaatje voor elk slot
+    // randomize eindplaatje voor elk slot (1-7)
     let final1 = randomInt(1,7);
     let final2 = randomInt(1,7);
     let final3 = randomInt(1,7);
 
-    // animatie teller
     let i1=0, i2=0, i3=0;
 
     let slot1Int = setInterval(function(){
         i1++;
         let el = document.getElementById("slot1");
-        if(i1 >= 20 + final1){ // gewoon een beetje draaien
+        if(i1 >= 20 + final1){
             clearInterval(slot1Int);
             el.className = "a" + final1;
             return;
@@ -342,59 +339,44 @@ function gamble(y){
     }, 50);
 }
 
-// win / lose logica met nieuwe uitbetalingen
+// win / lose logica
 function testWin(){
-    var slot1 = document.getElementById("slot1").className;
-    var slot2 = document.getElementById("slot2").className;
-    var slot3 = document.getElementById("slot3").className;
+    let slot1 = document.getElementById("slot1").className;
+    let slot2 = document.getElementById("slot2").className;
+    let slot3 = document.getElementById("slot3").className;
 
-    let payout = 0; // hoeveel je wint
+    let payout = 0;
 
-    // mapping van symbool naar multiplier
     const multipliers2 = {
-        "a3": 0, // strawberry
-        "a6": 0, // star
-        "a2": 0, // cherry
-        "a5": 0, // clover
-        "a4": 0, // diamond
-        "a7": 0, // crown
-        "a1": 2  // seven
+        "a1": 2, // two 7s
+        "a2": 0,
+        "a3": 0,
+        "a4": 0,
+        "a5": 0,
+        "a6": 0,
+        "a7": 0
     };
 
     const multipliers3 = {
-        "a3": 3,
-        "a6": 3,
+        "a1": 5, // three 7s
         "a2": 3,
-        "a5": 4,
+        "a3": 3,
         "a4": 4,
-        "a7": 4,
-        "a1": 5
+        "a5": 4,
+        "a6": 3,
+        "a7": 4
     };
 
-    // teller van hoeveel dezelfde symbolen
-    const symbols = [slot1, slot2, slot3];
-    const counts = {};
-    symbols.forEach(s => counts[s] = (counts[s] || 0) + 1);
-
     // check voor 3 dezelfde
-    for(let sym in counts){
-        if(counts[sym] === 3){
-            payout = y * (multipliers3[sym] || 0);
-            break;
-        }
+    if(slot1 === slot2 && slot2 === slot3){
+        payout = y * (multipliers3[slot1] || 0);
+    }
+    // check voor 2 dezelfde (en dat het niet 3 dezelfde waren)
+    else if(slot1 === slot2 || slot1 === slot3 || slot2 === slot3){
+        let sym = slot1 === slot2 ? slot1 : (slot1 === slot3 ? slot1 : slot2);
+        payout = y * (multipliers2[sym] || 0);
     }
 
-    // check voor 2 dezelfde (als 3 dezelfde al was, wordt dit niet meer uitgevoerd)
-    if(payout === 0){
-        for(let sym in counts){
-            if(counts[sym] === 2){
-                payout = y * (multipliers2[sym] || 0);
-                break;
-            }
-        }
-    }
-
-    // win of verlies
     if(payout > 0){
         status.innerHTML = "YOU WIN! +" + payout + " coins";
         coins += payout;
@@ -404,11 +386,10 @@ function testWin(){
         if(coins < 0) coins = 0;
     }
 
-    y = 0; // inzet reset
+    y = 0; // reset inzet
     document.getElementById("message1").innerHTML = "Money: $" + coins;
     document.getElementById("message2").innerHTML = "Now Betting: $0";
 
-    // localStorage bijwerken
     localStorage.setItem("coins", coins);
 
     action = false;
@@ -418,8 +399,8 @@ function testWin(){
 function randomInt(min, max){
     return Math.floor((Math.random() * (max-min+1)) + min);
 }
-
 </script>
+
 
 
 
