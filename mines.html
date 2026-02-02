@@ -215,9 +215,9 @@
     let tilesLeft = 25;
 
     function updateInfo() {
-      multEl.textContent = currentMult.toFixed(2) + '×';
-      winEl.textContent = (bet * currentMult).toFixed(2);
-      coinsEl.textContent = coins.toFixed(2);
+      multEl.textContent = currentMult + '×';
+      winEl.textContent = (bet * currentMult);
+      coinsEl.textContent = coins;
     }
 
     function showMessage(text) {
@@ -294,7 +294,7 @@
 
     function cashOut() {
       if (!gameActive) return;
-      const winnings = bet * currentMult;
+      const winnings = Math.floor(bet * currentMult);
       coins += winnings;
       localStorage.setItem("coins", coins);
       updateInfo();
@@ -309,7 +309,7 @@
       localStorage.setItem("coins", coins);
 
       showMessage(cashedOut
-        ? `🏆 Cashed out ${(bet * currentMult).toFixed(2)} coins!`
+        ? `🏆 Cashed out ${(bet * currentMult)} coins!`
         : `💥 You hit a bomb!`);
 
       gridEl.querySelectorAll('.tile').forEach((tile, i) => {
