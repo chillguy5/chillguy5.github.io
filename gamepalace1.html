@@ -209,6 +209,33 @@ body {
     margin: 30px auto;
     line-height: 1.5;
 }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: rgba(240, 170, 94);
+    border-radius: 12px;
+  }
+
+  .navigation a {
+    color: #900d27;
+    text-decoration: none;
+    font-size: 3rem;
+    transition: transform 0.2s;
+  }
+
+  .navigation a:hover {
+    transform: scale(1.2);
+  }
+
+  .arrow-left::before {
+    content: "⬅"; /* grote linker pijl */
+  }
+
+  .arrow-right::before {
+    content: "➡"; /* grote rechter pijl */
+  }
 </style>
 </head>
 
@@ -278,6 +305,10 @@ body {
   <button class="category-btn" onclick="filterCategory('Stoner')">Stoner</button>
   <button class="category-btn" onclick="filterCategory('Strategy Games')">Strategy</button>
   <button class="category-btn" onclick="filterCategory('War Games')">War Games</button>
+</div>
+
+<div class="navigation">
+  <a href="gamepalace1.html" class="arrow-right"></a>
 </div>
 
 <!-- === GAME GRID === -->
