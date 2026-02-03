@@ -322,10 +322,12 @@ if (!audio) {
 
 const GAMES_PER_PAGE = 25;
 
-function renderGames(list = games, limit = GAMES_PER_PAGE) {
+function renderGames(list = games, limit = null) {
     gameGrid.innerHTML = "";
 
-    list.slice(0, limit).forEach(g => {
+    const gamesToShow = limit ? list.slice(0, limit) : list;
+
+    gamesToShow.forEach(g => {
         const card = document.createElement("a");
         card.href = g.link;
         card.className = "game-card";
@@ -337,12 +339,13 @@ function renderGames(list = games, limit = GAMES_PER_PAGE) {
     });
 }
 
+
 function filterCategory(cat) {
     if (cat === "all") {
-        renderGames(games);
+        renderGames(games); // 👈 GEEN limiet
     } else {
         const filtered = games.filter(g => g.category.includes(cat));
-        renderGames(filtered);
+        renderGames(filtered); // ook geen limiet
     }
 }
 
@@ -354,12 +357,12 @@ searchBar.addEventListener("input", () => {
         g.category.some(c => c.toLowerCase().includes(q))
     );
 
-    renderGames(filtered);
+    renderGames(filtered); // 👈 alles wat matcht
 });
 
 
 /* === INIT === */
-renderGames();
+renderGames(games, GAMES_PER_PAGE);
 </script>
 </body>
 </html>
