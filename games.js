@@ -45,4 +45,15 @@ const games = [
   { name:"Where in Space is Baby Hitler", category:["Hitler", "Action Games"], image:"images/gameicons/Where in Space is Baby Hitler.webp", link:"Where in Space is Baby Hitler.html"},
   { name:"World Dictator", category:["."], image:"images/gameicons/World Dictator.webp", link:"World Dictator.html"},
   { name:"Worms Zone a Slithery Snake", category:["Snake Games", "io games"], image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
+  { name:"Block Blast Master", category:["."], image:"images/gameicons/Block Blast Master.avif", link:"Block Blast Master.html"},
+  { name:"Brawl Simulator 3D", category:["."], image:"images/gameicons/Brawl Simulator 3D.avif", link:"Brawl Simulator 3D.html"},
+  { name:"Deadly Descent", category:["."], image:"images/gameicons/Deadly Descent.avif", link:"Deadly Descent.html"},
+  { name:"Fruit Merge: Juicy Drop Game", category:["."], image:"images/gameicons/Fruit Merge: Juicy Drop Game.avif", link:"Fruit Merge: Juicy Drop Game.html"},
+  { name:"Golf Orbit", category:["."], image:"images/gameicons/Golf Orbit.avif", link:"Golf Orbit.html"},
+  { name:"Hidden Object: Clues and Mysteries", category:["."], image:"images/gameicons/Hidden Object: Clues and Mysteries.avif", link:"Hidden Object: Clues and Mysteries.html"},
+  { name:"Idle Tower Defense", category:["."], image:"images/gameicons/Idle Tower Defense.avif", link:"Idle Tower Defense.html"},
+  { name:"Moto X3M Spooky Land", category:["."], image:"images/gameicons/Moto X3M Spooky Land.avif", link:"Moto X3M Spooky Land.html"},        
+  { name:"Moto X3M", category:["."], image:"images/gameicons/Moto X3M.avif", link:"Moto X3M.html"},
+  { name:"Skyblock 3D: Survival", category:["."], image:"images/gameicons/Skyblock 3D: Survival.avif", link:"Skyblock 3D: Survival.html"},
+
 ];
