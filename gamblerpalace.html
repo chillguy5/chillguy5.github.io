@@ -245,6 +245,27 @@
         color: #900d27;
     }
 
+    #reset-coins-btn {
+    position: absolute;
+    top: 90px;
+    right: 30px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #900d27;
+    color: #f8f8d7;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#reset-coins-btn:hover {
+    background-color: #b01233;
+    transform: scale(1.05);
+}
+
+
     </style>
 </head>
 <body>
@@ -301,6 +322,8 @@
         </a>
     </div>
 
+    <button id="reset-coins-btn">Reset Coins</button>
+
 
       <!--   <button id="secret-button" title="???"></button> -->
 
@@ -311,6 +334,17 @@
   document.getElementById("nav").classList.toggle("change");
   document.getElementById("menu-bg").classList.toggle("change-bg");
 }
+
+
+document.getElementById("reset-coins-btn").addEventListener("click", function () {
+    if (!confirm("Weet je zeker dat je je coins wilt resetten?")) return;
+
+    coins = 0;
+    localStorage.setItem("coins", 0);
+    document.getElementById("coins").textContent = 0;
+});
+
+
 
                   // Controleer of geluid is ingeschakeld in localStorage
 function initializeSound() {
