@@ -317,8 +317,8 @@
       <input id="betAmount" type="number" min="1" value="10" />
     </div>
     <div>
-      <label for="bombCount">Number of Bombs (1-24):</label>
-      <input id="bombCount" type="number" min="1" max="24" value="3" />
+      <label for="bombCount">Number of Bombs (1-23):</label>
+      <input id="bombCount" type="number" min="1" max="23" value="3" />
     </div>
     <button id="startBtn">Start Game</button>
     <button id="cashOutBtn" disabled>Cash Out</button>
@@ -381,7 +381,7 @@ document.getElementById("menu-bg").classList.toggle("change-bg");
       bet = parseFloat(betInp.value);
       const bombCount = parseInt(bombInp.value);
 
-      if (!bet || bet <= 0 || bombCount < 1 || bombCount > 24) {
+      if (!bet || bet <= 0 || bombCount < 1 || bombCount > 23) {
         return showMessage("❗ Invalid bet or bomb count");
       }
 
