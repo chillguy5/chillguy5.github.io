@@ -613,14 +613,14 @@
         <img id="sound-icon" src="images/overig/soundicon.png" alt="Sound" class="sound-icon">
     </a>
 
-        <a href="javascript:void(0);" class="one-time-button100" onclick="clickOneTimeButton()" id="one-time-button100">
+    <!-- <a href="javascript:void(0);" class="one-time-button100" onclick="clickOneTimeButton()" id="one-time-button100">
     1 jaar!!!! Claim nu je coins!!!!
-</a>
+    </a> -->
 
 
     <!--  <div><img src="images/overig/naam.png" alt="icon" class="title"></div> -->
 
-    <div class="info-box">
+    <!-- <div class="info-box">
     <p>
 Vandaag vieren we een mooie mijlpaal: de website bestaat één jaar.
 Iedereen die het afgelopen jaar heeft gespeeld, getest, gelachen en meegeleefd: dank jullie wel. Zonder jullie was dit nooit zo’n succes geworden.
@@ -637,7 +637,32 @@ En het wordt nog beter:
 👉 Elke dag, de komende 7 dagen, komen er elke dag 10 nieuwe spellen bij
 Bedankt voor alles — en veel speelplezier! 🎮🔥
     </p>
-</div>
+</div> -->
+
+<!--
+
+      // Controleer bij laden of de knop al is geklikt
+document.addEventListener("DOMContentLoaded", function () {
+    let oneTimeClicked100 = localStorage.getItem("oneTimeClicked100");
+    if (oneTimeClicked100 === "true") {
+        document.getElementById("one-time-button100").style.display = "none";
+    }
+});
+
+// Functie die de knop permanent verbergt//
+function clickOneTimeButton() {
+    document.getElementById("one-time-button100").style.display = "none";
+    localStorage.setItem("oneTimeClicked100", "true");
+
+    // Eventueel iets doen bij klikken, zoals coins toevoegen://
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
+    coins += 1000000000;
+    localStorage.setItem("coins", coins);
+    document.getElementById("coins").textContent = coins;
+
+    alert("Gefeliciteerd! Je hebt 1.000.000.000 extra coins ontvangen!");
+} 
+-->
 
 
     
@@ -964,31 +989,6 @@ window.onload = function() {
     updateUsernameDisplay();
     showUsername(); // username tonen bij laden
 };
-
-
-        
-
-        // Controleer bij laden of de knop al is geklikt
-document.addEventListener("DOMContentLoaded", function () {
-    let oneTimeClicked100 = localStorage.getItem("oneTimeClicked100");
-    if (oneTimeClicked100 === "true") {
-        document.getElementById("one-time-button100").style.display = "none";
-    }
-});
-
-// Functie die de knop permanent verbergt
-function clickOneTimeButton() {
-    document.getElementById("one-time-button100").style.display = "none";
-    localStorage.setItem("oneTimeClicked100", "true");
-
-    // Eventueel iets doen bij klikken, zoals coins toevoegen:
-    let coins = parseInt(localStorage.getItem("coins")) || 0;
-    coins += 1000000000; // Bijvoorbeeld 100.000.000 coins
-    localStorage.setItem("coins", coins);
-    document.getElementById("coins").textContent = coins;
-
-    alert("Gefeliciteerd! Je hebt 1.000.000.000 extra coins ontvangen!");
-}
 
     </script>
     
