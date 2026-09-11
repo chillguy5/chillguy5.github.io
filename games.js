@@ -13,6 +13,7 @@ const games = [
   { name:"Worms Zone a Slithery Snake", category:["Snake Games", "io games"], image:"images/gameicons/Worms Zone a Slithery Snake.jpg", link:"Worms Zone a Slithery Snake.html"},
   { name:"paper io", category:["io games"], image:"images/gameicons/paper io.jpg", link:"paper io.html"},
   { name:"Golf Orbit", category:["Sport", "Golf"], image:"images/gameicons/Golf Orbit.avif", link:"Golf Orbit.html"},
+  { name:"Plants vs Zombies Fusion Mode", category:["Idle Games", "Defense Game"], image:"images/gameicons/Plants vs Zombies Fusion Mode.avif", link:"Plants vs Zombies Fusion Mode.html"},
   { name:"Hazmob FPS: Online Shooter", category:["Action Games", "Shooting Games"], image:"images/gameicons/Hazmob FPS: Online Shooter.avif", link:"Hazmob FPS: Online Shooter.html"},
   { name:"Idle Tower Defense", category:["Idle Games", "Strategy Games", "Action Games"], image:"images/gameicons/Idle Tower Defense.avif", link:"Idle Tower Defense.html"},
   { name:"Moto X3M Spooky Land", category:["Racing", "Moto X3M"], image:"images/gameicons/Moto X3M Spooky Land.avif", link:"Moto X3M Spooky Land.html"},        
